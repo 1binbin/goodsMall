@@ -1,0 +1,446 @@
+/**管理员界面
+ * @Author: hongxiaobin
+ * @Date: 2022/5/6 8:40
+ */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --back: #333;
+}
+
+body {
+    overflow: hidden;
+}
+
+.check {
+    margin-top: 6px;
+}
+
+.navbar {
+    /*相对定位*/
+    position: relative;
+    width: 100vw;
+}
+
+#checkbox {
+    /*隐藏复选框*/
+    display: none;
+}
+
+.navbar .label {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    width: 100%;
+    height: 43px;
+    font-size: 30px;
+    color: #5a738e;
+    background-color: #ededed;
+    padding-left: 20px;
+    border: 1px solid #d9dee4;
+    /*鼠标放上变小手*/
+    cursor: pointer;
+    /*	动画过渡*/
+    transition: all 0.5s;
+}
+
+.navbar .main .left ul {
+    list-style: none;
+    width: 70px;
+    height: 100vh;
+    background-color: #2a3f54;
+    transition: all 0.5s;
+    /*	溢出隐藏*/
+    overflow: hidden;
+}
+
+.navbar .main .left ul li {
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+.navbar .main .left ul li:first-child {
+    /*图片变小，往上走*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.navbar .main .left ul li:first-child img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.navbar .main .left ul li:first-child span {
+    color: #fff;
+    /*文字禁止换行*/
+    white-space: nowrap;
+    padding-left: 10px;
+    /*先把文字影藏*/
+    display: none;
+}
+
+.navbar .main .left ul li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*垂直排列*/
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    color: #dedede;
+    /*除掉下划线*/
+    text-decoration: none;
+}
+
+.navbar .main .left ul li a i {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.navbar .main .left ul li a span {
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.navbar .main .left ul li a:hover {
+    color: #fff;
+    background-color: #35495d;
+}
+
+/*兄弟选择器，判断复选框是否被选中*/
+/*+为兄弟选择器，找到input的下一个兄弟label*/
+.navbar input:checked + .label {
+    left: 200px;
+}
+
+/*~也是兄弟选择器，但是可以相隔几代的兄弟*/
+.navbar input:checked ~ .main .left ul {
+    width: 200px;
+}
+
+.navbar input:checked ~ .main .left ul li:first-child {
+    justify-content: flex-start;
+}
+
+.navbar input:checked ~ .main .left ul li:first-child span {
+    /*文字显示*/
+    display: block;
+}
+
+.navbar input:checked ~ .main .left ul li a {
+    /*改为行对齐*/
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.navbar input:checked ~ .main .left ul li a i {
+    font-size: 18px;
+    margin: 0 15px 0 30px;
+}
+
+.navbar input:checked ~ .main .left ul li a span {
+    font-size: 14px;
+}
+
+
+.right {
+    transition: all 0.5s;
+    width: calc(100vw - 70px);
+    height: calc(100vh - 43px);
+    position: fixed;
+    /*z-index: 999;*/
+    right: 0;
+    bottom: 0;
+}
+
+.navbar input:checked ~ .main .right {
+    width: calc(100vw - 200px);
+}
+
+.right > div {
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.right .first {
+    /*display: block;*/
+    background-color: #b490ca;
+}
+
+.right .second {
+    display: block;
+    /*background-color: #c6dcb2;*/
+}
+
+.right .third {
+    background-color: #8e8fe6;
+}
+
+.right .fourth {
+    background-color: #df8159;
+}
+
+/*商品管理*/
+.second .top {
+    width: 100%;
+    height: 100%;
+    /*background-color: #e8c2b2;*/
+    display: block;
+}
+
+.second .top .p {
+    color: var(--back);
+    font-size: 20px;
+    padding: 20px 20px 10px 20px;
+    letter-spacing: 8px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.second .top .goods {
+    display: block;
+    height: calc(100% - 153px);
+    margin-left: 20px;
+    overflow-y: scroll;
+    text-align: center;
+    /*    表格框线*/
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    border-bottom: 1px solid #000;
+    border-spacing: 0;
+}
+
+.second .top .goods_head {
+    text-align: center;
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.second .top .goods_head tr th {
+    font-weight: 500;
+}
+
+.second .top .goods {
+    margin-top: 6px;
+    font-size: 18px;
+}
+
+.second .top .goods tr:nth-child(odd) {
+    background-color: #d2d5da;
+}
+
+.second .top .goods,
+.second .top .goods_head {
+    width: calc(100% - 40px);
+    word-break: break-word;
+    word-wrap: break-word;
+    table-layout: fixed;
+    vertical-align: center;
+}
+
+.second .top .goods tr td {
+    width: 1920px;
+    height: 30px;
+    /*    表格框线*/
+    border-bottom: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.second .top .goods tr:hover {
+    background-color: #9e9e9e;
+}
+
+.addGoods, .allGoods {
+    float: right;
+    margin-top: 14px;
+}
+
+.addGoods {
+    margin-right: 30px;
+}
+
+.allGoods {
+    margin-right: 25px;
+}
+
+#add, #all {
+    display: none;
+}
+
+/*商品管理搜索框*/
+.second .top .select {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 14px;
+    right: 30px;
+}
+
+.choose, .chooseinput, .button {
+    outline: none;
+    height: 32px;
+    background-color: #efefef;
+}
+
+.choose {
+    border-left: 1px solid #333;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-right: none;
+    width: 100px;
+    border-radius: 10px 0 0 10px;
+    text-indent: 8px;
+}
+
+.chooseinput {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-left: none;
+    border-right: none;
+    width: 350px;
+    text-indent: 8px;
+}
+
+.button {
+    border-right: 1px solid #333;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
+
+.button #btnaa {
+    font-size: 22px;
+    color: #333;
+}
+
+.button:hover {
+    background-color: #cacaca;
+}
+
+/*添加商品、修改商品信息、查看主图*/
+.addbottom, .updatebottom,.goodsImg{
+    transition: all 0.3s ease-in-out;
+    background-color: #efefef;
+    position: absolute;
+    left: 50%;
+    bottom: 50%;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.addbottom, .updatebottom {
+    width: 800px;
+    margin-left: -400px;
+    height: 400px;
+    margin-bottom: -200px;
+    transform: scaleX(0);
+    flex-direction: row;
+}
+.goodsImg{
+    width: 300px;
+    margin-left: -150px;
+    height: 450px;
+    margin-bottom: -225px;
+    transform: scaleY(0);
+    flex-direction: column;
+}
+
+
+#add:checked + .addGoods #ia {
+    color: #2a3f54;
+}
+
+#all:hover + .allGoods #iaa {
+    color: #2a3f54;
+}
+
+/*#add:checked +  .addbottom {*/
+/*    transform: scaleX(1);*/
+/*}*/
+
+#ia, #iaa {
+    font-size: 40px;
+    color: #a5a5a5;
+}
+.addbottom .addleft, .updatebottom .addleft,.goodsImg .addleft{
+    border: 1px solid #b8b8b8;
+    border-radius: 8px;
+    width: 263px;
+    height: 350px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.addbottom .addleft, .updatebottom .addleft{
+    margin-right: 30px;
+}
+
+#img,#img1,#img2{
+    width: 100%;
+}
+.addbottom .addform .im, .updatebottom .addform .im {
+    display: inline-block;
+    margin-bottom: 18px;
+    font-size: 18px;
+    letter-spacing: 4px;
+    width: 90px;
+}
+
+.addbottom .addform .minput, .updatebottom .addform .minput {
+    padding: 6px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    width: 300px;
+}
+
+.addbottom .addform .minput:focus {
+    border: 2px solid #333;
+}
+
+.addbottom .addform .addright input,
+.updatebottom .addform .addright input,
+.goodsImg .addright input{
+    width: 100px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 8px;
+    letter-spacing: 2px;
+    font-size: 16px;
+    border: 1px solid #333;
+}
+
+.addbottom .addform .addright .submit,
+.updatebottom .addform .addright .submit {
+    margin-left: 120px;
+}
+.addbottom .addform .addright .reset,
+#reset {
+    margin-left: 50px;
+}
+#resetimg{
+    margin-top: 20px;
+}
+.addbottom .addform .addright input:hover,
+.updatebottom .addform .addright input:hover,
+.goodsImg .addright input:hover {
+    background-color: #f1b599;
+}

@@ -1,0 +1,160 @@
+<%@ page import="com.entity.EmployeeModel" %>
+<%@ page import="com.business.EBofactory" %>
+<%@ page import="com.entity.GoodsModel" %>
+<%@ page import="java.util.ArrayList" %><%--
+  Created by IntelliJ IDEA.
+  Author: hongxiaobin
+  User: hongxiaobin
+  Date: 2022/5/5
+  Time: 19:20
+  Description: 注册登录与忘记密码界面
+--%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<html>
+    <head>
+        <%
+            String path = request.getContextPath();
+            Cookie[] cookies = request.getCookies();
+            String username = "";
+            if (cookies!=null){
+                for (Cookie cookie:cookies){
+                    if ("username".equals(cookie.getName())){
+                        username = cookie.getValue();
+                    }
+                }
+            }
+            if (username.endsWith("user")){
+                request.getSession().setAttribute("userName",username);
+                request.getRequestDispatcher("userwait.jsp").forward(request,response);
+            }else if (username.endsWith("admin")){
+                ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList();
+                request.getSession().setAttribute("allGoods",arrayList);
+                request.getSession().setAttribute("adminName",username);
+                request.getRequestDispatcher("adminwait.jsp").forward(request,response);
+            }
+        %>
+        <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<%=path%>/css/index.css">
+        <title>51商城</title>
+        <script type="text/javascript">
+            function refrush_code(obj) {
+                obj.setAttribute("src", obj.getAttribute("src").toString().split("?")[0] + "?id=" + Math.random());
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container right-panel-active">
+            <!--            登录-->
+            <div class="container_form container--singup">
+                <form action="<%=path%>/IndexServlet" class="form" id="form1" method="post">
+                    <h2 class="from_title">用户登录中心</h2>
+                    <div class="acc">
+                        <input type="text" placeholder="账号" class="input" name="username">
+                        <input type="password" placeholder="密码" class="input" name="password">
+                        <div class="code">
+                            <input type="text" placeholder="验证码" class="input1" name="code">
+                            <img src="<%=path%>/IndexServlet" alt="暂无图片" onclick="refrush_code(this)" title="点击刷新">
+                        </div>
+                    </div>
+                    <div class="fn">
+                        <label for="radio" class="lable"><input type="radio" name="role" value="user" id="radio"
+                                                                checked><span><span></span></span>用户</label>
+                        <label for="radio1" class="lable"><input type="radio" name="role" value="admin"
+                                                                 id="radio1"><span><span></span></span>商家</label>
+                        <label for="check"><input type="checkbox" id="check" name="keep" value="choose"><span><span></span></span>记住我</label>
+                        <label for="check1" class="forgetlable"><input type="checkbox" id="check1"
+                                                                       onclick="c()">忘记密码</label>
+                    </div>
+                    <div class="box">
+                        <input type="submit" value="登录" class="btn" >
+                        <input type="reset" value="重置" class="btn">
+                    </div>
+                </form>
+                <%--                    忘记密码--%>
+                <div class="forget" id="forget">
+                    <form action="<%=path%>/ForgetServlet" class="form" id="form3" method="post">
+                        <h2 class="from_title" id="h2">重置密码</h2>
+                        <input type="text" placeholder="手机号" class="input" name="phone">
+                        <input type="password" placeholder="新密码" class="input" name="fpassword">
+                        <input type="password" placeholder="确认密码" class="input" name="spassword">
+                        <div class="code">
+                            <input type="text" placeholder="验证码" class="input1" name="code">
+                            <img src="<%=path%>/ForgetServlet" alt="暂无图片" onclick="refrush_code(this)" title="点击刷新">
+                        </div>
+                        <div class="fn">
+                            <label for="radio1112" class="lable"><input type="radio" name="role" value="user" id="radio1112"
+                                                                       checked><span><span></span></span>用户</label>
+                            <label for="radio112" class="lable"><input type="radio" name="role" value="admin"
+                                                                      id="radio112"><span><span></span></span>商家</label>
+                        </div>
+                        <div class="box">
+                            <input type="submit" value="确定" class="btn">
+                            <input type="reset" value="重置" class="btn">
+                        </div>
+                        <i class="fa fa-chevron-left icon" aria-hidden="true" onclick="back_return()">返回</i>
+                    </form>
+                </div>
+            </div>
+
+            <!--            注册-->
+            <div class="container_form container--singin">
+                <form action="<%=path%>/RegisterServlet" class="form" id="form2" method="post">
+                    <h2 class="from_title">注册账号</h2>
+                    <input type="text" placeholder="手机号" class="input" name="phone">
+                    <input type="password" placeholder="密码" class="input" name="fpassword">
+                    <input type="password" placeholder="确认密码" class="input" name="spassword">
+                    <div class="code">
+                        <input type="text" placeholder="验证码" class="input1" name="code">
+                        <img src="<%=path%>/RegisterServlet" alt="暂无图片" onclick="refrush_code(this)" title="点击刷新">
+                    </div>
+                    <div class="fn">
+                        <label for="radio111" class="lable"><input type="radio" name="role" value="user" id="radio111"
+                                                                   checked><span><span></span></span>用户</label>
+                        <label for="radio11" class="lable"><input type="radio" name="role" value="admin"
+                                                                  id="radio11"><span><span></span></span>商家</label>
+                    </div>
+                    <div class="box">
+                        <input type="submit" value="注册" class="btn">
+                        <input type="reset" value="重置" class="btn">
+                    </div>
+                </form>
+            </div>
+
+            <div class="container_overlay">
+                <div class="overlay">
+                    <%--                    以下盒子可跟随移动--%>
+                    <div class="overlay_panel overlay--left">
+                        <button class="btn" id="singin">没有账号，点击注册</button>
+                    </div>
+                    <div class="overlay_panel overlay--right">
+                        <button class="btn" id="singup">已有账号，直接登录</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+    <script>
+        const singinBtn = document.getElementById("singin");
+        const singupBtn = document.getElementById("singup");
+        const conrainer = document.querySelector(".container");
+        const check1 = document.getElementById("check1");
+        const forget = document.getElementById("forget");
+        singinBtn.addEventListener("click", () => {
+            conrainer.classList.remove("right-panel-active");
+            forget.style.transform = "scaleY(0)";
+        })
+        singupBtn.addEventListener("click", () => {
+            conrainer.classList.add("right-panel-active")
+        })
+
+        function c() {
+            forget.style.transform = "scaleY(1)";
+        }
+
+        function back_return() {
+            forget.style.transform = "scaleY(0)";
+        }
+    </script>
+</html>

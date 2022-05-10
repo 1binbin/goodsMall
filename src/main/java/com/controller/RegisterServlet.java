@@ -1,0 +1,98 @@
+package com.controller; /**
+ * @Author hongxiaobin
+ * @Time 2022/5/8-17:56
+ */
+
+import com.Utils.Utils;
+import com.business.EBofactory;
+import com.entity.EmployeeModel;
+
+import javax.imageio.ImageIO;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Random;
+
+@WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
+public class RegisterServlet extends HttpServlet {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //产生验验证码
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setDateHeader("Expires", 0);
+        response.setContentType("image/jpeg");
+        int width = 40;
+        int height = 20;
+        Random random = new Random();
+        BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        Graphics graphiecs = img.getGraphics();
+        graphiecs.setColor(new Color(243, 243, 243));
+        graphiecs.fillRect(0, 0, width, height);
+        int style = random.nextInt(4) ;
+//        数字大小
+        int size = random.nextInt(4) + 12;
+        graphiecs.setFont(new Font("微软雅黑", style, size));
+        StringBuilder srand = new StringBuilder();
+//        产生随机数
+        for (int i = 0; i < 4; i++) {
+            String rand = String.valueOf(random.nextInt(10));
+            srand.append(rand);
+            graphiecs.setColor(new Color(random.nextInt(100), random.nextInt(150), random.nextInt(150)));
+//            更改间距8
+            graphiecs.drawString(rand, i * 10, 18);
+        }
+//        产生随机线条
+        for (int i = 0; i < 10; i++) {
+            int x = random.nextInt(width);
+            int y = random.nextInt(height);
+            int x1 = random.nextInt(10);
+            int y1 = random.nextInt(10);
+            graphiecs.drawLine(x, y, x + x1, y + y1);
+        }
+        request.getSession().setAttribute("yzm3", srand.toString());
+        graphiecs.dispose();
+        ImageIO.write(img, "jpeg", response.getOutputStream());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String imgcode = (String) request.getSession().getAttribute("yzm3");
+        String phone = request.getParameter("phone");
+        String fpassword = request.getParameter("fpassword");
+        String spassword = request.getParameter("spassword");
+        String code = request.getParameter("code");
+        String role = request.getParameter("role");
+        EmployeeModel employeeModel = new EmployeeModel(phone,spassword,role);
+        if (!Objects.equals(phone, "") && !Objects.equals(fpassword, "") && !Objects.equals(spassword, "") && !Objects.equals(code, "")){
+            if (imgcode.equals(code)) {
+                if (Objects.equals(fpassword, spassword)){
+                    if (EBofactory.getemployeeebiempl().insertEmployee(employeeModel)){
+                        if ("user".equals(role)){
+                            request.getSession().setAttribute("userName",phone+role);
+                            request.getRequestDispatcher("jsp/userwait.jsp").forward(request,response);
+                        }else {
+                            Utils.getAllGoods(request);
+                            request.getSession().setAttribute("adminName",phone+role);
+                            request.getRequestDispatcher("jsp/adminwait.jsp").forward(request,response);
+                        }
+                    }else {
+                        Utils.alter(response, "<script type='text/javascript'>alert('账号已存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
+                    }
+                }else {
+                    Utils.alter(response, "<script type='text/javascript'>alert('密码不相同！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
+                }
+            } else {
+                Utils.alter(response, "<script type='text/javascript'>alert('验证码错误！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
+            }
+        }else {
+            Utils.alter(response, "<script type='text/javascript'>alert('部分信息未输入！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
+        }
+    }
+}
