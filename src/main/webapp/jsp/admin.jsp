@@ -24,13 +24,6 @@
         <link href="<%=path%>/css/admin.css" rel="stylesheet">
     </head>
     <script type="text/javascript">
-        window.onload = function () {
-            const addbottom = document.getElementById("addbottom");
-            addbottom.addEventListener("click", event => {
-                event.cancelBubble = true;
-            }, false)
-        }
-
         function check(form) {
             //    商品编号输入框不为空
             if (form.gid.value === "") {
