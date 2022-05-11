@@ -78,7 +78,7 @@ public class RegisterServlet extends HttpServlet {
                             request.getSession().setAttribute("userName",phone+role);
                             request.getRequestDispatcher("jsp/userwait.jsp").forward(request,response);
                         }else {
-                            Utils.getAllGoods(request);
+                            Utils.getAllGoods(request,phone);
                             request.getSession().setAttribute("adminName",phone+role);
                             request.getRequestDispatcher("jsp/adminwait.jsp").forward(request,response);
                         }

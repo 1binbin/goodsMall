@@ -86,7 +86,7 @@ public class IndexServlet extends HttpServlet {
                     if (choose) {
                         response.addCookie(cookie);
                     }
-                    Utils.getAllGoods(request);
+                    Utils.getAllGoods(request,username);
                     request.getSession().setAttribute("adminName",username+role);
                     request.getRequestDispatcher("jsp/adminwait.jsp").forward(request, response);
                 } else if ("user".equals(role) && is) {

@@ -13,6 +13,7 @@ import java.util.List;
  */
 public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
     Connection connection;
+
     {
         try {
             connection = JdbcConnection.getConnection();
@@ -23,49 +24,49 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public void insertGoods(GoodsModel goodsModel) {
-        String sql = "insert into goods(gid,gname,gcategory,gprice,ginprice,gnum) values(?,?,?,?,?,?)";
-        update(connection,sql, goodsModel.getGid(), goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(),goodsModel.getGinprice(),goodsModel.getGnum());
+        String sql = "insert into goods(eid,gid,gname,gcategory,gprice,ginprice,gnum) values(?,?,?,?,?,?,?)";
+        update(connection, sql, goodsModel.getEid(), goodsModel.getGid(), goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(), goodsModel.getGnum());
     }
 
     @Override
-    public void deleteGoods(String isbn) {
-        String sql = "delete from goods where gid = ?";
-        update(connection,sql,isbn);
+    public void deleteGoods(String isbn, String eid) {
+        String sql = "delete from goods where gid = ? and eid = ?";
+        update(connection, sql, isbn, eid);
     }
 
     @Override
     public void update(GoodsModel goodsModel) {
-        String sql = "update goods set  gname = ? , gcategory = ? , gprice = ? where gid = ?";
-        update(connection,sql, goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGid());
+        String sql = "update goods set  gname = ? , gcategory = ? , gprice = ? where gid = ? and eid = ?";
+        update(connection, sql, goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGid(), goodsModel.getEid());
     }
 
     @Override
-    public List<GoodsModel> getGoodslist() {
-        String sql = "select * from goods";
-        return getBeanList(connection,sql);
+    public List<GoodsModel> getGoodslist(String eid) {
+        String sql = "select * from goods where eid = ?";
+        return getBeanList(connection, sql, eid);
     }
 
     @Override
-    public List<GoodsModel> getGoods(String gid) {
-        String sql = "select * from goods where gid like concat('%',?,'%')";
-        return getBeanList(connection,sql,gid);
+    public List<GoodsModel> getGoods(String gid, String eid) {
+        String sql = "select * from goods where gid like concat('%',?,'%') and eid = ?";
+        return getBeanList(connection, sql, gid, eid);
     }
 
     @Override
-    public List<GoodsModel> getGoodsGname(String gname) {
-        String sql = "select * from goods where gname like concat('%',?,'%')";
-        return getBeanList(connection,sql,gname);
+    public List<GoodsModel> getGoodsGname(String gname, String eid) {
+        String sql = "select * from goods where gname like concat('%',?,'%') and eid = ?";
+        return getBeanList(connection, sql, gname, eid);
     }
 
     @Override
-    public List<GoodsModel> getGoodsGcategory(String gcategory) {
-        String sql = "select * from goods where gcategory like concat('%',?,'%')";
-        return getBeanList(connection,sql,gcategory);
+    public List<GoodsModel> getGoodsGcategory(String gcategory, String eid) {
+        String sql = "select * from goods where gcategory like concat('%',?,'%') and eid = ?";
+        return getBeanList(connection, sql, gcategory, eid);
     }
 
     @Override
-    public List<GoodsModel> getGoodsAll(String all) {
-        String sql = "select * from goods where gid like concat('%',?,'%') or gname like concat('%',?,'%') or  gcategory like concat('%',?,'%')";
-        return getBeanList(connection,sql,all,all,all);
+    public List<GoodsModel> getGoodsAll(String all, String eid) {
+        String sql = "select * from goods where (gid like concat('%',?,'%') or gname like concat('%',?,'%') or  gcategory like concat('%',?,'%')) and eid = ?";
+        return getBeanList(connection, sql, all, all, all,eid);
     }
 }

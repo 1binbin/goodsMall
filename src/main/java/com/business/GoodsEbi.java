@@ -26,7 +26,7 @@ public interface GoodsEbi {
      * @Param: String
      * @Return: boolean
      */
-    boolean deleteGoods(String isbn);
+    boolean deleteGoods(String isbn ,String eid);
 
     /**
      * @Author: hongxiaobin
@@ -44,7 +44,7 @@ public interface GoodsEbi {
      * @Param: null
      * @Return: GoodsModel
      */
-    List<GoodsModel> selectGoods(String gid);
+    List<GoodsModel> selectGoods(String gid,String eid);
 
     /**
      * @Author: hongxiaobin
@@ -53,11 +53,11 @@ public interface GoodsEbi {
      * @Param: null
      * @Return: GoodsModel
      */
-    List<GoodsModel> selectGoodsGname(String gname);
+    List<GoodsModel> selectGoodsGname(String gname,String eid);
 
-    List<GoodsModel> selectGoodsGcategory(String gcategory);
+    List<GoodsModel> selectGoodsGcategory(String gcategory,String eid);
 
-    List<GoodsModel> selectGoodsAll(String all);
+    List<GoodsModel> selectGoodsAll(String all,String eid);
     /**
      * @Author: hongxiaobin
      * @Description: 精确查询所有图书
@@ -65,5 +65,5 @@ public interface GoodsEbi {
      * @Param: String
      * @Return: List<GoodsModel>
      */
-    List<GoodsModel> selectGoodsList();
+    List<GoodsModel> selectGoodsList(String eid);
 }

@@ -29,8 +29,8 @@ public class Utils {
         out.flush();
         out.close();
     }
-    public static void getAllGoods(HttpServletRequest request) {
-        ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList();
+    public static void getAllGoods(HttpServletRequest request,String eid) {
+        ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid);
         request.getSession().setAttribute("allGoods", arrayList);
     }
 }

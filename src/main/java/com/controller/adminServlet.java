@@ -42,50 +42,58 @@ public class adminServlet extends HttpServlet {
     }
 
     protected void insert(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String eid = getEid(request);
         GoodsModel goodsModel = getGoodsModel(request);
         EBofactory.getgoodsebiempl().insertGoods(goodsModel);
-        Utils.getAllGoods(request);
+        Utils.getAllGoods(request,eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String eid = getEid(request);
         GoodsModel goodsModel = getGoodsModel(request);
         EBofactory.getgoodsebiempl().updateGoods(goodsModel);
-        Utils.getAllGoods(request);
+        Utils.getAllGoods(request,eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String eid = getEid(request);
         String gid = request.getParameter("gid");
-        EBofactory.getgoodsebiempl().deleteGoods(gid);
-        Utils.getAllGoods(request);
+        EBofactory.getgoodsebiempl().deleteGoods(gid,eid);
+        Utils.getAllGoods(request,eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
 
     protected void select(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String eid = getEid(request);
         String selectText = request.getParameter("selectGid");
         String selectOption = request.getParameter("selectOption");
         ArrayList<GoodsModel> arrayList = new ArrayList<>();
         if ("all".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsAll(selectText);
+            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsAll(selectText,eid);
         } else if ("selectGid".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoods(selectText);
+            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoods(selectText,eid);
         } else if ("selectGname".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsGname(selectText);
+            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsGname(selectText,eid);
         } else if ("selectGcategory".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsGcategory(selectText);
+            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsGcategory(selectText,eid);
         }
         request.getSession().setAttribute("allGoods", arrayList);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
+
+
+
     protected void all(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        Utils.getAllGoods(request);
+        String eid = getEid(request);
+        Utils.getAllGoods(request,eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
     private GoodsModel getGoodsModel(HttpServletRequest request) throws IOException, ServletException {
-        String adminName = (String) request.getSession().getAttribute("adminName");
+        String eid = getEid(request);
         String gid = request.getParameter("gid");
         String name = request.getParameter("gname");
         String category = request.getParameter("gcategory");
@@ -97,14 +105,14 @@ public class adminServlet extends HttpServlet {
         int gnum = (Objects.equals(num, "") ? 0 : Integer.parseInt(num));
         double gprice = (Objects.deepEquals(price, "") ? 0.0 : Double.parseDouble(price));
         double ginprice = (Objects.deepEquals(inprice, "") ? 0.0 : Double.parseDouble(inprice));
-        GoodsModel goodsModel = new GoodsModel(gid, gname, gcategory, gprice, ginprice, gnum);
+        GoodsModel goodsModel = new GoodsModel(gid, gname, gcategory, gprice, ginprice, gnum,eid);
 //        上传主图
         String path = this.getServletContext().getRealPath("/");
         Part p = request.getPart("file");
         if (p.getSize() > 1024 * 1024) {
             p.delete();
         } else {
-            path = path + "\\" + adminName;
+            path = path + "\\" + eid;
             File file = new File(path);
             if (!file.exists()) {
                 file.mkdirs();
@@ -115,5 +123,9 @@ public class adminServlet extends HttpServlet {
             }
         }
         return goodsModel;
+    }
+    private String getEid(HttpServletRequest request) {
+        String adminName = (String) request.getSession().getAttribute("adminName");
+        return adminName.substring(0,adminName.length()-5);
     }
 }

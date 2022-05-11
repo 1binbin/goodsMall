@@ -17,16 +17,26 @@ public class GoodsModel {
     private double ginprice;
     private int gnum;
 
+    private String eid;
     public GoodsModel() {
     }
 
-    public GoodsModel(String gid, String gname, String gcategory, double gprice, double ginprice, int gnum) {
+    public GoodsModel(String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String eid) {
         this.gid = gid;
         this.gname = gname;
         this.gcategory = gcategory;
         this.gprice = gprice;
         this.ginprice = ginprice;
         this.gnum = gnum;
+        this.eid = eid;
+    }
+
+    public String getEid() {
+        return eid;
+    }
+
+    public void setEid(String eid) {
+        this.eid = eid;
     }
 
     public double getGinprice() {

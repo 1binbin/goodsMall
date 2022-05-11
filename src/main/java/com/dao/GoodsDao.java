@@ -26,7 +26,7 @@ public interface GoodsDao {
      * @Param: Connection
      * @Return: void
      */
-    void deleteGoods(String isbn);
+    void deleteGoods(String isbn,String eid);
 
     /**
      * @Author: hongxiaobin
@@ -44,7 +44,7 @@ public interface GoodsDao {
      * @Param: Connection
      * @Return: List<GoodsModel>
      */
-    List<GoodsModel> getGoodslist();
+    List<GoodsModel> getGoodslist(String eid);
 
     /**
      * @Author: hongxiaobin
@@ -53,7 +53,7 @@ public interface GoodsDao {
      * @Param: Connection
      * @Return: GoodsModel
      */
-    List<GoodsModel> getGoods(String gid);
+    List<GoodsModel> getGoods(String gid,String eid);
 
     /**
      * @Author: hongxiaobin
@@ -62,7 +62,7 @@ public interface GoodsDao {
      * @Param: Connection
      * @Return: GoodsModel
      */
-    List<GoodsModel> getGoodsGname(String gname);
+    List<GoodsModel> getGoodsGname(String gname,String eid);
 
     /**
      * 商品类别模糊查询
@@ -70,10 +70,10 @@ public interface GoodsDao {
      * @Param:
      * @Return:
      */
-    List<GoodsModel> getGoodsGcategory(String gcategory);
+    List<GoodsModel> getGoodsGcategory(String gcategory,String eid);
     /**全部范围内模糊查询
      * @Param:
      * @Return:
      */
-    List<GoodsModel> getGoodsAll(String all);
+    List<GoodsModel> getGoodsAll(String all,String eid);
 }

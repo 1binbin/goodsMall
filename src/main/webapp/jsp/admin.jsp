@@ -326,7 +326,7 @@
 
         function update(gid, gname, gcategory, gnum, ginprice, gpeice) {
             updatebottom.style.transform = "scaleX(1)"
-            document.getElementById("img1").src = "<%=path%>/<%=adminName%>/" + gid + ".jpg";
+            document.getElementById("img1").src = "<%=path%>/<%=name%>/" + gid + ".jpg";
             document.getElementById("ugid").value = gid;
             document.getElementById("ugname").value = gname;
             document.getElementById("ugnum").value = gnum;
@@ -353,7 +353,7 @@
         }
 
         function showgoodsimg(gid) {
-            document.getElementById("img2").src = "<%=path%>/<%=adminName%>/" + gid + ".jpg";
+            document.getElementById("img2").src = "<%=path%>/<%=name%>/" + gid + ".jpg";
             showimg.style.transform = "scaleY(1)"
         }
 
