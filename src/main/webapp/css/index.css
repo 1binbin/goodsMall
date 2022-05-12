@@ -278,3 +278,11 @@ img {
         z-index: 5;
     }
 }
+#message1,#message2,#message4,#message5{
+    text-align: left;
+    font-size: 12px;
+    margin: 0;
+}
+.inputdiv{
+    width: 80%;
+}

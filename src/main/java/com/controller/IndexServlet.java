@@ -70,7 +70,7 @@ public class IndexServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String imgcode = (String) request.getSession().getAttribute("yzm1");
         String code = request.getParameter("code");
-        String username = request.getParameter("username");
+        String username = Utils.utf_8(request.getParameter("username"));
         String password = request.getParameter("password");
         String role = request.getParameter("role");
         String[] keep = request.getParameterValues("keep");

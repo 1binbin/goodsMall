@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -32,5 +33,12 @@ public class Utils {
     public static void getAllGoods(HttpServletRequest request,String eid) {
         ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid);
         request.getSession().setAttribute("allGoods", arrayList);
+    }
+    /**乱码处理
+     * @Param:
+     * @Return:
+     */
+    public static String utf_8(String s){
+        return new String(s.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
     }
 }

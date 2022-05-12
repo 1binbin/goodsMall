@@ -63,7 +63,7 @@ public class ForgetServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String imgcode = (String) request.getSession().getAttribute("yzm2");
-        String phone = request.getParameter("phone");
+        String phone = Utils.utf_8(request.getParameter("phone"));
         String fpassword = request.getParameter("fpassword");
         String spassword = request.getParameter("spassword");
         String code = request.getParameter("code");

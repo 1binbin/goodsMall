@@ -59,7 +59,7 @@ public class adminServlet extends HttpServlet {
 
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
-        String gid = request.getParameter("gid");
+        String gid = Utils.utf_8(request.getParameter("gid"));
         EBofactory.getgoodsebiempl().deleteGoods(gid,eid);
         Utils.getAllGoods(request,eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
@@ -68,7 +68,7 @@ public class adminServlet extends HttpServlet {
 
     protected void select(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
-        String selectText = request.getParameter("selectGid");
+        String selectText = Utils.utf_8(request.getParameter("selectGid"));
         String selectOption = request.getParameter("selectOption");
         ArrayList<GoodsModel> arrayList = new ArrayList<>();
         if ("all".equals(selectOption)) {
@@ -94,9 +94,9 @@ public class adminServlet extends HttpServlet {
 
     private GoodsModel getGoodsModel(HttpServletRequest request) throws IOException, ServletException {
         String eid = getEid(request);
-        String gid = request.getParameter("gid");
-        String name = request.getParameter("gname");
-        String category = request.getParameter("gcategory");
+        String gid = Utils.utf_8(request.getParameter("gid"));
+        String name = Utils.utf_8(request.getParameter("gname"));
+        String category = Utils.utf_8(request.getParameter("gcategory"));
         String gname = (Objects.deepEquals(name, "") ? "-" : name);
         String gcategory = (Objects.deepEquals(category, "") ? "-" : category);
         String num = request.getParameter("gnum");
@@ -125,7 +125,7 @@ public class adminServlet extends HttpServlet {
         return goodsModel;
     }
     private String getEid(HttpServletRequest request) {
-        String adminName = (String) request.getSession().getAttribute("adminName");
+        String adminName = Utils.utf_8((String) request.getSession().getAttribute("adminName"));
         return adminName.substring(0,adminName.length()-5);
     }
 }

@@ -52,7 +52,7 @@
                     <h2 class="from_title">用户登录中心</h2>
                     <div class="acc">
                         <input type="text" placeholder="账号" class="input" name="username">
-                        <input type="password" placeholder="密码" class="input" name="password">
+                        <input type="password" placeholder="密码" class="input" name="password" id="password">
                         <div class="code">
                             <input type="text" placeholder="验证码" class="input1" name="code">
                             <img src="<%=path%>/IndexServlet" alt="暂无图片" onclick="refrush_code(this)" title="点击刷新">
@@ -77,8 +77,10 @@
                     <form action="<%=path%>/ForgetServlet" class="form" id="form3" method="post">
                         <h2 class="from_title" id="h2">重置密码</h2>
                         <input type="text" placeholder="手机号" class="input" name="phone">
-                        <input type="password" placeholder="新密码" class="input" name="fpassword">
-                        <input type="password" placeholder="确认密码" class="input" name="spassword">
+                        <input type="password" placeholder="新密码" class="input" name="fpassword" id="fpassword">
+                        <div class="inputdiv"><p id="message2"></p></div>
+                        <input type="password" placeholder="确认密码" class="input" name="spassword" id="ffpassword">
+                        <div class="inputdiv"><p id="message5"></p></div>
                         <div class="code">
                             <input type="text" placeholder="验证码" class="input1" name="code">
                             <img src="<%=path%>/ForgetServlet" alt="暂无图片" onclick="refrush_code(this)" title="点击刷新">
@@ -90,7 +92,7 @@
                                                                       id="radio112"><span><span></span></span>商家</label>
                         </div>
                         <div class="box">
-                            <input type="submit" value="确定" class="btn">
+                            <input type="submit" value="确定" class="btn" id="submit2">
                             <input type="reset" value="重置" class="btn">
                         </div>
                         <i class="fa fa-chevron-left icon" aria-hidden="true" onclick="back_return()">返回</i>
@@ -103,8 +105,10 @@
                 <form action="<%=path%>/RegisterServlet" class="form" id="form2" method="post">
                     <h2 class="from_title">注册账号</h2>
                     <input type="text" placeholder="手机号" class="input" name="phone">
-                    <input type="password" placeholder="密码" class="input" name="fpassword">
-                    <input type="password" placeholder="确认密码" class="input" name="spassword">
+                    <input type="password" placeholder="密码" class="input" name="fpassword" id="rfpassword">
+                    <div class="inputdiv"><p id="message1"></p></div>
+                    <input type="password" placeholder="确认密码" class="input" name="spassword" id="rspassword">
+                    <div class="inputdiv"><p id="message4"></p></div>
                     <div class="code">
                         <input type="text" placeholder="验证码" class="input1" name="code">
                         <img src="<%=path%>/RegisterServlet" alt="暂无图片" onclick="refrush_code(this)" title="点击刷新">
@@ -116,7 +120,7 @@
                                                                   id="radio11"><span><span></span></span>商家</label>
                     </div>
                     <div class="box">
-                        <input type="submit" value="注册" class="btn">
+                        <input type="submit" value="注册" class="btn" id="submit1">
                         <input type="reset" value="重置" class="btn">
                     </div>
                 </form>
@@ -133,8 +137,6 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
     </body>
     <script>
@@ -157,6 +159,63 @@
 
         function back_return() {
             forget.style.transform = "scaleY(0)";
+        }
+        var regu = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
+        var rfpassword = document.getElementById("rfpassword");
+        var fpassword = document.getElementById("fpassword");
+        var message1 = document.getElementById("message1");
+        var message2 = document.getElementById("message2");
+        //确认密码
+        var rspassword = document.getElementById("rspassword");
+        var ffpassword = document.getElementById("ffpassword");
+        var message4 = document.getElementById("message4");
+        var message5 = document.getElementById("message5");
+        rfpassword.oninput = function (){
+            if (!regu.test(rfpassword.value)){
+                message1.innerHTML = "密码应为6-16位数字和字母组成";
+                message1.style.color = "#ef4444"
+                rspassword.disabled = true;
+            }else {
+                message1.innerHTML = "密码格式正确";
+                message1.style.color = "green";
+                rspassword.disabled = false;
+            }
+        }
+        fpassword.oninput = function (){
+            if (!regu.test(fpassword.value)){
+                message2.innerHTML = "密码应为6-16位数字和字母组成";
+                message2.style.color = "#ef4444"
+                ffpassword.disabled = true;
+            }else {
+                message2.innerHTML = "密码格式正确";
+                message2.style.color = "green";
+                ffpassword.disabled = false;
+            }
+        }
+    //    确认密码
+        var submit1 = document.getElementById("submit1");
+        var submit2 = document.getElementById("submit2");
+        rspassword.oninput = function (){
+            if (rfpassword.value!==rspassword.value){
+                message4.innerHTML="与新密码不相同";
+                message4.style.color = "#ef4444"
+                submit1.disabled = true;
+            }else {
+                message4.innerHTML = "密码正确";
+                message4.style.color = "green";
+                submit1.disabled = false;
+            }
+        }
+        ffpassword.oninput = function (){
+            if (fpassword.value!==ffpassword.value){
+                message5.innerHTML="与新密码不相同";
+                message5.style.color = "#ef4444"
+                submit2.disabled = true;
+            }else {
+                message5.innerHTML = "密码正确";
+                message5.style.color = "green";
+                submit2.disabled = false;
+            }
         }
     </script>
 </html>
