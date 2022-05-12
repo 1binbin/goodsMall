@@ -112,7 +112,16 @@ body {
     color: #fff;
     background-color: #35495d;
 }
-
+/*退出登录*/
+#outlogin{
+    float: right;
+    margin-right: 120px;
+    margin-top: 10px;
+    font-size: 18px;
+}
+#outlogin:hover{
+    color: #ea3838;
+}
 /*兄弟选择器，判断复选框是否被选中*/
 /*+为兄弟选择器，找到input的下一个兄弟label*/
 .navbar input:checked + .label {

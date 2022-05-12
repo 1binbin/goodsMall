@@ -1,8 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.dao.GoodsDao" %>
 <%@ page import="com.entity.GoodsModel" %>
-<%@ page import="com.business.EBofactory" %>
-<%@ page import="com.Utils.Utils" %><%--
+<%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -71,12 +69,18 @@
         function allGoods() {
             window.open("<%=path%>/adminServlet?action=all", "_self")
         }
+        function outlogin() {
+            if (window.confirm("确定是否退出登录？")) {
+                window.open("<%=path%>/jsp/index.jsp", "_self")
+            }
+        }
     </script>
     <body>
         <div class="navbar">
             <input type="checkbox" id="checkbox">
             <label for="checkbox" class="label">
                 <i class="fa fa-bars check" aria-hidden="true"></i>
+                <p id="outlogin" onclick="outlogin()">退出登录</p>
             </label>
             <div class="main">
                 <div class="left">
