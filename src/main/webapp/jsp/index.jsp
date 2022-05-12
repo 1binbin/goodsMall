@@ -35,7 +35,7 @@
                 request.getRequestDispatcher("adminwait.jsp").forward(request,response);
             }
         %>
-        <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=path%>/css/index.css">
         <title>51商城</title>
         <script type="text/javascript">

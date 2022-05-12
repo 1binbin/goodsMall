@@ -18,7 +18,7 @@
             String name = adminName.substring(0, adminName.length() - 5);
         %>
         <title>管理员</title>
-        <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="<%=path%>/css/admin.css" rel="stylesheet">
     </head>
     <script type="text/javascript">
@@ -69,6 +69,7 @@
         function allGoods() {
             window.open("<%=path%>/adminServlet?action=all", "_self")
         }
+
         function outlogin() {
             if (window.confirm("确定是否退出登录？")) {
                 window.open("<%=path%>/jsp/index.jsp", "_self")
@@ -362,9 +363,9 @@
         }
 
         function isCheck(e) {
-            if (e.checked){
+            if (e.checked) {
                 addbottom.style.transform = "scaleX(1)"
-            }else {
+            } else {
                 addbottom.style.transform = "scaleX(0)"
             }
         }

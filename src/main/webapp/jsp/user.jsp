@@ -13,7 +13,7 @@
             String path = request.getContextPath();
         %>
         <title>51商城</title>
-        <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=path%>/css/user.css">
     </head>
     <body>
