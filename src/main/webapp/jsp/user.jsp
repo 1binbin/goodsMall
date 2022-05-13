@@ -25,17 +25,20 @@
             function fun(i, j) {//转换图片函数，就是把透明度改了一下
                 lik[i].style.opacity = 1;
                 lik[j].style.opacity = 0;
-                lik[i + 8].style.backgroundColor = "#727272";//改一下小图标
+                lik[i + 8].style.backgroundColor = "#ffffff";//改一下小图标
                 lik[j + 8].style.backgroundColor = "#00000000"
             }
+
             fun(0, 1);//初始化下
             var i = 0;
+
             function auto() {//轮播循环函数
                 if (++i >= 8) {
                     i = 0;
                     fun(0, 7);
                 } else fun(i, i - 1);
             }
+
             timer = this.setInterval(auto, 3000);
             box.onmouseover = function () { //鼠标划上去，停止轮播
                 clearInterval(timer);
@@ -135,12 +138,26 @@
                 </div>
             </div>
             <div class="middle-right">
-
             </div>
         </div>
         <%--        推荐商品--%>
         <div class="content">
-
+            <span class="like">猜你喜欢</span>
+            <ul class="like_ul">
+                <%
+                    for (int i = 0; i < 20; i++) {
+                %>
+                <li>
+                    <div class="like_img"><img src="<%=path%>/img/1.jpg" alt=""></div>
+                    <div class="like_span">
+                        <p>企鹅窝群二群二无群无群二群二群二无群二二群翁无群二无群二无群二群翁无群二群</p>
+                        <i class="fa fa-jpy" aria-hidden="true"></i>
+                        <span class="mony">12.2</span></div>
+                </li>
+                <%
+                    }
+                %>
+            </ul>
         </div>
         <%--        底部信息--%>
         <div class="foot"></div>
