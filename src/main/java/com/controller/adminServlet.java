@@ -100,6 +100,7 @@ public class adminServlet extends HttpServlet {
         String describe = Utils.utf_8(request.getParameter("gdescribe"));
         String gname = (Objects.deepEquals(name, "") ? "-" : name);
         String gcategory = (Objects.deepEquals(category, "") ? "<空>" : category);
+        System.out.println(gcategory);
         String gdescribe = (Objects.deepEquals(describe, "") ? "<空>" : describe);
         String num = request.getParameter("gnum");
         String price = request.getParameter("gprice");

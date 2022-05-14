@@ -215,7 +215,7 @@
                                         <p class="im">商品名称</p>
                                         <input type="text" name="gname" class="minput"><br>
                                         <p class="im">商品类别</p>
-                                        <select class="minput">
+                                        <select class="minput" name="gcategory">
                                             <%
                                                 if (!list.isEmpty()) {
                                                     for (GoodsModel goodsModel : list) {
@@ -269,7 +269,7 @@
                                         <p class="im">商品名称</p>
                                         <input type="text" name="gname" class="minput" id="ugname"><br>
                                         <p class="im">商品类别</p>
-                                        <select class="minput">
+                                        <select class="minput" name="gcategory">
                                             <%
                                                 if (!list.isEmpty()) {
                                                     for (GoodsModel goodsModel : list) {
