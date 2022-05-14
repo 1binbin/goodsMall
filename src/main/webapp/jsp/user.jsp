@@ -1,4 +1,6 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="com.entity.GoodsModel" %>
+<%@ page import="com.business.Daofactory" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -11,6 +13,7 @@
     <head>
         <%
             String path = request.getContextPath();
+            List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
         %>
         <title>51商城</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -21,12 +24,14 @@
         window.onload = function () {
             var box = this.document.getElementById("re");
             var lik = box.getElementsByTagName("li");
+
             function fun(i, j) {//转换图片函数，就是把透明度改了一下
                 lik[i].style.opacity = 1;
                 lik[j].style.opacity = 0;
                 lik[i + 8].style.backgroundColor = "#ffffff";//改一下小图标
                 lik[j + 8].style.backgroundColor = "#00000000"
             }
+
             fun(0, 1);//初始化下
             var i = 0;
 
@@ -143,16 +148,24 @@
             <span class="like">猜你喜欢</span>
             <ul class="like_ul">
                 <%
-                    for (int i = 0; i < 20; i++) {
+                    if (!eidList.isEmpty()) {
+                        for (GoodsModel goodsModel : eidList) {
+                            List<GoodsModel> eidGoodsList = Daofactory.getgoodsdaoimpl().getdEidGoods(goodsModel.getEid());
+                            for (GoodsModel model : eidGoodsList) {
                 %>
                 <li>
-                    <div class="like_img"><img src="<%=path%>/img/1.jpg" alt=""></div>
+                    <div class="like_img"><img
+                            src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=model.getGid()%>.jpg" alt="">
+                    </div>
                     <div class="like_span">
-                        <p>企鹅窝群二群二无群无群二群二群二无群二二群翁无群二无群二无群二群翁无群二群</p>
+                        <p><%=model.getGdescribe()%>
+                        </p>
                         <i class="fa fa-jpy" aria-hidden="true"></i>
-                        <span class="mony">12.2</span></div>
+                        <span class="mony"><%=model.getGprice()%></span></div>
                 </li>
                 <%
+                            }
+                        }
                     }
                 %>
             </ul>

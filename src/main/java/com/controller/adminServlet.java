@@ -107,14 +107,14 @@ public class adminServlet extends HttpServlet {
         int gnum = (Objects.equals(num, "") ? 0 : Integer.parseInt(num));
         double gprice = (Objects.deepEquals(price, "") ? 0.0 : Double.parseDouble(price));
         double ginprice = (Objects.deepEquals(inprice, "") ? 0.0 : Double.parseDouble(inprice));
-        GoodsModel goodsModel = new GoodsModel(eid,gid, gname, gcategory, gprice, ginprice, gnum,describe);
+        GoodsModel goodsModel = new GoodsModel(eid,gid, gname, gcategory, gprice, ginprice, gnum,gdescribe);
 //        上传主图
         String path = this.getServletContext().getRealPath("/");
         Part p = request.getPart("file");
         if (p.getSize() > 1024 * 1024) {
             p.delete();
         } else {
-            path = path + "\\" + eid;
+            path = path + "\\Product_main_photo\\" + eid;
             File file = new File(path);
             if (!file.exists()) {
                 file.mkdirs();

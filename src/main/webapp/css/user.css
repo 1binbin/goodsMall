@@ -313,7 +313,7 @@ body {
 /*猜你喜欢*/
 .content {
     width: 82%;
-    height: 1000px;
+    /*height: 1000px;*/
     margin-top: 5px;
 }
 

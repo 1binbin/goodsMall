@@ -1,5 +1,6 @@
 package com.dao;
 
+import com.business.GoodsEbi;
 import com.entity.GoodsModel;
 
 import java.util.List;
@@ -76,4 +77,7 @@ public interface GoodsDao {
      * @Return:
      */
     List<GoodsModel> getGoodsAll(String all,String eid);
+
+    List<GoodsModel> getdEid();
+    List<GoodsModel> getdEidGoods(String eid);
 }

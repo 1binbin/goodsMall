@@ -66,4 +66,6 @@ public interface GoodsEbi {
      * @Return: List<GoodsModel>
      */
     List<GoodsModel> selectGoodsList(String eid);
+    List<GoodsModel> getdEid();
+    List<GoodsModel> getdEidGoods(String eid);
 }

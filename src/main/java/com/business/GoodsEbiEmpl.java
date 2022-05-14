@@ -71,4 +71,15 @@ public class GoodsEbiEmpl implements GoodsEbi {
     public List<GoodsModel> selectGoodsList(String eid) {
         return Daofactory.getgoodsdaoimpl().getGoodslist(eid);
     }
+
+    @Override
+    public List<GoodsModel> getdEid() {
+        return Daofactory.getgoodsdaoimpl().getdEid();
+    }
+
+    @Override
+    public List<GoodsModel> getdEidGoods(String eid) {
+        return Daofactory.getgoodsdaoimpl().getdEidGoods(eid);
+    }
+
 }

@@ -69,4 +69,16 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
         String sql = "select * from goods where (gid like concat('%',?,'%') or gname like concat('%',?,'%') or  gcategory like concat('%',?,'%')) and eid = ?";
         return getBeanList(connection, sql, all, all, all,eid);
     }
+
+    @Override
+    public List<GoodsModel> getdEid() {
+        String sql = "select distinct eid from goods";
+        return getBeanList(connection,sql);
+    }
+
+    @Override
+    public List<GoodsModel> getdEidGoods(String eid) {
+        String sql ="select * from goods where eid = ?";
+        return getBeanList(connection,sql,eid);
+    }
 }
