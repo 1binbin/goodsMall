@@ -23,8 +23,8 @@ public class EmployeeDaoEmpl extends BaseDao<EmployeeModel> implements EmployeeD
 
     @Override
     public List<EmployeeModel> getEmployeeList(EmployeeModel employeeModel) {
-        String sql = "select * from employee where eid = ? and epassword = ? and erole = ?";
-        return getBeanList(connection,sql,employeeModel.getEid(),employeeModel.getEpassword(),employeeModel.getErole());
+        String sql = "select * from employee where eid = ? and epassword = ?";
+        return getBeanList(connection,sql,employeeModel.getEid(),employeeModel.getEpassword());
     }
 
     @Override
@@ -35,8 +35,8 @@ public class EmployeeDaoEmpl extends BaseDao<EmployeeModel> implements EmployeeD
 
     @Override
     public void insertEmployee(EmployeeModel employeeModel) {
-        String sql = "insert into employee(eid,epassword,erole) values(?,?,?)";
-        update(connection,sql,employeeModel.getEid(),employeeModel.getEpassword(),employeeModel.getErole());
+        String sql = "insert into employee(eid,epassword) values(?,?)";
+        update(connection,sql,employeeModel.getEid(),employeeModel.getEpassword());
     }
 
     @Override

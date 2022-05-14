@@ -1,5 +1,6 @@
 package com.business;
 
+import com.dao.CustomerDaompl;
 import com.dao.EmployeeDaoEmpl;
 import com.dao.GoodsDaoImpl;
 
@@ -14,5 +15,8 @@ public class Daofactory {
     }
     public static EmployeeDaoEmpl getemloyeedaoimpl(){
         return new EmployeeDaoEmpl();
+    }
+    public static CustomerDaompl getcustomerimpl(){
+        return new CustomerDaompl();
     }
 }

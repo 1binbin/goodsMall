@@ -24,8 +24,8 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public void insertGoods(GoodsModel goodsModel) {
-        String sql = "insert into goods(eid,gid,gname,gcategory,gprice,ginprice,gnum) values(?,?,?,?,?,?,?)";
-        update(connection, sql, goodsModel.getEid(), goodsModel.getGid(), goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(), goodsModel.getGnum());
+        String sql = "insert into goods(eid,gid,gname,gcategory,gprice,ginprice,gnum,gdescribe) values(?,?,?,?,?,?,?,?)";
+        update(connection, sql, goodsModel.getEid(), goodsModel.getGid(), goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(), goodsModel.getGnum(),goodsModel.getGdescribe());
     }
 
     @Override
@@ -36,8 +36,8 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public void update(GoodsModel goodsModel) {
-        String sql = "update goods set  gname = ? , gcategory = ? , gprice = ? where gid = ? and eid = ?";
-        update(connection, sql, goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGid(), goodsModel.getEid());
+        String sql = "update goods set  gname = ? , gcategory = ? , gprice = ? ,ginprice = ? , gnum = ? , gdescribe = ? where gid = ? and eid = ? ";
+        update(connection, sql, goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(),goodsModel.getGnum(),goodsModel.getGdescribe(),goodsModel.getGid(), goodsModel.getEid());
     }
 
     @Override

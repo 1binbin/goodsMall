@@ -7,6 +7,7 @@ package com.entity;
  */
 public class GoodsModel {
     //    商品编号
+    private String eid;
     private String gid;
     //    商品名称
     private String gname;
@@ -16,19 +17,29 @@ public class GoodsModel {
     private double gprice;
     private double ginprice;
     private int gnum;
+    private String gdescribe;
 
-    private String eid;
+
     public GoodsModel() {
     }
 
-    public GoodsModel(String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String eid) {
+    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe) {
+        this.eid = eid;
         this.gid = gid;
         this.gname = gname;
         this.gcategory = gcategory;
         this.gprice = gprice;
         this.ginprice = ginprice;
         this.gnum = gnum;
-        this.eid = eid;
+        this.gdescribe = gdescribe;
+    }
+
+    public String getGdescribe() {
+        return gdescribe;
+    }
+
+    public void setGdescribe(String gdescribe) {
+        this.gdescribe = gdescribe;
     }
 
     public String getEid() {

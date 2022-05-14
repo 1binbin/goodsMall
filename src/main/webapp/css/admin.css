@@ -357,21 +357,36 @@ body {
 .addbottom, .updatebottom {
     width: 800px;
     margin-left: -400px;
-    height: 400px;
+    height: 450px;
     margin-bottom: -200px;
     transform: scaleX(0);
     flex-direction: row;
 }
 .goodsImg{
-    width: 300px;
-    margin-left: -150px;
+    width: 500px;
+    margin-left: -250px;
     height: 450px;
     margin-bottom: -225px;
     transform: scaleY(0);
     flex-direction: column;
 }
-
-
+.goodsImg .left{
+    display: flex;
+    flex-direction: row;
+}
+.goodsImg .left .ditaboxtextarea p{
+    margin-bottom: 2px;
+}
+.goodsImg .left .ditaboxtextarea textarea{
+    resize: none;
+    width: 190px;
+    height: 330px;
+    border: 1px solid #b8b8b8;
+    border-radius: 8px;
+}
+.goodsImg .left .ditaboxtextarea{
+    margin-left: 20px;
+}
 #add:checked + .addGoods #ia {
     color: #2a3f54;
 }
@@ -388,7 +403,7 @@ body {
     font-size: 40px;
     color: #a5a5a5;
 }
-.addbottom .addleft, .updatebottom .addleft,.goodsImg .addleft{
+.addbottom .addleft, .updatebottom .addleft,.goodsImg .left .addleft{
     border: 1px solid #b8b8b8;
     border-radius: 8px;
     width: 263px;
@@ -452,4 +467,13 @@ body {
 .updatebottom .addform .addright input:hover,
 .goodsImg .addright input:hover {
     background-color: #f1b599;
+}
+.textarea{
+    resize: none;
+    margin-left: 5px;
+    height: 80px;
+}
+.boxtextarea{
+    display: flex;
+    flex-direction: row;
 }

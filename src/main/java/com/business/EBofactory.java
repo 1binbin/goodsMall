@@ -12,4 +12,7 @@ public class EBofactory {
     public static EmployeeEbiempl getemployeeebiempl(){
         return new EmployeeEbiempl();
     }
+    public static CustomerEbimpl getcustomerebiempl(){
+        return new CustomerEbimpl();
+    }
 }

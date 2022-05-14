@@ -21,14 +21,12 @@
         window.onload = function () {
             var box = this.document.getElementById("re");
             var lik = box.getElementsByTagName("li");
-
             function fun(i, j) {//转换图片函数，就是把透明度改了一下
                 lik[i].style.opacity = 1;
                 lik[j].style.opacity = 0;
                 lik[i + 8].style.backgroundColor = "#ffffff";//改一下小图标
                 lik[j + 8].style.backgroundColor = "#00000000"
             }
-
             fun(0, 1);//初始化下
             var i = 0;
 

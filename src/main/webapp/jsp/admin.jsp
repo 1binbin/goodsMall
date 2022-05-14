@@ -153,7 +153,7 @@
                                     <th>库存量</th>
                                     <th>商品进价</th>
                                     <th>商品价格</th>
-                                    <th>查看主图</th>
+                                    <th>查看详情</th>
                                     <th>删除</th>
                                     <th>修改</th>
                                 </tr>
@@ -172,13 +172,12 @@
                                     <td><%=goods.getGcategory()%>
                                     </td>
                                     <td><%=goods.getGnum()%>
-                                    <td><%=goods.getGnum()%>
                                     </td>
                                     <td><%=goods.getGinprice()%>
                                     </td>
                                     <td><%=goods.getGprice()%>
                                     </td>
-                                    <td onclick="showgoodsimg('<%=goods.getGid()%>')"><i class="fa fa-info-circle"
+                                    <td onclick="showgoodsimg('<%=goods.getGid()%>','<%=goods.getGdescribe()%>')"><i class="fa fa-info-circle"
                                                                                          aria-hidden="true"></i></td>
                                     <td onclick="deleteCheck('<%=goods.getGid()%>')"><i class="fa fa-trash-o"
                                                                                         aria-hidden="true"></i></td>
@@ -216,7 +215,11 @@
                                         <p class="im">商品进价</p>
                                         <input type="text" name="ginprice" class="minput"><br>
                                         <p class="im">商品售价</p>
-                                        <input type="text" name="gprice" class="minput">
+                                        <input type="text" name="gprice" class="minput"><br>
+                                        <div class="boxtextarea">
+                                            <p class="im imm">商品描述</p>
+                                            <textarea name="gdescribe" class="minput textarea" maxlength="120"></textarea>
+                                        </div>
                                     </div>
                                     <div class="addright">
                                         <input type="submit" value="确定" class="submit"
@@ -254,7 +257,11 @@
                                         <p class="im">商品进价</p>
                                         <input type="text" name="ginprice" class="minput" id="uginprice"><br>
                                         <p class="im">商品售价</p>
-                                        <input type="text" name="gprice" class="minput" id="ugprice">
+                                        <input type="text" name="gprice" class="minput" id="ugprice"><br>
+                                        <div class="boxtextarea">
+                                            <p class="im imm">商品描述</p>
+                                            <textarea name="gdescribe" class="minput textarea" maxlength="120"></textarea>
+                                        </div>
                                     </div>
                                     <div class="addright">
                                         <input type="submit" value="确定" class="submit "
@@ -266,8 +273,14 @@
                             </div>
                             <%--查看主图--%>
                             <div class="goodsImg" id="showimg">
-                                <div class="addleft">
-                                    <img src="" alt="暂无图片" class="img_goods" id="img2">
+                                <div class="left">
+                                    <div class="addleft">
+                                        <img src="" alt="暂无图片" class="img_goods" id="img2">
+                                    </div>
+                                    <div class="ditaboxtextarea">
+                                        <p>商品描述</p>
+                                        <textarea disabled="disabled" id="goodsImgtextarea"></textarea>
+                                    </div>
                                 </div>
                                 <div class="addright">
                                     <a href="javascript:void(0);" onclick="resetImg()" class="updatea"><input
@@ -357,8 +370,9 @@
             document.getElementById('img1').src = window.URL.createObjectURL(cell.files[0]);
         }
 
-        function showgoodsimg(gid) {
+        function showgoodsimg(gid,gdescribe) {
             document.getElementById("img2").src = "<%=path%>/<%=name%>/" + gid + ".jpg";
+            document.getElementById("goodsImgtextarea").value = gdescribe;
             showimg.style.transform = "scaleY(1)"
         }
 

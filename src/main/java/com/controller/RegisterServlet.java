@@ -5,6 +5,7 @@ package com.controller; /**
 
 import com.Utils.Utils;
 import com.business.EBofactory;
+import com.entity.CustomerModel;
 import com.entity.EmployeeModel;
 
 import javax.imageio.ImageIO;
@@ -69,21 +70,26 @@ public class RegisterServlet extends HttpServlet {
         String spassword = request.getParameter("spassword");
         String code = request.getParameter("code");
         String role = request.getParameter("role");
-        EmployeeModel employeeModel = new EmployeeModel(phone,spassword,role);
+        EmployeeModel employeeModel = new EmployeeModel(phone,spassword,"null","null","null","null","null");
+        CustomerModel customerModel = new CustomerModel(phone, spassword,"null","null","null","null");
         if (!Objects.equals(phone, "") && !Objects.equals(fpassword, "") && !Objects.equals(spassword, "") && !Objects.equals(code, "")){
             if (imgcode.equals(code)) {
                 if (Objects.equals(fpassword, spassword)){
-                    if (EBofactory.getemployeeebiempl().insertEmployee(employeeModel)){
-                        if ("user".equals(role)){
+                    if ("user".equals(role)){
+                        if (EBofactory.getcustomerebiempl().insertCustomer(customerModel)){
                             request.getSession().setAttribute("userName",phone+role);
                             request.getRequestDispatcher("jsp/userwait.jsp").forward(request,response);
                         }else {
+                            Utils.alter(response, "<script type='text/javascript'>alert('账号已存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
+                        }
+                    }else {
+                        if (EBofactory.getemployeeebiempl().insertEmployee(employeeModel)){
                             Utils.getAllGoods(request,phone);
                             request.getSession().setAttribute("adminName",phone+role);
                             request.getRequestDispatcher("jsp/adminwait.jsp").forward(request,response);
+                        }else {
+                            Utils.alter(response, "<script type='text/javascript'>alert('账号已存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
                         }
-                    }else {
-                        Utils.alter(response, "<script type='text/javascript'>alert('账号已存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
                     }
                 }else {
                     Utils.alter(response, "<script type='text/javascript'>alert('密码不相同！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");

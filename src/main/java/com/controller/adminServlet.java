@@ -97,15 +97,17 @@ public class adminServlet extends HttpServlet {
         String gid = Utils.utf_8(request.getParameter("gid"));
         String name = Utils.utf_8(request.getParameter("gname"));
         String category = Utils.utf_8(request.getParameter("gcategory"));
+        String describe = Utils.utf_8(request.getParameter("gdescribe"));
         String gname = (Objects.deepEquals(name, "") ? "-" : name);
-        String gcategory = (Objects.deepEquals(category, "") ? "-" : category);
+        String gcategory = (Objects.deepEquals(category, "") ? "<空>" : category);
+        String gdescribe = (Objects.deepEquals(describe, "") ? "<空>" : describe);
         String num = request.getParameter("gnum");
         String price = request.getParameter("gprice");
         String inprice = request.getParameter("ginprice");
         int gnum = (Objects.equals(num, "") ? 0 : Integer.parseInt(num));
         double gprice = (Objects.deepEquals(price, "") ? 0.0 : Double.parseDouble(price));
         double ginprice = (Objects.deepEquals(inprice, "") ? 0.0 : Double.parseDouble(inprice));
-        GoodsModel goodsModel = new GoodsModel(gid, gname, gcategory, gprice, ginprice, gnum,eid);
+        GoodsModel goodsModel = new GoodsModel(eid,gid, gname, gcategory, gprice, ginprice, gnum,describe);
 //        上传主图
         String path = this.getServletContext().getRealPath("/");
         Part p = request.getPart("file");

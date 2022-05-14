@@ -6,6 +6,7 @@ package com.controller;
 
 import com.Utils.Utils;
 import com.business.EBofactory;
+import com.entity.CustomerModel;
 import com.entity.EmployeeModel;
 
 import javax.imageio.ImageIO;
@@ -74,27 +75,27 @@ public class IndexServlet extends HttpServlet {
         String password = request.getParameter("password");
         String role = request.getParameter("role");
         String[] keep = request.getParameterValues("keep");
-        EmployeeModel employeeModel = new EmployeeModel(username, password, role);
+        EmployeeModel employeeModel = new EmployeeModel(username, password,"null","null","null","null","null");
+        CustomerModel customerModel = new CustomerModel(username, password,"null","null","null","null");
         if (!Objects.equals(username, "") && !Objects.equals(password, "") && !Objects.equals(code, "")) {
             if (imgcode.equals(code)) {
-                boolean is = EBofactory.getemployeeebiempl().login(employeeModel);
-                boolean choose = (keep !=null);
+                boolean choose = (keep != null);
                 Cookie cookie = new Cookie("username", username + role);
                 cookie.setMaxAge(60 * 5);
-                if ("admin".equals(role) && is) {
+                if ("admin".equals(role) && EBofactory.getemployeeebiempl().login(employeeModel)) {
                     //            商家
                     if (choose) {
                         response.addCookie(cookie);
                     }
-                    Utils.getAllGoods(request,username);
-                    request.getSession().setAttribute("adminName",username+role);
+                    Utils.getAllGoods(request, username);
+                    request.getSession().setAttribute("adminName", username + role);
                     request.getRequestDispatcher("jsp/adminwait.jsp").forward(request, response);
-                } else if ("user".equals(role) && is) {
+                } else if ("user".equals(role) && EBofactory.getcustomerebiempl().login(customerModel)) {
                     //            用户
                     if (choose) {
                         response.addCookie(cookie);
                     }
-                    request.getSession().setAttribute("userName",username+role);
+                    request.getSession().setAttribute("userName", username + role);
                     request.getRequestDispatcher("jsp/userwait.jsp").forward(request, response);
                 } else {
                     Utils.alter(response, "<script type='text/javascript'>alert('用户名、密码或角色错误！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
