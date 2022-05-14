@@ -114,8 +114,8 @@ body {
 }
 /*退出登录*/
 #outlogin{
-    float: right;
-    margin-right: 120px;
+    position: fixed;
+    right: 40px;
     margin-top: 10px;
     font-size: 18px;
 }

@@ -27,8 +27,8 @@
                 request.getSession().setAttribute("userName",username);
                 request.getRequestDispatcher("userwait.jsp").forward(request,response);
             }else if (username.endsWith("admin")){
-                String adminName = (String) request.getSession().getAttribute("adminName");
-                String eid = adminName.substring(0,adminName.length()-5);
+//                String adminName = (String) request.getSession().getAttribute("adminName");
+                String eid = username.substring(0,username.length()-5);
                 ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid);
                 request.getSession().setAttribute("allGoods",arrayList);
                 request.getSession().setAttribute("adminName",username);

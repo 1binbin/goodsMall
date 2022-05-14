@@ -77,6 +77,11 @@
 
         function outlogin() {
             if (window.confirm("确定是否退出登录？")) {
+                <%
+                /*Cookie cookie = new Cookie("username","");
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);*/
+                %>
                 window.open("<%=path%>/jsp/index.jsp", "_self")
             }
         }
@@ -86,8 +91,8 @@
             <input type="checkbox" id="checkbox">
             <label for="checkbox" class="label">
                 <i class="fa fa-bars check" aria-hidden="true"></i>
-                <p id="outlogin" onclick="outlogin()">退出登录</p>
             </label>
+            <p id="outlogin" onclick="outlogin()">退出登录</p>
             <div class="main">
                 <div class="left">
                     <ul>
