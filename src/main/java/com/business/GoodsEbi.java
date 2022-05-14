@@ -68,4 +68,5 @@ public interface GoodsEbi {
     List<GoodsModel> selectGoodsList(String eid);
     List<GoodsModel> getdEid();
     List<GoodsModel> getdEidGoods(String eid);
+    List<GoodsModel> getGcategory();
 }

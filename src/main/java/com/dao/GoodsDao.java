@@ -80,4 +80,5 @@ public interface GoodsDao {
 
     List<GoodsModel> getdEid();
     List<GoodsModel> getdEidGoods(String eid);
+    List<GoodsModel> getGcategory();
 }

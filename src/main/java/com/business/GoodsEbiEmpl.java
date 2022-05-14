@@ -82,4 +82,9 @@ public class GoodsEbiEmpl implements GoodsEbi {
         return Daofactory.getgoodsdaoimpl().getdEidGoods(eid);
     }
 
+    @Override
+    public List<GoodsModel> getGcategory() {
+        return Daofactory.getgoodsdaoimpl().getGcategory();
+    }
+
 }

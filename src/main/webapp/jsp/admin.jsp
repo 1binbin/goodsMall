@@ -1,5 +1,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.entity.GoodsModel" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.business.Daofactory" %>
+<%@ page import="com.mysql.cj.xdevapi.DbDocFactory" %>
+<%@ page import="com.business.EBofactory" %>
 <%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
@@ -16,6 +20,7 @@
             ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) request.getSession().getAttribute("allGoods");
             String adminName = (String) request.getSession().getAttribute("adminName");
             String name = adminName.substring(0, adminName.length() - 5);
+            List<GoodsModel> list = EBofactory.getgoodsebiempl().getGcategory();
         %>
         <title>管理员</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -177,8 +182,9 @@
                                     </td>
                                     <td><%=goods.getGprice()%>
                                     </td>
-                                    <td onclick="showgoodsimg('<%=goods.getGid()%>','<%=goods.getGdescribe()%>')"><i class="fa fa-info-circle"
-                                                                                         aria-hidden="true"></i></td>
+                                    <td onclick="showgoodsimg('<%=goods.getGid()%>','<%=goods.getGdescribe()%>')"><i
+                                            class="fa fa-info-circle"
+                                            aria-hidden="true"></i></td>
                                     <td onclick="deleteCheck('<%=goods.getGid()%>')"><i class="fa fa-trash-o"
                                                                                         aria-hidden="true"></i></td>
                                     <td onclick='update("<%=goods.getGid()%>","<%=goods.getGname()%>","<%=goods.getGcategory()%>","<%=goods.getGnum()%>","<%=goods.getGinprice()%>","<%=goods.getGprice()%>")'>
@@ -209,7 +215,18 @@
                                         <p class="im">商品名称</p>
                                         <input type="text" name="gname" class="minput"><br>
                                         <p class="im">商品类别</p>
-                                        <input type="text" name="gcategory" class="minput"><br>
+                                        <select class="minput">
+                                            <%
+                                                if (!list.isEmpty()) {
+                                                    for (GoodsModel goodsModel : list) {
+                                            %>
+                                            <option value="<%=goodsModel.getGcategory()%>"><%=goodsModel.getGcategory()%>
+                                            </option>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                        </select><br>
                                         <p class="im">库存量</p>
                                         <input type="text" name="gnum" class="minput"><br>
                                         <p class="im">商品进价</p>
@@ -218,7 +235,8 @@
                                         <input type="text" name="gprice" class="minput"><br>
                                         <div class="boxtextarea">
                                             <p class="im imm">商品描述</p>
-                                            <textarea name="gdescribe" class="minput textarea" maxlength="120"></textarea>
+                                            <textarea name="gdescribe" class="minput textarea"
+                                                      maxlength="120"></textarea>
                                         </div>
                                     </div>
                                     <div class="addright">
@@ -251,7 +269,18 @@
                                         <p class="im">商品名称</p>
                                         <input type="text" name="gname" class="minput" id="ugname"><br>
                                         <p class="im">商品类别</p>
-                                        <input type="text" name="gcategory" class="minput" id="ugcategory"><br>
+                                        <select class="minput">
+                                            <%
+                                                if (!list.isEmpty()) {
+                                                    for (GoodsModel goodsModel : list) {
+                                            %>
+                                            <option value="<%=goodsModel.getGcategory()%>"><%=goodsModel.getGcategory()%>
+                                            </option>
+                                            <%
+                                                    }
+                                                }
+                                            %>
+                                        </select><br>
                                         <p class="im">库存量</p>
                                         <input type="text" name="gnum" class="minput" id="ugnum"><br>
                                         <p class="im">商品进价</p>
@@ -260,7 +289,8 @@
                                         <input type="text" name="gprice" class="minput" id="ugprice"><br>
                                         <div class="boxtextarea">
                                             <p class="im imm">商品描述</p>
-                                            <textarea name="gdescribe" class="minput textarea" maxlength="120"></textarea>
+                                            <textarea name="gdescribe" class="minput textarea"
+                                                      maxlength="120"></textarea>
                                         </div>
                                     </div>
                                     <div class="addright">
@@ -370,7 +400,7 @@
             document.getElementById('img1').src = window.URL.createObjectURL(cell.files[0]);
         }
 
-        function showgoodsimg(gid,gdescribe) {
+        function showgoodsimg(gid, gdescribe) {
             document.getElementById("img2").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
             document.getElementById("goodsImgtextarea").value = gdescribe;
             showimg.style.transform = "scaleY(1)"

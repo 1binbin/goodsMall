@@ -61,38 +61,36 @@
     </script>
     <body>
         <%--        顶部--%>
-        <div class="cover">
-            <div class="top">
-                <span>51商城欢迎您</span>
-                <div class="top-right">
-                    <ul>
-                        <li>
-                            <a href="#">你好，请登录或注册</a>
-                        </li>
-                        <li class="line"></li>
-                        <li>
-                            <a href="#">我的订单</a>
-                        </li>
-                        <li class="line"></li>
-                        <li>
-                            <a href="#">个人信息</a>
-                        </li>
-                    </ul>
-                    <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
-                </div>
+        <div class="top">
+            <span>51商城欢迎您</span>
+            <div class="top-right">
+                <ul>
+                    <li>
+                        <a href="#">你好，请登录或注册</a>
+                    </li>
+                    <li class="line"></li>
+                    <li>
+                        <a href="#">我的订单</a>
+                    </li>
+                    <li class="line"></li>
+                    <li>
+                        <a href="#">个人信息</a>
+                    </li>
+                </ul>
+                <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
             </div>
             <%--    LOGO图+搜索框+购物车--%>
-            <div class="search">
-                <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
-                <form action="" method="get">
-                    <input type="text" placeholder="搜索内容">
-                    <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
-                                                                    id="btnaa"></i></div>
-                </form>
-                <div class="cart">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    <span>购物车</span>
-                </div>
+        </div>
+        <div class="search" id="search">
+            <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
+            <form action="" method="get">
+                <input type="text" placeholder="搜索内容">
+                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
+                                                                id="btnaa"></i></div>
+            </form>
+            <div class="cart">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                <span>购物车</span>
             </div>
         </div>
         <%--        商品分类+轮播图+baner图--%>
@@ -144,7 +142,7 @@
             </div>
         </div>
         <%--        推荐商品--%>
-        <div class="content">
+        <div class="content" id="content">
             <span class="like">猜你喜欢</span>
             <ul class="like_ul">
                 <%
@@ -170,7 +168,60 @@
                 %>
             </ul>
         </div>
+        <%--        侧边导航栏--%>
+        <div class="rightnav" id="nav">
+            <ul>
+                <li>
+                    <a href="javascript:void(0)" onclick="like()">
+                        <span>猜你喜欢</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span><i class="fa fa-commenting-o" aria-hidden="true"></i></span>
+                        <span>客服</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
+                        <span>反馈</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="javascript:void(0)">
+                        <span><i class="fa fa-line-chart" aria-hidden="true"></i></span>
+                        <span>后台</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span><i class="fa fa-angle-up" aria-hidden="true"></i></span>
+                        <span>顶部</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
         <%--        底部信息--%>
         <div class="foot"></div>
     </body>
+    <script>
+        window.addEventListener("scroll", function () {
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            console.log(scrollTop)
+            if (scrollTop >= 45){
+                document.getElementById("search").className = "searchfix";
+            }else {
+                document.getElementById("search").className = "search";
+            }
+            if (scrollTop >= 477){
+                document.getElementById("nav").className = "nav";
+            }else {
+                document.getElementById("nav").className = "rightnav";
+            }
+        })
+        function like() {
+            document.body.scrollTop = 450;
+        }
+    </script>
 </html>

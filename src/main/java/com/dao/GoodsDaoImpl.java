@@ -81,4 +81,10 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
         String sql ="select * from goods where eid = ?";
         return getBeanList(connection,sql,eid);
     }
+
+    @Override
+    public List<GoodsModel> getGcategory() {
+        String sql = "select * from goodsc";
+        return getBeanList(connection,sql);
+    }
 }
