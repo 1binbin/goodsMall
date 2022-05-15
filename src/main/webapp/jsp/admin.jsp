@@ -100,12 +100,12 @@
                             <img src="<%=path%>/img/1.jpg" alt="暂无图片">
                             <span>欢迎您，<%=name%></span>
                         </li>
-                        <li>
-                            <a href="javascript:void(0);" id="a" onclick="aOnclick()">
-                                <i class="fa fa-home" aria-hidden="true"></i>
-                                <span>商家首页</span>
-                            </a>
-                        </li>
+<%--                        <li>--%>
+<%--                            <a href="javascript:void(0);" id="a" onclick="aOnclick()">--%>
+<%--                                <i class="fa fa-home" aria-hidden="true"></i>--%>
+<%--                                <span>商家首页</span>--%>
+<%--                            </a>--%>
+<%--                        </li>--%>
                         <li>
                             <a href="javascript:void(0);" id="b" onclick="bOnclick()">
                                 <i class="fa fa-sitemap" aria-hidden="true"></i>
@@ -347,30 +347,19 @@
         const updatebottom = document.getElementById("updatebottom")
         const addbottom = document.getElementById("addbottom")
         const showimg = document.getElementById("showimg")
-
-        function aOnclick() {
-            first.style.display = "block";
-            second.style.display = "none";
-            third.style.display = "none";
-            fourth.style.display = "none";
-        }
-
         function bOnclick() {
-            first.style.display = "none";
             second.style.display = "block";
             third.style.display = "none";
             fourth.style.display = "none";
         }
 
         function cOnclick() {
-            first.style.display = "none";
             second.style.display = "none";
             third.style.display = "block";
             fourth.style.display = "none";
         }
 
         function dOnclick() {
-            first.style.display = "none";
             second.style.display = "none";
             third.style.display = "none";
             fourth.style.display = "block";

@@ -8,12 +8,15 @@ import com.business.Daofactory;
 import com.business.EBofactory;
 import com.entity.GoodsModel;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -100,7 +103,6 @@ public class adminServlet extends HttpServlet {
         String describe = Utils.utf_8(request.getParameter("gdescribe"));
         String gname = (Objects.deepEquals(name, "") ? "-" : name);
         String gcategory = (Objects.deepEquals(category, "") ? "<空>" : category);
-        System.out.println(gcategory);
         String gdescribe = (Objects.deepEquals(describe, "") ? "<空>" : describe);
         String num = request.getParameter("gnum");
         String price = request.getParameter("gprice");
