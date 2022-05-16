@@ -4,6 +4,8 @@ package com.controller; /**
  */
 
 import com.Utils.Utils;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.business.Daofactory;
 import com.business.EBofactory;
 import com.entity.GoodsModel;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -83,12 +86,15 @@ public class adminServlet extends HttpServlet {
         } else if ("selectGcategory".equals(selectOption)) {
             arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsGcategory(selectText,eid);
         }
-        request.getSession().setAttribute("allGoods", arrayList);
-        request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arrayList);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
+//        request.getSession().setAttribute("allGoods", arrayList);
+//        request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
-
-
-
     protected void all(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         String eid = getEid(request);
         Utils.getAllGoods(request,eid);

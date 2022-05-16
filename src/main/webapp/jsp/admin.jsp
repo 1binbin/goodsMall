@@ -86,7 +86,7 @@
             }
         }
     </script>
-    <body>
+    <body >
         <div class="navbar">
             <input type="checkbox" id="checkbox">
             <label for="checkbox" class="label">
@@ -100,12 +100,12 @@
                             <img src="<%=path%>/img/1.jpg" alt="暂无图片">
                             <span>欢迎您，<%=name%></span>
                         </li>
-<%--                        <li>--%>
-<%--                            <a href="javascript:void(0);" id="a" onclick="aOnclick()">--%>
-<%--                                <i class="fa fa-home" aria-hidden="true"></i>--%>
-<%--                                <span>商家首页</span>--%>
-<%--                            </a>--%>
-<%--                        </li>--%>
+                        <%--                        <li>--%>
+                        <%--                            <a href="javascript:void(0);" id="a" onclick="aOnclick()">--%>
+                        <%--                                <i class="fa fa-home" aria-hidden="true"></i>--%>
+                        <%--                                <span>商家首页</span>--%>
+                        <%--                            </a>--%>
+                        <%--                        </li>--%>
                         <li>
                             <a href="javascript:void(0);" id="b" onclick="bOnclick()">
                                 <i class="fa fa-sitemap" aria-hidden="true"></i>
@@ -151,7 +151,9 @@
                                 </select>
                                 <input type="text" placeholder="搜索内容" class="chooseinput" name="selectContent"
                                        id="select">
-                                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
+<%--                                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"--%>
+<%--                                                                                id="btnaa"></i></div>--%>
+                                <div class="button" onclick="showgoods()"><i class="fa fa-search" aria-hidden="true"
                                                                                 id="btnaa"></i></div>
                             </form>
 
@@ -168,7 +170,7 @@
                                     <th>修改</th>
                                 </tr>
                             </table>
-                            <table class="goods">
+                            <table class="goods"  id="goodstable">
                                 <%--录入商品表格信息--%>
                                 <%
                                     if (arrayList != null) {
@@ -347,6 +349,7 @@
         const updatebottom = document.getElementById("updatebottom")
         const addbottom = document.getElementById("addbottom")
         const showimg = document.getElementById("showimg")
+
         function bOnclick() {
             second.style.display = "block";
             third.style.display = "none";
@@ -405,6 +408,41 @@
             } else {
                 addbottom.style.transform = "scaleX(0)"
             }
+        }
+        function showgoods(){
+            var selectText = document.getElementById("select").value;
+            var myselect = document.getElementById("selecteange");
+            var index = myselect.selectedIndex;
+            var url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value;
+            let xml = new XMLHttpRequest();
+            xml.open("get",url,true)
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    let vals = xml.responseText;
+                    let jsonArr = eval(vals);
+                    let temp = '';
+                    let table = document.getElementById("goodstable");
+                    for (let goods of jsonArr) {
+                        const a = "showgoodsimg('" + goods.gid + "','" + goods.gdescribe + "')";
+                        const b = "deleteCheck('" + goods.gid + "')";
+                        const c = "update('" + goods.gid + "','" + goods.gname + "','" + goods.gcategory + "','" + goods.gnum + "','" + goods.ginprice + "','" + goods.gprice + "')";
+                        temp +=
+                            '<tr>' +
+                            '<td>' + goods.gid + '</td>' +
+                            '<td>' + goods.gname + '</td>' +
+                            '<td>' + goods.gcategory + '</td>' +
+                            '<td>' + goods.gnum + '</td>' +
+                            '<td>' + goods.ginprice + '</td>' +
+                            '<td>' + goods.gprice + '</td>' +
+                            '<td onclick=' + a + '><i class="fa fa-info-circle" aria-hidden="true"></i></td>' +
+                            '<td onclick=' + b + '><i class="fa fa-trash-o" aria-hidden="true"></i></td>' +
+                            '<td onclick=' + c + '><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>' +
+                            '</tr>'
+                    }
+                    table.innerHTML = temp;
+                }
+            }
+            xml.send(null);
         }
     </script>
 </html>

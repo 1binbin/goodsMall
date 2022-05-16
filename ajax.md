@@ -2,11 +2,14 @@
 public class t {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println(111);
         String name = (String) req.getSession().getAttribute("adminName");
         String eid = name.substring(0, name.length() - 5);
         List<GoodsModel> list = EBofactory.getgoodsebiempl().selectGoodsList(eid);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
+        //解决中文乱码
+        resp.setContentType("text/xml;charset=UTF-8");
+        resp.setHeader("Cache-Control", "no-cache");
+        resp.setCharacterEncoding("UTF-8");
         PrintWriter printWriter = resp.getWriter();
         printWriter.print(jsonArray);
         System.out.println(jsonArray);
