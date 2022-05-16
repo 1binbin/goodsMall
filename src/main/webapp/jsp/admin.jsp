@@ -194,7 +194,7 @@
                                             aria-hidden="true"></i></td>
                                     <td onclick="deleteCheck('<%=goods.getGid()%>')"><i class="fa fa-trash-o"
                                                                                         aria-hidden="true"></i></td>
-                                    <td onclick='update("<%=goods.getGid()%>","<%=goods.getGname()%>","<%=goods.getGcategory()%>","<%=goods.getGnum()%>","<%=goods.getGinprice()%>","<%=goods.getGprice()%>")'>
+                                    <td onclick='update("<%=goods.getGid()%>","<%=goods.getGname()%>","<%=goods.getGcategory()%>","<%=goods.getGnum()%>","<%=goods.getGinprice()%>","<%=goods.getGprice()%>","<%=goods.getGdescribe()%>")'>
                                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
                                 </tr>
                                 <%
@@ -276,7 +276,7 @@
                                         <p class="im">商品名称</p>
                                         <input type="text" name="gname" class="minput" id="ugname"><br>
                                         <p class="im">商品类别</p>
-                                        <select class="minput" name="gcategory">
+                                        <select class="minput" name="gcategory" id="ugcategory">
                                             <%
                                                 if (!list.isEmpty()) {
                                                     for (GoodsModel goodsModel : list) {
@@ -297,7 +297,7 @@
                                         <div class="boxtextarea">
                                             <p class="im imm">商品描述</p>
                                             <textarea name="gdescribe" class="minput textarea"
-                                                      maxlength="120"></textarea>
+                                                      maxlength="120" id="ugdescribe"></textarea>
                                         </div>
                                     </div>
                                     <div class="addright">
@@ -368,7 +368,7 @@
             fourth.style.display = "block";
         }
 
-        function update(gid, gname, gcategory, gnum, ginprice, gpeice) {
+        function update(gid, gname, gcategory, gnum, ginprice, gpeice,gdescribe) {
             updatebottom.style.transform = "scaleX(1)"
             document.getElementById("img1").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
             document.getElementById("ugid").value = gid;
@@ -377,6 +377,7 @@
             document.getElementById("uginprice").value = ginprice;
             document.getElementById("ugprice").value = gpeice;
             document.getElementById("ugcategory").value = gcategory;
+            document.getElementById("ugdescribe").value = gdescribe;
         }
 
         function reset() {
@@ -398,7 +399,9 @@
 
         function showgoodsimg(gid, gdescribe) {
             document.getElementById("img2").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
-            document.getElementById("goodsImgtextarea").value = gdescribe;
+            if(gdescribe!=null){
+                document.getElementById("goodsImgtextarea").value = gdescribe;
+            }
             showimg.style.transform = "scaleY(1)"
         }
 
