@@ -86,7 +86,7 @@
             }
         }
     </script>
-    <body >
+    <body>
         <div class="navbar">
             <input type="checkbox" id="checkbox">
             <label for="checkbox" class="label">
@@ -151,10 +151,10 @@
                                 </select>
                                 <input type="text" placeholder="搜索内容" class="chooseinput" name="selectContent"
                                        id="select">
-<%--                                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"--%>
-<%--                                                                                id="btnaa"></i></div>--%>
+                                <%--                                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"--%>
+                                <%--                                                                                id="btnaa"></i></div>--%>
                                 <div class="button" onclick="showgoods()"><i class="fa fa-search" aria-hidden="true"
-                                                                                id="btnaa"></i></div>
+                                                                             id="btnaa"></i></div>
                             </form>
 
                             <table class="goods_head">
@@ -170,7 +170,7 @@
                                     <th>修改</th>
                                 </tr>
                             </table>
-                            <table class="goods"  id="goodstable">
+                            <table class="goods" id="goodstable">
                                 <%--录入商品表格信息--%>
                                 <%
                                     if (arrayList != null) {
@@ -368,7 +368,7 @@
             fourth.style.display = "block";
         }
 
-        function update(gid, gname, gcategory, gnum, ginprice, gpeice,gdescribe) {
+        function update(gid, gname, gcategory, gnum, ginprice, gpeice, gdescribe) {
             updatebottom.style.transform = "scaleX(1)"
             document.getElementById("img1").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
             document.getElementById("ugid").value = gid;
@@ -399,7 +399,7 @@
 
         function showgoodsimg(gid, gdescribe) {
             document.getElementById("img2").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
-            if(gdescribe!=null){
+            if (gdescribe != null) {
                 document.getElementById("goodsImgtextarea").value = gdescribe;
             }
             showimg.style.transform = "scaleY(1)"
@@ -412,13 +412,14 @@
                 addbottom.style.transform = "scaleX(0)"
             }
         }
-        function showgoods(){
+
+        function showgoods() {
             var selectText = document.getElementById("select").value;
             var myselect = document.getElementById("selecteange");
             var index = myselect.selectedIndex;
             var url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value;
             let xml = new XMLHttpRequest();
-            xml.open("get",url,true)
+            xml.open("get", url, true)
             xml.onreadystatechange = function () {
                 if (xml.readyState === 4 && xml.status === 200) {
                     let vals = xml.responseText;
