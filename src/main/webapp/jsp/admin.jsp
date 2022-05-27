@@ -27,7 +27,6 @@
         <title>管理员</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="<%=path%>/css/admin.css" rel="stylesheet">
-        <%--        <script type="text/javascript " src="<%=path%>/js/admin.js"></script>--%>
     </head>
     <script type="text/javascript">
         function check(form) {
