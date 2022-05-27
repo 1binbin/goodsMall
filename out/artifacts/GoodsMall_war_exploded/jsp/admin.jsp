@@ -27,7 +27,6 @@
         <title>管理员</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="<%=path%>/css/admin.css" rel="stylesheet">
-        <%--        <script type="text/javascript " src="<%=path%>/js/admin.js"></script>--%>
     </head>
     <script type="text/javascript">
         function check(form) {
@@ -462,6 +461,11 @@
             var jumpPage;
             switch (pagenum) {
                 case 1:
+                    if(Number(pageNow1) > Number(maxPage) || Number(pageNow1) < 0){
+                        alert("选择页数超过最大页数")
+                        document.getElementById("jumpNumChoose").focus();
+                        return false;
+                    }
                     jumpPage = pageNow1;
                     break;
                 case 2:
