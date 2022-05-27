@@ -1,5 +1,6 @@
 package com.business;
 
+import com.business.businessimplement.CustomerEbi;
 import com.entity.CustomerModel;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
  * @Author hongxiaobin
  * @Time 2022/5/14-11:08
  */
-public class CustomerEbimpl implements CustomerEbi{
+public class CustomerEbimpl implements CustomerEbi {
 
     @Override
     public boolean login(CustomerModel customerModel) {

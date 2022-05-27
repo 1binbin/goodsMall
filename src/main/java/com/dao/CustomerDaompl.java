@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.dao.implement.CustmerDao;
 import com.entity.CustomerModel;
 
 import java.sql.Connection;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Author hongxiaobin
  * @Time 2022/5/14-11:06
  */
-public class CustomerDaompl extends BaseDao<CustomerModel>implements CustmerDao{
+public class CustomerDaompl extends BaseDao<CustomerModel>implements CustmerDao {
     Connection connection;
     {
         try {

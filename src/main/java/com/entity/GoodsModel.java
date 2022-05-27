@@ -18,6 +18,7 @@ public class GoodsModel {
     private double ginprice;
     private int gnum;
     private String gdescribe;
+    private int allCount;
 
 
     public GoodsModel() {
@@ -32,6 +33,26 @@ public class GoodsModel {
         this.ginprice = ginprice;
         this.gnum = gnum;
         this.gdescribe = gdescribe;
+    }
+
+    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe, int allCount) {
+        this.eid = eid;
+        this.gid = gid;
+        this.gname = gname;
+        this.gcategory = gcategory;
+        this.gprice = gprice;
+        this.ginprice = ginprice;
+        this.gnum = gnum;
+        this.gdescribe = gdescribe;
+        this.allCount = allCount;
+    }
+
+    public int getAllCount() {
+        return allCount;
+    }
+
+    public void setAllCount(int allCount) {
+        this.allCount = allCount;
     }
 
     public String getGdescribe() {

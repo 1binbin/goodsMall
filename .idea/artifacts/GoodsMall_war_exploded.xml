@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="GoodsMall:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/GoodsMall_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="GoodsMall" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="commons-dbutils-1.6" module-name="GoodsMall" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="GoodsMall/web/Web" />
+    </root>
+  </artifact>
+</component>

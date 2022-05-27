@@ -1,19 +1,15 @@
 package com.Utils;
 
 import com.business.EBofactory;
-import com.entity.EmployeeModel;
+import com.entity.CountModel;
 import com.entity.GoodsModel;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Random;
 
 /**
  * @Author hongxiaobin
@@ -30,15 +26,25 @@ public class Utils {
         out.flush();
         out.close();
     }
-    public static void getAllGoods(HttpServletRequest request,String eid) {
-        ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid);
+
+    public static void getAllGoods(HttpServletRequest request, String eid, int start, int end) {
+        ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid, start, end);
         request.getSession().setAttribute("allGoods", arrayList);
     }
-    /**乱码处理
+
+    public static int getCount(HttpServletRequest request, String eid) {
+        int count =EBofactory.getCountbiempl().getallCount(eid);
+        request.getSession().setAttribute("allgoodsCount", count);
+        return  count;
+    }
+
+    /**
+     * 乱码处理
+     *
      * @Param:
      * @Return:
      */
-    public static String utf_8(String s){
-        return new String(s.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+    public static String utf_8(String s) {
+        return new String(s.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
     }
 }

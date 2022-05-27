@@ -87,7 +87,8 @@ public class IndexServlet extends HttpServlet {
                     if (choose) {
                         response.addCookie(cookie);
                     }
-                    Utils.getAllGoods(request, username);
+                    Utils.getAllGoods(request, username,0,15);
+                    Utils.getCount(request,username);
                     request.getSession().setAttribute("adminName", username + role);
                     request.getRequestDispatcher("jsp/adminwait.jsp").forward(request, response);
                 } else if ("user".equals(role) && EBofactory.getcustomerebiempl().login(customerModel)) {

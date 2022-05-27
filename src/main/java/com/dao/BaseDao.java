@@ -1,6 +1,6 @@
 package com.dao;
 
-import com.entity.GoodsModel;
+import com.entity.CountModel;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 
@@ -67,11 +67,13 @@ public abstract class BaseDao<T> {
      * @Param: Connection , String ,Object...
      * @Return: Object
      */
-    public GoodsModel getValue(Connection connection, String sql, String isbn) {
-        if (this.getBeanList(connection, sql, isbn).size() > 0) {
-            return (GoodsModel) this.getBeanList(connection, sql, isbn).get(0);
-        } else {
-            return null;
+    public List<T> getValue(Connection connection, String sql, Object... params) {
+        List<T> list = null;
+        try {
+            list = queryRunner.query(connection, sql, new BeanListHandler<>(type), params);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
+        return list;
     }
 }

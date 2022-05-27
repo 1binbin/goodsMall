@@ -8,6 +8,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.business.Daofactory;
 import com.business.EBofactory;
+import com.entity.CountModel;
 import com.entity.GoodsModel;
 
 import javax.servlet.ServletException;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @MultipartConfig(location = "D:\\", fileSizeThreshold = 1024)
@@ -51,7 +53,8 @@ public class adminServlet extends HttpServlet {
         String eid = getEid(request);
         GoodsModel goodsModel = getGoodsModel(request);
         EBofactory.getgoodsebiempl().insertGoods(goodsModel);
-        Utils.getAllGoods(request,eid);
+        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getCount(request, eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
@@ -59,32 +62,35 @@ public class adminServlet extends HttpServlet {
         String eid = getEid(request);
         GoodsModel goodsModel = getGoodsModel(request);
         EBofactory.getgoodsebiempl().updateGoods(goodsModel);
-        Utils.getAllGoods(request,eid);
+        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getCount(request, eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
         String gid = Utils.utf_8(request.getParameter("gid"));
-        EBofactory.getgoodsebiempl().deleteGoods(gid,eid);
-        Utils.getAllGoods(request,eid);
+        EBofactory.getgoodsebiempl().deleteGoods(gid, eid);
+        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getCount(request, eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
 
     protected void select(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
-        String selectText = Utils.utf_8(request.getParameter("selectGid"));
+        String selectText = request.getParameter("selectGid");
         String selectOption = request.getParameter("selectOption");
+        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
         ArrayList<GoodsModel> arrayList = new ArrayList<>();
         if ("all".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsAll(selectText,eid);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsAll(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
         } else if ("selectGid".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoods(selectText,eid);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGid(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
         } else if ("selectGname".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsGname(selectText,eid);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGname(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
         } else if ("selectGcategory".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) Daofactory.getgoodsdaoimpl().getGoodsGcategory(selectText,eid);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGcategory(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
         }
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arrayList);
         response.setContentType("text/xml;charset=UTF-8");
@@ -92,12 +98,24 @@ public class adminServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
-//        request.getSession().setAttribute("allGoods", arrayList);
-//        request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
-    protected void all(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    protected void paging(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
-        Utils.getAllGoods(request,eid);
+        int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+        List<GoodsModel> arrayList = EBofactory.getgoodsebiempl().selectGoodsList(eid, 15 * (pageNum - 1), 15 * pageNum);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arrayList);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
+    }
+
+    protected void all(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String eid = getEid(request);
+        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getCount(request, eid);
         request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
     }
 
@@ -116,7 +134,7 @@ public class adminServlet extends HttpServlet {
         int gnum = (Objects.equals(num, "") ? 0 : Integer.parseInt(num));
         double gprice = (Objects.deepEquals(price, "") ? 0.0 : Double.parseDouble(price));
         double ginprice = (Objects.deepEquals(inprice, "") ? 0.0 : Double.parseDouble(inprice));
-        GoodsModel goodsModel = new GoodsModel(eid,gid, gname, gcategory, gprice, ginprice, gnum,gdescribe);
+        GoodsModel goodsModel = new GoodsModel(eid, gid, gname, gcategory, gprice, ginprice, gnum, gdescribe);
 //        上传主图
         String path = this.getServletContext().getRealPath("/");
         Part p = request.getPart("file");
@@ -135,8 +153,9 @@ public class adminServlet extends HttpServlet {
         }
         return goodsModel;
     }
+
     private String getEid(HttpServletRequest request) {
         String adminName = Utils.utf_8((String) request.getSession().getAttribute("adminName"));
-        return adminName.substring(0,adminName.length()-5);
+        return adminName.substring(0, adminName.length() - 5);
     }
 }

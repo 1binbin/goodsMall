@@ -1,0 +1,66 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    height: 100vh;
+    /*渐变背景*/
+    background: linear-gradient(to bottom, #2b6876, #09203f);
+    /*	弹性布局水平垂直居中*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading{
+    width: 200px;
+    height: 200px;
+    box-sizing: border-box;
+    border-top: 10px solid #63a69f;
+    border-radius: 50%;
+    /*相对定位*/
+    position: relative;
+    /*执行动画,2s,线性,无限循环*/
+    animation: a1 2s linear infinite;
+}
+.loading:after,.loading:before{
+    /*重点*/
+    content: "";
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 0;
+    top: -10px;
+    box-sizing: border-box;
+    border-radius: 50%;
+}
+.loading:after{
+    border-top: 10px solid #f2e1ac;
+    /*	旋转*/
+    transform: rotate(240deg);
+}
+.loading:before {
+    border-top: 10px solid #f2836f;
+    transform: rotate(120deg);
+}
+.loading span{
+    font-size: 20px;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    color: #fff;
+    animation: a2 2s linear infinite;
+}
+/*定义动画*/
+@keyframes a1 {
+    to{
+        transform: rotate(360deg);
+    }
+}
+@keyframes a2 {
+    to{
+        transform: rotate(-360deg);
+    }
+}

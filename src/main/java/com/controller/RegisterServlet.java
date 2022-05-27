@@ -84,7 +84,8 @@ public class RegisterServlet extends HttpServlet {
                         }
                     }else {
                         if (EBofactory.getemployeeebiempl().insertEmployee(employeeModel)){
-                            Utils.getAllGoods(request,phone);
+                            Utils.getAllGoods(request,phone,0,15);
+                            Utils.getCount(request,phone);
                             request.getSession().setAttribute("adminName",phone+role);
                             request.getRequestDispatcher("jsp/adminwait.jsp").forward(request,response);
                         }else {

@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.dao.implement.EmployeeDao;
 import com.entity.EmployeeModel;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.util.List;
  * @Time 2022/3/20-19:20
  * @Description
  */
-public class EmployeeDaoEmpl extends BaseDao<EmployeeModel> implements EmployeeDao{
+public class EmployeeDaoEmpl extends BaseDao<EmployeeModel> implements EmployeeDao {
     Connection connection;
     {
         try {

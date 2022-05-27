@@ -1,5 +1,7 @@
 package com.business;
 
+import com.business.businessimplement.GoodsEbi;
+import com.entity.CountModel;
 import com.entity.GoodsModel;
 
 import java.util.List;
@@ -53,23 +55,28 @@ public class GoodsEbiEmpl implements GoodsEbi {
     }
 
     @Override
-    public List<GoodsModel> selectGoodsGname(String gname, String eid) {
-        return Daofactory.getgoodsdaoimpl().getGoodsGname(gname,eid);
+    public List<GoodsModel> selectGoodsGname(String gname, String eid,int start,int end) {
+        return Daofactory.getgoodsdaoimpl().getGoodsGname(gname,eid,start,end);
     }
 
     @Override
-    public List<GoodsModel> selectGoodsGcategory(String gcategory, String eid) {
-        return Daofactory.getgoodsdaoimpl().getGoodsGcategory(gcategory,eid);
+    public List<GoodsModel> selectGoodsGid(String gname, String eid, int start, int end) {
+        return Daofactory.getgoodsdaoimpl().getGoodsGid(gname,eid,start,end);
     }
 
     @Override
-    public List<GoodsModel> selectGoodsAll(String all, String eid) {
-        return Daofactory.getgoodsdaoimpl().getGoodsAll(all,eid);
+    public List<GoodsModel> selectGoodsGcategory(String gcategory, String eid,int start,int end) {
+        return Daofactory.getgoodsdaoimpl().getGoodsGcategory(gcategory,eid,start,end);
     }
 
     @Override
-    public List<GoodsModel> selectGoodsList(String eid) {
-        return Daofactory.getgoodsdaoimpl().getGoodslist(eid);
+    public List<GoodsModel> selectGoodsAll(String all, String eid,int start,int end) {
+        return Daofactory.getgoodsdaoimpl().getGoodsAll(all,eid,start,end);
+    }
+
+    @Override
+    public List<GoodsModel> selectGoodsList(String eid,int start,int end) {
+        return Daofactory.getgoodsdaoimpl().getGoodslist(eid,start,end);
     }
 
     @Override
@@ -86,5 +93,6 @@ public class GoodsEbiEmpl implements GoodsEbi {
     public List<GoodsModel> getGcategory() {
         return Daofactory.getgoodsdaoimpl().getGcategory();
     }
+
 
 }

@@ -15,4 +15,7 @@ public class EBofactory {
     public static CustomerEbimpl getcustomerebiempl(){
         return new CustomerEbimpl();
     }
+    public static CountEbiEmpl getCountbiempl(){
+        return new CountEbiEmpl();
+    }
 }
