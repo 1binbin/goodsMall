@@ -462,7 +462,7 @@
             switch (pagenum) {
                 case 1:
                     if(Number(pageNow1) > Number(maxPage) || Number(pageNow1) < 0){
-                        alert("选择页数超过最大页数")
+                        alert("选择页数超过最大页数或小于0")
                         document.getElementById("jumpNumChoose").focus();
                         return false;
                     }
