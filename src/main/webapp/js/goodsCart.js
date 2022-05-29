@@ -31,3 +31,18 @@ function isChecked1(e,classname,id1) {
         }
     }
 }
+function allChecked(e,name1,n2,n3) {
+    var ele = document.getElementsByClassName(name1);
+    var num = ele.length;
+    if (e.checked) {
+        for (let i = 0; i < num; i++) {
+            ele[i].checked = true;
+            isChecked1(ele[i],n2,n3);
+        }
+    } else {
+        for (let i = 0; i < num; i++) {
+            ele[i].checked = false;
+            isChecked1(ele[i],n2,n3);
+        }
+    }
+}

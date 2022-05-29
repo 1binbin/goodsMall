@@ -62,7 +62,7 @@
         </div>
         <%--        中间--%>
         <div class="middle">
-            <input type="checkbox" id="allChecked">
+            <input type="checkbox" id="allChecked" onclick="allChecked(this,'employee','goods','allGoods')">
             <label for="allChecked">全选</label>
             <div class="a">商品</div>
             <div class="b">单价</div>
@@ -77,7 +77,7 @@
             %>
             <div class="cart">
                 <div class="cart-top">
-                    <input type="checkbox" id="checked<%=i%>" onclick="isChecked1(this,'goods<%=i%>','goodsChecked<%=i%>')">
+                    <input type="checkbox" id="checked<%=i%>" onclick="isChecked1(this,'goods<%=i%>','goodsChecked<%=i%>')" class="employee">
                     <label for="checked<%=i%>">商家1</label>
                     <div class="cart-goods" >
                         <%
@@ -85,7 +85,7 @@
                                 String num = i + (j + "");
                         %>
                         <div class="goods goods<%=i%>" id="goods<%=num%>">
-                            <input type="checkbox" id="checkedGoods" class="goodsChecked<%=i%>" onclick="isChecked(this,'goods<%=num%>','checked<%=i%>')">
+                            <input type="checkbox" id="checkedGoods" class="goodsChecked<%=i%> allGoods" onclick="isChecked(this,'goods<%=num%>','checked<%=i%>')">
                             <div class="goods-img">
                                 <img src="<%=path%>/img/1.jpg" alt="">
                             </div>
@@ -114,7 +114,7 @@
         <div class="buttom">
             <div class="content">
                 <div class="left">
-                    <input type="checkbox" id="allChecked2">
+                    <input type="checkbox" id="allChecked2"  onclick="allChecked(this,'employee','goods','allGoods')">
                     <label for="allChecked2">全选</label>
                     <a href="" class="deleteCheck">删除选中的商品</a>
                     <a href="" class="deleteCheckAll">清空购物车</a>
