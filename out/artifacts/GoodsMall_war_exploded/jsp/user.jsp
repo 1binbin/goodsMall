@@ -31,6 +31,10 @@
                     </li>
                     <li class="line"></li>
                     <li>
+                        <a href="<%=path%>/jsp/index.jsp">商家登录</a>
+                    </li>
+                    <li class="line"></li>
+                    <li>
                         <a href="#">成为会员</a>
                     </li>
                     <li class="line"></li>
@@ -155,7 +159,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<%=path%>/jsp/index.jsp">
+                    <a href="javascript:void(0)">
                         <span><i class="fa fa-line-chart" aria-hidden="true"></i></span>
                         <span>后台</span>
                     </a>

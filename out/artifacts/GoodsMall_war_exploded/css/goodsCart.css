@@ -1,0 +1,426 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    --bg:#fff;
+    width: 100vw;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+.top {
+    width: 100%;
+    height: 40px;
+    background-color: #e3e4e5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    border-bottom: 1px solid #ddd;
+}
+
+#search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    transition: all 0.3s;
+}
+
+.search .logo {
+    margin-left: 20px;
+}
+
+.search form {
+    margin-right: 20px;
+}
+
+.search .logo span {
+    color: #f10215;
+    font-weight: 700;
+    margin-left: 5px;
+}
+
+.search {
+    width: calc(82% - 8px);
+    margin-top: 5px;
+}
+
+.searchfix {
+    width: calc(100%);
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+/*顶部*/
+.top span {
+    font-size: 18px;
+    letter-spacing: 4px;
+    margin-left: 90px;
+    color: #333;
+}
+
+.top .top-right ul li a {
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.top .top-right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 90px;
+}
+
+.top .top-right .img {
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.top .top-right .img img {
+    height: 100%;
+}
+
+.top .top-right ul {
+    margin-right: 10px;
+    list-style: none;
+}
+
+.top .top-right ul li {
+    float: left;
+    margin-right: 10px;
+}
+
+.top .top-right ul .line {
+    width: 1px;
+    height: 30px;
+    background-color: rgb(204, 202, 202);
+}
+
+.top .top-right ul li a {
+    text-decoration: none;
+    vertical-align: middle;
+    color: #999;
+}
+
+.top .top-right ul li a:hover {
+    color: #f10215;
+}
+
+/*LOGO+搜索+购物车*/
+#search form .button {
+    float: right;
+}
+
+#search form {
+    border: 2px solid #e2231a;
+    height: 32px;
+    width: 500px;
+    display: flex;
+    align-items: center;
+}
+
+#search form input[type = "text"] {
+    outline: none;
+    border: none;
+    width: 440px;
+    text-indent: 18px;
+    font-size: 16px;
+}
+
+#search form .button {
+    position: relative;
+    background-color: #cd1921;
+    height: 31px;
+    width: 60px;
+    line-height: 32px;
+    font-size: 25px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#search form .button i {
+    vertical-align: center;
+    text-align: center;
+}
+
+/*中间*/
+.middle {
+    margin-top: 10px;
+    height: 40px;
+    width: calc(82% - 8px);
+    background-color: #f3f3f3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.middle span {
+    text-align: left;
+}
+
+.middle input,
+.middle label {
+    margin-left: 10px;
+}
+.middle label{
+    width: 37px;
+}
+.middle .a {
+    margin-left: 60px;
+    width: 555px;
+}
+
+.middle .b {
+    width: 122px;
+}
+
+.middle .c {
+    width: 129px;
+}
+
+.middle .d {
+    width: 96px;
+}
+
+.middle .e {
+    width: 100px;
+}
+
+/*购物车主体*/
+.cart-top{
+    margin-top: 15px;
+}
+.cartBody {
+    width: calc(82% - 8px);
+}
+#checked{
+    margin-left: 10px;
+}
+.cart-top .cart-goods {
+    width: 100%;
+    border: 1px solid #f1f1f1;
+}
+
+.cart-top .cart-goods .goods {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    border-top: 1px solid #c5c5c5;
+}
+
+.cart-top .cart-goods .goods input[type='checkbox'] {
+    margin-left: 10px;
+}
+
+.cart-top .cart-goods .goods .goods-img {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #f1f1f1;
+    margin-left: 5px;
+    overflow: hidden;
+}
+
+.cart-top .cart-goods .goods .goods-img img {
+    height: 100%;
+}
+
+.cart-top .cart-goods .goods .text {
+    width: 300px;
+    margin-left: 5px;
+    font-size: 14px;
+    line-height: 20px;
+    text-indent: 20px;
+}
+
+.cart-top .cart-goods .goods .price {
+    margin-left: 250px;
+}
+
+.cart-top .cart-goods .goods .goods-num {
+    border: 1px solid #f1f1f1;
+    display: flex;
+    height: 22px;
+    margin-left: 60px;
+}
+
+.cart-top .cart-goods .goods .goods-num button {
+    border: none;
+    width: 20px;
+    font-size: 16px;
+}
+
+.cart-top .cart-goods .goods .goods-num button:hover {
+    background-color: #c0c0c0;
+}
+
+.cart-top .cart-goods .goods .goods-num input {
+    text-align: center;
+    width: 45px;
+    border: none;
+}
+
+.cart-top .cart-goods .goods .allprice {
+    margin-left: 60px;
+}
+
+.cart-top .cart-goods .goods .delete {
+    margin-left: 60px;
+    text-decoration: none;
+    color: #333;
+}
+.cart-top .cart-goods .goods .delete:hover{
+    color: #cd1921;
+}
+/*返回顶部*/
+.rightnav2{
+    display:none;
+}
+.nav2{
+    display: block;
+}
+#nav2{
+    position: fixed;
+    top: 520px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    right: 30px;
+}
+#nav2 ul{
+    list-style: none;
+}
+#nav2 ul li{
+    width: 50px;
+    height: 50px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+#nav2 ul li:last-child{
+    border-bottom: none;
+}
+#nav2 ul li:hover{
+    background-color: #c81623;
+}
+#nav2 ul li:hover a span{
+    color: #fff;
+}
+#nav2 ul li a{
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+#nav2 ul li a span{
+    vertical-align: center;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    line-height: 19px;
+    letter-spacing: 2px;
+}
+#nav2 ul li a span i {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+/*提交订单*/
+.white{
+    height: 57px;
+}
+.buttom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 52px;
+    background-color: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,0.2);
+}
+.buttom .content{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 83%;
+    height: 100%;
+    margin-left: 18px;
+}
+.buttom .content .right{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.buttom .content .right span:nth-child(1){
+    font-size: 18px;
+}
+.buttom .content .right span:nth-child(2){
+    margin-left: 5px;
+    font-size: 20px;
+    font-weight: 500;
+    color: #c81623;
+}
+.buttom .content .right .settlement{
+    margin-left: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100px;
+    background-color: #c81623;
+}
+.buttom .content .right .settlement span{
+    color: #fff;
+    letter-spacing: 4px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.buttom .content .right .settlement:hover span{
+    cursor: pointer;
+    font-size: 24px;
+}
+.buttom .content .left{
+    margin-left: 10px;
+}
+.buttom .content .left a{
+    text-decoration: none;
+    color: #000;
+    margin-left: 20px;
+}
+.buttom .content .left a:hover{
+    color: #c81623;
+    cursor: pointer;
+}
+.goods{
+    background-color: var(--bg);
+}

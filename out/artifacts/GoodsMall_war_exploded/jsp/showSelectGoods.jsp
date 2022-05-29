@@ -31,6 +31,10 @@
                     </li>
                     <li class="line"></li>
                     <li>
+                        <a href="<%=path%>/jsp/index.jsp">商家登录</a>
+                    </li>
+                    <li class="line"></li>
+                    <li>
                         <a href="#">成为会员</a>
                     </li>
                     <li class="line"></li>
@@ -44,8 +48,8 @@
                 </ul>
                 <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
             </div>
-            <%--    LOGO图+搜索框+购物车--%>
         </div>
+        <%--    LOGO图+搜索框+购物车--%>
         <div class="search" id="search">
             <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
             <form action="" method="get">
