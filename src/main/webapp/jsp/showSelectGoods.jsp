@@ -57,7 +57,7 @@
                 <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
                                                                 id="btnaa"></i></div>
             </form>
-            <div class="cart">
+            <div class="cart" onclick="window.open('<%=path%>/jsp/goodsCart.jsp')">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span>购物车</span>
             </div>

@@ -92,9 +92,9 @@
                             <span class="text">诶去未逾期未我千千万为哦EQUI噢权威去问为哦UI偶尔去问为哦诶我去额为武器噢完全</span>
                             <span class="price">￥23.9</span>
                             <div class="goods-num">
-                                <button>-</button>
-                                <input type="text" min="1" value="1">
-                                <button>+</button>
+                                <button onclick="downnum('num<%=num%>')">-</button>
+                                <input type="text" min="1" value="1" id="num<%=num%>" disabled="disabled">
+                                <button onclick="upnum('num<%=num%>')">+</button>
                             </div>
                             <span class="allprice">￥23.9</span>
                             <a href="" class="delete">删除</a>

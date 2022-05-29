@@ -1,5 +1,5 @@
 window.addEventListener("scroll", function () {
-    var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+    const scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
     if (scrollTop >= 477){
         document.getElementById("nav2").className = "nav2";
     }else {
@@ -16,9 +16,9 @@ function isChecked(e, id,id1) {
     }
 }
 function isChecked1(e,classname,id1) {
-    var ele = document.getElementsByClassName(classname);
-    var ele1= document.getElementsByClassName(id1);
-    var num = ele.length;
+    const ele = document.getElementsByClassName(classname);
+    const ele1 = document.getElementsByClassName(id1);
+    const num = ele.length;
     if (e.checked) {
         for (let i = 0; i < num; i++) {
             ele[i].style.backgroundColor = 'rgba(255,148,136,0.5)';
@@ -32,8 +32,8 @@ function isChecked1(e,classname,id1) {
     }
 }
 function allChecked(e,name1,n2,n3) {
-    var ele = document.getElementsByClassName(name1);
-    var num = ele.length;
+    const ele = document.getElementsByClassName(name1);
+    const num = ele.length;
     if (e.checked) {
         for (let i = 0; i < num; i++) {
             ele[i].checked = true;
@@ -44,5 +44,22 @@ function allChecked(e,name1,n2,n3) {
             ele[i].checked = false;
             isChecked1(ele[i],n2,n3);
         }
+    }
+}
+
+function downnum(n) {
+    const num = document.getElementById(n).value;
+    if (Number(num) -1 >=1){
+        document.getElementById(n).value = Number(num) -1;
+    }else {
+        document.getElementById(n).value = 1;
+    }
+}
+function upnum(n){
+    const num = document.getElementById(n).value;
+    if (Number(num) +1 <=1000){
+        document.getElementById(n).value = Number(num) + 1 ;
+    }else {
+        document.getElementById(n).value = 1000 ;
     }
 }
