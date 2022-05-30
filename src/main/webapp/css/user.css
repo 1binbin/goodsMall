@@ -53,6 +53,12 @@ body {
     margin-left: 90px;
     color: #333;
 }
+.top span a{
+    font-size: 18px;
+    text-decoration: none;
+    color: #333;
+    cursor: pointer;
+}
 .top .top-right ul li a {
     font-size: 16px;
     letter-spacing: 2px;

@@ -66,10 +66,14 @@ body {
 
 /*顶部*/
 .top span {
-    font-size: 18px;
     letter-spacing: 4px;
     margin-left: 90px;
+}
+.top span a{
+    font-size: 18px;
+    text-decoration: none;
     color: #333;
+    cursor: pointer;
 }
 
 .top .top-right ul li a {
