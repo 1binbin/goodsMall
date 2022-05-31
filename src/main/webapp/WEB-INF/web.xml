@@ -7,6 +7,6 @@
 <!--        <welcome-file>jsp/index.jsp</welcome-file>-->
 <!--    </welcome-file-list>-->
     <welcome-file-list>
-        <welcome-file>jsp/user.jsp</welcome-file>
+        <welcome-file>jsp/goodsDetails.jsp</welcome-file>
     </welcome-file-list>
 </web-app>  

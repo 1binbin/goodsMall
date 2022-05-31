@@ -19,7 +19,7 @@
         function jump(){
             window.location.href="<%=base%>/jsp/user.jsp";
         }
-        setTimeout(jump,4000);
+        setTimeout(jump,3000);
     </script>
     <body>
         <div class="loading">
