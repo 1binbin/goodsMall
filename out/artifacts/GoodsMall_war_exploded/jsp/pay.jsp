@@ -80,12 +80,31 @@
             </div>
             <div class="b-bottom">
                 <div class="submit">
-                    <button>立即支付</button>
+                    <button onclick="jump()">立即支付</button>
                 </div>
             </div>
         </div>
         <div class="message">
-            <span>支付成功，正在跳转到首页······</span>
+            <span>支付成功</span>
+            <span id="second">3</span>
+            <span>秒后跳转到首页······</span>
         </div>
     </body>
+    <script>
+        function jump() {
+            document.getElementsByClassName("message")[0].style.display = "block";
+            timer();
+        }
+        function timer() {
+            let second = 3;
+            setInterval(function () {
+                second--;
+                document.getElementById("second").innerText =  second+"";
+                console.log(second)
+                if (second === 0){
+                    window.location.href = "<%=path%>/jsp/user.jsp";
+                }
+            }, 3000)
+        }
+    </script>
 </html>

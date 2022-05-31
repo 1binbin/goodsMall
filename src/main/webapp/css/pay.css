@@ -238,7 +238,12 @@ body {
 }
 /*支付成功*/
 .message{
+    display: none;
     margin-top: 50px;
     font-size: 18px;
     letter-spacing: 4px;
+}
+.message span:nth-child(2){
+    font-size: 20px;
+    color: #c81623;
 }
