@@ -123,7 +123,7 @@
                     <span>总价</span>
                     <span>￥23.9</span>
                     <div class="settlement">
-                        <span>结算</span>
+                        <span onclick="jumpPay()">结算</span>
                     </div>
                 </div>
             </div>
@@ -141,6 +141,8 @@
         </div>
     </body>
     <script>
-
+        function jumpPay() {
+            window.location.href="<%=path%>/jsp/pay.jsp";
+        }
     </script>
 </html>

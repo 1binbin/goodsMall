@@ -15,7 +15,7 @@
             String path = request.getContextPath();
             List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
         %>
-        <title>51商城</title>
+        <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=path%>/css/user.css">
         <script src="<%=path%>/js/user.js"></script>
@@ -23,7 +23,7 @@
     <body>
         <%--顶部--%>
         <div class="top">
-            <span>51商城欢迎您</span>
+            <span>天天淘商城欢迎您</span>
             <div class="top-right">
                 <ul>
                     <li>
@@ -54,7 +54,7 @@
             <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
             <form action="" method="get">
                 <input type="text" placeholder="搜索内容">
-                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
+                <div class="button" onclick="getSelect()"><i class="fa fa-search" aria-hidden="true"
                                                                 id="btnaa"></i></div>
             </form>
             <div class="cart" onclick="window.open('<%=path%>/jsp/goodsCart.jsp')">
@@ -175,4 +175,9 @@
         <%--        底部信息--%>
         <div class="foot"></div>
     </body>
+    <script>
+        function getSelect() {
+            window.location.href = "<%=path%>/jsp/showSelectGoods.jsp";
+        }
+    </script>
 </html>
