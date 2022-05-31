@@ -150,7 +150,7 @@
                 </div>
             </div>
         </div>
-        <%--商品分页展示--%>
+        <%--商品展示--%>
         <div class="content">
             <ul class="like_ul">
                 <%
@@ -160,7 +160,7 @@
                             List<GoodsModel> eidGoodsList = Daofactory.getgoodsdaoimpl().getdEidGoods(goodsModel.getEid());
                             for (GoodsModel model : eidGoodsList) {
                 %>
-                <li>
+                <li onclick="window.open('<%=path%>/jsp/goodsDetails.jsp')">
                     <div class="like_img"><img
                             src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=model.getGid()%>.jpg" alt="">
                     </div>

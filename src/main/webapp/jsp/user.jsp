@@ -121,7 +121,7 @@
                             List<GoodsModel> eidGoodsList = Daofactory.getgoodsdaoimpl().getdEidGoods(goodsModel.getEid());
                             for (GoodsModel model : eidGoodsList) {
                 %>
-                <li>
+                <li onclick="window.open('<%=path%>/jsp/goodsDetails.jsp')">
                     <div class="like_img"><img
                             src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=model.getGid()%>.jpg" alt="">
                     </div>
