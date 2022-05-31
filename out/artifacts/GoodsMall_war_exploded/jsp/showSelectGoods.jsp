@@ -8,7 +8,7 @@
   Time: 20:04
   Description: 
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
         <%
@@ -23,7 +23,7 @@
     </head>
     <body>
         <div class="top">
-            <span>51商城欢迎您</span>
+            <span><a href="<%=path%>/jsp/user.jsp"><i class="fa fa-angle-double-left" aria-hidden="true"></i>返回首页</a></span>
             <div class="top-right">
                 <ul>
                     <li>

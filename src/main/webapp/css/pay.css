@@ -1,0 +1,244 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    width: 100vw;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.top {
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top .t-left {
+    height: 100%;
+    margin-left: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top .t-left .logo {
+    height: 90%;
+}
+
+.t-left span {
+    margin-left: 10px;
+    font-size: 20px;
+    color: rgb(100, 100, 100);
+}
+
+.t-right {
+    margin-right: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.t-right .line {
+    width: 1px;
+    height: 20px;
+    background-color: #333;
+}
+
+.t-right span, .t-right .line {
+    margin-right: 10px;
+}
+
+.t-right a {
+    text-decoration: none;
+    color: #333;
+}
+
+.t-right a:hover {
+    color: #c81623;
+    cursor: pointer;
+}
+
+/*进度条*/
+.progress {
+    margin-top: 20px;
+    width: 82%;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.progress .p-left {
+    font-size: 16px;
+}
+
+.progress .p-left span:nth-child(2) {
+    color: #c81623;
+}
+
+.progress .p-right {
+    display: flex;
+    flex-direction: column;
+}
+
+.progress .p-right .p-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.progress .p-right .p-top .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #fff;
+    font-weight: 700;
+    text-align: center;
+    vertical-align: center;
+}
+
+.progress .p-right .p-top .bar {
+    width: 50px;
+    height: 4px;
+}
+
+.progress .p-right .p-top .circle:nth-child(2) {
+    background-color: #caecb6;
+}
+
+.progress .p-right .p-top .circle:nth-child(5) {
+    background-color: #caecb6;
+}
+
+.progress .p-right .p-top .circle:nth-child(8) {
+    background-color: #7abd54;
+}
+
+.progress .p-right .p-top .bar:nth-child(1),
+.progress .p-right .p-top .bar:nth-child(3) {
+    background-color: #caecb6;
+}
+
+.progress .p-right .p-top .bar:nth-child(4),
+.progress .p-right .p-top .bar:nth-child(6) {
+    background-color: #caecb6;
+}
+
+.progress .p-right .p-top .bar:nth-child(7),
+.progress .p-right .p-top .bar:nth-child(9) {
+    background-color: #7abd54;
+}
+
+.progress .p-right .p-bottom span {
+    font-size: 14px;
+}
+
+.progress .p-right .p-bottom span:nth-child(1) {
+    color: #caecb6;
+    margin-left: 14px;
+}
+
+.progress .p-right .p-bottom span:nth-child(2) {
+    color: #caecb6;
+    margin-left: 15px;
+}
+
+.progress .p-right .p-bottom span:nth-child(3) {
+    color: #7abd54;
+    margin-left: 19px;
+}
+
+/*订单信息*/
+.bottom {
+    margin-top: 20px;
+    border: 10px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+    repeating-linear-gradient(-45deg, red 0, red 12.5%,
+            transparent 0, transparent 25%,
+            #58a 0, #58a 37.5%,
+            transparent 0, transparent 50%) 0 / 3em 3em;
+    width: calc(82% - 20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bottom .b-bottom {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bottom .b-bottom .submit button {
+    width: 135px;
+    height: 36px;
+    line-height: 36px;
+    margin: 8px 45px 20px 0;
+    padding: 0;
+    background-color: #ff0013;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 0;
+}
+
+.bottom .b-bottom .submit button:hover {
+    transform: scale(1.1);
+}
+
+.bottom .b-middle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.bottom .b-middle .b-middle-left {
+    margin-left: 40px;
+}
+.bottom .b-middle .b-middle-left table tr:nth-child(1) td,
+.bottom .b-middle .b-middle-left table tr:nth-child(2) td{
+    padding-bottom: 8px;
+}
+
+.bottom .b-middle .b-middle-right {
+    margin-right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom .b-middle .b-middle-right span:nth-child(1) {
+    font-size: 18px;
+    margin-right: 5px;
+}
+
+.bottom .b-middle .b-middle-right span:nth-child(2) {
+    font-size: 24px;
+    color: #c81623;
+    font-weight: 600;
+}
+
+.bottom .b-top {
+    margin: 10px 0 10px 20px;
+    font-size: 18px;
+    font-weight: 550;
+}
+/*支付成功*/
+.message{
+    margin-top: 50px;
+    font-size: 18px;
+    letter-spacing: 4px;
+}

@@ -67,7 +67,7 @@
                 <div class="p-bottom">
                     <span>1.我的购物车</span>
                     <span>2.填写核对订单信息</span>
-                    <span>3.成功提交订单</span>
+                    <span>3.订单支付</span>
                 </div>
             </div>
         </div>
