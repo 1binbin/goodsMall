@@ -48,14 +48,14 @@
                 </ul>
                 <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
             </div>
-            <%--    LOGO图+搜索框+购物车--%>
         </div>
+        <%--    LOGO图+搜索框+购物车--%>
         <div class="search" id="search">
             <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
             <form action="" method="get">
                 <input type="text" placeholder="搜索内容">
                 <div class="button" onclick="getSelect()"><i class="fa fa-search" aria-hidden="true"
-                                                                id="btnaa"></i></div>
+                                                             id="btnaa"></i></div>
             </form>
             <div class="cart" onclick="window.open('<%=path%>/jsp/goodsCart.jsp')">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>

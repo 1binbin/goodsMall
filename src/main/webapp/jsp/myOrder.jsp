@@ -103,10 +103,25 @@
                 </ul>
             </div>
             <div class="line"></div>
+            <div class="bar">
+                <span>订单详情</span>
+                <span>收货人</span>
+                <span>金额</span>
+                <span>操作</span>
+            </div>
+            <div class="allOrder">
+                <div class="orderBox">
+                    <div class="o-top">
+                        <span>2022/05/31 22:23:00</span>
+                        <span>订单编号</span>
+                        <span>1321213989992</span>
+                    </div>
+
+                </div>
+            </div>
+            <div class="haveOrder"></div>
+            <div class="notOrder"></div>
+            <div class="notPayOrder"></div>
         </div>
-        <div class="allOrder"></div>
-        <div class="haveOrder"></div>
-        <div class="notOrder"></div>
-        <div class="notPayOrder"></div>
     </body>
 </html>
