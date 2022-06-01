@@ -32,6 +32,7 @@
                 window.open("<%=path%>/adminServlet?action=delete&gid=" + deleteGid, "_self")
             }
         }
+
         //    搜索
         function selectSearch() {
             const selectText = document.getElementById("select").value;
@@ -289,7 +290,75 @@
                     </div>
                     <%--订单列表--%>
                     <div class="third" id="third">
-
+                        <div class="top">
+                            <p class="p">所有订单列表</p>
+                            <%--搜索--%>
+                            <form class="select">
+                                <select name="selecteange" id="t-selecteange" class="choose">
+                                    <option value="all" selected>全部</option>
+                                    <option value="selectGid">商品编号</option>
+                                    <option value="selectGname">商品名称</option>
+                                    <option value="selectGcategory">商品类别</option>
+                                </select>
+                                <input type="text" placeholder="搜索内容" class="chooseinput" name="selectContent"
+                                       id="t-select">
+                                <div class="button" onclick="showgoods()"><i class="fa fa-search" aria-hidden="true"
+                                                                             id="t-btnaa"></i></div>
+                            </form>
+                        </div>
+                        <div class="bottom">
+                            <div class="bottom-top">
+                                <span>发货状态筛选</span>
+                                <select name="" id="status" onchange="isDisabled()">
+                                    <option value="no">未发货</option>
+                                    <option value="yes">已发货</option>
+                                </select>
+                                <span>时间筛选</span>
+                                <input type="date">
+                                <span>-</span>
+                                <input type="date">
+                                <button id="button">一键发货</button>
+                            </div>
+                            <div class="bottom-bottom">
+                                <div class="bar">
+                                    <span>选择</span>
+                                    <span>订单编号</span>
+                                    <span>下单时间</span>
+                                    <span>商品编号</span>
+                                    <span>收货信息</span>
+                                    <span>发货状态</span>
+                                </div>
+                                <div class="table">
+                                    <table>
+                                        <%
+                                            for (int i = 0; i < 100; i++) {
+                                        %>
+                                        <tr>
+                                            <td><input type="checkbox" class="orderChecked"></td>
+                                            <td>1234556896732</td>
+                                            <td>2022/06/01 22:58:00</td>
+                                            <td>
+                                                <p>23</p>
+                                                <p>23</p>
+                                                <p>23</p>
+                                            </td>
+                                            <td>
+                                                <p>XXX</p>
+                                                <p>XX省XX市XX镇XXXXXXXXXXX</p>
+                                            </td>
+                                            <td>未发货</td>
+                                        </tr>
+                                        <%
+                                            }
+                                        %>
+                                    </table>
+                                </div>
+                                <div class="bb-bottom">
+                                    <input type="checkbox" id="allChecked" onclick="orderChecked()">
+                                    <label for="allChecked">全选</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <%--个人中心--%>
                     <div class="fourth" id="fourth">
@@ -298,225 +367,250 @@
                 </div>
             </div>
         </div>
-    </body>
-    <script>
-        function update(gid, gname, gcategory, gnum, ginprice, gpeice, gdescribe) {
-            updatebottom.style.transform = "scaleX(1)"
-            document.getElementById("img1").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
-            document.getElementById("ugid").value = gid;
-            document.getElementById("ugname").value = gname;
-            document.getElementById("ugnum").value = gnum;
-            document.getElementById("uginprice").value = ginprice;
-            document.getElementById("ugprice").value = gpeice;
-            document.getElementById("ugcategory").value = gcategory;
-            document.getElementById("ugdescribe").value = gdescribe;
-        }
-
-        function showgoodsimg(gid, gdescribe) {
-            document.getElementById("img2").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
-            if (gdescribe != null) {
-                document.getElementById("goodsImgtextarea").value = gdescribe;
+        <script>
+            function update(gid, gname, gcategory, gnum, ginprice, gpeice, gdescribe) {
+                updatebottom.style.transform = "scaleX(1)"
+                document.getElementById("img1").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
+                document.getElementById("ugid").value = gid;
+                document.getElementById("ugname").value = gname;
+                document.getElementById("ugnum").value = gnum;
+                document.getElementById("uginprice").value = ginprice;
+                document.getElementById("ugprice").value = gpeice;
+                document.getElementById("ugcategory").value = gcategory;
+                document.getElementById("ugdescribe").value = gdescribe;
             }
-            showimg.style.transform = "scaleY(1)"
-        }
 
-        let choice;
+            function showgoodsimg(gid, gdescribe) {
+                document.getElementById("img2").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
+                if (gdescribe != null) {
+                    document.getElementById("goodsImgtextarea").value = gdescribe;
+                }
+                showimg.style.transform = "scaleY(1)"
+            }
 
-        //    刷新
-        function allGoods() {
-            choice = 2;
-            window.open("<%=path%>/adminServlet?action=all", "_self")
-        }
+            let choice;
 
-        //查询商品
-        function showgoods() {
-            choice = 1;
-            const selectText = document.getElementById("select").value;
-            const myselect = document.getElementById("selecteange");
-            const index = myselect.selectedIndex;
-            const url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=1";
-            let xml = new XMLHttpRequest();
-            xml.open("get", url, true)
-            xml.onreadystatechange = function () {
-                if (xml.readyState === 4 && xml.status === 200) {
-                    let vals = xml.responseText;
-                    let jsonArr = eval(vals);
-                    tableinner(jsonArr);
-                    for (let goods of jsonArr){
-                        document.getElementById("allcount").innerText = Math.floor(Number(goods.allCount)/15) + 1;
-                        document.getElementById("jumpNumChoose").max = Math.floor(Number(goods.allCount)/15) + 1;
+            //    刷新
+            function allGoods() {
+                choice = 2;
+                window.open("<%=path%>/adminServlet?action=all", "_self")
+            }
+
+            //查询商品
+            function showgoods() {
+                choice = 1;
+                const selectText = document.getElementById("select").value;
+                const myselect = document.getElementById("selecteange");
+                const index = myselect.selectedIndex;
+                const url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=1";
+                let xml = new XMLHttpRequest();
+                xml.open("get", url, true)
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        let vals = xml.responseText;
+                        let jsonArr = eval(vals);
+                        tableinner(jsonArr);
+                        for (let goods of jsonArr) {
+                            document.getElementById("allcount").innerText = Math.floor(Number(goods.allCount) / 15) + 1;
+                            document.getElementById("jumpNumChoose").max = Math.floor(Number(goods.allCount) / 15) + 1;
+                            break;
+                        }
+                    }
+                }
+                xml.send(null);
+            }
+
+            //    跳转到首页
+            function jumpPage(pagenum) {
+                const pageNow = document.getElementById("pagenum").innerText;
+                const pageNow1 = document.getElementById("jumpNumChoose").value;
+                const maxPage = document.getElementById("allcount").innerText;
+                //跳转到的页数
+                let jumpPage;
+                switch (pagenum) {
+                    case 1:
+                        if (Number(pageNow1) > Number(maxPage) || Number(pageNow1) < 0) {
+                            alert("选择页数超过最大页数或小于0")
+                            document.getElementById("jumpNumChoose").focus();
+                            return false;
+                        }
+                        jumpPage = pageNow1;
                         break;
-                    }
-                }
-            }
-            xml.send(null);
-        }
-
-        //    跳转到首页
-        function jumpPage(pagenum) {
-            const pageNow = document.getElementById("pagenum").innerText;
-            const pageNow1 = document.getElementById("jumpNumChoose").value;
-            const maxPage = document.getElementById("allcount").innerText;
-            //跳转到的页数
-            let jumpPage;
-            switch (pagenum) {
-                case 1:
-                    if(Number(pageNow1) > Number(maxPage) || Number(pageNow1) < 0){
-                        alert("选择页数超过最大页数或小于0")
-                        document.getElementById("jumpNumChoose").focus();
-                        return false;
-                    }
-                    jumpPage = pageNow1;
-                    break;
-                case 2:
-                    jumpPage = 1;
-                    break;
-                case 3:
-                    if (Number(pageNow) - 1 > 0) {
-                        jumpPage = Number(pageNow) - 1;
-                    } else {
+                    case 2:
                         jumpPage = 1;
+                        break;
+                    case 3:
+                        if (Number(pageNow) - 1 > 0) {
+                            jumpPage = Number(pageNow) - 1;
+                        } else {
+                            jumpPage = 1;
+                        }
+                        break;
+                    case 4:
+                        if (Number(pageNow) + 1 <= maxPage) {
+                            jumpPage = Number(pageNow) + 1;
+                        } else {
+                            jumpPage = maxPage;
+                        }
+                        break;
+                }
+                let url;
+                switch (choice) {
+                    case 1:
+                        const selectText = document.getElementById("select").value;
+                        const myselect = document.getElementById("selecteange");
+                        const index = myselect.selectedIndex;
+                        url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=" + jumpPage;
+                        break;
+                    case 2:
+                        //所有
+                        url = "<%=path%>/adminServlet?action=paging&pageNum=" + jumpPage;
+                        break;
+                }
+                let xml = new XMLHttpRequest();
+                xml.open("get", url, true)
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        let vals = xml.responseText;
+                        let jsonArr = eval(vals);
+                        tableinner(jsonArr);
+                        document.getElementById("pagenum").innerText = jumpPage;
                     }
-                    break;
-                case 4:
-                    if (Number(pageNow) + 1 <= maxPage) {
-                        jumpPage = Number(pageNow) + 1;
-                    } else {
-                        jumpPage = maxPage;
-                    }
-                    break;
+                }
+                xml.send(null);
             }
-            let url;
-            switch (choice) {
-                case 1:
-                    const selectText = document.getElementById("select").value;
-                    const myselect = document.getElementById("selecteange");
-                    const index = myselect.selectedIndex;
-                    url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=" + jumpPage;
-                    break;
-                case 2:
-                    //所有
-                    url = "<%=path%>/adminServlet?action=paging&pageNum=" + jumpPage;
-                    break;
-            }
-            let xml = new XMLHttpRequest();
-            xml.open("get", url, true)
-            xml.onreadystatechange = function () {
-                if (xml.readyState === 4 && xml.status === 200) {
-                    let vals = xml.responseText;
-                    let jsonArr = eval(vals);
-                    tableinner(jsonArr);
-                    document.getElementById("pagenum").innerText = jumpPage;
+
+            function check(form) {
+                //    商品编号输入框不为空
+                if (form.gid.value === "") {
+                    alert("商品编号为空");
+                    form.gid.focus();
+                    return false;
+                }
+                //    验证价格最多两位小数
+                const regu = /^(([0-9]+)|([0-9]+\.[0-9]{0,2}))$/;
+                if (form.gprice.value !== "" && !regu.test(form.gprice.value)) {
+                    alert("价格请输入最多两位小数的非负数");
+                    form.gprice.focus();
+                    return false;
+                }
+                if (form.ginprice.value !== "" && !regu.test(form.ginprice.value)) {
+                    alert("价格请输入最多两位小数的非负数");
+                    form.ginprice.focus();
+                    return false;
+                }
+                //    验证数量为非负数
+                const regu1 = /^\d+$/;
+                if (form.gnum.value !== "" && !regu1.test(form.gnum.value)) {
+                    alert("库存量请输入非负整数")
+                    form.gnum.focus();
+                    return false;
                 }
             }
-            xml.send(null);
-        }
-        function check(form) {
-            //    商品编号输入框不为空
-            if (form.gid.value === "") {
-                alert("商品编号为空");
-                form.gid.focus();
-                return false;
+
+            choice = 2;
+            const first = document.getElementById("first")
+            const second = document.getElementById("second")
+            const third = document.getElementById("third")
+            const fourth = document.getElementById("fourth")
+            const a = document.getElementById("a")
+            const b = document.getElementById("b")
+            const c = document.getElementById("c")
+            const d = document.getElementById("d")
+            const updatebottom = document.getElementById("updatebottom")
+            const addbottom = document.getElementById("addbottom")
+            const showimg = document.getElementById("showimg")
+
+            function bOnclick() {
+                console.log(second)
+                second.style.display = "block";
+                third.style.display = "none";
+                fourth.style.display = "none";
             }
-            //    验证价格最多两位小数
-            const regu = /^(([0-9]+)|([0-9]+\.[0-9]{0,2}))$/;
-            if (form.gprice.value !== "" && !regu.test(form.gprice.value)) {
-                alert("价格请输入最多两位小数的非负数");
-                form.gprice.focus();
-                return false;
+
+            function cOnclick() {
+                second.style.display = "none";
+                third.style.display = "block";
+                fourth.style.display = "none";
             }
-            if (form.ginprice.value !== "" && !regu.test(form.ginprice.value)) {
-                alert("价格请输入最多两位小数的非负数");
-                form.ginprice.focus();
-                return false;
+
+            function dOnclick() {
+                second.style.display = "none";
+                third.style.display = "none";
+                fourth.style.display = "block";
             }
-            //    验证数量为非负数
-            const regu1 = /^\d+$/;
-            if (form.gnum.value !== "" && !regu1.test(form.gnum.value)) {
-                alert("库存量请输入非负整数")
-                form.gnum.focus();
-                return false;
+
+            function reset() {
+                updatebottom.style.transform = "scaleX(0)"
             }
-        }
 
-        choice = 2;
-        const first = document.getElementById("first")
-        const second = document.getElementById("second")
-        const third = document.getElementById("third")
-        const fourth = document.getElementById("fourth")
-        const a = document.getElementById("a")
-        const b = document.getElementById("b")
-        const c = document.getElementById("c")
-        const d = document.getElementById("d")
-        const updatebottom = document.getElementById("updatebottom")
-        const addbottom = document.getElementById("addbottom")
-        const showimg = document.getElementById("showimg")
-
-        function bOnclick() {
-            console.log(second)
-            second.style.display = "block";
-            third.style.display = "none";
-            fourth.style.display = "none";
-        }
-
-        function cOnclick() {
-            second.style.display = "none";
-            third.style.display = "block";
-            fourth.style.display = "none";
-        }
-
-        function dOnclick() {
-            second.style.display = "none";
-            third.style.display = "none";
-            fourth.style.display = "block";
-        }
-
-        function reset() {
-            updatebottom.style.transform = "scaleX(0)"
-        }
-
-        function resetImg() {
-            showimg.style.transform = "scaleY(0)"
-        }
-
-        //图片更新
-        function showImg(cell) {
-            document.getElementById('img').src = window.URL.createObjectURL(cell.files[0]);
-        }
-
-        function showImg1(cell) {
-            document.getElementById('img1').src = window.URL.createObjectURL(cell.files[0]);
-        }
-
-        function isCheck(e) {
-            if (e.checked) {
-                addbottom.style.transform = "scaleX(1)"
-            } else {
-                addbottom.style.transform = "scaleX(0)"
+            function resetImg() {
+                showimg.style.transform = "scaleY(0)"
             }
-        }
 
-        function tableinner(jsonArr) {
-            let temp = '';
-            let table = document.getElementById("goodstable");
-            for (let goods of jsonArr) {
-                const a = "showgoodsimg('" + goods.gid + "','" + goods.gdescribe + "')";
-                const b = "deleteCheck('" + goods.gid + "')";
-                const c = "update('" + goods.gid + "','" + goods.gname + "','" + goods.gcategory + "','" + goods.gnum + "','" + goods.ginprice + "','" + goods.gprice + "')";
-                temp +=
-                    '<tr>' +
-                    '<td>' + goods.gid + '</td>' +
-                    '<td>' + goods.gname + '</td>' +
-                    '<td>' + goods.gcategory + '</td>' +
-                    '<td>' + goods.gnum + '</td>' +
-                    '<td>' + goods.ginprice + '</td>' +
-                    '<td>' + goods.gprice + '</td>' +
-                    '<td onclick=' + a + '><i class="fa fa-info-circle" aria-hidden="true"></i></td>' +
-                    '<td onclick=' + b + '><i class="fa fa-trash-o" aria-hidden="true"></i></td>' +
-                    '<td onclick=' + c + '><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>' +
-                    '</tr>'
+            //图片更新
+            function showImg(cell) {
+                document.getElementById('img').src = window.URL.createObjectURL(cell.files[0]);
             }
-            table.innerHTML = temp;
-        }
-    </script>
+
+            function showImg1(cell) {
+                document.getElementById('img1').src = window.URL.createObjectURL(cell.files[0]);
+            }
+
+            function isCheck(e) {
+                if (e.checked) {
+                    addbottom.style.transform = "scaleX(1)"
+                } else {
+                    addbottom.style.transform = "scaleX(0)"
+                }
+            }
+
+            function tableinner(jsonArr) {
+                let temp = '';
+                let table = document.getElementById("goodstable");
+                for (let goods of jsonArr) {
+                    const a = "showgoodsimg('" + goods.gid + "','" + goods.gdescribe + "')";
+                    const b = "deleteCheck('" + goods.gid + "')";
+                    const c = "update('" + goods.gid + "','" + goods.gname + "','" + goods.gcategory + "','" + goods.gnum + "','" + goods.ginprice + "','" + goods.gprice + "')";
+                    temp +=
+                        '<tr>' +
+                        '<td>' + goods.gid + '</td>' +
+                        '<td>' + goods.gname + '</td>' +
+                        '<td>' + goods.gcategory + '</td>' +
+                        '<td>' + goods.gnum + '</td>' +
+                        '<td>' + goods.ginprice + '</td>' +
+                        '<td>' + goods.gprice + '</td>' +
+                        '<td onclick=' + a + '><i class="fa fa-info-circle" aria-hidden="true"></i></td>' +
+                        '<td onclick=' + b + '><i class="fa fa-trash-o" aria-hidden="true"></i></td>' +
+                        '<td onclick=' + c + '><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>' +
+                        '</tr>'
+                }
+                table.innerHTML = temp;
+            }
+
+            function isDisabled() {
+                const select = document.getElementById("status");
+                const index = select.selectedIndex;
+                console.log(select[index].value)
+                if (select[index].value === "yes") {
+                    document.getElementById("button").style.display = "none";
+                } else {
+                    document.getElementById("button").style.display = "block";
+                }
+            }
+
+            function orderChecked() {
+                const input = document.getElementsByClassName("orderChecked");
+                if (document.getElementById("allChecked").checked) {
+                    for (let i = 0; i < input.length; i++) {
+                        input[i].checked = true;
+                    }
+                }else {
+                    for (let i = 0; i < input.length; i++) {
+                        input[i].checked = false;
+                    }
+                }
+            }
+        </script>
+    </body>
 </html>

@@ -179,11 +179,11 @@ body {
 }
 
 .right .second {
-    display: block;
+    display: none;
 }
 
 .right .third {
-    background-color: #8e8fe6;
+    display: block;
 }
 
 .right .fourth {
@@ -194,11 +194,11 @@ body {
 .second .top {
     width: 100%;
     height: 100%;
-    /*background-color: #e8c2b2;*/
     display: block;
 }
 
-.second .top .p {
+.second .top .p,
+.third .top .p{
     color: var(--back);
     font-size: 20px;
     padding: 20px 20px 10px 20px;
@@ -277,7 +277,8 @@ body {
 }
 
 /*商品管理搜索框*/
-.second .top .select {
+.second .top .select ,
+.third .top .select {
     width: auto;
     display: flex;
     flex-direction: row;
@@ -466,11 +467,11 @@ body {
     display: flex;
     flex-direction: row;
 }
-.third div{
+/*.third div{
     width: 200px;
     height: 200px;
     background-color: red;
-}
+}*/
 /*分页*/
 .paging{
     list-style: none;
@@ -503,3 +504,114 @@ body {
     cursor: pointer;
 }
 /*订单中心*/
+.third .bottom{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 98%;
+    height: 82%;
+    margin: 0 auto 10px auto;
+    /*border: 1px solid red;*/
+}
+.bottom .bottom-top{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    margin-left: 30px;
+    font-size: 14px;
+}
+.bottom .bottom-top span,
+.bottom .bottom-top select,
+.bottom .bottom-top input{
+    margin-right: 10px;
+}
+.bottom .bottom-top button{
+    width: 85px;
+    height: 25px;
+    font-size: 16px;
+    border: 1px solid #a5a5a5;
+    border-radius: 4px;
+}
+.bottom .bottom-top button:hover{
+    background-color: #f1b599;
+}
+
+.bottom-bottom{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.bottom-bottom .bar{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 5px auto 0 auto;
+    font-size: 14px;
+    height: 20px;
+    background-color: #cecece;
+}
+.bottom-bottom .bar span:nth-child(1){
+    width: 12%;
+}
+.bottom-bottom .bar span:nth-child(2){
+    width: 22%;
+}
+.bottom-bottom .bar span:nth-child(3){
+    width: 22%;
+}
+.bottom-bottom .bar span:nth-child(4){
+    width: 23%;
+}
+.bottom-bottom .bar span:nth-child(5){
+    width: 15%;
+}
+.bottom-bottom .bar span:nth-child(6){
+    width: 6%;
+}
+.bottom-bottom .table{
+    border-bottom: 1px solid #a5a5a5;
+    overflow-y: scroll;
+    height: 460px;
+    width: 100%;
+}
+.bottom-bottom table{
+    word-break: break-word;
+    word-wrap: break-word;
+    width: 100%;
+    border-top: 1px solid #a5a5a5;
+    border-left: 1px solid #a5a5a5;
+    border-spacing: 0;
+}
+.bottom-bottom table tr td{
+    border-bottom: 1px solid #a5a5a5;
+    border-right: 1px solid #a5a5a5;
+    text-align: center;
+    vertical-align: center;
+}
+.bottom-bottom table tr td{
+    font-size: 16px;
+}
+.bottom-bottom table tr td:nth-child(4) p{
+    font-size: 14px;
+}
+.bottom-bottom table tr td:nth-child(1){
+    width: 2%;
+}
+.bottom-bottom table tr td:nth-child(2),
+.bottom-bottom table tr td:nth-child(3),
+.bottom-bottom table tr td:nth-child(4),
+.bottom-bottom table tr td:nth-child(5){
+    width: calc((100% - 8%) / 4);
+}
+.bottom-bottom table tr td:nth-child(6){
+    width: 6%;
+}
+.bb-bottom{
+    width: 100%;
+    margin-top: 5px;
+    margin-left: 13px;
+}
