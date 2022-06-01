@@ -162,7 +162,8 @@
     flex-direction: row;
     align-items: flex-end;
 }
-.m-bottom-second .shouhuSelect ul li span{
+
+.m-bottom-second .shouhuSelect ul li span {
     font-size: 12px;
 }
 
@@ -212,14 +213,17 @@
     margin-left: 30px;
     margin-top: 10px;
 }
-.m-bottom-second .line{
+
+.m-bottom-second .line {
     width: 98%;
     background-color: #d2d2d2;
     height: 1px;
     margin: 10px auto;
 }
+
 /*展示订单*/
-.bar{
+.bar {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
     width: 98%;
     background-color: #e3e4e5;
     border-radius: 4px;
@@ -228,10 +232,33 @@
     display: flex;
     align-items: center;
 }
-.bar span{
+
+.bar span {
     font-size: 14px;
+    text-align: center;
 }
-.allOrder,.haveOrder,.notOrder,.notPayOrder{
+
+.bar span:nth-child(1) {
+    width: 60%;
+}
+
+.bar span:nth-child(2) {
+    width: 10%;
+}
+
+.bar span:nth-child(3) {
+    width: 10%;
+}
+
+.bar span:nth-child(4) {
+    width: 10%;
+}
+
+.bar span:nth-child(5) {
+    width: 10%;
+}
+
+.orderShow {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -239,15 +266,256 @@
     align-items: center;
 }
 
-.allOrder .orderBox{
-    margin: 0 auto;
+.orderShow .orderBox {
+    margin: 10px auto;
     width: 98%;
-    border: 1px solid red;
+    border-top: 1px solid #d3d3d3;
+    border-left: 1px solid #d3d3d3;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
 }
-.allOrder .orderBox .o-top{
+
+.orderShow .orderBox .o-top {
+    border-bottom: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+    background-color: #e3e4e5;
+    height: 28px;
+    display: flex;
+    align-items: center;
     width: 100%;
+}
+.o-top span:nth-child(1),
+.o-top span:nth-child(3){
+    margin-left: 10px;
+}
+.o-top span:nth-child(2){
+    margin-left: 50px;
+}
+.orderShow .orderBox .o-top span {
+    font-size: 14px;
+    color: #a5a5a5;
+}
+
+.orderShow .orderBox .o-top span:nth-child(3) {
+    color: #505050;
+}
+
+.orderShow .o-bottom {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.orderShow .o-bottom .ob-left .show {
+    border-bottom: 1px solid #d3d3d3;
+    border-right: 1px solid #d3d3d3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.orderShow .o-bottom .ob-left {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+}
+
+.orderShow .o-bottom .ob-one,
+.orderShow .o-bottom .ob-two,
+.orderShow .o-bottom .ob-three,
+.orderShow .o-bottom .ob-four {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+    height: calc(100% - 1px);
+    border-right: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.orderShow .o-bottom .ob-four {
+    flex-direction: column;
+}
+
+.orderShow .o-bottom .ob-two {
+    width: 10%;
+    height: 100%;
+    border-right: 1px solid #d3d3d3;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+/*展示*/
+.ob-left .show .show-left .img {
+    margin: 5px;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ob-left .show .show-left .img img {
+    height: 100%;
+}
+
+.ob-left .show .show-middle {
+    width: 65%;
+    height: 60px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+.ob-left .show .show-middle p {
+    line-height: 20px;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-indent: 22px;
+    font-weight: 400;
+    color: #505050;
+}
+
+.ob-left .show .show-right {
+    margin-left: 55px;
+}
+
+.ob-left .show .show-right span {
+    font-size: 14px;
+    font-weight: 200;
+}
+
+/*收货人*/
+.ob-one span {
+    font-size: 16px;
+}
+
+.ob-one i {
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.address {
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    display: none;
+}
+
+.ob-one i:hover .address {
+    display: block;
+}
+
+.address .text {
+    padding: 10px;
+    width: 300px;
+    height: 72px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+.address .text p {
+    font-size: 14px;
+    line-height: 20px;
+
+}
+
+/*金额*/
+.ob-two span {
+    font-size: 16px;
+    color: #888888;
+}
+
+/*状态*/
+.ob-three span {
+    letter-spacing: 2px;
+}
+
+/*操作*/
+.ob-four a {
+    text-decoration: none;
+    color: #333;
+    line-height: 30px;
+}
+
+.ob-four a:hover {
+    color: #c81623;
+    text-decoration: underline;
+}
+
+/*返回顶部*/
+.rightnav2 {
+    display: none;
+}
+
+.nav2 {
+    display: block;
+}
+
+#nav2 {
+    position: fixed;
+    top: 520px;
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+    right: 30px;
+}
+
+#nav2 ul {
+    list-style: none;
+}
+
+#nav2 ul li {
+    width: 50px;
+    height: 50px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#nav2 ul li:last-child {
+    border-bottom: none;
+}
+
+#nav2 ul li:hover {
+    background-color: #c81623;
+}
+
+#nav2 ul li:hover a span {
+    color: #fff;
+}
+
+#nav2 ul li a {
+    width: 32px;
+    height: 32px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#nav2 ul li a span {
+    vertical-align: center;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    line-height: 19px;
+    letter-spacing: 2px;
+}
+
+#nav2 ul li a span i {
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.m-bottom-second {
+    margin-bottom: 60px;
 }
