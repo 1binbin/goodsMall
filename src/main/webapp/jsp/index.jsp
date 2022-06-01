@@ -25,7 +25,7 @@
             }
             if (username.endsWith("user")){
                 request.getSession().setAttribute("userName",username);
-                request.getRequestDispatcher("userwait.jsp").forward(request,response);
+                request.getRequestDispatcher("../jsp/user/userwait.jsp").forward(request,response);
             }else if (username.endsWith("admin")){
 //                String adminName = (String) request.getSession().getAttribute("adminName");
                 String eid = username.substring(0,username.length()-5);

@@ -142,7 +142,7 @@
     </body>
     <script>
         function jumpPay() {
-            window.location.href="<%=path%>/jsp/user/pay.jsp";
+            window.location.href="<%=path%>/jsp/user/order.jsp";
         }
     </script>
 </html>

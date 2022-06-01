@@ -97,7 +97,7 @@ public class IndexServlet extends HttpServlet {
                         response.addCookie(cookie);
                     }
                     request.getSession().setAttribute("userName", username + role);
-                    request.getRequestDispatcher("jsp/userwait.jsp").forward(request, response);
+                    request.getRequestDispatcher("jsp/user/userwait.jsp").forward(request, response);
                 } else {
                     Utils.alter(response, "<script type='text/javascript'>alert('用户名、密码或角色错误！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
                 }

@@ -57,7 +57,7 @@
                 <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
                                                                 id="btnaa"></i></div>
             </form>
-            <div class="cart" onclick="window.open('<%=path%>/jsp/goodsCart.jsp')">
+            <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp')">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span>购物车</span>
             </div>
@@ -154,13 +154,12 @@
         <div class="content">
             <ul class="like_ul">
                 <%
-
                     if (!eidList.isEmpty()) {
                         for (GoodsModel goodsModel : eidList) {
                             List<GoodsModel> eidGoodsList = Daofactory.getgoodsdaoimpl().getdEidGoods(goodsModel.getEid());
                             for (GoodsModel model : eidGoodsList) {
                 %>
-                <li onclick="window.open('<%=path%>/jsp/goodsDetails.jsp')">
+                <li onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp')">
                     <div class="like_img"><img
                             src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=model.getGid()%>.jpg" alt="">
                     </div>

@@ -1,8 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.entity.GoodsModel" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.business.Daofactory" %>
-<%@ page import="com.mysql.cj.xdevapi.DbDocFactory" %>
 <%@ page import="com.business.EBofactory" %>
 <%--
   Created by IntelliJ IDEA.
@@ -36,10 +34,10 @@
         }
         //    搜索
         function selectSearch() {
-            var selectText = document.getElementById("select").value;
-            var myselect = document.getElementById("selecteange");
-            var index = myselect.selectedIndex;
-            var url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value;
+            const selectText = document.getElementById("select").value;
+            const myselect = document.getElementById("selecteange");
+            const index = myselect.selectedIndex;
+            const url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value;
             window.open(url, "_self");
         }
 
@@ -291,6 +289,7 @@
                     </div>
                     <%--订单列表--%>
                     <div class="third" id="third">
+
                     </div>
                     <%--个人中心--%>
                     <div class="fourth" id="fourth">
@@ -321,6 +320,8 @@
             showimg.style.transform = "scaleY(1)"
         }
 
+        let choice;
+
         //    刷新
         function allGoods() {
             choice = 2;
@@ -330,10 +331,10 @@
         //查询商品
         function showgoods() {
             choice = 1;
-            var selectText = document.getElementById("select").value;
-            var myselect = document.getElementById("selecteange");
-            var index = myselect.selectedIndex;
-            var url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=1";
+            const selectText = document.getElementById("select").value;
+            const myselect = document.getElementById("selecteange");
+            const index = myselect.selectedIndex;
+            const url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=1";
             let xml = new XMLHttpRequest();
             xml.open("get", url, true)
             xml.onreadystatechange = function () {
@@ -353,11 +354,11 @@
 
         //    跳转到首页
         function jumpPage(pagenum) {
-            var pageNow = document.getElementById("pagenum").innerText;
-            var pageNow1 = document.getElementById("jumpNumChoose").value;
-            var maxPage = document.getElementById("allcount").innerText;
+            const pageNow = document.getElementById("pagenum").innerText;
+            const pageNow1 = document.getElementById("jumpNumChoose").value;
+            const maxPage = document.getElementById("allcount").innerText;
             //跳转到的页数
-            var jumpPage;
+            let jumpPage;
             switch (pagenum) {
                 case 1:
                     if(Number(pageNow1) > Number(maxPage) || Number(pageNow1) < 0){
@@ -385,12 +386,12 @@
                     }
                     break;
             }
-            var url;
+            let url;
             switch (choice) {
                 case 1:
-                    var selectText = document.getElementById("select").value;
-                    var myselect = document.getElementById("selecteange");
-                    var index = myselect.selectedIndex;
+                    const selectText = document.getElementById("select").value;
+                    const myselect = document.getElementById("selecteange");
+                    const index = myselect.selectedIndex;
                     url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=" + jumpPage;
                     break;
                 case 2:
@@ -418,7 +419,7 @@
                 return false;
             }
             //    验证价格最多两位小数
-            var regu = /^(([0-9]+)|([0-9]+\.[0-9]{0,2}))$/;
+            const regu = /^(([0-9]+)|([0-9]+\.[0-9]{0,2}))$/;
             if (form.gprice.value !== "" && !regu.test(form.gprice.value)) {
                 alert("价格请输入最多两位小数的非负数");
                 form.gprice.focus();
@@ -430,7 +431,7 @@
                 return false;
             }
             //    验证数量为非负数
-            var regu1 = /^\d+$/
+            const regu1 = /^\d+$/;
             if (form.gnum.value !== "" && !regu1.test(form.gnum.value)) {
                 alert("库存量请输入非负整数")
                 form.gnum.focus();
@@ -438,7 +439,7 @@
             }
         }
 
-        var choice = 2;
+        choice = 2;
         const first = document.getElementById("first")
         const second = document.getElementById("second")
         const third = document.getElementById("third")
