@@ -1,0 +1,200 @@
+/*
+  Created by IntelliJ IDEA.
+  Author: hongxiaobin
+  User: hongxiaobin
+  Date: 2022/6/1
+  Time: 19:22
+  Description: 会员页面
+*/
+* {
+    padding: 0;
+    margin: 0;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background: url("../img/cool.png") 100% center no-repeat;
+    background-size: cover;
+}
+.container{
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.container .container-left span{
+
+    font-family: "字魂45号-冰宇雅宋",serif;
+    color: #c6ad51;
+    line-height: 40px;
+    height: 40px;
+    font-size: 40px;
+    letter-spacing: 6px;
+    margin-left: 50px;
+    font-weight: 500;
+}
+.container .container-right {
+    margin-right: 40px;
+}
+.container-right span{
+    color: rgba(0,0,0,0.7);
+    font-size: 20px;
+    margin-right: 20px;
+}
+.container-right a{
+    text-decoration: none;
+    color: rgba(0,0,0,0.7);
+}
+.container-right a:hover{
+    color: #c81623;
+}
+.member-middle{
+    color: #fff;
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.member-middle .first{
+    font-size: 44px;
+    letter-spacing: 6px;
+    margin-bottom: 10px;
+}
+.member-middle .second{
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+.member-middle div span:first-child{
+    font-size: 20px;
+    letter-spacing: 6px;
+}
+.member-middle div span:nth-child(2){
+    font-size: 24px;
+    color: #f5ca3a;
+    font-weight: bold;
+}
+/*按钮*/
+button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #e0b44f;
+    width: 470px;
+    height: 60px;
+    border-radius: 30px;
+    margin-top: 20px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+button:hover{
+    background-color: #ffd471;
+    transform: scale(1.01);
+}
+button span:first-child{
+    font-size: 22px;
+    letter-spacing: 4px;
+}
+button span:nth-child(2){
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+/*种类选择*/
+.selectBox{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.selectBox .s-left{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-right: 10px;
+}
+.selectBox .s-right{
+    margin-left: 10px;
+}
+.selectBox .s-left div:first-child,
+.selectBox .s-right div:first-child{
+    width: 80px;
+    height: 4px;
+    background-color: rgb(129,129,129);
+    margin-bottom: 10px;
+}
+.selectBox .s-left div:nth-child(2),
+.selectBox .s-right div:nth-child(2){
+    width: 40px;
+    height: 4px;
+    background-color: rgb(129,129,129);
+}
+.selectBox .s-middle span{
+    color: #fff;
+    font-size: 38px;
+    font-weight: 600;
+    letter-spacing: 4px;
+}
+/*卡片*/
+.bottomBox{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.bottomBox input:checked + label{
+    box-shadow: 0 0 5px rgba(0,0,0,0.4);
+    transform: translateY(-3px);
+    border: 2px solid #f5ca3a;
+}
+.bottomBox input{
+    display: none;
+}
+.bottomBox label:nth-child(2),
+.bottomBox label:nth-child(4){
+    margin-right: 20px;
+}
+.bottomBox label{
+    border-radius: 6px;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+.bottomBox label span:nth-child(1){
+    margin-left: 10px;
+    margin-top: 10px;
+    letter-spacing: 4px;
+    font-size: 20px;
+}
+.bottomBox label span:nth-child(2){
+    text-align: center;
+    font-size: 30px;
+    margin-top: 30px;
+}
+.bottomBox label div{
+    height: 5px;
+    background-color: #000;
+    width: 30px;
+    margin: 10px auto;
+}
+.bottomBox label span:nth-child(4){
+    font-size: 14px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.bottomBox label span:nth-child(5){
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+.bottomBox label span:nth-child(5) span{
+    font-size: 20px;
+}

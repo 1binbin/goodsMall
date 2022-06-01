@@ -34,7 +34,7 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="#">成为会员</a>
+                        <a href="<%=path%>/jsp/user/members.jsp">成为会员</a>
                     </li>
                     <li class="line"></li>
                     <li>
