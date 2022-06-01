@@ -86,7 +86,7 @@ public class ForgetServlet extends HttpServlet {
                             Utils.getAllGoods(request,phone,0,15);
                             Utils.getCount(request,phone);
                             request.getSession().setAttribute("adminName",phone+role);
-                            request.getRequestDispatcher("jsp/adminwait.jsp").forward(request, response);
+                            request.getRequestDispatcher("jsp/mechants/merchantsWait.jsp").forward(request, response);
                         }else {
                             Utils.alter(response, "<script type='text/javascript'>alert('账号不存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
                         }

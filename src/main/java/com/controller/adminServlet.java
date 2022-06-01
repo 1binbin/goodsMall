@@ -55,7 +55,7 @@ public class adminServlet extends HttpServlet {
         EBofactory.getgoodsebiempl().insertGoods(goodsModel);
         Utils.getAllGoods(request, eid, 0, 15);
         Utils.getCount(request, eid);
-        request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/mechants/merchants.jsp").forward(request, response);
     }
 
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -64,7 +64,7 @@ public class adminServlet extends HttpServlet {
         EBofactory.getgoodsebiempl().updateGoods(goodsModel);
         Utils.getAllGoods(request, eid, 0, 15);
         Utils.getCount(request, eid);
-        request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/mechants/merchants.jsp").forward(request, response);
     }
 
     protected void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -73,7 +73,7 @@ public class adminServlet extends HttpServlet {
         EBofactory.getgoodsebiempl().deleteGoods(gid, eid);
         Utils.getAllGoods(request, eid, 0, 15);
         Utils.getCount(request, eid);
-        request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/mechants/merchants.jsp").forward(request, response);
     }
 
 
@@ -116,7 +116,7 @@ public class adminServlet extends HttpServlet {
         String eid = getEid(request);
         Utils.getAllGoods(request, eid, 0, 15);
         Utils.getCount(request, eid);
-        request.getRequestDispatcher("jsp/admin.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/mechants/merchants.jsp").forward(request, response);
     }
 
     private GoodsModel getGoodsModel(HttpServletRequest request) throws IOException, ServletException {
