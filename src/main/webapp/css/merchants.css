@@ -178,14 +178,8 @@ body {
     display: none;
 }
 
-.right .first {
-    /*display: block;*/
-    background-color: #b490ca;
-}
-
 .right .second {
     display: block;
-    /*background-color: #c6dcb2;*/
 }
 
 .right .third {

@@ -34,7 +34,7 @@
                 request.getSession().setAttribute("allGoods",arrayList);
                 request.getSession().setAttribute("adminName",username);
                 request.getSession().setAttribute("allgoodsCount",count);
-                request.getRequestDispatcher("merchantsWait.jsp").forward(request,response);
+                request.getRequestDispatcher("../jsp/merchants/merchantsWait.jsp").forward(request,response);
             }
         %>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">

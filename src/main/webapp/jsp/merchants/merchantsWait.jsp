@@ -17,7 +17,7 @@
     </head>
     <script>
         function jump() {
-            window.location.href = "<%=page%>/jsp/mechants/merchants.jsp";
+            window.location.href = "<%=base%>/jsp/merchants/merchants.jsp";
         }
         setTimeout(jump, 3000);
     </script>
