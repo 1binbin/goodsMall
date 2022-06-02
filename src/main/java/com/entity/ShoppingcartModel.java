@@ -8,16 +8,13 @@ public class ShoppingcartModel {
     private String cid;
     private String eid;
     private String gid;
-    private int snum;
-
     public ShoppingcartModel() {
     }
 
-    public ShoppingcartModel(String cid, String eid, String gid, int snum) {
+    public ShoppingcartModel(String cid, String eid, String gid ) {
         this.cid = cid;
         this.eid = eid;
         this.gid = gid;
-        this.snum = snum;
     }
 
     public String getCid() {
@@ -42,13 +39,5 @@ public class ShoppingcartModel {
 
     public void setGid(String gid) {
         this.gid = gid;
-    }
-
-    public int getSnum() {
-        return snum;
-    }
-
-    public void setSnum(int snum) {
-        this.snum = snum;
     }
 }

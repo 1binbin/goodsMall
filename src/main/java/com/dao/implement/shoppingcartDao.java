@@ -11,7 +11,6 @@ import java.util.List;
 public interface shoppingcartDao {
     void insertCart(ShoppingcartModel shoppingcartModel);
     List<ShoppingcartModel> getCart(String cid,String eid,String gid);
-    void updateCart(ShoppingcartModel shoppingcartModel);
     List<ShoppingcartModel> getCidEid(String cid);
     List<ShoppingcartModel> getCidEidGid(String cid,String eid);
 }

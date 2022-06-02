@@ -27,7 +27,8 @@
     </head>
     <body>
         <div class="top">
-            <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left" aria-hidden="true"></i>返回首页</a></span>
+            <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left"
+                                                           aria-hidden="true"></i>返回首页</a></span>
             <div class="top-right">
                 <ul>
                     <li>
@@ -84,28 +85,36 @@
             %>
             <div class="cart">
                 <div class="cart-top">
-                    <input type="checkbox" id="checked<%=i%>" onclick="isChecked1(this,'goods<%=i%>','goodsChecked<%=i%>','allprice<%=i%>')" class="employee">
-                    <label for="checked<%=i%>"><%=employeeModels.get(0).getEstorename()%></label>
-                    <div class="cart-goods" >
+                    <input type="checkbox" id="checked<%=i%>"
+                           onclick="isChecked1(this,'goods<%=i%>','goodsChecked<%=i%>','allprice<%=i%>')"
+                           class="employee">
+                    <label for="checked<%=i%>"><%=employeeModels.get(0).getEstorename()%>
+                    </label>
+                    <div class="cart-goods">
                         <%
                             //eid下的所有gid
                             for (int j = 0; j < list.get(i).size(); j++) {
-                                List<GoodsModel> listGoods = EBofactory.getgoodsebiempl().getGidEid(list.get(i).get(j).getGid(),list.get(i).get(j).getEid());
+                                List<GoodsModel> listGoods = EBofactory.getgoodsebiempl().getGidEid(list.get(i).get(j).getGid(), list.get(i).get(j).getEid());
                                 String num = i + (j + "");
                         %>
                         <div class="goods goods<%=i%>" id="goods<%=num%>">
-                            <input type="checkbox" id="checkedGoodsnum<%=num%>" class="goodsChecked<%=i%> allGoods" onclick="isChecked(this,'goods<%=num%>','checked<%=i%>','num<%=num%>')">
+                            <input type="checkbox" id="checkedGoodsnum<%=num%>"
+                                   class="goodsChecked<%=i%> allGoods <%=list.get(i).get(j).getEid()%> <%=list.get(i).get(j).getGid()%>"
+                                   onclick="isChecked(this,'goods<%=num%>','checked<%=i%>','num<%=num%>')">
                             <div class="goods-img">
-                                <img alt="暂无图片" src="<%=path%>/Product_main_photo/<%=list.get(i).get(j).getEid()%>/<%=list.get(i).get(j).getGid()%>.jpg">
+                                <img alt="暂无图片"
+                                     src="<%=path%>/Product_main_photo/<%=list.get(i).get(j).getEid()%>/<%=list.get(i).get(j).getGid()%>.jpg">
                             </div>
                             <span class="text"><%=listGoods.get(0).getGdescribe()%></span>
                             <span class="price" id="pricenum<%=num%>">￥<%=listGoods.get(0).getGprice()%></span>
                             <div class="goods-num">
                                 <button onclick="downnum('num<%=num%>')">-</button>
-                                <input type="text" min="1" value="1" id="num<%=num%>" disabled="disabled">
+                                <input type="text" min="1" value="1" id="num<%=num%>" disabled="disabled"
+                                       class="<%=list.get(i).get(j).getEid()%>-<%=list.get(i).get(j).getGid()%>">
                                 <button onclick="upnum('num<%=num%>')">+</button>
                             </div>
-                            <span class="allprice allprice<%=i%>" id="allpricenum<%=num%>">￥<%=listGoods.get(0).getGprice()%></span>
+                            <span class="allprice allprice<%=i%>"
+                                  id="allpricenum<%=num%>">￥<%=listGoods.get(0).getGprice()%></span>
                             <a href="" class="delete">删除</a>
                         </div>
                         <%
@@ -123,7 +132,8 @@
         <div class="buttom">
             <div class="content">
                 <div class="left">
-                    <input type="checkbox" id="allChecked2"  onclick="allChecked(this,'employee','goods','allGoods','allprice')">
+                    <input type="checkbox" id="allChecked2"
+                           onclick="allChecked(this,'employee','goods','allGoods','allprice')">
                     <label for="allChecked2">全选</label>
                     <a href="" class="deleteCheck">删除选中的商品</a>
                     <a href="" class="deleteCheckAll">清空购物车</a>
@@ -149,9 +159,19 @@
             </ul>
         </div>
     </body>
-    <script>
-        function jumpPay() {
-            window.location.href="<%=path%>/jsp/user/order.jsp";
-        }
-    </script>
 </html>
+<script>
+    function jumpPay() {
+        const eidInput = document.getElementsByClassName("allGoods");
+        const arr = [];
+        for (let i = 0; i < eidInput.length; i++) {
+            if (eidInput[i].checked) {
+                const eid = eidInput[i].className.split(" ")[2];
+                const gid = eidInput[i].className.split(" ")[3];
+                const num = document.getElementsByClassName(eid + "-" + gid)[0].value;
+                arr[i] = [eid, gid, num];
+            }
+        }
+        window.location.href="<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&cid=<%=cid%>&arr="+arr;
+    }
+</script>

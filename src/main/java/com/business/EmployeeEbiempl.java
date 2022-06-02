@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * @Author hongxiaobin
  * @Time 2022/3/20-19:23
- * @Description 根据用户ID获取值
+ * @Description &#x6839;&#x636E;&#x7528;&#x6237;ID&#x83B7;&#x53D6;&#x503C;
  */
 public class EmployeeEbiempl implements EmployeeEbi {
 

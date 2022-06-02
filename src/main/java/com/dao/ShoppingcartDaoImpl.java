@@ -24,20 +24,14 @@ public class ShoppingcartDaoImpl extends BaseDao<ShoppingcartModel> implements s
 
     @Override
     public void insertCart(ShoppingcartModel shoppingcartModel) {
-        String sql = "insert into shoppingcart(cid,eid,gid,snum) values(?,?,?,?)";
-        update(connection,sql,shoppingcartModel.getCid(),shoppingcartModel.getEid(),shoppingcartModel.getGid(),shoppingcartModel.getSnum());
+        String sql = "insert into shoppingcart(cid,eid,gid) values(?,?,?)";
+        update(connection,sql,shoppingcartModel.getCid(),shoppingcartModel.getEid(),shoppingcartModel.getGid());
     }
 
     @Override
     public List<ShoppingcartModel> getCart(String cid, String eid, String gid) {
         String sql ="select * from shoppingcart where cid=? and eid = ? and gid = ?";
         return getBeanList(connection,sql,cid,eid,gid);
-    }
-
-    @Override
-    public void updateCart(ShoppingcartModel shoppingcartModel) {
-        String sel = "update shoppingcart set snum = snum + ? where cid =? and eid = ? and gid =?";
-        update(connection,sel,shoppingcartModel.getSnum(),shoppingcartModel.getCid(),shoppingcartModel.getEid(),shoppingcartModel.getGid());
     }
 
     @Override

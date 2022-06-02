@@ -39,8 +39,7 @@ public class customerServlet extends HttpServlet {
         String gid = request.getParameter("gid");
         String cid = request.getParameter("cid");
         String eid = request.getParameter("eid");
-        int snum = Integer.parseInt(request.getParameter("snum"));
-        ShoppingcartModel shoppingcartModel = new ShoppingcartModel(cid,eid,gid,snum);
+        ShoppingcartModel shoppingcartModel = new ShoppingcartModel(cid,eid,gid);
         EBofactory.getShoppingcartempl().insertCart(shoppingcartModel);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");

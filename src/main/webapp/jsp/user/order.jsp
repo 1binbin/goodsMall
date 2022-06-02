@@ -1,6 +1,8 @@
 <%@ page import="com.entity.GoodsModel" %>
 <%@ page import="com.business.Daofactory" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.business.EBofactory" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -12,8 +14,22 @@
 <html>
     <head>
         <%
+            //分别为eid gid num
+            double numPrice = 0.0;
+            int numCount =0;
             String path = request.getContextPath();
-            List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
+            String arr = request.getParameter("arr");
+            String[] split = arr.split(",");
+            List<List<String>> list = new ArrayList<>();
+            for (int i = 0; i < split.length; i += 3) {
+                List<String> stringList = new ArrayList<>();
+                stringList.add(split[i]);
+                stringList.add(split[i + 1]);
+                stringList.add(split[i + 2]);
+                numCount += Integer.parseInt(split[i+2]);
+                list.add(stringList);
+            }
+            String cid = request.getParameter("cid");
         %>
         <title>天天淘-结算页</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -22,7 +38,8 @@
     </head>
     <body>
         <div class="top">
-            <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left" aria-hidden="true"></i>返回首页</a></span>
+            <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left"
+                                                           aria-hidden="true"></i>返回首页</a></span>
             <div class="top-right">
                 <ul>
                     <li>
@@ -115,22 +132,25 @@
                     <div class="f-top">
                         <p>送货清单</p>
                         <div class="f-top-right">
-                            <a href="<%=path%>/jsp/user/goodsCart.jsp">返回购物车</a>
+                            <a href="<%=path%>/jsp/user/goodsCart.jsp?cid=<%=cid%>">返回购物车</a>
                         </div>
                     </div>
                     <div class="t-bottom">
                         <ul>
                             <%
-                                for (int i = 0; i < 3; i++) {
+                                for (List<String> strings : list) {
+                                    List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().getGidEid(strings.get(1), strings.get(0));
+                                    numPrice += Integer.parseInt(strings.get(2)) * goodsModels.get(0).getGprice();
                             %>
                             <li>
                                 <div class="goods">
                                     <div class="img">
-                                        <img src="<%=path%>/img/1.jpg" alt="">
+                                        <img src="<%=path%>/Product_main_photo/<%=goodsModels.get(0).getEid()%>/<%=goodsModels.get(0).getGid()%>.jpg"
+                                             alt="">
                                     </div>
-                                    <span class="text">aseweqweqoqwieuiqioqeuqwioeuqewqeuq的空间暗示都搜达SaaS大迫杰肯德基斯柯达结课了打卡世界等级客户端看</span>
-                                    <span class="price">￥23.3</span>
-                                    <span class="num">X1</span>
+                                    <span class="text"><%=goodsModels.get(0).getGdescribe()%></span>
+                                    <span class="price">￥<%=goodsModels.get(0).getGprice()%></span>
+                                    <span class="num">X<%=strings.get(2)%></span>
                                 </div>
                             </li>
                             <%
@@ -145,18 +165,18 @@
             <table>
                 <tr>
                     <td>数目合计：</td>
-                    <td>3</td>
+                    <td><%=numCount%></td>
                 </tr>
                 <tr>
                     <td>价格合计：</td>
-                    <td>￥69.9</td>
+                    <td>￥<%=numPrice%></td>
                 </tr>
             </table>
         </div>
         <div class="order-message">
             <div class="f">
                 <span>应付总额：</span>
-                <span>￥69.9</span>
+                <span>￥<%=numPrice%></span>
             </div>
             <div class="s">
                 <span>寄送至：</span>

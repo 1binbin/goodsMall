@@ -16,9 +16,7 @@ public class ShoppingcartEmpl implements ShoppingcartEbi {
     @Override
     public void insertCart(ShoppingcartModel shoppingcartModel) {
         List<ShoppingcartModel> shoppingcartModelList = Daofactory.getShoppingDaoumpl().getCart(shoppingcartModel.getCid(),shoppingcartModel.getEid(),shoppingcartModel.getGid());
-        if (!shoppingcartModelList.isEmpty()){
-            Daofactory.getShoppingDaoumpl().updateCart(shoppingcartModel);
-        }else {
+        if (shoppingcartModelList.isEmpty()){
             Daofactory.getShoppingDaoumpl().insertCart(shoppingcartModel);
         }
     }
