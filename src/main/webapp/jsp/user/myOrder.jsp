@@ -1,4 +1,8 @@
-<%@ page import="java.util.HashMap" %><%--
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.entity.EntityModel" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.business.EBofactory" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -11,6 +15,14 @@
     <head>
         <%
             String path = request.getContextPath();
+            String cid = (String) request.getSession().getAttribute("cid");
+            List<List<EntityModel>> list = new ArrayList<>();
+            List<EntityModel> entityModelList = EBofactory.getotherEbimpl().getTicketCid(cid);
+            for (EntityModel entityModel : entityModelList) {
+                List<EntityModel> entityModels = EBofactory.getotherEbimpl().getTicketCidEid(cid, entityModel.getOid());
+                list.add(entityModels);
+            }
+
         %>
         <title>天天淘-我的订单</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -22,7 +34,7 @@
     <body>
         <div class="top">
             <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left"
-                                                                aria-hidden="true"></i>返回首页</a></span>
+                                                           aria-hidden="true"></i>返回首页</a></span>
             <div class="top-right">
                 <ul>
                     <li>
@@ -38,7 +50,7 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="#">我的订单</a>
+                        <a href="javascript:void(0)">我的订单</a>
                     </li>
                     <li class="line"></li>
                     <li>
@@ -74,6 +86,7 @@
             <div class="time">
                 <span>时间筛选</span>
                 <select name="" id="">
+                    <option value="">全部</option>
                     <option>一个月内</option>
                     <option>三个月内</option>
                     <option>半年内</option>
@@ -113,35 +126,33 @@
             </div>
             <div class="orderShow">
                 <%
-                    for (int j = 0; j < 3; j++) {
+                    for (int j = 0; j < list.size(); j++) {
                 %>
                 <div class="orderBox">
                     <div class="o-top">
-                        <span>2022/05/31 22:23:00</span>
+                        <span><%=list.get(j).get(0).getTdate()%></span>
                         <span>订单编号</span>
-                        <span>1321213989992</span>
+                        <span><%=list.get(j).get(0).getOid()%></span>
                     </div>
                     <div class="o-bottom">
                         <div class="ob-left">
                             <%
-                                String[] strings = {"未收货", "已收货", "未付款"};
-                                HashMap<Integer,String[]> hashMap = new HashMap<>();
-                                hashMap.put(0,new String[]{"确认收货"});
-                                hashMap.put(1,new String[]{"删除订单"});
-                                hashMap.put(2,new String[]{"去付款","取消订单"});
-                                for (int i = 0; i < 3; i++) {
+                                for (int i = 0; i < list.get(j).size(); i++) {
                             %>
                             <div class="show">
                                 <div class="show-left">
-                                    <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
+                                    <div class="img"><img
+                                            src="<%=path%>/Product_main_photo/<%=list.get(j).get(i).getEid()%>/<%=list.get(j).get(i).getGid()%>.jpg"
+                                            alt=""></div>
                                 </div>
                                 <div class="show-middle">
-                                    <p>
-                                        结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到</p>
+                                    <p><%=list.get(j).get(i).getGcategory()%> | <%=list.get(j).get(i).getGname()%>
+                                        | <%=list.get(j).get(i).getGdescribe()%>
+                                    </p>
                                 </div>
                                 <div class="show-right">
                                     <span>X</span>
-                                    <span>1</span>
+                                    <span><%=list.get(j).get(i).getMnum()%></span>
                                 </div>
                             </div>
                             <%
@@ -149,30 +160,48 @@
                             %>
                         </div>
                         <div class="ob-one">
-                            <span>XXX</span>
+                            <span><%=list.get(j).get(0).getRname()%></span>
                             <i class="fa fa-question-circle-o" aria-hidden="true">
                                 <div class="address">
                                     <div class="text">
                                         <p>收货地址</p>
-                                        <p>
-                                            结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到结合当今爱好等按斤称看来得及奥斯卡结课了即可了解啊阿萨德焦点离开三的大浪街道拉大锯的路径阿达克了打卡啦多久啊大家爱哦端到</p>
+                                        <p><%=list.get(j).get(0).getRadd()%>
+                                        </p>
                                     </div>
                                 </div>
                             </i>
                         </div>
                         <div class="ob-two">
-                            <span>￥23.9</span>
+                            <span>￥<%=list.get(j).get(0).getAllprice()%></span>
                         </div>
                         <div class="ob-three">
-                            <span><%=strings[j]%></span>
+                            <%
+                                if (list.get(j).get(0).getTispay().equals("no")) {
+                            %>
+                            <span class="span">未付款</span>
+                            <%
+                            } else if (list.get(j).get(0).getTisdelivey().equals("no")) {
+                            %>
+                            <span class="span">未发货</span>
+                            <%
+                            } else if (list.get(j).get(0).getTisover().equals("no")) {
+                            %>
+                            <span class="span">未收货</span>
+                            <%
+                            } else {
+                            %>
+                            <span class="span">已完成</span>
+                            <%
+                                }
+                            %>
                         </div>
                         <div class="ob-four">
-                            <a href=""><%=hashMap.get(j)[0]%>
-                            </a>
                             <%
-                                if (j == 2){
+                                String[] strings = list.get(j).get(0).getMessage().split(",");
+                                for (int i = 0; i < strings.length; i++) {
                             %>
-                            <a href=""><%=hashMap.get(j)[1]%></a>
+                            <a href=""><%=strings[i]%>
+                            </a>
                             <%
                                 }
                             %>

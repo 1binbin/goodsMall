@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,15 +59,11 @@ public class customerServlet extends HttpServlet {
         double tpay = Double.parseDouble(request.getParameter("tpay"));
         String arr = request.getParameter("arr");
         String[] split = arr.split(",");
-        Date date = new Date();
-        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String oid = request.getParameter("oid");
-        Date tdate = null;
-        try {
-            tdate = simpleDateFormat1.parse(simpleDateFormat1.format(date));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.now();
+        String tdate1 = dateTimeFormatter.format(localDateTime);
+        LocalDateTime tdate = LocalDateTime.parse(tdate1,dateTimeFormatter);
 //        分别为eid,gid,num
         for (int i = 0; i < split.length; i += 3) {
             EBofactory.getotherEbimpl().insertOrder(oid,split[i+1],split[i]);
