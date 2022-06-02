@@ -11,8 +11,8 @@ import java.util.List;
  */
 public class otherEbimpl implements otherEbi {
     @Override
-    public void insertOrder(String oid, String gid, String eid) {
-        Daofactory.getotherDaoImpl().insertOrder(oid,gid,eid);
+    public void insertOrder(String oid, String gid, String eid,int mnum) {
+        Daofactory.getotherDaoImpl().insertOrder(oid,gid,eid,mnum);
     }
 
     @Override

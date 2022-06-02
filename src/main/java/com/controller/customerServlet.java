@@ -66,7 +66,7 @@ public class customerServlet extends HttpServlet {
         LocalDateTime tdate = LocalDateTime.parse(tdate1,dateTimeFormatter);
 //        分别为eid,gid,num
         for (int i = 0; i < split.length; i += 3) {
-            EBofactory.getotherEbimpl().insertOrder(oid,split[i+1],split[i]);
+            EBofactory.getotherEbimpl().insertOrder(oid,split[i+1],split[i], Integer.parseInt(split[i+2]));
         }
         EntityModel entityModel = new EntityModel(oid,cid,rname,tdate,tpay,"no","no");
         EBofactory.getotherEbimpl().insertTicket(entityModel);
