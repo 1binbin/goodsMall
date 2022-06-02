@@ -15,4 +15,5 @@ public interface otherDao {
     void uodateTicket(String tispay,String oid,String cid);
     List<EntityModel> getTicketCid(String cid);
     List<EntityModel> getTicketCidEid(String cid,String eid);
+    List<EntityModel> getVipCid(String cid);
 }

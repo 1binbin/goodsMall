@@ -72,7 +72,7 @@
                         <div class="button" onclick="getSelect()"><i class="fa fa-search" aria-hidden="true"
                                                                      id="btnaa"></i></div>
                     </form>
-                    <div class="cart" onclick="window.open('<%=path%>/jsp/goodsCart.jsp')">
+                    <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp?cid=<%=cid%>')">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <span>购物车</span>
                     </div>
@@ -172,7 +172,7 @@
                             </i>
                         </div>
                         <div class="ob-two">
-                            <span>￥<%=list.get(j).get(0).getAllprice()%></span>
+                            <span>￥<%=list.get(j).get(0).getTpay()%></span>
                         </div>
                         <div class="ob-three">
                             <%

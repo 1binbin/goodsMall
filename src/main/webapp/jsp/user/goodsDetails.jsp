@@ -83,14 +83,14 @@
                 <div class="m-r-num">
                     <div>数量</div>
                     <div class="goods-num">
-                        <button onclick="downnum('num')">-</button>
+                        <button onclick="down('num')">-</button>
                         <input type="text" min="1" value="1" id="num" disabled="disabled" >
-                        <button onclick="upnum('num')">+</button>
+                        <button onclick="up('num')">+</button>
                     </div>
                 </div>
                 <div class="m-r-submit">
                     <button class="gouwuche" onclick="insertCart()">加入购物车</button>
-                    <button class="lijigoumai" onclick="window.open('<%=path%>/jsp/user/order.jsp')">直接购买</button>
+                    <button class="lijigoumai" onclick="noworder()">直接购买</button>
                 </div>
             </div>
         </div>
@@ -107,6 +107,14 @@
                 }
             }
             xml.send(null)
+        }
+        function noworder() {
+        //eid gid num
+            var eid = "<%=g.getEid()%>";
+            var gid = "<%=g.getGid()%>";
+            var num = document.getElementById("num").value;
+            var arr = [eid,gid, num];
+            window.open("<%=path%>/jsp/user/order.jsp?arr="+arr);
         }
     </script>
 </html>

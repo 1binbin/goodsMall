@@ -11,6 +11,7 @@
     <head>
         <%
             String path = request.getContextPath();
+            String cid = (String) request.getSession().getAttribute("cid");
         %>
         <title>天天淘-注册会员</title>
         <link rel="stylesheet" href="<%=path%>/css/members.css">
@@ -62,7 +63,7 @@
                 <span>开通会员预计可省</span>
                 <span>￥1221</span>
             </div>
-            <button>
+            <button onclick="jump()">
                 <span>立即支付</span>
                 <span id="allPrice">应付金额￥25</span>
             </button>
@@ -81,7 +82,7 @@
             </div>
         </div>
         <div class="bottomBox">
-            <input type="radio" id="one" name="select" checked class="select" onclick="changePrice()">
+            <input type="radio" id="one" name="select" checked class="select" onclick="changePrice()" value="month">
             <label for="one">
                 <span>月度会员</span>
                 <span  id="0">￥25</span>
@@ -89,7 +90,7 @@
                 <span>会员特权</span>
                 <span>会员商品享受<span>9.8</span> 折</span>
             </label>
-            <input type="radio" id="two" name="select" class="select" onclick="changePrice()">
+            <input type="radio" id="two" name="select" class="select" onclick="changePrice()" value="quarter">
             <label for="two">
                 <span>季度会员</span>
                 <span  id="1">￥68</span>
@@ -97,7 +98,7 @@
                 <span>会员特权</span>
                 <span>会员商品享受<span>9.5</span> 折</span>
             </label>
-            <input type="radio" id="three" name="select" class="select" onclick="changePrice()">
+            <input type="radio" id="three" name="select" class="select" onclick="changePrice()" value="year">
             <label for="three">
                 <span>年度会员</span>
                 <span id="2">￥128</span>
@@ -118,6 +119,26 @@
                 }
             }
             document.getElementById("allPrice").innerText = "应付金额"+price;
+        }
+        function jump() {
+        //    cid options
+            const radio = document.getElementsByClassName("select");
+            let vcategory;
+            for (let i = 0; i < radio.length; i++) {
+                if (radio[i].checked){
+                    vcategory = radio[i].value;
+                }
+            }
+            const url = "<%=path%>/customerServlet?action=insertVip&cid=<%=cid%>&vcategory=" + vcategory;
+            let xml = new XMLHttpRequest;
+            xml.open("get",url,true)
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200){
+                    alert("注册成功")
+                    window.open("<%=path%>/jsp/user/user.jsp")
+                }
+            }
+            xml.send(null)
         }
     </script>
 </html>

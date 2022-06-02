@@ -3,6 +3,7 @@ package com.dao.implement;
 import com.entity.CustomerModel;
 import com.entity.EmployeeModel;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,4 +18,5 @@ public interface CustmerDao {
     void insertCustomer(CustomerModel customerModel);
 
     void updateCustomer(CustomerModel customerModel);
+    void insertVip(String cid, String vcategory, String vindate,String voudate);
 }

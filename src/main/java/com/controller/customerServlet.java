@@ -82,4 +82,12 @@ public class customerServlet extends HttpServlet {
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");
     }
+    protected void insertVip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        String vcategory = request.getParameter("vcategory");
+        EBofactory.getcustomerebiempl().insertVip(cid,vcategory);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+    }
 }

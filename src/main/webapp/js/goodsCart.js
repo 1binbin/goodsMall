@@ -107,3 +107,20 @@ function upnum(n) {
     }
     allprice.innerText = '￥' + (document.getElementById(n).value * price);
 }
+
+function down(n) {
+    const num = document.getElementById(n).value;
+    if (Number(num) - 1 >= 1) {
+        document.getElementById(n).value = Number(num) - 1;
+    } else {
+        document.getElementById(n).value = 1;
+    }
+}
+function up(n) {
+    const num = document.getElementById(n).value;
+    if (Number(num) + 1 <= 1000) {
+        document.getElementById(n).value = Number(num) + 1;
+    } else {
+        document.getElementById(n).value = 1000;
+    }
+}

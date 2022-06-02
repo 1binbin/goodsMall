@@ -44,4 +44,10 @@ public class CustomerDaompl extends BaseDao<CustomerModel>implements CustmerDao 
         String sql = "update customer set cpassword = ? where cid = ?";
         update(connection,sql,customerModel.getCpassword(),customerModel.getCid());
     }
+
+    @Override
+    public void insertVip(String cid, String vcategory, String vindate, String voudate) {
+        String sql = "insert into vip(cid,vcategory,vindate,voutdate) values(?,?,?,?)";
+        update(connection,sql,cid,vcategory,vindate,voudate);
+    }
 }

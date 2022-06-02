@@ -29,6 +29,9 @@ public class EntityModel {
     private String radd;
     private double allprice;
     private String tisover;
+    private String vcategory;
+    private Date vindate;
+    private Date voutdate;
 
     public EntityModel() {
     }
@@ -64,6 +67,37 @@ public class EntityModel {
         this.tpay = tpay;
         this.tisdelivey = tisdelivey;
         this.tispay = tispay;
+    }
+
+    public EntityModel(String cid, String vcategory, Date vindate, Date voutdate) {
+        this.cid = cid;
+        this.vcategory = vcategory;
+        this.vindate = vindate;
+        this.voutdate = voutdate;
+    }
+
+    public String getVcategory() {
+        return vcategory;
+    }
+
+    public void setVcategory(String vcategory) {
+        this.vcategory = vcategory;
+    }
+
+    public Date getVindate() {
+        return vindate;
+    }
+
+    public void setVindate(Date vindate) {
+        this.vindate = vindate;
+    }
+
+    public Date getVoutdate() {
+        return voutdate;
+    }
+
+    public void setVoutdate(Date voutdate) {
+        this.voutdate = voutdate;
     }
 
     public String getTisover() {

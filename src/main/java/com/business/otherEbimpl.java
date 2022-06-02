@@ -34,4 +34,9 @@ public class otherEbimpl implements otherEbi {
     public List<EntityModel> getTicketCidEid(String cid, String eid) {
         return Daofactory.getotherDaoImpl().getTicketCidEid(cid,eid);
     }
+
+    @Override
+    public List<EntityModel> getVipCid(String cid) {
+        return Daofactory.getotherDaoImpl().getVipCid(cid);
+    }
 }

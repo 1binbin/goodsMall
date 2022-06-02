@@ -12,4 +12,5 @@ public interface CustomerEbi {
     boolean insertCustomer(CustomerModel customerModel);
 
     boolean updateCustomer(CustomerModel customerModel);
+    boolean insertVip(String cid, String vcategory);
 }
