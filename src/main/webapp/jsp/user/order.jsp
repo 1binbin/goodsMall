@@ -107,12 +107,12 @@
                     </div>
                     <div class="f-bottom">
                         <span>收货人</span>
-                        <select name="name" id="name">
+                        <select name="name" id="name" onchange="rname()">
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
                         <span>收货地址</span>
-                        <select name="address" id="address">
+                        <select name="address" id="address" onchange="radd()">
                             <option value="1">1</option>
                             <option value="2">2</option>
                         </select>
@@ -187,9 +187,9 @@
             </div>
             <div class="s">
                 <span>寄送至：</span>
-                <span>XXX</span>
+                <span id="radd"></span>
                 <span>收货人：</span>
-                <span>XXX 1587519xxxx</span>
+                <span id="rname"></span>
             </div>
         </div>
         <div class="submit">
@@ -223,6 +223,16 @@
                 }
             }
             xml.send(null);
+        }
+        function rname() {
+            var input = document.getElementById("name");
+            var index = input.selectedIndex;
+            document.getElementById("rname").innerText = input.options[index].innerText;
+        }
+        function radd() {
+            var input = document.getElementById("address");
+            var index = input.selectedIndex;
+            document.getElementById("radd").innerText = input.options[index].innerText;
         }
     </script>
 </html>
