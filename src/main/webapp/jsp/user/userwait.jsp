@@ -11,6 +11,9 @@
     <head>
         <%
             String base = request.getContextPath();
+            String username = (String) request.getSession().getAttribute("username");
+            String cid = username.substring(0,username.length()-4);
+            request.getSession().setAttribute("cid",cid);
         %>
         <title>用户正在登录</title>
         <link rel="stylesheet" href="<%=base%>/css/wait.css">

@@ -18,4 +18,7 @@ public class EBofactory {
     public static CountEbiEmpl getCountbiempl(){
         return new CountEbiEmpl();
     }
+    public static ShoppingcartEmpl getShoppingcartempl(){
+        return new ShoppingcartEmpl();
+    }
 }

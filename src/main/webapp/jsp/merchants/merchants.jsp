@@ -202,6 +202,11 @@
                                         <input type="text" name="ginprice" class="minput"><br>
                                         <p class="im">商品售价</p>
                                         <input type="text" name="gprice" class="minput"><br>
+                                        <p class="im">会员商品</p>
+                                        <select class="minput" name="isvip">
+                                            <option value="yes">是</option>
+                                            <option value="no">否</option>
+                                        </select>
                                         <div class="boxtextarea">
                                             <p class="im imm">商品描述</p>
                                             <textarea name="gdescribe" class="minput textarea"
@@ -256,6 +261,11 @@
                                         <input type="text" name="ginprice" class="minput" id="uginprice"><br>
                                         <p class="im">商品售价</p>
                                         <input type="text" name="gprice" class="minput" id="ugprice"><br>
+                                        <p class="im">会员商品</p>
+                                        <select class="minput" name="isvip">
+                                            <option value="yes">是</option>
+                                            <option value="no">否</option>
+                                        </select>
                                         <div class="boxtextarea">
                                             <p class="im imm">商品描述</p>
                                             <textarea name="gdescribe" class="minput textarea"

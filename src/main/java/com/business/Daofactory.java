@@ -1,10 +1,6 @@
 package com.business;
 
-import com.dao.CountDaoEmpl;
-import com.dao.CustomerDaompl;
-import com.dao.EmployeeDaoEmpl;
-import com.dao.GoodsDaoImpl;
-import com.entity.CountModel;
+import com.dao.*;
 
 /**
  * @Author hongxiaobin
@@ -23,5 +19,8 @@ public class Daofactory {
     }
     public static CountDaoEmpl getcountDaoimpl(){
         return new CountDaoEmpl();
+    }
+    public static ShoppingcartDaoImpl getShoppingDaoumpl(){
+        return new ShoppingcartDaoImpl();
     }
 }

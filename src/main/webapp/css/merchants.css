@@ -351,7 +351,7 @@ body {
 .addbottom, .updatebottom {
     width: 800px;
     margin-left: -400px;
-    height: 450px;
+    height: 500px;
     margin-bottom: -200px;
     transform: scaleX(0);
     flex-direction: row;

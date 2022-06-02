@@ -37,4 +37,9 @@ public class EmployeeEbiempl implements EmployeeEbi {
             return false;
         }
     }
+
+    @Override
+    public List<EmployeeModel> getEmployee(String eid) {
+        return Daofactory.getemloyeedaoimpl().getEid(eid);
+    }
 }

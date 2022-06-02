@@ -33,6 +33,11 @@ public class EmployeeDaoEmpl extends BaseDao<EmployeeModel> implements EmployeeD
         String sql = "select * from employee where eid = ?";
         return getBeanList(connection,sql,employeeModel.getEid());
     }
+    @Override
+    public List<EmployeeModel> getEid(String eid) {
+        String sql = "select * from employee where eid = ?";
+        return getBeanList(connection,sql,eid);
+    }
 
     @Override
     public void insertEmployee(EmployeeModel employeeModel) {

@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="GoodsMall:war">
+  <artifact type="war" build-on-make="true" name="GoodsMall:war">
     <output-path>$PROJECT_DIR$/target</output-path>
     <properties id="maven-jee-properties">
       <options>

@@ -1,4 +1,8 @@
 import com.business.EBofactory;
+import com.entity.ShoppingcartModel;
+
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * @Author hongxiaobin
@@ -6,6 +10,5 @@ import com.business.EBofactory;
  */
 public class test {
     public static void main(String[] args) {
-        System.out.println(EBofactory.getCountbiempl().getallCount("15875195553"));
     }
 }

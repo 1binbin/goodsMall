@@ -25,8 +25,8 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public void insertGoods(GoodsModel goodsModel) {
-        String sql = "insert into goods(eid,gid,gname,gcategory,gprice,ginprice,gnum,gdescribe) values(?,?,?,?,?,?,?,?)";
-        update(connection, sql, goodsModel.getEid(), goodsModel.getGid(), goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(), goodsModel.getGnum(), goodsModel.getGdescribe());
+        String sql = "insert into goods(eid,gid,gname,gcategory,gprice,ginprice,gnum,gdescribe,gvip) values(?,?,?,?,?,?,?,?,?)";
+        update(connection, sql, goodsModel.getEid(), goodsModel.getGid(), goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(), goodsModel.getGnum(), goodsModel.getGdescribe(),goodsModel.getGvip());
     }
 
     @Override
@@ -37,8 +37,8 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public void update(GoodsModel goodsModel) {
-        String sql = "update goods set  gname = ? , gcategory = ? , gprice = ? ,ginprice = ? , gnum = ? , gdescribe = ? where gid = ? and eid = ? ";
-        update(connection, sql, goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(), goodsModel.getGnum(), goodsModel.getGdescribe(), goodsModel.getGid(), goodsModel.getEid());
+        String sql = "update goods set  gname = ? , gcategory = ? , gprice = ? ,ginprice = ? , gnum = ? , gdescribe = ? ,gvip = ? where gid = ? and eid = ? ";
+        update(connection, sql, goodsModel.getGname(), goodsModel.getGcategory(), goodsModel.getGprice(), goodsModel.getGinprice(), goodsModel.getGnum(), goodsModel.getGdescribe(),goodsModel.getGvip(), goodsModel.getGid(), goodsModel.getEid());
     }
 
     @Override
@@ -94,5 +94,11 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
     public List<GoodsModel> getGcategory() {
         String sql = "select * from goodsc";
         return getBeanList(connection, sql);
+    }
+
+    @Override
+    public List<GoodsModel> getGidEid(String gid,String eid) {
+        String sql = "select * from goods where gid = ? and eid = ?";
+        return getBeanList(connection,sql,gid,eid);
     }
 }

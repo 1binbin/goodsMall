@@ -19,12 +19,13 @@ public class GoodsModel {
     private int gnum;
     private String gdescribe;
     private int allCount;
+    private String gvip;
 
 
     public GoodsModel() {
     }
 
-    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe) {
+    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe,String gvip) {
         this.eid = eid;
         this.gid = gid;
         this.gname = gname;
@@ -33,9 +34,10 @@ public class GoodsModel {
         this.ginprice = ginprice;
         this.gnum = gnum;
         this.gdescribe = gdescribe;
+        this.gvip = gvip;
     }
 
-    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe, int allCount) {
+    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe, int allCount,String gvip) {
         this.eid = eid;
         this.gid = gid;
         this.gname = gname;
@@ -45,6 +47,15 @@ public class GoodsModel {
         this.gnum = gnum;
         this.gdescribe = gdescribe;
         this.allCount = allCount;
+        this.gvip = gvip;
+    }
+
+    public String getGvip() {
+        return gvip;
+    }
+
+    public void setGvip(String gvip) {
+        this.gvip = gvip;
     }
 
     public int getAllCount() {

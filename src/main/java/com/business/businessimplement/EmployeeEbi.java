@@ -1,5 +1,6 @@
 package com.business.businessimplement;
 
+import com.entity.CustomerModel;
 import com.entity.EmployeeModel;
 
 import java.util.List;
@@ -13,4 +14,5 @@ public interface EmployeeEbi {
     boolean login(EmployeeModel employeeModel);
     boolean insertEmployee(EmployeeModel employeeModel);
     boolean updateEmployee(EmployeeModel employeeModel);
+    List<EmployeeModel> getEmployee(String eid);
 }

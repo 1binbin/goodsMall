@@ -375,12 +375,17 @@ body {
 }
 
 .content .like_ul li .like_span i,
-.content .like_ul li .like_span span {
+.content .like_ul li .like_span .mony
+{
     color: #e1251b;
     font-size: 25px;
     font-weight: 500;
 }
-
+.content .like_ul li .like_span .vip{
+    color: #e1251b;
+    font-size: 16px;
+    margin-left: 10px;
+}
 .content .like {
     display: block;
     width: calc(100% - 16px);

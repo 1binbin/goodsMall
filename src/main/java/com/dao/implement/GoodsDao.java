@@ -87,4 +87,5 @@ public interface GoodsDao {
     List<GoodsModel> getdEidGoods(String eid);
 
     List<GoodsModel> getGcategory();
+    List<GoodsModel> getGidEid(String gid,String eid);
 }

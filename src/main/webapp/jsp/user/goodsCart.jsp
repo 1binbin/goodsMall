@@ -1,6 +1,10 @@
 <%@ page import="com.entity.GoodsModel" %>
 <%@ page import="com.business.Daofactory" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="com.entity.ShoppingcartModel" %>
+<%@ page import="com.business.EBofactory" %>
+<%@ page import="com.entity.EmployeeModel" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -13,7 +17,8 @@
     <head>
         <%
             String path = request.getContextPath();
-            List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
+            String cid = request.getParameter("cid");
+            List<List<ShoppingcartModel>> list = EBofactory.getShoppingcartempl().getCidGidEidHash(cid);
         %>
         <title>购物车</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -62,7 +67,7 @@
         </div>
         <%--        中间--%>
         <div class="middle">
-            <input type="checkbox" id="allChecked" onclick="allChecked(this,'employee','goods','allGoods')">
+            <input type="checkbox" id="allChecked" onclick="allChecked(this,'employee','goods','allGoods','allprice')">
             <label for="allChecked">全选</label>
             <div class="a">商品</div>
             <div class="b">单价</div>
@@ -73,30 +78,34 @@
         <%--        购物车主体--%>
         <div class="cartBody">
             <%
-                for (int i = 0; i < 10; i++) {
+                //eid
+                for (int i = 0; i < list.size(); i++) {
+                    List<EmployeeModel> employeeModels = EBofactory.getemployeeebiempl().getEmployee(list.get(i).get(0).getEid());
             %>
             <div class="cart">
                 <div class="cart-top">
-                    <input type="checkbox" id="checked<%=i%>" onclick="isChecked1(this,'goods<%=i%>','goodsChecked<%=i%>')" class="employee">
-                    <label for="checked<%=i%>">商家1</label>
+                    <input type="checkbox" id="checked<%=i%>" onclick="isChecked1(this,'goods<%=i%>','goodsChecked<%=i%>','allprice<%=i%>')" class="employee">
+                    <label for="checked<%=i%>"><%=employeeModels.get(0).getEstorename()%></label>
                     <div class="cart-goods" >
                         <%
-                            for (int j = 0; j < 2; j++) {
+                            //eid下的所有gid
+                            for (int j = 0; j < list.get(i).size(); j++) {
+                                List<GoodsModel> listGoods = EBofactory.getgoodsebiempl().getGidEid(list.get(i).get(j).getGid(),list.get(i).get(j).getEid());
                                 String num = i + (j + "");
                         %>
                         <div class="goods goods<%=i%>" id="goods<%=num%>">
-                            <input type="checkbox" id="checkedGoods" class="goodsChecked<%=i%> allGoods" onclick="isChecked(this,'goods<%=num%>','checked<%=i%>')">
+                            <input type="checkbox" id="checkedGoodsnum<%=num%>" class="goodsChecked<%=i%> allGoods" onclick="isChecked(this,'goods<%=num%>','checked<%=i%>','num<%=num%>')">
                             <div class="goods-img">
-                                <img src="<%=path%>/img/1.jpg" alt="">
+                                <img alt="暂无图片" src="<%=path%>/Product_main_photo/<%=list.get(i).get(j).getEid()%>/<%=list.get(i).get(j).getGid()%>.jpg">
                             </div>
-                            <span class="text">诶去未逾期未我千千万为哦EQUI噢权威去问为哦UI偶尔去问为哦诶我去额为武器噢完全</span>
-                            <span class="price">￥23.9</span>
+                            <span class="text"><%=listGoods.get(0).getGdescribe()%></span>
+                            <span class="price" id="pricenum<%=num%>">￥<%=listGoods.get(0).getGprice()%></span>
                             <div class="goods-num">
                                 <button onclick="downnum('num<%=num%>')">-</button>
                                 <input type="text" min="1" value="1" id="num<%=num%>" disabled="disabled">
                                 <button onclick="upnum('num<%=num%>')">+</button>
                             </div>
-                            <span class="allprice">￥23.9</span>
+                            <span class="allprice allprice<%=i%>" id="allpricenum<%=num%>">￥<%=listGoods.get(0).getGprice()%></span>
                             <a href="" class="delete">删除</a>
                         </div>
                         <%
@@ -114,14 +123,14 @@
         <div class="buttom">
             <div class="content">
                 <div class="left">
-                    <input type="checkbox" id="allChecked2"  onclick="allChecked(this,'employee','goods','allGoods')">
+                    <input type="checkbox" id="allChecked2"  onclick="allChecked(this,'employee','goods','allGoods','allprice')">
                     <label for="allChecked2">全选</label>
                     <a href="" class="deleteCheck">删除选中的商品</a>
                     <a href="" class="deleteCheckAll">清空购物车</a>
                 </div>
                 <div class="right">
                     <span>总价</span>
-                    <span>￥23.9</span>
+                    <span id="price">￥0.0</span>
                     <div class="settlement">
                         <span onclick="jumpPay()">结算</span>
                     </div>

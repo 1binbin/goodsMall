@@ -24,7 +24,9 @@
                 }
             }
             if (username.endsWith("user")){
-                request.getSession().setAttribute("userName",username);
+                String cid = username.substring(0,username.length()-4);
+                request.getSession().setAttribute("username",username);
+                request.getSession().setAttribute("cid",cid);
                 request.getRequestDispatcher("../jsp/user/userwait.jsp").forward(request,response);
             }else if (username.endsWith("admin")){
 //                String adminName = (String) request.getSession().getAttribute("adminName");
@@ -32,7 +34,7 @@
                 ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid,0,15);
                 int count = EBofactory.getCountbiempl().getallCount(eid);
                 request.getSession().setAttribute("allGoods",arrayList);
-                request.getSession().setAttribute("adminName",username);
+                request.getSession().setAttribute("username",username);
                 request.getSession().setAttribute("allgoodsCount",count);
                 request.getRequestDispatcher("../jsp/merchants/merchantsWait.jsp").forward(request,response);
             }

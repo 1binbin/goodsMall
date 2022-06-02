@@ -1,7 +1,6 @@
 package com.business.businessimplement;
 
 import com.entity.CustomerModel;
-import com.entity.EmployeeModel;
 
 /**
  * @Author hongxiaobin
@@ -9,6 +8,8 @@ import com.entity.EmployeeModel;
  */
 public interface CustomerEbi {
     boolean login(CustomerModel customerModel);
+
     boolean insertCustomer(CustomerModel customerModel);
+
     boolean updateCustomer(CustomerModel customerModel);
 }

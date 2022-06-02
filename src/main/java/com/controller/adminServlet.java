@@ -131,10 +131,11 @@ public class adminServlet extends HttpServlet {
         String num = request.getParameter("gnum");
         String price = request.getParameter("gprice");
         String inprice = request.getParameter("ginprice");
+        String isVip = request.getParameter("isvip");
         int gnum = (Objects.equals(num, "") ? 0 : Integer.parseInt(num));
         double gprice = (Objects.deepEquals(price, "") ? 0.0 : Double.parseDouble(price));
         double ginprice = (Objects.deepEquals(inprice, "") ? 0.0 : Double.parseDouble(inprice));
-        GoodsModel goodsModel = new GoodsModel(eid, gid, gname, gcategory, gprice, ginprice, gnum, gdescribe);
+        GoodsModel goodsModel = new GoodsModel(eid, gid, gname, gcategory, gprice, ginprice, gnum, gdescribe,isVip);
 //        上传主图
         String path = this.getServletContext().getRealPath("/");
         Part p = request.getPart("file");

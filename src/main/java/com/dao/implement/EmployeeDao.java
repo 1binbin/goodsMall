@@ -12,6 +12,7 @@ import java.util.List;
 public interface EmployeeDao {
     List<EmployeeModel> getEmployeeList(EmployeeModel employeeModel);
     List<EmployeeModel> getEid(EmployeeModel employeeModel);
+    List<EmployeeModel> getEid(String eid);
     void insertEmployee(EmployeeModel employeeModel);
     void updateEmployee(EmployeeModel employeeModel);
 }
