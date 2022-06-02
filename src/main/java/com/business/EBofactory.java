@@ -21,4 +21,7 @@ public class EBofactory {
     public static ShoppingcartEmpl getShoppingcartempl(){
         return new ShoppingcartEmpl();
     }
+    public  static  otherEbimpl getotherEbimpl(){
+        return new otherEbimpl();
+    }
 }

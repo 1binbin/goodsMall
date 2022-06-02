@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -11,6 +12,27 @@
     <head>
         <%
             String path = request.getContextPath();
+            int numCount = Integer.parseInt(request.getParameter("num"));
+            double numPrice = Double.parseDouble(request.getParameter("numPrice"));
+            String address = request.getParameter("address");
+            String fangshi = request.getParameter("zifu");
+            String cid = request.getParameter("cid");
+            String oid = request.getParameter("oid");
+            String zifu = null;
+            switch (fangshi){
+                case "weixin":
+                    zifu = "微信支付";
+                    break;
+                case "huodao":
+                    zifu = "货到付款";
+                    break;
+                case "zifubao":
+                    zifu = "支付宝支付";
+                    break;
+            }
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String now = simpleDateFormat.format(date);
         %>
         <title>天天淘-支付</title>
         <link rel="stylesheet" href="<%=path%>/css/pay.css">
@@ -48,7 +70,7 @@
             </div>
             <div class="p-left">
                 <span>请在</span>
-                <span>2022-06-01 00:00:00</span>
+                <span><%=now%> 23:00:00</span>
                 <span>之内完成支付，否则自动取消订单</span>
             </div>
         </div>
@@ -61,21 +83,21 @@
                     <table>
                         <tr>
                             <td>商品数量：</td>
-                            <td>3</td>
+                            <td><%=numCount%></td>
                         </tr>
                         <tr>
                             <td>支付方式：</td>
-                            <td>微信支付</td>
+                            <td><%=zifu%></td>
                         </tr>
                         <tr>
                             <td>收件人信息：</td>
-                            <td>XXX 15875195553 xxx省xx市xx镇</td>
+                            <td><%=address%></td>
                         </tr>
                     </table>
                 </div>
                 <div class="b-middle-right">
                     <span>应付金额</span>
-                    <span>￥69.9</span>
+                    <span>￥<%=numPrice%></span>
                 </div>
             </div>
             <div class="b-bottom">
@@ -93,6 +115,10 @@
     <script>
         function jump() {
             document.getElementsByClassName("message")[0].style.display = "block";
+            const url = "<%=path%>/customerServlet?action=updateTispay&cid=<%=cid%>&oid=<%=oid%>";
+            let  xml = new XMLHttpRequest();
+            xml.open("get",url,true);
+            xml.send(null)
             timer();
         }
         function timer() {

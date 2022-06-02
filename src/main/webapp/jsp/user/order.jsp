@@ -2,7 +2,9 @@
 <%@ page import="com.business.Daofactory" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.business.EBofactory" %><%--
+<%@ page import="com.business.EBofactory" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -16,7 +18,7 @@
         <%
             //分别为eid gid num
             double numPrice = 0.0;
-            int numCount =0;
+            int numCount = 0;
             String path = request.getContextPath();
             String arr = request.getParameter("arr");
             String[] split = arr.split(",");
@@ -26,10 +28,13 @@
                 stringList.add(split[i]);
                 stringList.add(split[i + 1]);
                 stringList.add(split[i + 2]);
-                numCount += Integer.parseInt(split[i+2]);
+                numCount += Integer.parseInt(split[i + 2]);
                 list.add(stringList);
             }
             String cid = request.getParameter("cid");
+            Date date = new Date();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+            String oid = simpleDateFormat.format(date);
         %>
         <title>天天淘-结算页</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -119,11 +124,11 @@
                         <p>支付方式</p>
                     </div>
                     <div class="f-bottom">
-                        <input type="radio" name="zfu" value="weixin" id="huodao" checked>
+                        <input type="radio" name="zfu" value="weixin" id="huodao" checked class="radio">
                         <label for="huodao">货到付款</label>
-                        <input type="radio" name="zfu" value="weixin" id="weixin" checked>
+                        <input type="radio" name="zfu" value="weixin" id="weixin" checked class="radio">
                         <label for="weixin">微信支付</label>
-                        <input type="radio" name="zfu" value="zifubao" id="zifubao">
+                        <input type="radio" name="zfu" value="zifubao" id="zifubao" class="radio">
                         <label for="zifubao">支付宝</label>
                     </div>
                 </div>
@@ -165,11 +170,13 @@
             <table>
                 <tr>
                     <td>数目合计：</td>
-                    <td><%=numCount%></td>
+                    <td><%=numCount%>
+                    </td>
                 </tr>
                 <tr>
                     <td>价格合计：</td>
-                    <td>￥<%=numPrice%></td>
+                    <td>￥<%=numPrice%>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -186,7 +193,36 @@
             </div>
         </div>
         <div class="submit">
-            <button onclick="window.location.href='<%=path%>/jsp/user/pay.jsp'">提交订单</button>
+            <button onclick="jumpPay()">提交订单</button>
         </div>
     </body>
+    <script>
+        function jumpPay() {
+            //跳转传递信息
+            var a = document.getElementById("name");
+            var ainde = a.selectedIndex;
+            var b = document.getElementById("address");
+            var binde = b.selectedIndex;
+            //支付方式
+            var fangshi
+            var zifu = document.getElementsByClassName("radio");
+            for (let i = 0; i < zifu.length; i++) {
+                if (zifu[i].checked) {
+                    fangshi = zifu[i].value;
+                }
+            }
+            //添加到未支付订单
+            var url = "<%=path%>/customerServlet?action=addOrder&arr=<%=arr%>&rname=" + a.options[ainde].innerText + "&tpay=<%=numPrice%>&cid=<%=cid%>&oid=<%=oid%>";
+            let xml = new XMLHttpRequest();
+            xml.open("get", url, true);
+            xml.onreadystatechange = function () {
+                console.log(xml.readyState)
+                console.log(xml.status)
+                if (xml.readyState === 4 && xml.status === 200) {
+                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&numPrice=<%=numPrice%>&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi+"&cid=<%=cid%>&oid=<%=oid%>";
+                }
+            }
+            xml.send(null);
+        }
+    </script>
 </html>

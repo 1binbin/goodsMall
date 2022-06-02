@@ -23,4 +23,7 @@ public class Daofactory {
     public static ShoppingcartDaoImpl getShoppingDaoumpl(){
         return new ShoppingcartDaoImpl();
     }
+    public static OtherDaoImpl getotherDaoImpl(){
+        return  new OtherDaoImpl();
+    }
 }
