@@ -118,7 +118,8 @@
                             </div>
                             <span class="allprice allprice<%=i%>"
                                   id="allpricenum<%=num%>">￥<%=listGoods.get(0).getGprice()%></span>
-                            <a href="javascript:void(0)" class="delete" onclick="delect('<%=list.get(i).get(j).getGid()%>','<%=list.get(i).get(j).getEid()%>','<%=cid%>')">删除</a>
+                            <a href="javascript:void(0)" class="delete"
+                               onclick="delect('<%=list.get(i).get(j).getGid()%>','<%=list.get(i).get(j).getEid()%>','<%=cid%>')">删除</a>
                         </div>
                         <%
                             }
@@ -167,12 +168,14 @@
     function jumpPay() {
         const eidInput = document.getElementsByClassName("allGoods");
         const arr = [];
+        let j = 0;
         for (let i = 0; i < eidInput.length; i++) {
             if (eidInput[i].checked) {
                 const eid = eidInput[i].className.split(" ")[2];
                 const gid = eidInput[i].className.split(" ")[3];
                 const num = document.getElementsByClassName(eid + "-" + gid)[0].value;
-                arr[i] = [eid, gid, num];
+                arr[j] = [eid, gid, num];
+                j++;
             }
         }
         window.location.href = "<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&cid=<%=cid%>&arr=" + arr;
@@ -236,15 +239,15 @@
                             "<input type=\"checkbox\" id=\"checkedGoodsnum" + num + "\" class=\"goodsChecked" + i + " allGoods " + json[i][j].eid + " " + json[i][j].gid + "\" onclick=\"isChecked(this,'goods" + num + "','checked" + i + "','num" + num + "')\">" +
                             "<div class=\"goods-img\" onclick=\"window.open('<%=path%>/jsp/user/goodsDetails.jsp?eid=" + json[i][j].eid + "&gid=" + json[i][j].gid + "')\">" +
                             "<img alt=\"暂无图片\" src=\"<%=path%>/Product_main_photo/" + json[i][j].eid + "/" + json[i][j].gid + ".jpg\" title=\"点击查看详情\">" +
-                            "</div><span class=\"text\">"+json[i][j].gname+" | "+json[i][j].gdescribe+"</span>" +
-                            "<span class=\"price\" id=\"pricenum"+num+"\">￥"+json[i][j].gprice+"</span>" +
+                            "</div><span class=\"text\">" + json[i][j].gname + " | " + json[i][j].gdescribe + "</span>" +
+                            "<span class=\"price\" id=\"pricenum" + num + "\">￥" + json[i][j].gprice + "</span>" +
                             "<div class=\"goods-num\">" +
-                            "<button onclick=\"downnum('num"+num+"')\">-</button>" +
-                            "<input type=\"text\" min=\"1\" value=\"1\" id=\"num"+num+"\" disabled=\"disabled\" class=\""+json[i][j].eid+"-"+json[i][j].gid+"\">" +
-                            "<button onclick=\"upnum('num"+num+"')\">+</button>" +
+                            "<button onclick=\"downnum('num" + num + "')\">-</button>" +
+                            "<input type=\"text\" min=\"1\" value=\"1\" id=\"num" + num + "\" disabled=\"disabled\" class=\"" + json[i][j].eid + "-" + json[i][j].gid + "\">" +
+                            "<button onclick=\"upnum('num" + num + "')\">+</button>" +
                             "</div>" +
-                            "<span class=\"allprice allprice"+i+"\" id=\"allpricenum"+num+"\">￥"+json[i][j].gprice+"</span>" +
-                            "<a href=\"javascript:void(0)\" class=\"delete\" onclick=\"delect('"+json[i][j].gid+"','"+json[i][j].eid+"','<%=cid%>')\">删除</a>" +
+                            "<span class=\"allprice allprice" + i + "\" id=\"allpricenum" + num + "\">￥" + json[i][j].gprice + "</span>" +
+                            "<a href=\"javascript:void(0)\" class=\"delete\" onclick=\"delect('" + json[i][j].gid + "','" + json[i][j].eid + "','<%=cid%>')\">删除</a>" +
                             "</div>";
                     }
                     item += item1;
@@ -258,10 +261,11 @@
         }
         xml.send(null)
     }
-    function delect (gid,eid,cid){
+
+    function delect(gid, eid, cid) {
         if (window.confirm("确定是否删除该商品？")) {
             let xml = new XMLHttpRequest();
-            xml.open("get", "<%=path%>/customerServlet?action=delect&cid="+cid+"&gid="+gid+"&eid="+eid, true);
+            xml.open("get", "<%=path%>/customerServlet?action=delect&cid=" + cid + "&gid=" + gid + "&eid=" + eid, true);
             xml.onreadystatechange = function () {
                 if (xml.readyState === 4 && xml.status === 200) {
                     window.location.reload();
