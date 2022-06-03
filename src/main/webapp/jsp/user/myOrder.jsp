@@ -19,7 +19,7 @@
             List<List<EntityModel>> list = new ArrayList<>();
             List<EntityModel> entityModelList = EBofactory.getotherEbimpl().getTicketCid(cid);
             for (EntityModel entityModel : entityModelList) {
-                List<EntityModel> entityModels = EBofactory.getotherEbimpl().getTicketCidEid(cid, entityModel.getOid());
+                List<EntityModel> entityModels = EBofactory.getotherEbimpl().getTicketCidEid(cid, entityModel.getOid(), "");
                 list.add(entityModels);
             }
 
@@ -68,9 +68,9 @@
             <div class="right">
                 <div class="search" id="search">
                     <div class="form1">
-                        <input type="text" placeholder="搜索内容">
-                        <div class="button" onclick="getSelect()"><i class="fa fa-search" aria-hidden="true"
-                                                                     id="btnaa"></i></div>
+                        <input type="text" placeholder="搜索内容" id="searchText">
+                        <div class="button" onclick="searchText()"><i class="fa fa-search" aria-hidden="true"
+                                                                      id="btnaa"></i></div>
                     </div>
                     <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp?cid=<%=cid%>')">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -95,25 +95,25 @@
             <div class="shouhuSelect">
                 <ul class="oneUl">
                     <li>
-                        <input type="radio" id="one" name="shouhu" checked onclick="window.location.reload()">
+                        <input type="radio" id="one" name="shouhu" checked onclick="window.location.reload()" class="shouhuradio">
                         <label for="one"><i class="iconfont">&#xe784;</i></label>
                         <span>全部订单</span>
                     </li>
                     <li>
-                        <input type="radio" id="two" name="shouhu"
-                               onclick="selectOrder('<%=cid%>','yes','no','no','未发货')">
+                        <input type="radio" id="two" name="shouhu" class="shouhuradio"
+                               onclick="selectOrder('<%=cid%>','yes','no','no')">
                         <label for="two"><i class="iconfont">&#xe683;</i></label>
                         <span>未发货</span>
                     </li>
                     <li>
-                        <input type="radio" id="three" name="shouhu"
-                               onclick="selectOrder('<%=cid%>','yes','yes','no','待收货')">
+                        <input type="radio" id="three" name="shouhu" class="shouhuradio"
+                               onclick="selectOrder('<%=cid%>','yes','yes','no')">
                         <label for="three"><i class="iconfont">&#xe650;</i></label>
                         <span>待收货</span>
                     </li>
                     <li>
-                        <input type="radio" id="four" name="shouhu"
-                               onclick="selectOrder('<%=cid%>','no','no','no','未付款')">
+                        <input type="radio" id="four" name="shouhu" class="shouhuradio"
+                               onclick="selectOrder('<%=cid%>','no','no','no')">
                         <label for="four"><i class="iconfont">&#xe61f;</i></label>
                         <span>未付款</span>
                     </li>
@@ -229,11 +229,12 @@
         </div>
     </body>
     <script>
-        function selectOrder(cid, pay, delivey, over, message1) {
-            var time = document.getElementById("time");
-            var index = time.selectedIndex;
-            var timeValue = time[index].value;
-            var url = "<%=path%>/customerServlet?action=selectOrder&cid=" + cid + "&pay=" + pay + "&delivey=" + delivey + "&over=" + over + "&type=" + timeValue;
+        function selectOrder(cid, pay, delivey, over) {
+            const time = document.getElementById("time");
+            const index = time.selectedIndex;
+            const timeValue = time[index].value;
+            const search = document.getElementById("searchText").value;
+            const url = "<%=path%>/customerServlet?action=selectOrder&cid=" + cid + "&pay=" + pay + "&delivey=" + delivey + "&over=" + over + "&type=" + timeValue + "&search=" + search;
             let xml = new XMLHttpRequest();
             xml.open("get", url, true)
             xml.onreadystatechange = function () {
@@ -242,74 +243,94 @@
                     const json = JSON.parse(data);
                     let item = "";
                     for (let i = 0; i < json.length; i++) {
-                        item += "<div class=\"orderBox\">"+
-                        "<div class=\"o-top\">"+
-                            "<span>"+json[i][0].tdate+"</span>"+
-                        "<span>订单编号</span>"+
-                        "<span>"+json[i][0].oid+"</span>"+
-                    "</div>"+
-                        "<div class=\"o-bottom\">"+
+                        item += "<div class=\"orderBox\">" +
+                            "<div class=\"o-top\">" +
+                            "<span>" + json[i][0].tdate + "</span>" +
+                            "<span>订单编号</span>" +
+                            "<span>" + json[i][0].oid + "</span>" +
+                            "</div>" +
+                            "<div class=\"o-bottom\">" +
                             "<div class=\"ob-left\">";
                         let itemin = "";
                         for (let j = 0; j < json[i].length; j++) {
                             itemin += "<div class=\"show\">" +
                                 "<div class=\"show-left\">" +
-                                "<div class=\"img\"><img src=\"<%=path%>/Product_main_photo/"+json[i][j].eid+"/"+json[i][j].gid+".jpg\" alt=\"\"></div>" +
+                                "<div class=\"img\"><img src=\"<%=path%>/Product_main_photo/" + json[i][j].eid + "/" + json[i][j].gid + ".jpg\" alt=\"\"></div>" +
                                 "</div>" +
                                 "<div class=\"show-middle\">" +
-                                "<p>"+json[i][j].gcategory+" | "+json[i][j].gname+" | "+json[i][j].gdescribe+"</p>" +
+                                "<p>" + json[i][j].gcategory + " | " + json[i][j].gname + " | " + json[i][j].gdescribe + "</p>" +
                                 "</div>" +
                                 "<div class=\"show-right\">" +
                                 "<span>X</span>" +
-                                "<span>"+json[i][j].mnum+"</span>" +
+                                "<span>" + json[i][j].mnum + "</span>" +
                                 "</div>" +
                                 "</div>";
                         }
-                        item+=itemin;
-                        item+="</div>"+
-                            "<div class=\"ob-one\">"+
-                                "<span>"+json[i][0].rname+"</span>"+
-                                "<i class=\"fa fa-question-circle-o\" aria-hidden=\"true\">"+
-                                    "<div class=\"address\">"+
-                                        "<div class=\"text\">"+
-                                            "<p>收货地址</p>"+
-                                            "<p>"+json[i][0].radd+""+
-                                            "</p>"+
-                                        "</div>"+
-                                    "</div>"+
-                                "</i>"+
-                            "</div>"+
-                            "<div class=\"ob-two\">"+
-                                "<span>￥"+json[i][0].tpay+"</span>"+
-                            "</div>"+
+                        item += itemin;
+                        item += "</div>" +
+                            "<div class=\"ob-one\">" +
+                            "<span>" + json[i][0].rname + "</span>" +
+                            "<i class=\"fa fa-question-circle-o\" aria-hidden=\"true\">" +
+                            "<div class=\"address\">" +
+                            "<div class=\"text\">" +
+                            "<p>收货地址</p>" +
+                            "<p>" + json[i][0].radd + "" +
+                            "</p>" +
+                            "</div>" +
+                            "</div>" +
+                            "</i>" +
+                            "</div>" +
+                            "<div class=\"ob-two\">" +
+                            "<span>￥" + json[i][0].tpay + "</span>" +
+                            "</div>" +
                             "<div class=\"ob-three\">";
-                                let message1 = "";
-                                    if (json[i][0].tispay==="no") {
-                                        message1 = "未付款"
-                                    }else if (json[i][0].tisdelivey==="no") {
-                                        message1 = "未发货"
-                                    }else if (json[i][0].tisover==="no"){
-                                        message1 ="待收货";
-                                    }else{
-                                        message1 = "已完成";
-                                    }
-                                    item +="<span class=\"span\">"+message1+"</span>"+
-                            "</div>"+
-                            "<div class=\"ob-four\">";
-                                    let itmeinin = "";
-                                    var strings = json[i][0].message.split(",");
-                                    for (let k = 0; k < strings.length; k++) {
-                                        itmeinin += "<a href=\"\">"+strings[k]+"</a>";
-                                    }
-                                    item += itmeinin;
-                                    item +="</div>"+
-                            "</div>"+
-                        "</div>"
+                        let message1 = "";
+                        if (json[i][0].tispay === "no") {
+                            message1 = "未付款"
+                        } else if (json[i][0].tisdelivey === "no") {
+                            message1 = "未发货"
+                        } else if (json[i][0].tisover === "no") {
+                            message1 = "待收货";
+                        } else {
+                            message1 = "已完成";
                         }
-                    document.getElementById("orderShow").innerHTML = item;
+                        item += "<span class=\"span\">" + message1 + "</span>" +
+                            "</div>" +
+                            "<div class=\"ob-four\">";
+                        let itmeinin = "";
+                        const strings = json[i][0].message.split(",");
+                        for (let k = 0; k < strings.length; k++) {
+                            itmeinin += "<a href=\"\">" + strings[k] + "</a>";
+                        }
+                        item += itmeinin;
+                        item += "</div>" +
+                            "</div>" +
+                            "</div>"
                     }
+                    document.getElementById("orderShow").innerHTML = item;
                 }
-                xml.send(null)
+            }
+            xml.send(null)
+        }
+
+        function searchText() {
+            const cid = '<%=cid%>';
+            let id = "";
+            const shouhuradio = document.getElementsByClassName("shouhuradio");
+            for (let i = 0; i < shouhuradio.length; i++) {
+                if (shouhuradio[i].checked){
+                   id = shouhuradio[i].id;
                 }
+            }
+            if (id==="one"){
+                selectOrder(cid,"","","")
+            }else if (id==="two"){
+                selectOrder(cid,"yes","no","no")
+            }else if (id==="three"){
+                selectOrder(cid,"yes","yes","no")
+            }else if (id==="four"){
+                selectOrder(cid,"no","no","no")
+            }
+        }
     </script>
 </html>

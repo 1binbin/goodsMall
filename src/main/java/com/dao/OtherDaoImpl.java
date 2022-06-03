@@ -47,9 +47,9 @@ public class OtherDaoImpl extends BaseDao<EntityModel> implements otherDao {
     }
 
     @Override
-    public List<EntityModel> getTicketCidOid(String cid, String oid) {
-        String sql = "select radd,mnum,ticket.oid,ticket.cid,ticket.rname,tdate,tpay,tisdelivey,tispay,tisover,goods.gid,goods.eid,gcategory,gname,gprice,ginprice,gnum,gdescribe,gvip, if(tispay = 'no', '去付款,取消订单', if(tisdelivey = 'no', '取消订单', if(tisover = 'no' ,'确认收货','删除订单'))) message from goodsims.ticket,myorder,goodsims.goods,raddress where raddress.rname = ticket.rname and raddress.cid = ticket.cid and ticket.oid = myorder.oid and goods.gid = myorder.gid and ticket.cid = ? and myorder.oid =?";
-        return getBeanList(connection, sql, cid, oid);
+    public List<EntityModel> getTicketCidOid(String cid, String oid,String search) {
+        String sql = "select radd,mnum,ticket.oid,ticket.cid,ticket.rname,tdate,tpay,tisdelivey,tispay,tisover,goods.gid,goods.eid,gcategory,gname,gprice,ginprice,gnum,gdescribe,gvip, if(tispay = 'no', '去付款,取消订单', if(tisdelivey = 'no', '取消订单', if(tisover = 'no' ,'确认收货','删除订单'))) message from goodsims.ticket,myorder,goodsims.goods,raddress where raddress.rname = ticket.rname and raddress.cid = ticket.cid and ticket.oid = myorder.oid and goods.gid = myorder.gid and ticket.cid = ? and myorder.oid =? and (gname like concat('%',?,'%') or gdescribe like concat('%',?,'%'))";
+        return getBeanList(connection, sql, cid, oid,search,search);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class OtherDaoImpl extends BaseDao<EntityModel> implements otherDao {
 
     @Override
     public List<EntityModel> getTicketCidChecked(String cid, String pay, String delivey, String over,String begin,String end) {
-        String sql = "select distinct myorder.oid from myorder,ticket where ticket.oid = myorder.oid and cid = ? and tispay = ? and tisdelivey = ? and tisover = ? and date_format(tdate,'%Y-%m-%d') >= date_format(?,'%Y-%m-%d') and date_format(tdate,'%Y-%m-%d') <= date_format(?,'%Y-%m-%d')";
+        String sql = "select distinct myorder.oid from myorder,ticket where ticket.oid = myorder.oid and cid = ? and tispay like concat('%',?,'%') and tisdelivey like concat('%',?,'%') and tisover like concat('%',?,'%') and date_format(tdate,'%Y-%m-%d') >= date_format(?,'%Y-%m-%d') and date_format(tdate,'%Y-%m-%d') <= date_format(?,'%Y-%m-%d')";
         return getBeanList(connection,sql,cid,pay,delivey,over,begin,end);
     }
 

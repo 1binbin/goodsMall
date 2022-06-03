@@ -17,7 +17,7 @@ public interface otherEbi {
 
     List<EntityModel> getTicketCid(String cid);
 
-    List<EntityModel> getTicketCidEid(String cid, String eid);
+    List<EntityModel> getTicketCidEid(String cid, String oid,String search);
     List<EntityModel> getVipCid(String cid);
-    List<List<EntityModel>> getSelectTicket(String cid,String pay,String delivey,String over,String type);
+    List<List<EntityModel>> getSelectTicket(String cid,String pay,String delivey,String over,String type,String search);
 }

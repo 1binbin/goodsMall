@@ -169,7 +169,9 @@ public class customerServlet extends HttpServlet {
         String delivey = request.getParameter("delivey");
         String over = request.getParameter("over");
         String type = request.getParameter("type");
-        List<List<EntityModel>> list =  EBofactory.getotherEbimpl().getSelectTicket(cid,pay,delivey,over,type);
+        String search = request.getParameter("search");
+        search = search==null?"":search;
+        List<List<EntityModel>> list =  EBofactory.getotherEbimpl().getSelectTicket(cid,pay,delivey,over,type,search);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");

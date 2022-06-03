@@ -35,8 +35,8 @@ public class otherEbimpl implements otherEbi {
     }
 
     @Override
-    public List<EntityModel> getTicketCidEid(String cid, String eid) {
-        return Daofactory.getotherDaoImpl().getTicketCidOid(cid,eid);
+    public List<EntityModel> getTicketCidEid(String cid, String eid,String search) {
+        return Daofactory.getotherDaoImpl().getTicketCidOid(cid,eid,search);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class otherEbimpl implements otherEbi {
     }
 
     @Override
-    public List<List<EntityModel>> getSelectTicket(String cid, String pay, String delivey, String over,String type) {
+    public List<List<EntityModel>> getSelectTicket(String cid, String pay, String delivey, String over,String type,String search) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 //        今日
         Date date = new Date();
@@ -79,7 +79,7 @@ public class otherEbimpl implements otherEbi {
             oidList = Daofactory.getotherDaoImpl().getTicketCidCheckedyear(cid, pay, delivey, over);
         }
         for (EntityModel entityModel : oidList) {
-            List<EntityModel> list1 = Daofactory.getotherDaoImpl().getTicketCidOid(cid, entityModel.getOid());
+            List<EntityModel> list1 = Daofactory.getotherDaoImpl().getTicketCidOid(cid, entityModel.getOid(),search);
             list.add(list1);
         }
         return list;
