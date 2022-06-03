@@ -17,6 +17,6 @@ public interface otherDao {
     List<EntityModel> getTicketCid(String cid);
     List<EntityModel> getTicketCidOid(String cid, String oid);
     List<EntityModel> getVipCid(String cid);
-
     List<EntityModel> getTicketCidChecked(String cid,String pay,String delivey,String over,String begin,String end);
+    List<EntityModel> getTicketCidCheckedyear(String cid,String pay,String delivey,String over);
 }

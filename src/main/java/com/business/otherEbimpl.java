@@ -52,21 +52,32 @@ public class otherEbimpl implements otherEbi {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
 //        开始日
-        Date date1 ;
+        Date date1 = date;
+        boolean is;
         if ("onemonth".equals(type)){
             calendar.add(Calendar.MONTH,-1);
             date1 = calendar.getTime();
+            is = true;
         }else if ("threemonth".equals(type)){
             calendar.add(Calendar.MONTH,-3);
             date1 = calendar.getTime();
-        }else {
+            is = true;
+        }else if ("harfyear".equals(type)){
             calendar.add(Calendar.MONTH,-6);
             date1 = calendar.getTime();
+            is = true;
+        }else {
+            is = false;
         }
         String begin = simpleDateFormat.format(date1);
         String end = simpleDateFormat.format(date);
         List<List<EntityModel>> list = new ArrayList<>();
-        List<EntityModel> oidList = Daofactory.getotherDaoImpl().getTicketCidChecked(cid, pay, delivey, over,begin,end);
+        List<EntityModel> oidList;
+        if (is){
+            oidList = Daofactory.getotherDaoImpl().getTicketCidChecked(cid, pay, delivey, over,begin,end);
+        }else {
+            oidList = Daofactory.getotherDaoImpl().getTicketCidCheckedyear(cid, pay, delivey, over);
+        }
         for (EntityModel entityModel : oidList) {
             List<EntityModel> list1 = Daofactory.getotherDaoImpl().getTicketCidOid(cid, entityModel.getOid());
             list.add(list1);
