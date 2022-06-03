@@ -62,8 +62,8 @@
                 <span><%=count%></span>
             </div>
             <form action="" method="get">
-                <input type="text" placeholder="搜索内容">
-                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
+                <input type="text" placeholder="搜索内容" name="search" id="searchText">
+                <div class="button" onclick="selectSearch11()"><i class="fa fa-search" aria-hidden="true"
                                                                 id="btnaa"></i></div>
             </form>
         </div>
@@ -78,7 +78,7 @@
             <div class="e">操作</div>
         </div>
         <%--        购物车主体--%>
-        <div class="cartBody">
+        <div class="cartBody" id="cartBody">
             <%
                 //eid
                 for (int i = 0; i < list.size(); i++) {
@@ -102,11 +102,11 @@
                             <input type="checkbox" id="checkedGoodsnum<%=num%>"
                                    class="goodsChecked<%=i%> allGoods <%=list.get(i).get(j).getEid()%> <%=list.get(i).get(j).getGid()%>"
                                    onclick="isChecked(this,'goods<%=num%>','checked<%=i%>','num<%=num%>')">
-                            <div class="goods-img">
+                            <div class="goods-img" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?eid=<%=list.get(i).get(0).getEid()%>&gid=<%=list.get(i).get(0).getGid()%>')">
                                 <img alt="暂无图片"
-                                     src="<%=path%>/Product_main_photo/<%=list.get(i).get(j).getEid()%>/<%=list.get(i).get(j).getGid()%>.jpg">
+                                     src="<%=path%>/Product_main_photo/<%=list.get(i).get(j).getEid()%>/<%=list.get(i).get(j).getGid()%>.jpg" title="点击查看详情">
                             </div>
-                            <span class="text"><%=listGoods.get(0).getGdescribe()%></span>
+                            <span class="text"><%=listGoods.get(0).getGname()%> | <%=listGoods.get(0).getGdescribe()%></span>
                             <span class="price" id="pricenum<%=num%>">￥<%=listGoods.get(0).getGprice()%></span>
                             <div class="goods-num">
                                 <button onclick="downnum('num<%=num%>')">-</button>
@@ -207,5 +207,20 @@
             }
             xml.send(null);
         }
+    }
+
+    function selectSearch11() {
+        var search = document.getElementById("searchText").value;
+        var url = "<%=path%>/customerServlet?action=selectCart&cid=<%=cid%>&search="+search;
+        let  xml = new XMLHttpRequest();
+        xml.open("get",url,true);
+        xml.onreadystatechange = function (){
+            if(xml.readyState === 4 && xml.status === 200){
+                const data = xml.responseText;
+                const json = JSON.parse(data);
+                console.log(json)
+            }
+        }
+        xml.send(null)
     }
 </script>

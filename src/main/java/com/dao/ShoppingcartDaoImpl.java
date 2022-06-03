@@ -57,4 +57,16 @@ public class ShoppingcartDaoImpl extends BaseDao<ShoppingcartModel> implements s
         String sql ="delete from shoppingcart where cid=?";
         update(connection,sql,cid);
     }
+
+    @Override
+    public List<ShoppingcartModel> getCartEid(String cid, String search) {
+        String sql = "select distinct shoppingcart.eid from goodsims.goods,goodsims.employee,shoppingcart where shoppingcart.gid = goods.gid and shoppingcart.eid = employee.eid and cid = ? and (gname like concat('%',?,'%') or gdescribe like concat('%',?,'%') or gcategory like concat('%',?,'%') or estorename like concat('%',?,'%'))";
+        return getBeanList(connection,sql,cid,search,search,search,search);
+    }
+
+    @Override
+    public List<ShoppingcartModel> getCartEidSearch(String cid, String eid) {
+        String sql = "select gname,gdescribe,gprice,estorename,goods.eid,goods.gid from goodsims.goods,goodsims.employee,shoppingcart where shoppingcart.gid = goods.gid and shoppingcart.eid = employee.eid and shoppingcart.eid = ? and cid=?";
+        return getBeanList(connection,sql,eid,cid);
+    }
 }

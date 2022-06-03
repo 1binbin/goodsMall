@@ -8,6 +8,10 @@ public class ShoppingcartModel {
     private String cid;
     private String eid;
     private String gid;
+    private String gname;
+    private String gdescribe;
+    private String estorename;
+    private double gprice;
     public ShoppingcartModel() {
     }
 
@@ -15,6 +19,48 @@ public class ShoppingcartModel {
         this.cid = cid;
         this.eid = eid;
         this.gid = gid;
+    }
+
+    public ShoppingcartModel(String cid, String eid, String gid, String gname, String gdescribe, String estorename, double gprice) {
+        this.cid = cid;
+        this.eid = eid;
+        this.gid = gid;
+        this.gname = gname;
+        this.gdescribe = gdescribe;
+        this.estorename = estorename;
+        this.gprice = gprice;
+    }
+
+    public String getGname() {
+        return gname;
+    }
+
+    public void setGname(String gname) {
+        this.gname = gname;
+    }
+
+    public String getGdescribe() {
+        return gdescribe;
+    }
+
+    public void setGdescribe(String gdescribe) {
+        this.gdescribe = gdescribe;
+    }
+
+    public String getEstorename() {
+        return estorename;
+    }
+
+    public void setEstorename(String estorename) {
+        this.estorename = estorename;
+    }
+
+    public double getGprice() {
+        return gprice;
+    }
+
+    public void setGprice(double gprice) {
+        this.gprice = gprice;
     }
 
     public String getCid() {

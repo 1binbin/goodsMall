@@ -41,4 +41,15 @@ public class ShoppingcartEmpl implements ShoppingcartEbi {
     public void deleteCartAll(String cid) {
         Daofactory.getShoppingDaoumpl().deleteCartAll(cid);
     }
+
+    @Override
+    public List<List<ShoppingcartModel>> getCartEidSearch(String cid, String search) {
+        List<List<ShoppingcartModel>> result = new ArrayList<>();
+        List<ShoppingcartModel> shoppingcartModelList = Daofactory.getShoppingDaoumpl().getCartEid(cid,search);
+        for (ShoppingcartModel shoppingcartModel : shoppingcartModelList) {
+            List<ShoppingcartModel> list = Daofactory.getShoppingDaoumpl().getCartEidSearch(cid, shoppingcartModel.getEid());
+            result.add(list);
+        }
+        return result;
+    }
 }
