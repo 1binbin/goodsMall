@@ -3,6 +3,10 @@ package com.business;
 import com.business.businessimplement.otherEbi;
 import com.entity.EntityModel;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,11 +36,41 @@ public class otherEbimpl implements otherEbi {
 
     @Override
     public List<EntityModel> getTicketCidEid(String cid, String eid) {
-        return Daofactory.getotherDaoImpl().getTicketCidEid(cid,eid);
+        return Daofactory.getotherDaoImpl().getTicketCidOid(cid,eid);
     }
 
     @Override
     public List<EntityModel> getVipCid(String cid) {
         return Daofactory.getotherDaoImpl().getVipCid(cid);
+    }
+
+    @Override
+    public List<List<EntityModel>> getSelectTicket(String cid, String pay, String delivey, String over,String type) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        今日
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+//        开始日
+        Date date1 ;
+        if ("onemonth".equals(type)){
+            calendar.add(Calendar.MONTH,-1);
+            date1 = calendar.getTime();
+        }else if ("threemonth".equals(type)){
+            calendar.add(Calendar.MONTH,-3);
+            date1 = calendar.getTime();
+        }else {
+            calendar.add(Calendar.MONTH,-6);
+            date1 = calendar.getTime();
+        }
+        String begin = simpleDateFormat.format(date1);
+        String end = simpleDateFormat.format(date);
+        List<List<EntityModel>> list = new ArrayList<>();
+        List<EntityModel> oidList = Daofactory.getotherDaoImpl().getTicketCidChecked(cid, pay, delivey, over,begin,end);
+        for (EntityModel entityModel : oidList) {
+            List<EntityModel> list1 = Daofactory.getotherDaoImpl().getTicketCidOid(cid, entityModel.getOid());
+            list.add(list1);
+        }
+        return list;
     }
 }

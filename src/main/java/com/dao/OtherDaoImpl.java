@@ -42,12 +42,12 @@ public class OtherDaoImpl extends BaseDao<EntityModel> implements otherDao {
 
     @Override
     public List<EntityModel> getTicketCid(String cid) {
-        String sql = "select distinct myorder.oid from myorder , ticket where ticket.oid = myorder.oid and cid = ?";
+        String sql = "select distinct myorder.oid from myorder,ticket where ticket.oid = myorder.oid and cid = ?";
         return getBeanList(connection, sql, cid);
     }
 
     @Override
-    public List<EntityModel> getTicketCidEid(String cid, String oid) {
+    public List<EntityModel> getTicketCidOid(String cid, String oid) {
         String sql = "select radd,mnum,ticket.oid,ticket.cid,ticket.rname,tdate,tpay,tisdelivey,tispay,tisover,goods.gid,goods.eid,gcategory,gname,gprice,ginprice,gnum,gdescribe,gvip, if(tispay = 'no', '去付款,取消订单', if(tisdelivey = 'no', '取消订单', if(tisover = 'no' ,'确认收货','删除订单'))) message from goodsims.ticket,myorder,goodsims.goods,raddress where raddress.rname = ticket.rname and raddress.cid = ticket.cid and ticket.oid = myorder.oid and goods.gid = myorder.gid and ticket.cid = ? and myorder.oid =?";
         return getBeanList(connection, sql, cid, oid);
     }
@@ -56,5 +56,11 @@ public class OtherDaoImpl extends BaseDao<EntityModel> implements otherDao {
     public List<EntityModel> getVipCid(String cid) {
         String sql ="select * from vip where cid = ?";
         return getBeanList(connection,sql,cid);
+    }
+
+    @Override
+    public List<EntityModel> getTicketCidChecked(String cid, String pay, String delivey, String over,String begin,String end) {
+        String sql = "select distinct myorder.oid from myorder,ticket where ticket.oid = myorder.oid and cid = ? and tispay = ? and tisdelivey = ? and tisover = ? and (date_format(tdate,'%y-%M-%d') >= date_format(?,'%y-%M-%d') and date_format(tdate,'%y-%M-%d') <= date_format(?,'%y-%M-%d'))";
+        return getBeanList(connection,sql,cid,pay,delivey,over,begin,end);
     }
 }

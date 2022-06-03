@@ -148,7 +148,6 @@ public class customerServlet extends HttpServlet {
         String cid = req.getParameter("cid");
         search = search==null?"":search;
         List<List<ShoppingcartModel>> list = EBofactory.getShoppingcartempl().getCartEidSearch(cid,search);
-        System.out.println(list);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
@@ -161,5 +160,21 @@ public class customerServlet extends HttpServlet {
         String gid = req.getParameter("gid");
         String eid = req.getParameter("eid");
         EBofactory.getShoppingcartempl().deleteCart(cid,eid,gid);
+    }
+
+    /*订单搜索*/
+    protected void selectOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        String pay = request.getParameter("pay");
+        String delivey = request.getParameter("delivey");
+        String over = request.getParameter("over");
+        String type = request.getParameter("type");
+        List<List<EntityModel>> list =  EBofactory.getotherEbimpl().getSelectTicket(cid,pay,delivey,over,type);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
     }
 }

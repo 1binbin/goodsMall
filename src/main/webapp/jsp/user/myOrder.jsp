@@ -85,32 +85,35 @@
         <div class="m-bottom-second">
             <div class="time">
                 <span>时间筛选</span>
-                <select name="" id="">
-                    <option value="">全部</option>
-                    <option>一个月内</option>
-                    <option>三个月内</option>
-                    <option>半年内</option>
+                <select name="" id="time">
+                    <option value="all">全部</option>
+                    <option value="onemonth">一个月内</option>
+                    <option value="threemonth">三个月内</option>
+                    <option value="harfyear">半年内</option>
                 </select>
             </div>
             <div class="shouhuSelect">
                 <ul class="oneUl">
                     <li>
-                        <input type="radio" id="one" name="shouhu" checked>
+                        <input type="radio" id="one" name="shouhu" checked onclick="window.location.reload()">
                         <label for="one"><i class="iconfont">&#xe784;</i></label>
                         <span>全部订单</span>
                     </li>
                     <li>
-                        <input type="radio" id="two" name="shouhu">
+                        <input type="radio" id="two" name="shouhu"
+                               onclick="selectOrder('<%=cid%>','yes','no','no','未发货')">
                         <label for="two"><i class="iconfont">&#xe683;</i></label>
-                        <span>已收货</span>
+                        <span>未发货</span>
                     </li>
                     <li>
-                        <input type="radio" id="three" name="shouhu">
+                        <input type="radio" id="three" name="shouhu"
+                               onclick="selectOrder('<%=cid%>','yes','yes','no','待收货')">
                         <label for="three"><i class="iconfont">&#xe650;</i></label>
-                        <span>未收货</span>
+                        <span>待收货</span>
                     </li>
                     <li>
-                        <input type="radio" id="four" name="shouhu">
+                        <input type="radio" id="four" name="shouhu"
+                               onclick="selectOrder('<%=cid%>','no','no','no','未付款')">
                         <label for="four"><i class="iconfont">&#xe61f;</i></label>
                         <span>未付款</span>
                     </li>
@@ -186,7 +189,7 @@
                             <%
                             } else if (list.get(j).get(0).getTisover().equals("no")) {
                             %>
-                            <span class="span">未收货</span>
+                            <span class="span">待收货</span>
                             <%
                             } else {
                             %>
@@ -225,4 +228,21 @@
             </ul>
         </div>
     </body>
+    <script>
+        function selectOrder(cid, pay, delivey, over, message) {
+            var time = document.getElementById("time");
+            var index = time.selectedIndex;
+            var timeValue = time[index].value;
+            var url = "<%=path%>/customerServlet?action=selectOrder&cid=" + cid + "&pay=" + pay + "&delivey=" + delivey + "&over=" + over + "&type=" + timeValue;
+            let xml = new XMLHttpRequest();
+            xml.open("get", url, true)
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    const data = xml.responseText;
+                    const json = JSON.parse(data);
+                    let item = "";
+                }
+                xml.send(null)
+            }
+    </script>
 </html>
