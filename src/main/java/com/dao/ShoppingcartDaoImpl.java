@@ -45,4 +45,16 @@ public class ShoppingcartDaoImpl extends BaseDao<ShoppingcartModel> implements s
         String sql ="select * from shoppingcart where cid=? and eid =?";
         return getBeanList(connection,sql,cid,eid);
     }
+
+    @Override
+    public void deleteCart(String cid, String eid, String gid) {
+        String sql ="delete from shoppingcart where cid=? and eid =? and gid =?";
+        update(connection,sql,cid,eid,gid);
+    }
+
+    @Override
+    public void deleteCartAll(String cid) {
+        String sql ="delete from shoppingcart where cid=?";
+        update(connection,sql,cid);
+    }
 }

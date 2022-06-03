@@ -10,4 +10,5 @@ import java.util.List;
  */
 public interface CountDao {
     List<CountModel> allgoodsCount(String eid);
+    List<CountModel> allGoodsCart(String cid);
 }

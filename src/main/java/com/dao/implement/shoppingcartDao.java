@@ -13,4 +13,6 @@ public interface shoppingcartDao {
     List<ShoppingcartModel> getCart(String cid,String eid,String gid);
     List<ShoppingcartModel> getCidEid(String cid);
     List<ShoppingcartModel> getCidEidGid(String cid,String eid);
+    void deleteCart(String cid,String eid,String gid);
+    void deleteCartAll(String cid);
 }

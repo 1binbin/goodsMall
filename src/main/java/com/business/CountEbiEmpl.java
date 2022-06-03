@@ -18,4 +18,13 @@ public class CountEbiEmpl implements CountEbi {
         }
         return 1;
     }
+
+    @Override
+    public int getAllCart(String cid) {
+        List<CountModel> countModels = Daofactory.getcountDaoimpl().allGoodsCart(cid);
+        if (!countModels.isEmpty()){
+            return countModels.get(0).getAllCount();
+        }
+        return 0;
+    }
 }

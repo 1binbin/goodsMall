@@ -8,4 +8,6 @@ import com.entity.ShoppingcartModel;
  */
 public interface ShoppingcartEbi {
     void insertCart(ShoppingcartModel shoppingcartModel);
+    void deleteCart(String cid,String eid,String gid);
+    void deleteCartAll(String cid);
 }

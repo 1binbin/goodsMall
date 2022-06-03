@@ -131,4 +131,15 @@ public class customerServlet extends HttpServlet {
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
     }
+    /*购物车相关*/
+    protected  void deleteChekedCart (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String arr = request.getParameter("arr");
+        String cid = request.getParameter("cid");
+        String[] split = arr.split(",");
+        EBofactory.getShoppingcartempl().deleteCart( cid,split[0],split[1]);
+    }
+    protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        EBofactory.getShoppingcartempl().deleteCartAll(cid);
+    }
 }

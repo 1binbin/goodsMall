@@ -21,6 +21,11 @@ public class ShoppingcartEmpl implements ShoppingcartEbi {
         }
     }
 
+    @Override
+    public void deleteCart(String cid, String eid, String gid) {
+        Daofactory.getShoppingDaoumpl().deleteCart(cid,eid,gid);
+    }
+
     public List<List<ShoppingcartModel>> getCidGidEidHash(String cid){
         List<List<ShoppingcartModel>> list = new ArrayList<>();
 //        得到商家
@@ -30,5 +35,10 @@ public class ShoppingcartEmpl implements ShoppingcartEbi {
             list.add(shoppingcartModelList1);
         }
         return list;
+    }
+
+    @Override
+    public void deleteCartAll(String cid) {
+        Daofactory.getShoppingDaoumpl().deleteCartAll(cid);
     }
 }

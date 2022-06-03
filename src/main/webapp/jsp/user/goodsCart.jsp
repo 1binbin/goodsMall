@@ -19,6 +19,7 @@
             String path = request.getContextPath();
             String cid = request.getParameter("cid");
             List<List<ShoppingcartModel>> list = EBofactory.getShoppingcartempl().getCidGidEidHash(cid);
+            int count = EBofactory.getCountbiempl().getAllCart(cid);
         %>
         <title>购物车</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -58,7 +59,7 @@
         <div class="search" id="search">
             <div class="logo">
                 <span>全部商品</span>
-                <span>40</span>
+                <span><%=count%></span>
             </div>
             <form action="" method="get">
                 <input type="text" placeholder="搜索内容">
@@ -135,8 +136,8 @@
                     <input type="checkbox" id="allChecked2"
                            onclick="allChecked(this,'employee','goods','allGoods','allprice')">
                     <label for="allChecked2">全选</label>
-                    <a href="" class="deleteCheck">删除选中的商品</a>
-                    <a href="" class="deleteCheckAll">清空购物车</a>
+                    <a href="" class="deleteCheck" onclick="deleteCheckedGoods()">删除选中的商品</a>
+                    <a href="" class="deleteCheckAll" onclick="deleteAllCart()">清空购物车</a>
                 </div>
                 <div class="right">
                     <span>总价</span>
@@ -173,5 +174,38 @@
             }
         }
         window.location.href="<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&cid=<%=cid%>&arr="+arr;
+    }
+    function deleteCheckedGoods() {
+        if (window.confirm("确定是否删除选中的商品？")){
+            const eidInput = document.getElementsByClassName("allGoods");
+            const arr = [];
+            for (let i = 0; i < eidInput.length; i++) {
+                if (eidInput[i].checked) {
+                    const eid = eidInput[i].className.split(" ")[2];
+                    const gid = eidInput[i].className.split(" ")[3];
+                    arr[i] = [eid, gid];
+                }
+            }
+            let xml = new XMLHttpRequest();
+            xml.open("get", "<%=path%>/customerServlet?action=deleteChekedCart&cid=<%=cid%>&arr=" + arr, true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    window.location.reload();
+                }
+            }
+            xml.send(null);
+        }
+    }
+    function deleteAllCart() {
+        if (window.confirm("确定是否清空购物车？")){
+            let xml = new XMLHttpRequest();
+            xml.open("get", "<%=path%>/customerServlet?action=deleteCart&cid=<%=cid%>", true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    window.location.reload();
+                }
+            }
+            xml.send(null);
+        }
     }
 </script>

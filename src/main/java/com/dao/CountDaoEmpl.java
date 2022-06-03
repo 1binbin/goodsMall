@@ -26,4 +26,10 @@ public class CountDaoEmpl extends BaseDao<CountModel> implements CountDao {
         String sql = "select count(gid)allCount from goods where eid =?";
         return getValue(connection, sql, eid);
     }
+
+    @Override
+    public List<CountModel> allGoodsCart(String cid) {
+        String sql = "select count(gid)allCount from shoppingcart where cid =?";
+        return getValue(connection, sql, cid);
+    }
 }
