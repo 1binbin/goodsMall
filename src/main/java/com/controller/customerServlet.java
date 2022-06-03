@@ -148,11 +148,18 @@ public class customerServlet extends HttpServlet {
         String cid = req.getParameter("cid");
         search = search==null?"":search;
         List<List<ShoppingcartModel>> list = EBofactory.getShoppingcartempl().getCartEidSearch(cid,search);
+        System.out.println(list);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
+    }
+    protected void delect(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
+        String cid = req.getParameter("cid");
+        String gid = req.getParameter("gid");
+        String eid = req.getParameter("eid");
+        EBofactory.getShoppingcartempl().deleteCart(cid,eid,gid);
     }
 }
