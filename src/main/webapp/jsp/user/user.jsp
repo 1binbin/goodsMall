@@ -69,21 +69,21 @@
             <div class="middle_left">
                 <div class="span"><span>所有商品分类</span></div>
                 <ul>
-                    <li><a href="#">家用电器</a></li>
-                    <li><a href="#">医药保健</a></li>
-                    <li><a href="#">手机</a> / <a href="">运营商</a> / <a href="">数码</a></li>
-                    <li><a href="#">电脑</a> / <a href="">办公</a></li>
-                    <li><a href="#">家居</a> / <a href="#">家具</a> / <a href="#">家装</a> / <a href="#">厨具</a></li>
-                    <li><a href="#">男装</a> / <a href="#">女装</a> / <a href="#">童装</a></li>
-                    <li><a href="#">美妆</a> / <a href="#">个人清洁</a> / <a href="#">宠物</a></li>
-                    <li><a href="#">女鞋</a> / <a href="#">箱包</a> / <a href="#">钟表</a> / <a href="#">珠宝</a></li>
-                    <li><a href="#">男鞋</a> / <a href="#">运动</a> / <a href="#">户外</a></li>
-                    <li><a href="#">房产</a> / <a href="#">汽车</a> / <a href="#">汽车用品</a></li>
-                    <li><a href="#">母婴</a> / <a href="#">玩具乐器</a></li>
-                    <li><a href="#">食品</a> / <a href="#">酒类</a> / <a href="#">生鲜</a> / <a href="#">特产</a></li>
-                    <li><a href="#">艺术</a> / <a href="#">礼品鲜花</a> / <a href="#">农贸绿植</a></li>
-                    <li><a href="#">图书</a> / <a href="#">文娱</a> / <a href="#">教育</a> / <a href="#">电子书</a></li>
-                    <li><a href="#">安装</a> / <a href="#">维修</a> / <a href="#">清洗</a> / <a href="#">二手</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('家用电器')">家用电器</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('医药保健')">医药保健</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('手机')">手机</a> / <a href="javascript:void(0)" onclick="getGcategory('运营商')">运营商</a> / <a href="javascript:void(0)" onclick="getGcategory('数码')">数码</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('电脑')">电脑</a> / <a href="javascript:void(0)" onclick="getGcategory('办公')">办公</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('家居')">家居</a> / <a href="javascript:void(0)" onclick="getGcategory('家具')">家具</a> / <a href="javascript:void(0)" onclick="getGcategory('家装')">家装</a> / <a href="javascript:void(0)" onclick="getGcategory('厨具')">厨具</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('男装')">男装</a> / <a href="javascript:void(0)" onclick="getGcategory('女装')">女装</a> / <a href="javascript:void(0)" onclick="getGcategory('童装')">童装</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('美妆')">美妆</a> / <a href="javascript:void(0)" onclick="getGcategory('个人清洁')">个人清洁</a> / <a href="javascript:void(0)" onclick="getGcategory('宠物')">宠物</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('女鞋')">女鞋</a> / <a href="javascript:void(0)" onclick="getGcategory('箱包')">箱包</a> / <a href="javascript:void(0)"  onclick="getGcategory('钟表')">钟表</a> / <a href="javascript:void(0)"  onclick="getGcategory('珠宝')">珠宝</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('男鞋')">男鞋</a> / <a href="javascript:void(0)" onclick="getGcategory('运动')">运动</a> / <a href="javascript:void(0)"  onclick="getGcategory('户外')">户外</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('房产')">房产</a> / <a href="javascript:void(0)" onclick="getGcategory('汽车')">汽车</a> / <a href="javascript:void(0)"  onclick="getGcategory('汽车用品')">汽车用品</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('母婴')">母婴</a> / <a href="javascript:void(0)" onclick="getGcategory('玩具乐器')">玩具乐器</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('食品')">食品</a> / <a href="javascript:void(0)" onclick="getGcategory('酒类')">酒类</a> / <a href="javascript:void(0)"  onclick="getGcategory('生鲜')">生鲜</a> / <a href="javascript:void(0)"  onclick="getGcategory('特产')">特产</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('艺术')">艺术</a> / <a href="javascript:void(0)" onclick="getGcategory('礼品鲜花')">礼品鲜花</a> / <a href="javascript:void(0)"  onclick="getGcategory('农贸绿植 ')">农贸绿植</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('图书')">图书</a> / <a href="javascript:void(0)" onclick="getGcategory('文娱')">文娱</a> / <a href="javascript:void(0)"  onclick="getGcategory('教育')">教育</a> / <a href="javascript:void(0)"  onclick="getGcategory('电子书')">电子书</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('安装')">安装</a> / <a href="javascript:void(0)" onclick="getGcategory('维修')">维修</a> / <a href="javascript:void(0)"  onclick="getGcategory('清洗')">清洗</a> / <a href="javascript:void(0)"  onclick="getGcategory('二手')">二手</a></li>
                 </ul>
             </div>
             <div class="middle-middle" id="max">
@@ -190,6 +190,9 @@
     <script>
         function getSelect() {
             window.location.href = "<%=path%>/customerServlet?action=search&search="+document.getElementById("search2").value;
+        }
+        function getGcategory(m) {
+            window.location.href = "<%=path%>/customerServlet?action=searchGcaetgory&search="+m;
         }
     </script>
 </html>

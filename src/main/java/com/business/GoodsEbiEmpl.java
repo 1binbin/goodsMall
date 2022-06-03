@@ -122,4 +122,9 @@ public class GoodsEbiEmpl implements GoodsEbi {
     public List<GoodsModel> getGoodsTime(String search) {
         return Daofactory.getgoodsdaoimpl().getGoodsTime(search);
     }
+
+    @Override
+    public List<GoodsModel> gteGcategory(String search) {
+        return Daofactory.getgoodsdaoimpl().getGcategory(search);
+    }
 }

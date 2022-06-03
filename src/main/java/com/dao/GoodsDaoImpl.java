@@ -131,4 +131,10 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
         String sql = "select * from goodsims.goods where (gname like concat('%',?,'%') or gdescribe like concat('%',?,'%')) order by gdate desc ";
         return getBeanList(connection,sql,search,search);
     }
+
+    @Override
+    public List<GoodsModel> getGcategory(String search) {
+        String sql ="select * from goods where gcategory = ?";
+        return getBeanList(connection,sql,search);
+    }
 }

@@ -15,6 +15,7 @@
             String path = request.getContextPath();
             List<GoodsModel> goodsModels = (List<GoodsModel>) request.getSession().getAttribute("goods");
             String search = (String) request.getSession().getAttribute("search");
+            String search1 = (String) request.getSession().getAttribute("search1");
             String cid = (String) request.getSession().getAttribute("cid");
         %>
         <title>天天淘</title>
@@ -69,7 +70,7 @@
         <%--筛选--%>
         <div class="select">
             <span>全部结果></span>
-            <span id="cahnge"></span>
+            <span id="cahnge"><%=search1%></span>
             <div class="moreselect">
                 <div class="up">
                     <div class="left">

@@ -108,6 +108,14 @@ public class customerServlet extends HttpServlet {
         request.getSession().setAttribute("goods", goodsModels);
         request.getRequestDispatcher("jsp/user/showSelectGoods.jsp").forward(request, response);
     }
+    protected void searchGcaetgory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String search = request.getParameter("search");
+        List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().gteGcategory(search);
+        request.getSession().setAttribute("search", "");
+        request.getSession().setAttribute("search1", search);
+        request.getSession().setAttribute("goods", goodsModels);
+        request.getRequestDispatcher("jsp/user/showSelectGoods.jsp").forward(request, response);
+    }
 
     protected void select(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String type = request.getParameter("type");
