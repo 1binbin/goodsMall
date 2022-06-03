@@ -21,6 +21,7 @@
             int numCount = 0;
             String path = request.getContextPath();
             String arr = request.getParameter("arr");
+            String cid = (String) request.getSession().getAttribute("cid");
             String[] split = arr.split(",");
             List<List<String>> list = new ArrayList<>();
             for (int i = 0; i < split.length; i += 3) {
@@ -31,7 +32,6 @@
                 numCount += Integer.parseInt(split[i + 2]);
                 list.add(stringList);
             }
-            String cid = request.getParameter("cid");
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
             String oid = simpleDateFormat.format(date);

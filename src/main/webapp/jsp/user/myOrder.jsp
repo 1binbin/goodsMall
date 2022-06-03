@@ -19,7 +19,7 @@
             List<List<EntityModel>> list = new ArrayList<>();
             List<EntityModel> entityModelList = EBofactory.getotherEbimpl().getTicketCid(cid);
             for (EntityModel entityModel : entityModelList) {
-                List<EntityModel> entityModels = EBofactory.getotherEbimpl().getTicketCidEid(cid, entityModel.getOid(), "");
+                List<EntityModel> entityModels = EBofactory.getotherEbimpl().getTicketCidEid(cid, entityModel.getOid());
                 list.add(entityModels);
             }
 
@@ -85,7 +85,7 @@
         <div class="m-bottom-second">
             <div class="time">
                 <span>时间筛选</span>
-                <select name="" id="time">
+                <select name="" id="time" onchange="searchText()">
                     <option value="all">全部</option>
                     <option value="onemonth">一个月内</option>
                     <option value="threemonth">三个月内</option>
@@ -95,7 +95,8 @@
             <div class="shouhuSelect">
                 <ul class="oneUl">
                     <li>
-                        <input type="radio" id="one" name="shouhu" checked onclick="window.location.reload()" class="shouhuradio">
+                        <input type="radio" id="one" name="shouhu" checked onclick="window.location.reload()"
+                               class="shouhuradio">
                         <label for="one"><i class="iconfont">&#xe784;</i></label>
                         <span>全部订单</span>
                     </li>
@@ -203,7 +204,8 @@
                                 String[] strings = list.get(j).get(0).getMessage().split(",");
                                 for (int i = 0; i < strings.length; i++) {
                             %>
-                            <a href=""><%=strings[i]%>
+                            <a href="javascript:void(0)"
+                               onclick="jumpother('<%=strings[i]%>','<%=list.get(j).get(0).getOid()%>','<%=cid%>')"><%=strings[i]%>
                             </a>
                             <%
                                 }
@@ -300,7 +302,7 @@
                         let itmeinin = "";
                         const strings = json[i][0].message.split(",");
                         for (let k = 0; k < strings.length; k++) {
-                            itmeinin += "<a href=\"\">" + strings[k] + "</a>";
+                            itmeinin += "<a href=\"javascript:void(0)\" onclick=\"jumpother('" + strings[k] + "','" + json[i][0].oid + "','" + cid + "')\">" + strings[k] + "</a>";
                         }
                         item += itmeinin;
                         item += "</div>" +
@@ -318,19 +320,95 @@
             let id = "";
             const shouhuradio = document.getElementsByClassName("shouhuradio");
             for (let i = 0; i < shouhuradio.length; i++) {
-                if (shouhuradio[i].checked){
-                   id = shouhuradio[i].id;
+                if (shouhuradio[i].checked) {
+                    id = shouhuradio[i].id;
                 }
             }
-            if (id==="one"){
-                selectOrder(cid,"","","")
-            }else if (id==="two"){
-                selectOrder(cid,"yes","no","no")
-            }else if (id==="three"){
-                selectOrder(cid,"yes","yes","no")
-            }else if (id==="four"){
-                selectOrder(cid,"no","no","no")
+            if (id === "one") {
+                selectOrder(cid, "", "", "")
+            } else if (id === "two") {
+                selectOrder(cid, "yes", "no", "no")
+            } else if (id === "three") {
+                selectOrder(cid, "yes", "yes", "no")
+            } else if (id === "four") {
+                selectOrder(cid, "no", "no", "no")
             }
+        }
+        function jumpother(n, oid, cid) {
+            if (n === "确认收货") {
+                confirmGoods(oid, cid)
+            }
+            if (n === "删除订单") {
+                deleteOrder(oid, cid);
+            }
+            if (n === "取消订单") {
+                cancelOrder(oid, cid)
+            }
+            if (n === "去付款") {
+                gotoPay(oid, cid);
+            }
+        }
+
+        //确认收货
+        function confirmGoods(oid, cid) {
+            const url = "<%=path%>/customerServlet?action=updateTicket&oid=" + oid + "&cid=" + cid + "&type=one";
+            let xml = new XMLHttpRequest();
+            xml.open("get", url, true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    alert("确认收货成功")
+                    window.location.reload();
+                }
+            }
+            xml.send(null)
+        }
+
+        //    删除订单
+        function deleteOrder(oid, cid) {
+            if (window.confirm("确定是否删除？")) {
+                const url = "<%=path%>/customerServlet?action=updateTicket&oid=" + oid + "&cid=" + cid + "&type=two";
+                let xml = new XMLHttpRequest();
+                xml.open("get", url, true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        alert("删除订单成功")
+                        window.location.reload();
+                    }
+                }
+                xml.send(null)
+            }
+        }
+
+        //    取消订单
+        function cancelOrder(oid, cid) {
+            if (window.confirm("确定取消订单？")) {
+                const url = "<%=path%>/customerServlet?action=updateTicket&oid=" + oid + "&cid=" + cid + "&type=three";
+                let xml = new XMLHttpRequest();
+                xml.open("get", url, true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        alert("取消订单成功")
+                        window.location.reload();
+                    }
+                }
+                xml.send(null)
+            }
+        }
+
+        //    去付款
+        function gotoPay(oid, cid) {
+            const url = "<%=path%>/customerServlet?action=gotoPay&oid=" + oid + "&cid=" + cid;
+            let xml = new XMLHttpRequest();
+            xml.open("get", url, true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    const data = xml.responseText;
+                    const json = JSON.parse(data);
+                    console.log(json)
+                    window.location.href = "<%=path%>/jsp/user/pay.jsp?num=" + json[0]+"&numPrice="+json[1]+"&address="+json[2]+"&zifu=weixin";
+                }
+            }
+            xml.send(null)
         }
     </script>
 </html>

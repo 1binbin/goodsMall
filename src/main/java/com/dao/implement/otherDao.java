@@ -15,8 +15,13 @@ public interface otherDao {
     void insertTicket(EntityModel entityModel);
     void uodateTicket(String tispay,String oid,String cid);
     List<EntityModel> getTicketCid(String cid);
-    List<EntityModel> getTicketCidOid(String cid, String oid,String search);
+    List<EntityModel> getTicketCidOid(String cid, String oid);
     List<EntityModel> getVipCid(String cid);
-    List<EntityModel> getTicketCidChecked(String cid,String pay,String delivey,String over,String begin,String end);
+    List<EntityModel> getTicketCidChecked(String cid,String pay,String delivey,String over,String begin,String end,String search);
     List<EntityModel> getTicketCidCheckedyear(String cid,String pay,String delivey,String over);
+    /*修改订单状态*/
+    void updateTisover(String cid,String oid);
+    void deleteOrder(String cid,String oid);
+    void cancelOrder(String cid,String oid);
+    List<EntityModel> list(String cid,String oid);
 }

@@ -67,11 +67,11 @@ public class customerServlet extends HttpServlet {
         String tdate1 = dateTimeFormatter.format(localDateTime);
         LocalDateTime tdate = LocalDateTime.parse(tdate1, dateTimeFormatter);
 //        分别为eid,gid,num
+        EntityModel entityModel = new EntityModel(oid, cid, rname, tdate, tpay, "no", "no");
+        EBofactory.getotherEbimpl().insertTicket(entityModel);
         for (int i = 0; i < split.length; i += 3) {
             EBofactory.getotherEbimpl().insertOrder(oid, split[i + 1], split[i], Integer.parseInt(split[i + 2]));
         }
-        EntityModel entityModel = new EntityModel(oid, cid, rname, tdate, tpay, "no", "no");
-        EBofactory.getotherEbimpl().insertTicket(entityModel);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");
@@ -121,7 +121,7 @@ public class customerServlet extends HttpServlet {
             double down = Double.parseDouble(request.getParameter("down"));
             double up = Double.parseDouble(request.getParameter("up"));
             list = EBofactory.getgoodsebiempl().getGoodsPrice(down, up, search);
-        }else if("two".equals(type)){
+        } else if ("two".equals(type)) {
             list = EBofactory.getgoodsebiempl().getGoodsTime(search);
         }
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
@@ -131,23 +131,26 @@ public class customerServlet extends HttpServlet {
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
     }
+
     /*购物车相关*/
-    protected  void deleteChekedCart (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void deleteChekedCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String arr = request.getParameter("arr");
         String cid = request.getParameter("cid");
         String[] split = arr.split(",");
-        EBofactory.getShoppingcartempl().deleteCart( cid,split[0],split[1]);
+        EBofactory.getShoppingcartempl().deleteCart(cid, split[0], split[1]);
     }
+
     protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cid = request.getParameter("cid");
         EBofactory.getShoppingcartempl().deleteCartAll(cid);
     }
+
     /*购物车搜索*/
     protected void selectCart(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
         String search = req.getParameter("search");
         String cid = req.getParameter("cid");
-        search = search==null?"":search;
-        List<List<ShoppingcartModel>> list = EBofactory.getShoppingcartempl().getCartEidSearch(cid,search);
+        search = search == null ? "" : search;
+        List<List<ShoppingcartModel>> list = EBofactory.getShoppingcartempl().getCartEidSearch(cid, search);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
@@ -155,11 +158,12 @@ public class customerServlet extends HttpServlet {
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
     }
+
     protected void delect(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
         String cid = req.getParameter("cid");
         String gid = req.getParameter("gid");
         String eid = req.getParameter("eid");
-        EBofactory.getShoppingcartempl().deleteCart(cid,eid,gid);
+        EBofactory.getShoppingcartempl().deleteCart(cid, eid, gid);
     }
 
     /*订单搜索*/
@@ -170,9 +174,44 @@ public class customerServlet extends HttpServlet {
         String over = request.getParameter("over");
         String type = request.getParameter("type");
         String search = request.getParameter("search");
-        search = search==null?"":search;
-        List<List<EntityModel>> list =  EBofactory.getotherEbimpl().getSelectTicket(cid,pay,delivey,over,type,search);
+        search = (search == null ? "" : search);
+        List<List<EntityModel>> list = EBofactory.getotherEbimpl().getSelectTicket(cid, pay, delivey, over, type, search);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
+    }
+
+    /*确认收货*/
+    protected void updateTicket(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        String oid = request.getParameter("oid");
+        String type = request.getParameter("type");
+        switch (type) {
+            case "one":
+                System.out.println(1);
+                EBofactory.getotherEbimpl().updateTisover(cid, oid);
+                break;
+            case "two":
+                System.out.println(2);
+                EBofactory.getotherEbimpl().deleteOrder(cid, oid);
+                break;
+            case "three":
+                EBofactory.getotherEbimpl().cancelOrder(cid, oid);
+                break;
+        }
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+    }
+
+    protected void gotoPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        String oid = request.getParameter("oid");
+        String[] arr = EBofactory.getotherEbimpl().getLIst(cid, oid);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arr);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");

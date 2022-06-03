@@ -35,8 +35,8 @@ public class otherEbimpl implements otherEbi {
     }
 
     @Override
-    public List<EntityModel> getTicketCidEid(String cid, String eid,String search) {
-        return Daofactory.getotherDaoImpl().getTicketCidOid(cid,eid,search);
+    public List<EntityModel> getTicketCidEid(String cid, String eid) {
+        return Daofactory.getotherDaoImpl().getTicketCidOid(cid,eid);
     }
 
     @Override
@@ -74,14 +74,45 @@ public class otherEbimpl implements otherEbi {
         List<List<EntityModel>> list = new ArrayList<>();
         List<EntityModel> oidList;
         if (is){
-            oidList = Daofactory.getotherDaoImpl().getTicketCidChecked(cid, pay, delivey, over,begin,end);
+            oidList = Daofactory.getotherDaoImpl().getTicketCidChecked(cid, pay, delivey, over,begin,end,search);
         }else {
             oidList = Daofactory.getotherDaoImpl().getTicketCidCheckedyear(cid, pay, delivey, over);
         }
         for (EntityModel entityModel : oidList) {
-            List<EntityModel> list1 = Daofactory.getotherDaoImpl().getTicketCidOid(cid, entityModel.getOid(),search);
+            List<EntityModel> list1 = Daofactory.getotherDaoImpl().getTicketCidOid(cid, entityModel.getOid());
             list.add(list1);
         }
         return list;
+    }
+
+    @Override
+    public void updateTisover(String cid, String oid) {
+        Daofactory.getotherDaoImpl().updateTisover(cid,oid);
+    }
+
+    @Override
+    public void deleteOrder(String cid, String oid) {
+        Daofactory.getotherDaoImpl().deleteOrder(cid,oid);
+    }
+
+    @Override
+    public void cancelOrder(String cid, String oid) {
+        Daofactory.getotherDaoImpl().cancelOrder(cid,oid);
+    }
+
+    @Override
+    public String[] getLIst(String cid, String oid) {
+        List<EntityModel> list = Daofactory.getotherDaoImpl().list(cid,oid);
+        int numCount = 0;
+        String[] result = new String[3];
+        if (!list.isEmpty()){
+            for (EntityModel entityModel : list) {
+                numCount += entityModel.getMnum();
+            }
+            result[0] = String.valueOf(numCount);
+            result[1] = String.valueOf(list.get(0).getTpay());
+            result[2] = list.get(0).getRname() + list.get(0).getRadd();
+        }
+        return result;
     }
 }

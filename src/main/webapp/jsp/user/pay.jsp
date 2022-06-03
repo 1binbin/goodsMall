@@ -18,7 +18,7 @@
             String fangshi = request.getParameter("zifu");
             String cid = request.getParameter("cid");
             String oid = request.getParameter("oid");
-            String zifu = null;
+            String zifu = "微信支付";
             switch (fangshi){
                 case "weixin":
                     zifu = "微信支付";
