@@ -127,7 +127,7 @@
                 <span>状态</span>
                 <span>操作</span>
             </div>
-            <div class="orderShow">
+            <div class="orderShow" id="orderShow">
                 <%
                     for (int j = 0; j < list.size(); j++) {
                 %>
@@ -229,7 +229,7 @@
         </div>
     </body>
     <script>
-        function selectOrder(cid, pay, delivey, over, message) {
+        function selectOrder(cid, pay, delivey, over, message1) {
             var time = document.getElementById("time");
             var index = time.selectedIndex;
             var timeValue = time[index].value;
@@ -241,8 +241,75 @@
                     const data = xml.responseText;
                     const json = JSON.parse(data);
                     let item = "";
+                    for (let i = 0; i < json.length; i++) {
+                        item += "<div class=\"orderBox\">"+
+                        "<div class=\"o-top\">"+
+                            "<span>"+json[i][0].tdate+"</span>"+
+                        "<span>订单编号</span>"+
+                        "<span>"+json[i][0].oid+"</span>"+
+                    "</div>"+
+                        "<div class=\"o-bottom\">"+
+                            "<div class=\"ob-left\">";
+                        let itemin = "";
+                        for (let j = 0; j < json[i].length; j++) {
+                            itemin += "<div class=\"show\">" +
+                                "<div class=\"show-left\">" +
+                                "<div class=\"img\"><img src=\"<%=path%>/Product_main_photo/"+json[i][j].eid+"/"+json[i][j].gid+".jpg\" alt=\"\"></div>" +
+                                "</div>" +
+                                "<div class=\"show-middle\">" +
+                                "<p>"+json[i][j].gcategory+" | "+json[i][j].gname+" | "+json[i][j].gdescribe+"</p>" +
+                                "</div>" +
+                                "<div class=\"show-right\">" +
+                                "<span>X</span>" +
+                                "<span>"+json[i][j].mnum+"</span>" +
+                                "</div>" +
+                                "</div>";
+                        }
+                        item+=itemin;
+                        item+="</div>"+
+                            "<div class=\"ob-one\">"+
+                                "<span>"+json[i][0].rname+"</span>"+
+                                "<i class=\"fa fa-question-circle-o\" aria-hidden=\"true\">"+
+                                    "<div class=\"address\">"+
+                                        "<div class=\"text\">"+
+                                            "<p>收货地址</p>"+
+                                            "<p>"+json[i][0].radd+""+
+                                            "</p>"+
+                                        "</div>"+
+                                    "</div>"+
+                                "</i>"+
+                            "</div>"+
+                            "<div class=\"ob-two\">"+
+                                "<span>￥"+json[i][0].tpay+"</span>"+
+                            "</div>"+
+                            "<div class=\"ob-three\">";
+                                let message1 = "";
+                                    if (json[i][0].tispay==="no") {
+                                        message1 = "未付款"
+                                    }else if (json[i][0].tisdelivey==="no") {
+                                        message1 = "未发货"
+                                    }else if (json[i][0].tisover==="no"){
+                                        message1 ="待收货";
+                                    }else{
+                                        message1 = "已完成";
+                                    }
+                                    item +="<span class=\"span\">"+message1+"</span>"+
+                            "</div>"+
+                            "<div class=\"ob-four\">";
+                                    let itmeinin = "";
+                                    var strings = json[i][0].message.split(",");
+                                    for (let k = 0; k < strings.length; k++) {
+                                        itmeinin += "<a href=\"\">"+strings[k]+"</a>";
+                                    }
+                                    item += itmeinin;
+                                    item +="</div>"+
+                            "</div>"+
+                        "</div>"
+                        }
+                    document.getElementById("orderShow").innerHTML = item;
+                    }
                 }
                 xml.send(null)
-            }
+                }
     </script>
 </html>
