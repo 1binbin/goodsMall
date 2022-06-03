@@ -47,7 +47,9 @@
 .m-middle .left .img img {
     height: 100%;
 }
-
+.m-middle .right{
+    margin-right: 35px;
+}
 #search .cart {
     border: 1px solid #e3e4e5;
     width: 155px;
@@ -76,11 +78,12 @@
     cursor: pointer;
 }
 
-#search form .button {
+#search .form1 .button {
     float: right;
 }
 
-#search form {
+#search .form1 {
+    margin-right: 20px;
     border: 2px solid #e2231a;
     height: 32px;
     width: 400px;
@@ -88,7 +91,7 @@
     align-items: center;
 }
 
-#search form input[type = "text"] {
+#search .form1 input[type = "text"] {
     outline: none;
     border: none;
     width: 258px;
@@ -96,7 +99,7 @@
     font-size: 16px;
 }
 
-#search form .button {
+#search .form1 .button {
     position: relative;
     background-color: #cd1921;
     height: 31px;
@@ -109,7 +112,7 @@
     justify-content: center;
 }
 
-#search form .button i {
+#search .form1 .button i {
     vertical-align: center;
     text-align: center;
 }

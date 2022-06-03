@@ -67,11 +67,11 @@
             </div>
             <div class="right">
                 <div class="search" id="search">
-                    <form action="" method="get">
+                    <div class="form1">
                         <input type="text" placeholder="搜索内容">
                         <div class="button" onclick="getSelect()"><i class="fa fa-search" aria-hidden="true"
                                                                      id="btnaa"></i></div>
-                    </form>
+                    </div>
                     <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp?cid=<%=cid%>')">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         <span>购物车</span>
