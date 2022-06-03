@@ -1,5 +1,7 @@
 package com.entity;
 
+import java.util.Date;
+
 /**
  * @Author hongxiaobin
  * @Time 2022/3/20-14:42
@@ -20,6 +22,7 @@ public class GoodsModel {
     private String gdescribe;
     private int allCount;
     private String gvip;
+    private Date gdate;
 
 
     public GoodsModel() {
@@ -37,7 +40,7 @@ public class GoodsModel {
         this.gvip = gvip;
     }
 
-    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe, int allCount,String gvip) {
+    public GoodsModel(String eid, String gid, String gname, String gcategory, double gprice, double ginprice, int gnum, String gdescribe, int allCount, String gvip, Date gdate) {
         this.eid = eid;
         this.gid = gid;
         this.gname = gname;
@@ -48,6 +51,15 @@ public class GoodsModel {
         this.gdescribe = gdescribe;
         this.allCount = allCount;
         this.gvip = gvip;
+        this.gdate = gdate;
+    }
+
+    public Date getGdate() {
+        return gdate;
+    }
+
+    public void setGdate(Date gdate) {
+        this.gdate = gdate;
     }
 
     public String getGvip() {

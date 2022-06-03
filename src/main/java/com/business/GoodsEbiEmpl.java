@@ -98,5 +98,28 @@ public class GoodsEbiEmpl implements GoodsEbi {
         return Daofactory.getgoodsdaoimpl().getGidEid(gid, eid);
     }
 
+    @Override
+    public List<GoodsModel> getGoodsSearch(String search) {
+        return Daofactory.getgoodsdaoimpl().getGoodsSearch(search);
+    }
 
+    @Override
+    public List<GoodsModel> getGoodsAll() {
+        return Daofactory.getgoodsdaoimpl().getGoodsAll();
+    }
+
+    @Override
+    public List<GoodsModel> getGoodsGcategory(String sgcategory,String search) {
+        return Daofactory.getgoodsdaoimpl().getGoodsGcategory(sgcategory,search);
+    }
+
+    @Override
+    public List<GoodsModel> getGoodsPrice(double down, double up, String search) {
+        return Daofactory.getgoodsdaoimpl().getGoodsPrice(down, up, search);
+    }
+
+    @Override
+    public List<GoodsModel> getGoodsTime(String search) {
+        return Daofactory.getgoodsdaoimpl().getGoodsTime(search);
+    }
 }

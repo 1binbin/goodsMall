@@ -46,7 +46,7 @@
         <div class="middle">
             <div class="m-left">
                 <div class="img">
-                    <img src="<%=path%>/img/1.jpg" alt="暂无图片">
+                    <img src="<%=path%>/Product_main_photo/<%=g.getEid()%>/<%=g.getGid()%>.jpg" alt="暂无图片">
                 </div>
             </div>
             <div class="m-right">

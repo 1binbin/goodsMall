@@ -87,5 +87,14 @@ public interface GoodsDao {
     List<GoodsModel> getdEidGoods(String eid);
 
     List<GoodsModel> getGcategory();
-    List<GoodsModel> getGidEid(String gid,String eid);
+
+    List<GoodsModel> getGidEid(String gid, String eid);
+
+    /*搜索模块*/
+    List<GoodsModel> getGoodsSearch(String search);
+
+    List<GoodsModel> getGoodsAll();
+    List<GoodsModel> getGoodsGcategory(String sgcategory,String search);
+    List<GoodsModel> getGoodsPrice(double down,double up,String search);
+    List<GoodsModel> getGoodsTime(String search);
 }

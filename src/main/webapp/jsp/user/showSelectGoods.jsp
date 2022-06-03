@@ -13,7 +13,9 @@
     <head>
         <%
             String path = request.getContextPath();
-            List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
+            List<GoodsModel> goodsModels = (List<GoodsModel>) request.getSession().getAttribute("goods");
+            String search = (String) request.getSession().getAttribute("search");
+            String cid = (String) request.getSession().getAttribute("cid");
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -23,7 +25,8 @@
     </head>
     <body>
         <div class="top">
-            <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left" aria-hidden="true"></i>返回首页</a></span>
+            <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left"
+                                                           aria-hidden="true"></i>返回首页</a></span>
             <div class="top-right">
                 <ul>
                     <li>
@@ -52,12 +55,13 @@
         <%--    LOGO图+搜索框+购物车--%>
         <div class="search" id="search">
             <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
-            <form action="" method="get">
-                <input type="text" placeholder="搜索内容">
-                <div class="button" onclick="selectSearch()"><i class="fa fa-search" aria-hidden="true"
+            <form action="<%=path%>/customerServlet" method="get">
+                <input type="hidden" name="action" value="search">
+                <input type="text" placeholder="搜索内容" value="<%=search%>" name="search" id="search1">
+                <div class="button" onclick="selectSearch1()"><i class="fa fa-search" aria-hidden="true"
                                                                 id="btnaa"></i></div>
             </form>
-            <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp')">
+            <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp?cid=<%=cid%>')">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                 <span>购物车</span>
             </div>
@@ -65,6 +69,7 @@
         <%--筛选--%>
         <div class="select">
             <span>全部结果></span>
+            <span id="cahnge"></span>
             <div class="moreselect">
                 <div class="up">
                     <div class="left">
@@ -72,54 +77,54 @@
                     </div>
                     <div class="right">
                         <ul>
-                            <li>家用电器</li>
-                            <li>手机</li>
-                            <li>家居</li>
-                            <li>男装</li>
-                            <li>女装</li>
-                            <li>男鞋</li>
-                            <li>女鞋</li>
-                            <li>食品</li>
+                            <li onclick="selectCategory('家用电器',1)">家用电器</li>
+                            <li onclick="selectCategory('手机',1)">手机</li>
+                            <li onclick="selectCategory('家居' ,1)">家居</li>
+                            <li onclick="selectCategory('男装' ,1)">男装</li>
+                            <li onclick="selectCategory('女装' ,1)">女装</li>
+                            <li onclick="selectCategory('男鞋' ,1)">男鞋</li>
+                            <li onclick="selectCategory('女鞋' ,1)">女鞋</li>
+                            <li onclick="selectCategory('食品' ,1)">食品</li>
                             <li>
                                 <span>更多类别</span>
                                 <div class="more-list">
                                     <ul>
-                                        <li>医药保健</li>
-                                        <li>个人清洁</li>
-                                        <li>汽车用品</li>
-                                        <li>玩具乐器</li>
-                                        <li>礼品鲜花</li>
-                                        <li>农贸绿植</li>
-                                        <li>运营商</li>
-                                        <li>数码</li>
-                                        <li>电脑</li>
-                                        <li>办公</li>
-                                        <li>家具</li>
-                                        <li>家装</li>
-                                        <li>厨具</li>
-                                        <li>童装</li>
-                                        <li>美妆</li>
-                                        <li>宠物</li>
-                                        <li>箱包</li>
-                                        <li>钟表</li>
-                                        <li>珠宝</li>
-                                        <li>运动</li>
-                                        <li>户外</li>
-                                        <li>房产</li>
-                                        <li>汽车</li>
-                                        <li>母婴</li>
-                                        <li>酒类</li>
-                                        <li>生鲜</li>
-                                        <li>特产</li>
-                                        <li>艺术</li>
-                                        <li>图书</li>
-                                        <li>文娱</li>
-                                        <li>教育</li>
-                                        <li>电子书</li>
-                                        <li>安装</li>
-                                        <li>维修</li>
-                                        <li>清洗</li>
-                                        <li>二手</li>
+                                        <li onclick="selectCategory('医药保健',1)">医药保健</li>
+                                        <li onclick="selectCategory('个人清洁',1)">个人清洁</li>
+                                        <li onclick="selectCategory('汽车用品',1)">汽车用品</li>
+                                        <li onclick="selectCategory('玩具乐器',1)">玩具乐器</li>
+                                        <li onclick="selectCategory('礼品鲜花',1)">礼品鲜花</li>
+                                        <li onclick="selectCategory('农贸绿植',1)">农贸绿植</li>
+                                        <li onclick="selectCategory('运营商',1)">运营商</li>
+                                        <li onclick="selectCategory('数码',1)">数码</li>
+                                        <li onclick="selectCategory('电脑',1)">电脑</li>
+                                        <li onclick="selectCategory('办公',1)">办公</li>
+                                        <li onclick="selectCategory('家具',1)">家具</li>
+                                        <li onclick="selectCategory('家装',1)">家装</li>
+                                        <li onclick="selectCategory('厨具',1)">厨具</li>
+                                        <li onclick="selectCategory('童装',1)">童装</li>
+                                        <li onclick="selectCategory('美妆',1)">美妆</li>
+                                        <li onclick="selectCategory('宠物',1)">宠物</li>
+                                        <li onclick="selectCategory('箱包',1)">箱包</li>
+                                        <li onclick="selectCategory('钟表',1)">钟表</li>
+                                        <li onclick="selectCategory('珠宝',1)">珠宝</li>
+                                        <li onclick="selectCategory('运动',1)">运动</li>
+                                        <li onclick="selectCategory('户外',1)">户外</li>
+                                        <li onclick="selectCategory('房产',1)">房产</li>
+                                        <li onclick="selectCategory('汽车',1)">汽车</li>
+                                        <li onclick="selectCategory('母婴',1)">母婴</li>
+                                        <li onclick="selectCategory('酒类',1)">酒类</li>
+                                        <li onclick="selectCategory('生鲜',1)">生鲜</li>
+                                        <li onclick="selectCategory('特产',1)">特产</li>
+                                        <li onclick="selectCategory('艺术',1)">艺术</li>
+                                        <li onclick="selectCategory('图书',1)">图书</li>
+                                        <li onclick="selectCategory('文娱',1)">文娱</li>
+                                        <li onclick="selectCategory('教育',1)">教育</li>
+                                        <li onclick="selectCategory('电子书',1)">电子书</li>
+                                        <li onclick="selectCategory('安装',1)">安装</li>
+                                        <li onclick="selectCategory('维修',1)">维修</li>
+                                        <li onclick="selectCategory('清洗',1)">清洗</li>
+                                        <li onclick="selectCategory('二手',1)">二手</li>
                                     </ul>
                                 </div>
                             </li>
@@ -133,16 +138,16 @@
                     <div class="right">
                         <ul>
                             <li>综合排序</li>
-                            <li>最新上架</li>
+                            <li onclick="selectCategory('最新上架',2)">最新上架</li>
                             <li>我的关注</li>
                             <li>
                                 <span>价格区间</span>
-                                <input type="text" placeholder="￥">
+                                <input type="text" placeholder="￥" id="down">
                                 <span>-</span>
-                                <input type="text" placeholder="￥">
+                                <input type="text" placeholder="￥" id="up">
                                 <span class="price">
                                     <span>清空</span>
-                                    <span>确定</span>
+                                    <span onclick="selectCategory('价格筛选',3)">确定</span>
                                 </span>
                             </li>
                         </ul>
@@ -152,25 +157,22 @@
         </div>
         <%--商品展示--%>
         <div class="content">
-            <ul class="like_ul">
+            <ul class="like_ul" id="ul">
                 <%
-                    if (!eidList.isEmpty()) {
-                        for (GoodsModel goodsModel : eidList) {
-                            List<GoodsModel> eidGoodsList = Daofactory.getgoodsdaoimpl().getdEidGoods(goodsModel.getEid());
-                            for (GoodsModel model : eidGoodsList) {
+                    if (!goodsModels.isEmpty()) {
+                        for (GoodsModel goodsModel : goodsModels) {
                 %>
-                <li onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp')">
+                <li onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=<%=goodsModel.getGid()%>&eid=<%=goodsModel.getEid()%>')">
                     <div class="like_img"><img
-                            src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=model.getGid()%>.jpg" alt="">
+                            src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=goodsModel.getGid()%>.jpg" alt="">
                     </div>
                     <div class="like_span">
-                        <p><%=model.getGdescribe()%>
+                        <p><%=goodsModel.getGdescribe()%>
                         </p>
                         <i class="fa fa-jpy" aria-hidden="true"></i>
-                        <span class="mony"><%=model.getGprice()%></span></div>
+                        <span class="mony"><%=goodsModel.getGprice()%></span></div>
                 </li>
                 <%
-                            }
                         }
                     }
                 %>
@@ -187,4 +189,47 @@
             </ul>
         </div>
     </body>
+    <script>
+        function selectSearch1(){
+            window.location.href = "<%=path%>/customerServlet?action=search&search="+document.getElementById("search1").value;
+        }
+        function selectCategory(n,t) {
+            changeValue(n)
+            var search  = document.getElementById("search1").value;
+            var url;
+            if (t === 1) {
+                url = "<%=path%>/customerServlet?action=select&search="+search+"&category="+n+"&type=one";
+            } else if (t === 3) {
+                var down = document.getElementById("down").value;
+                var up = document.getElementById("up").value;
+                url = "<%=path%>/customerServlet?action=select&search="+search+"&type=three&down="+down+"&up="+up;
+            }else if(t === 2){
+                url = "<%=path%>/customerServlet?action=select&search="+search+"&type=two";
+            }
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", url, true);
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    const data = xmlhttp.responseText;
+                    const json = JSON.parse(data);
+                    let html = "";
+                    for (let i = 0; i < json.length; i++) {
+                        html += "<li onclick='window.open(\"<%=path%>/jsp/user/goodsDetails.jsp?gid="+json[i].gid+"&eid="+json[i].eid+"\")'>" +
+                            "<div class='like_img'><img src='<%=path%>/Product_main_photo/" + json[i].eid + "/" + json[i].gid + ".jpg' alt=''></div>" +
+                            "<div class='like_span'>" +
+                            "<p>" + json[i].gdescribe + "</p>" +
+                            "<i class='fa fa-jpy' aria-hidden='true'></i>" +
+                            "<span class='mony'>" + json[i].gprice + "</span>" +
+                            "</div>" +
+                            "</li>";
+                    }
+                    document.getElementById("ul").innerHTML = html;
+                }
+            };
+            xmlhttp.send(null);
+        }
+        function changeValue (m){
+            document.getElementById("cahnge").innerText = m;
+        }
+    </script>
 </html>

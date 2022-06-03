@@ -53,8 +53,9 @@
         <%--    LOGO图+搜索框+购物车--%>
         <div class="search" id="search">
             <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
-            <form action="" method="get">
-                <input type="text" placeholder="搜索内容">
+            <form action="<%=path%>/customerServlet" method="get">
+                <input type="hidden" name="action" value="search">
+                <input type="text" placeholder="搜索内容" name="search" id="search2">
                 <div class="button" onclick="getSelect()"><i class="fa fa-search" aria-hidden="true"
                                                              id="btnaa"></i></div>
             </form>
@@ -188,7 +189,7 @@
     </body>
     <script>
         function getSelect() {
-            window.location.href = "<%=path%>/jsp/user/showSelectGoods.jsp";
+            window.location.href = "<%=path%>/customerServlet?action=search&search="+document.getElementById("search2").value;
         }
     </script>
 </html>

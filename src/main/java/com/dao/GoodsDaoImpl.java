@@ -101,4 +101,34 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
         String sql = "select * from goods where gid = ? and eid = ?";
         return getBeanList(connection,sql,gid,eid);
     }
+
+    @Override
+    public List<GoodsModel> getGoodsSearch(String search) {
+        String sql ="select * from goods where gname like concat('%',?,'%') or gdescribe like concat('%',?,'%')";
+        return getBeanList(connection,sql,search,search);
+    }
+
+    @Override
+    public List<GoodsModel> getGoodsAll() {
+        String sql = "select * from goods";
+        return getBeanList(connection,sql);
+    }
+
+    @Override
+    public List<GoodsModel> getGoodsGcategory(String sgcategory,String search) {
+        String sql ="select * from  goodsims.goods where gcategory like concat('%',?,'%') and (gname like concat('%',?,'%') or gdescribe like concat('%',?,'%'))";
+        return getBeanList(connection,sql,sgcategory,search,search);
+    }
+
+    @Override
+    public List<GoodsModel> getGoodsPrice(double down, double up, String search) {
+        String sql ="select * from  goodsims.goods where gprice between ? and ? and (gname like concat('%',?,'%') or gdescribe like concat('%',?,'%'))";
+        return getBeanList(connection,sql,down,up,search,search);
+    }
+
+    @Override
+    public List<GoodsModel> getGoodsTime(String search) {
+        String sql = "select * from goodsims.goods where (gname like concat('%',?,'%') or gdescribe like concat('%',?,'%')) order by gdate desc ";
+        return getBeanList(connection,sql,search,search);
+    }
 }
