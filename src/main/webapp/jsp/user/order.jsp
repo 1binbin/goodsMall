@@ -43,11 +43,14 @@
             }else {
                 message = "您好，"+list1.get(0).getCnickname();
             }
+            List<CustomerModel> listRadd = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
         %>
         <title>天天淘-结算页</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
         <link rel="stylesheet" href="<%=path%>/css/order.css">
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<%=path%>/css/personalnformation.css">
+        <script src="<%=path%>/js/personalnformation.js"></script>
     </head>
     <body>
         <div class="top">
@@ -64,15 +67,20 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="#">成为会员</a>
+                        <a href="<%=path%>/jsp/user/members.jsp">成为会员</a>
                     </li>
                     <li class="line"></li>
                     <li>
                         <a href="<%=path%>/jsp/user/myOrder.jsp">我的订单</a>
                     </li>
+                    <li class="line"></li>
+                    <li>
+                        <a href="javascript:void(0)" id="person" onclick="person(1,'<%=cid%>','<%=path%>>')">个人信息</a>
+                    </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
             </div>
+            <%@ include file="/jsp/user/person.jsp" %>
         </div>
         <div class="progress">
             <div class="p-left">
@@ -105,20 +113,32 @@
                     <div class="f-top">
                         <p>收货人信息</p>
                         <div class="f-top-right">
-                            <a href="">修改收货地址</a>
-                            <a href="">新增收货地址</a>
+                            <a href="javascript:void(0)" onclick="person(1,'<%=cid%>','<%=path%>>')">修改收货地址</a>
+                            <a href="javascript:void(0)" onclick="person(1,'<%=cid%>','<%=path%>>')">新增收货地址</a>
                         </div>
                     </div>
                     <div class="f-bottom">
                         <span>收货人</span>
                         <select name="name" id="name" onchange="rname()">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
+                            <%
+                                for (CustomerModel customerModel : listRadd) {
+                            %>
+                            <option value="<%=customerModel.getRname()%>"><%=customerModel.getRname()%>
+                            </option>
+                            <%
+                                }
+                            %>
                         </select>
                         <span>收货地址</span>
                         <select name="address" id="address" onchange="radd()">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
+                            <%
+                                for (CustomerModel customerModel : listRadd) {
+                            %>
+                            <option value="<%=customerModel.getRadd()%>"><%=customerModel.getRadd()%>
+                            </option>
+                            <%
+                                }
+                            %>
                         </select>
                     </div>
                 </div>
@@ -223,16 +243,18 @@
                 console.log(xml.readyState)
                 console.log(xml.status)
                 if (xml.readyState === 4 && xml.status === 200) {
-                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&numPrice=<%=numPrice%>&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi+"&cid=<%=cid%>&oid=<%=oid%>";
+                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&numPrice=<%=numPrice%>&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi + "&cid=<%=cid%>&oid=<%=oid%>";
                 }
             }
             xml.send(null);
         }
+
         function rname() {
             var input = document.getElementById("name");
             var index = input.selectedIndex;
             document.getElementById("rname").innerText = input.options[index].innerText;
         }
+
         function radd() {
             var input = document.getElementById("address");
             var index = input.selectedIndex;

@@ -331,12 +331,16 @@
 .orderShow .o-bottom .ob-three,
 .orderShow .o-bottom .ob-four {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 10%;
     height: calc(100% - 1px);
     border-right: 1px solid #d3d3d3;
     border-bottom: 1px solid #d3d3d3;
+    word-break: break-all;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .orderShow .o-bottom .ob-four {

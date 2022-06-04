@@ -29,7 +29,7 @@
     <script type="text/javascript">
         function deleteCheck(deleteGid) {
             if (window.confirm("确定删除以下商品？\n商品编号：" + deleteGid)) {
-                window.open("<%=path%>/adminServlet?action=delete&gid=" + deleteGid, "_self")
+                window.open("<%=path%>/merchantsServlet?action=delete&gid=" + deleteGid, "_self")
             }
         }
 
@@ -38,7 +38,7 @@
             const selectText = document.getElementById("select").value;
             const myselect = document.getElementById("selecteange");
             const index = myselect.selectedIndex;
-            const url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value;
+            const url = "<%=path%>/merchantsServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value;
             window.open(url, "_self");
         }
 
@@ -403,7 +403,7 @@
             //    刷新
             function allGoods() {
                 choice = 2;
-                window.open("<%=path%>/adminServlet?action=all", "_self")
+                window.open("<%=path%>/merchantsServlet?action=all", "_self")
             }
 
             //查询商品
@@ -412,7 +412,7 @@
                 const selectText = document.getElementById("select").value;
                 const myselect = document.getElementById("selecteange");
                 const index = myselect.selectedIndex;
-                const url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=1";
+                const url = "<%=path%>/merchantsServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=1";
                 let xml = new XMLHttpRequest();
                 xml.open("get", url, true)
                 xml.onreadystatechange = function () {
@@ -470,11 +470,11 @@
                         const selectText = document.getElementById("select").value;
                         const myselect = document.getElementById("selecteange");
                         const index = myselect.selectedIndex;
-                        url = "<%=path%>/adminServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=" + jumpPage;
+                        url = "<%=path%>/merchantsServlet?action=select&selectGid=" + selectText + "&selectOption=" + myselect.options[index].value + "&pageNum=" + jumpPage;
                         break;
                     case 2:
                         //所有
-                        url = "<%=path%>/adminServlet?action=paging&pageNum=" + jumpPage;
+                        url = "<%=path%>/merchantsServlet?action=paging&pageNum=" + jumpPage;
                         break;
                 }
                 let xml = new XMLHttpRequest();

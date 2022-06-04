@@ -95,10 +95,13 @@ body {
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .top .top-right .img img {
-    height: 100%;
+    width: 100%;
 }
 
 .top .top-right ul {

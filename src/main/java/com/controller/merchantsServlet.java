@@ -27,8 +27,8 @@ import java.util.List;
 import java.util.Objects;
 
 @MultipartConfig(location = "D:\\", fileSizeThreshold = 1024)
-@WebServlet(name = "adminServlet", value = "/adminServlet")
-public class adminServlet extends HttpServlet {
+@WebServlet(name = "merchantsServlet", value = "/merchantsServlet")
+public class merchantsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");

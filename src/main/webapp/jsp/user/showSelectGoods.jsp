@@ -17,12 +17,13 @@
             String search = (String) request.getSession().getAttribute("search");
             String search1 = (String) request.getSession().getAttribute("search1");
             String cid = (String) request.getSession().getAttribute("cid");
-            List<CustomerModel> list = (List<CustomerModel>) request.getSession().getAttribute("customer");
+            List<CustomerModel> list;
             String message;
-            if (list.isEmpty()){
-                message = "你好，请登录或注册";
-            }else {
+            if(cid!=null){
+                list = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
                 message = "您好，"+list.get(0).getCnickname();
+            }else {
+                message = "你好，请登录或注册";
             }
         %>
         <title>天天淘</title>

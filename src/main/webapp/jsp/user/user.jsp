@@ -22,9 +22,9 @@
             Cookie[] cookies = request.getCookies();
 //            自动登录
             String username = "";
-            if (cookies!=null){
-                for (Cookie cookie:cookies){
-                    if ("username".equals(cookie.getName())){
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("username".equals(cookie.getName())) {
                         username = cookie.getValue();
                     }
                 }
@@ -36,11 +36,11 @@
             }
             List<CustomerModel> list;
             String message;
-            if(cid!=null){
+            if (cid != null) {
                 list = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
-                request.getSession().setAttribute("customer",list);
-                message = "您好，"+list.get(0).getCnickname();
-            }else {
+                request.getSession().setAttribute("customer", list);
+                message = "您好，" + list.get(0).getCnickname();
+            } else {
                 message = "你好，请登录或注册";
             }
         %>
@@ -58,7 +58,8 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%>
+                        </a>
                     </li>
                     <li class="line"></li>
                     <li>

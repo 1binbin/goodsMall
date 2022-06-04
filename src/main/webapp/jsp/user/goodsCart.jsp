@@ -188,7 +188,11 @@
                 j++;
             }
         }
-        window.location.href = "<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&cid=<%=cid%>&arr=" + arr;
+        if (arr.length === 0){
+            alert("请先选中商品")
+        }else {
+            window.location.href = "<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&cid=<%=cid%>&arr=" + arr;
+        }
     }
 
     function deleteCheckedGoods() {
