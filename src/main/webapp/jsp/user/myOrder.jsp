@@ -104,15 +104,15 @@
             <div class="shouhuSelect">
                 <ul class="oneUl">
                     <li>
-                        <input type="radio" id="one" name="shouhu" checked onclick="window.location.reload()"
+                        <input type="radio" id="one1" name="shouhu" checked onclick="window.location.reload()"
                                class="shouhuradio">
-                        <label for="one"><i class="iconfont">&#xe784;</i></label>
+                        <label for="one1"><i class="iconfont">&#xe784;</i></label>
                         <span>全部订单</span>
                     </li>
                     <li>
-                        <input type="radio" id="two" name="shouhu" class="shouhuradio"
+                        <input type="radio" id="two1" name="shouhu" class="shouhuradio"
                                onclick="selectOrder('<%=cid%>','yes','no','no')">
-                        <label for="two"><i class="iconfont">&#xe683;</i></label>
+                        <label for="two1"><i class="iconfont">&#xe683;</i></label>
                         <span>未发货</span>
                     </li>
                     <li>
