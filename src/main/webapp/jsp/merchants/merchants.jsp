@@ -320,11 +320,12 @@
                             <div class="bottom-top">
                                 <span>发货状态筛选</span>
                                 <select name="" id="status" onchange="isDisabled()">
+                                    <option value="all">全部</option>
                                     <option value="no">未发货</option>
                                     <option value="yes">已发货</option>
                                 </select>
                                 <span>时间筛选</span>
-                                <input type="date">
+                                <input type="date" >
                                 <span>-</span>
                                 <input type="date">
                                 <button id="button">一键发货</button>
