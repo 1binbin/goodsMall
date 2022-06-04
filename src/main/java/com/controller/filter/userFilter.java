@@ -11,7 +11,7 @@ import java.io.PrintWriter;
  * @Author hongxiaobin
  * @Time 2022/6/4-16:15
  */
-@WebFilter(filterName = "userFilter", urlPatterns = {"/jsp/user/goodsCart.jsp", "/jsp/user/members.jsp", "/jsp/user/myorder.jsp", "/jsp/user/order.jsp", "/jsp/user/pay.jsp"})
+@WebFilter(filterName = "userFilter", urlPatterns = {"/jsp/user/goodsCart.jsp", "/jsp/user/members.jsp", "/jsp/user/myOrder.jsp", "/jsp/user/order.jsp", "/jsp/user/pay.jsp"})
 public class userFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

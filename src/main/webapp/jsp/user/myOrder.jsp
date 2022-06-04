@@ -413,7 +413,6 @@
                 if (xml.readyState === 4 && xml.status === 200) {
                     const data = xml.responseText;
                     const json = JSON.parse(data);
-                    console.log(json)
                     window.location.href = "<%=path%>/jsp/user/pay.jsp?num=" + json[0]+"&numPrice="+json[1]+"&address="+json[2]+"&zifu=weixin";
                 }
             }

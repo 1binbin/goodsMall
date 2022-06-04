@@ -289,7 +289,8 @@ body {
     right: 30px;
 }
 
-.choose, .chooseinput, .button {
+.choose, .chooseinput, .button ,
+.choose, .chooseinput1, .button {
     outline: none;
     height: 32px;
     background-color: #efefef;
@@ -312,6 +313,15 @@ body {
     border-right: none;
     width: 350px;
     text-indent: 8px;
+}
+.chooseinput1 {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-left:  1px solid #333;
+    border-right: none;
+    width: 350px;
+    text-indent: 8px;
+    border-radius: 10px 0 0 10px;
 }
 
 .button {

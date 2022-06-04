@@ -24,4 +24,12 @@ public interface otherDao {
     void deleteOrder(String cid,String oid);
     void cancelOrder(String cid,String oid);
     List<EntityModel> list(String cid,String oid);
+    /*商家订单管理*/
+    List<EntityModel> getOidEid(String eid,String tispay,String tisdelivey,String begin,String end,String search);
+    List<EntityModel> getOidEidAll(String eid,String tispay,String tisdelivey,String search);
+    List<EntityModel> getOidAll(String eid,String tispay,String search);
+    List<EntityModel> getOidAllDate(String eid,String tispay,String begin,String end,String search);
+    List<EntityModel> getOidEidMeaasge(String eid,String oid);
+    /*一键发货*/
+    void setTisdelivey(String eid,String oid);
 }

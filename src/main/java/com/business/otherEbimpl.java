@@ -115,4 +115,37 @@ public class otherEbimpl implements otherEbi {
         }
         return result;
     }
+
+    @Override
+    public List<List<EntityModel>> getList(String eid, String tispay, String tisdelivey, String begin, String end, String search,String type) {
+//        初始数据，全部
+//        有日期下
+        List<List<EntityModel>> list = new ArrayList<>();
+        List<EntityModel> oidList;
+        switch (type){
+            case "all":
+                oidList = Daofactory.getotherDaoImpl().getOidAll(eid,tispay,search);
+                break;
+            case "isdate":
+                oidList = Daofactory.getotherDaoImpl().getOidEid(eid,tispay,tisdelivey,begin,end,search);
+                break;
+            case "alldata":
+                oidList = Daofactory.getotherDaoImpl().getOidAllDate(eid,tispay,begin,end,search);
+                break;
+            default:
+                oidList = Daofactory.getotherDaoImpl().getOidEidAll(eid,tispay,tisdelivey,search);
+                break;
+        }
+        for (EntityModel entityModel : oidList) {
+            List<EntityModel> list1 = Daofactory.getotherDaoImpl().getOidEidMeaasge(eid,entityModel.getOid());
+            assert false;
+            list.add(list1);
+        }
+        return list;
+    }
+
+    @Override
+    public void setTisdelivey(String eid, String oid) {
+        Daofactory.getotherDaoImpl().setTisdelivey(eid,oid);
+    }
 }

@@ -25,4 +25,7 @@ public interface otherEbi {
     void deleteOrder(String cid,String oid);
     void cancelOrder(String cid,String oid);
     String[] getLIst(String cid,String oid);
+    /*商家订单*/
+    List<List<EntityModel>> getList(String eid,String tispay,String tisdelivey,String begin,String end,String search,String type);
+    void setTisdelivey(String eid,String oid);
 }

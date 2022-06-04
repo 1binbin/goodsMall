@@ -2,6 +2,7 @@
 <%@ page import="com.entity.GoodsModel" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.business.EBofactory" %>
+<%@ page import="com.entity.EntityModel" %>
 <%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
@@ -17,10 +18,11 @@
             String path = request.getContextPath();
             ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) request.getSession().getAttribute("allGoods");
             String name = (String) request.getSession().getAttribute("username");
-            System.out.println(name);
+            String eid = (String) request.getSession().getAttribute("eid");
             int count = (int) request.getSession().getAttribute("allgoodsCount");
             int pageCount = count / 15 + 1;
             List<GoodsModel> list = EBofactory.getgoodsebiempl().getGcategory();
+            List<List<EntityModel>> listList = EBofactory.getotherEbimpl().getList(eid, "yes", "", "", "", "", "all");
         %>
         <title>管理员</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -304,31 +306,26 @@
                             <p class="p">所有订单列表</p>
                             <%--搜索--%>
                             <form class="select">
-                                <select name="selecteange" id="t-selecteange" class="choose">
-                                    <option value="all" selected>全部</option>
-                                    <option value="selectGid">商品编号</option>
-                                    <option value="selectGname">商品名称</option>
-                                    <option value="selectGcategory">商品类别</option>
-                                </select>
-                                <input type="text" placeholder="搜索内容" class="chooseinput" name="selectContent"
-                                       id="t-select">
-                                <div class="button" onclick="showgoods()"><i class="fa fa-search" aria-hidden="true"
-                                                                             id="t-btnaa"></i></div>
+                                <input type="text" placeholder="搜索内容" class="chooseinput1" name="selectContent"
+                                       id="t-select1">
+                                <div class="button" onclick="change(<%=eid%>)"><i class="fa fa-search"
+                                                                                  aria-hidden="true"
+                                                                                  id="t-btnaa"></i></div>
                             </form>
                         </div>
                         <div class="bottom">
                             <div class="bottom-top">
                                 <span>发货状态筛选</span>
-                                <select name="" id="status" onchange="isDisabled()">
+                                <select name="" id="status" onchange="isDisabled(<%=eid%>)">
                                     <option value="all">全部</option>
                                     <option value="no">未发货</option>
                                     <option value="yes">已发货</option>
                                 </select>
                                 <span>时间筛选</span>
-                                <input type="date" >
+                                <input type="date" id="begin" onchange="change(<%=eid%>)">
                                 <span>-</span>
-                                <input type="date">
-                                <button id="button">一键发货</button>
+                                <input type="date" id="end" onchange="change(<%=eid%>)">
+                                <button id="button" onclick="tiddelivey(<%=eid%>)">一键发货</button>
                             </div>
                             <div class="bottom-bottom">
                                 <div class="bar">
@@ -340,24 +337,35 @@
                                     <span>发货状态</span>
                                 </div>
                                 <div class="table">
-                                    <table>
+                                    <table id="table">
                                         <%
-                                            for (int i = 0; i < 100; i++) {
+                                            for (int i = 0; i < listList.size(); i++) {
                                         %>
                                         <tr>
-                                            <td><input type="checkbox" class="orderChecked"></td>
-                                            <td>1234556896732</td>
-                                            <td>2022/06/01 22:58:00</td>
-                                            <td>
-                                                <p>23</p>
-                                                <p>23</p>
-                                                <p>23</p>
+                                            <td><input type="checkbox"
+                                                       class="orderChecked <%=listList.get(i).get(0).getOid()%>"></td>
+                                            <td><%=listList.get(i).get(0).getOid()%>
+                                            </td>
+                                            <td><%=listList.get(i).get(0).getTdate()%>
                                             </td>
                                             <td>
-                                                <p>XXX</p>
-                                                <p>XX省XX市XX镇XXXXXXXXXXX</p>
+                                                <%
+                                                    for (int j = 0; j < listList.get(i).size(); j++) {
+                                                %>
+                                                <p><%=listList.get(i).get(j).getGid()%>
+                                                </p>
+                                                <%
+                                                    }
+                                                %>
                                             </td>
-                                            <td>未发货</td>
+                                            <td>
+                                                <p><%=listList.get(i).get(0).getRname()%>
+                                                </p>
+                                                <p><%=listList.get(i).get(0).getRadd()%>
+                                                </p>
+                                            </td>
+                                            <td><%=listList.get(i).get(0).getMessage()%>
+                                            </td>
                                         </tr>
                                         <%
                                             }
@@ -533,7 +541,6 @@
             const showimg = document.getElementById("showimg")
 
             function bOnclick() {
-                console.log(second)
                 second.style.display = "block";
                 third.style.display = "none";
                 fourth.style.display = "none";
@@ -599,15 +606,15 @@
                 table.innerHTML = temp;
             }
 
-            function isDisabled() {
+            function isDisabled(eid) {
                 const select = document.getElementById("status");
                 const index = select.selectedIndex;
-                console.log(select[index].value)
                 if (select[index].value === "yes") {
                     document.getElementById("button").style.display = "none";
                 } else {
                     document.getElementById("button").style.display = "block";
                 }
+                change(eid)
             }
 
             function orderChecked() {
@@ -616,11 +623,74 @@
                     for (let i = 0; i < input.length; i++) {
                         input[i].checked = true;
                     }
-                }else {
+                } else {
                     for (let i = 0; i < input.length; i++) {
                         input[i].checked = false;
                     }
                 }
+            }
+
+            function change(eid) {
+                var search = document.getElementById("t-select1").value;
+                var begin = document.getElementById("begin").value;
+                var end = document.getElementById("end").value;
+                var choose = document.getElementById("status")
+                var index = choose.selectedIndex;
+                var value = choose.options[index].value;
+                var url;
+                url = "<%=path%>/merchantsServlet?action=getEmployeeOrder&eid=" + eid + "&search=" + search + "&value=" + value + "&begin=" + begin + "&end=" + end;
+                let xml = new XMLHttpRequest();
+                xml.open("get", url, true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        let vals = xml.responseText;
+                        let jsonArr = eval(vals);
+                        var item = "";
+                        for (let i = 0; i < jsonArr.length; i++) {
+                            item += "<tr>" +
+                                "<td><input type=\"checkbox\" class=\"orderChecked" + " " + jsonArr[i][0].oid + "\"></td>" +
+                                "<td>" + jsonArr[i][0].oid + "</td>" +
+                                "<td>" + jsonArr[i][0].tdate + "</td>" +
+                                "<td>";
+                            let items = "";
+                            for (let j = 0; j < jsonArr[i].length; j++) {
+                                items += "<p>" + jsonArr[i][j].gid + "</p>";
+                            }
+                            item += items;
+                            item += "</td>" +
+                                "<td>" +
+                                "<p>" + jsonArr[i][0].rname + "</p>" +
+                                "<p>" + jsonArr[i][0].radd + "</p>" +
+                                "</td>" +
+                                "<td>" + jsonArr[i][0].message + "</td>" +
+                                "</tr>";
+                        }
+                        document.getElementById("table").innerHTML = item;
+                    }
+                }
+                xml.send(null)
+            }
+
+            function tiddelivey(eid) {
+                var orderChecked = document.getElementsByClassName("orderChecked");
+                var oid = [];
+                let index = 0;
+                for (let i = 0; i < orderChecked.length; i++) {
+                    if (orderChecked[i].checked) {
+                        oid[index] = orderChecked[i].className.split(" ")[1];
+                        index++;
+                    }
+                }
+                var url = "<%=path%>/merchantsServlet?action=setTisdelivey&eid=" + eid + "&oid=" + oid;
+                let xml = new XMLHttpRequest();
+                xml.open("get", url, true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        alert("一键发货成功");
+                        change(eid)
+                    }
+                }
+                xml.send(null)
             }
         </script>
     </body>
