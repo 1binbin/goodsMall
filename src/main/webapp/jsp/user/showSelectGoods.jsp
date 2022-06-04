@@ -17,6 +17,13 @@
             String search = (String) request.getSession().getAttribute("search");
             String search1 = (String) request.getSession().getAttribute("search1");
             String cid = (String) request.getSession().getAttribute("cid");
+            List<CustomerModel> list = (List<CustomerModel>) request.getSession().getAttribute("customer");
+            String message;
+            if (list.isEmpty()){
+                message = "你好，请登录或注册";
+            }else {
+                message = "您好，"+list.get(0).getCnickname();
+            }
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -33,7 +40,7 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="#">你好，请登录或注册</a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
                     </li>
                     <li class="line"></li>
                     <li>

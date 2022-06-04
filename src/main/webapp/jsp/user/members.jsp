@@ -1,4 +1,5 @@
-<%--
+<%@ page import="com.entity.CustomerModel" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -12,6 +13,13 @@
         <%
             String path = request.getContextPath();
             String cid = (String) request.getSession().getAttribute("cid");
+            List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
+            String message;
+            if (list1.isEmpty()){
+                message = "你好，请登录或注册";
+            }else {
+                message = "您好，"+list1.get(0).getCnickname();
+            }
         %>
         <title>天天淘-注册会员</title>
         <link rel="stylesheet" href="<%=path%>/css/members.css">
@@ -25,7 +33,7 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="#">你好，请登录或注册</a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
                     </li>
                     <li class="line"></li>
                     <li>

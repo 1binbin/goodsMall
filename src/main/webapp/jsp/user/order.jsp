@@ -4,7 +4,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.business.EBofactory" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="java.util.Date" %><%--
+<%@ page import="java.util.Date" %>
+<%@ page import="com.entity.CustomerModel" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -35,6 +36,13 @@
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
             String oid = simpleDateFormat.format(date);
+            List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
+            String message;
+            if (list1.isEmpty()){
+                message = "你好，请登录或注册";
+            }else {
+                message = "您好，"+list1.get(0).getCnickname();
+            }
         %>
         <title>天天淘-结算页</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -48,7 +56,7 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="#">你好，请登录或注册</a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
                     </li>
                     <li class="line"></li>
                     <li>

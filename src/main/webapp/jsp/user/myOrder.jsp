@@ -22,7 +22,13 @@
                 List<EntityModel> entityModels = EBofactory.getotherEbimpl().getTicketCidEid(cid, entityModel.getOid());
                 list.add(entityModels);
             }
-
+            List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
+            String message;
+            if (list1.isEmpty()){
+                message = "你好，请登录或注册";
+            }else {
+                message = "您好，"+list1.get(0).getCnickname();
+            }
         %>
         <title>天天淘-我的订单</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -40,7 +46,7 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="#">你好，请登录或注册</a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
                     </li>
                     <li class="line"></li>
                     <li>

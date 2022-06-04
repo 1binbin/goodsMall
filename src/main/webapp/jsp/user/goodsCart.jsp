@@ -20,6 +20,13 @@
             String cid = request.getParameter("cid");
             List<List<ShoppingcartModel>> list = EBofactory.getShoppingcartempl().getCidGidEidHash(cid);
             int count = EBofactory.getCountbiempl().getAllCart(cid);
+            List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
+            String message;
+            if (list1.isEmpty()){
+                message = "你好，请登录或注册";
+            }else {
+                message = "您好，"+list1.get(0).getCnickname();
+            }
         %>
         <title>购物车</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -35,7 +42,7 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="#">你好，请登录或注册</a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
                     </li>
                     <li class="line"></li>
                     <li>

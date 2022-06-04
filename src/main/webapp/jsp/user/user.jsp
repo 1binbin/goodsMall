@@ -3,7 +3,8 @@
 <%@ page import="com.business.Daofactory" %>
 <%@ page import="com.business.CustomerEbimpl" %>
 <%@ page import="com.business.EBofactory" %>
-<%@ page import="com.entity.CustomerModel" %><%--
+<%@ page import="com.entity.CustomerModel" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -18,6 +19,30 @@
             String path = request.getContextPath();
             List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
             String cid = (String) request.getSession().getAttribute("cid");
+            Cookie[] cookies = request.getCookies();
+//            自动登录
+            String username = "";
+            if (cookies!=null){
+                for (Cookie cookie:cookies){
+                    if ("username".equals(cookie.getName())){
+                        username = cookie.getValue();
+                    }
+                }
+            }
+            if (username.endsWith("user")) {
+                cid = username.substring(0, username.length() - 4);
+                request.getSession().setAttribute("username", username);
+                request.getSession().setAttribute("cid", cid);
+            }
+            List<CustomerModel> list;
+            String message;
+            if(cid!=null){
+                list = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
+                request.getSession().setAttribute("customer",list);
+                message = "您好，"+list.get(0).getCnickname();
+            }else {
+                message = "你好，请登录或注册";
+            }
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -33,7 +58,7 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="#">你好，请登录或注册</a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
                     </li>
                     <li class="line"></li>
                     <li>
