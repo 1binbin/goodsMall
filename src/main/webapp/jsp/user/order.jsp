@@ -62,12 +62,8 @@
                     <li>
                         <a href="<%=path%>/jsp/user/myOrder.jsp">我的订单</a>
                     </li>
-                    <li class="line"></li>
-                    <li>
-                        <a href="#">个人信息</a>
-                    </li>
                 </ul>
-                <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
+                <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
             </div>
         </div>
         <div class="progress">

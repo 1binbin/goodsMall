@@ -18,8 +18,8 @@
     z-index: 999;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
     background-color: #e3e4e5;
-    /*display: none;*/
-    display: flex;
+    display: none;
+    /*display: flex;*/
     flex-direction: column;
     justify-content: center;
     align-items: center;

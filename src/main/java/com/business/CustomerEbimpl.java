@@ -81,4 +81,25 @@ public class CustomerEbimpl implements CustomerEbi {
     public List<CustomerModel> getCustomerMessage(String cid) {
         return Daofactory.getcustomerimpl().getCustomerMessage(cid);
     }
+
+    @Override
+    public void updatePerson(String cid, String cname, String cnickname, String cesx) {
+        Daofactory.getcustomerimpl().updatePerson(cid,cname,cnickname,cesx);
+    }
+
+    @Override
+    public void addRadd(String cid, String rname, String radd) {
+        List<CustomerModel> lis = Daofactory.getcustomerimpl().raddlist(cid,rname);
+        if (lis.isEmpty()){
+            Daofactory.getcustomerimpl().addRadd(cid,rname,radd);
+        }
+    }
+
+    @Override
+    public void updateRadd(String cid, String rname, String radd, String old) {
+        List<CustomerModel> list = Daofactory.getcustomerimpl().raddlist(cid,rname);
+        if (list.isEmpty()){
+            Daofactory.getcustomerimpl().updateRadd(cid,rname,radd,old);
+        }
+    }
 }

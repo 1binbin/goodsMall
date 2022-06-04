@@ -11,18 +11,23 @@ import com.entity.GoodsModel;
 import com.entity.ShoppingcartModel;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Objects;
 
 @WebServlet(name = "customerServlet", value = "/customerServlet")
+@MultipartConfig(location = "D:\\", fileSizeThreshold = 1024)
 public class customerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -225,5 +230,52 @@ public class customerServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
+    }
+    /*修改个人信息*/
+    protected void updatePerson(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        String cname = request.getParameter("cname");
+        String cnickname = request.getParameter("cnickname");
+        String cesx = request.getParameter("cesx");
+        EBofactory.getcustomerebiempl().updatePerson(cid,cname,cnickname,cesx);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+    }
+    /*修改头像*/
+    protected void touxiang(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = this.getServletContext().getRealPath("/");
+        String cid = (String) request.getSession().getAttribute("cid");
+        Part p = request.getPart("touxiang");
+        if (p.getSize() > 1024 * 1024) {
+            p.delete();
+        } else {
+            path = path + "\\personImg\\";
+            File file = new File(path);
+            if (!file.exists()) {
+                file.mkdirs();
+            }
+            String filename = cid + ".jpg";
+            if (!Objects.equals(p.getSubmittedFileName(), "")) {
+                p.write(path + "\\" + filename);
+            }
+        }
+        request.getRequestDispatcher("jsp/user/user.jsp").forward(request,response);
+    }
+    /*地址*/
+    protected void updateRadd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String rname = request.getParameter("rname");
+        String radd = request.getParameter("radd");
+        String cid = request.getParameter("cid");
+        String type = request.getParameter("type");
+        if ("one".equals(type)){
+            EBofactory.getcustomerebiempl().addRadd(cid,rname,radd);
+        }else{
+            String old =request.getParameter("old");
+            EBofactory.getcustomerebiempl().updateRadd(cid,rname,radd,old);
+        }
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
     }
 }

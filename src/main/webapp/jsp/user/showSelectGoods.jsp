@@ -23,6 +23,8 @@
         <link rel="stylesheet" href="<%=path%>/css/user.css">
         <link rel="stylesheet" href="<%=path%>/css/showSelectGoods.css">
         <script src="<%=path%>/js/showSelectGoods.js"></script>
+        <link rel="stylesheet" href="<%=path%>/css/personalnformation.css">
+        <script src="<%=path%>/js/personalnformation.js"></script>
     </head>
     <body>
         <div class="top">
@@ -47,11 +49,12 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="#">个人信息</a>
+                        <a href="javascript:void(0)" id="person" onclick="person(1,'<%=cid%>','<%=path%>>')">个人信息</a>
                     </li>
                 </ul>
-                <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
+                <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
             </div>
+            <%@ include file="/jsp/user/person.jsp" %>
         </div>
         <%--    LOGO图+搜索框+购物车--%>
         <div class="search" id="search">

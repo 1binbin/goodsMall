@@ -20,4 +20,8 @@ public interface CustmerDao {
     void updateCustomer(CustomerModel customerModel);
     void insertVip(String cid, String vcategory, String vindate,String voudate);
     List<CustomerModel> getCustomerMessage(String cid);
+    void updatePerson(String cid,String cname,String cnickname,String cesx);
+    void addRadd(String cid,String rname,String radd);
+    void updateRadd(String cid,String rname,String radd,String old);
+    List<CustomerModel> raddlist(String cid,String rname);
 }

@@ -18,14 +18,13 @@
             String path = request.getContextPath();
             List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
             String cid = (String) request.getSession().getAttribute("cid");
-
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=path%>/css/user.css">
         <link rel="stylesheet" href="<%=path%>/css/personalnformation.css">
-        <script src="<%=path%>/js/user.js"></script>
         <script src="<%=path%>/js/personalnformation.js"></script>
+        <script src="<%=path%>/js/user.js"></script>
     </head>
     <body>
         <%--顶部--%>
@@ -50,10 +49,10 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="javascript:void(0)" id="person" onclick="person(1)">个人信息</a>
+                        <a href="javascript:void(0)" id="person" onclick="person(1,'<%=cid%>','<%=path%>>')">个人信息</a>
                     </li>
                 </ul>
-                <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
+                <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
             </div>
             <%@ include file="/jsp/user/person.jsp" %>
         </div>

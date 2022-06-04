@@ -16,4 +16,8 @@ public interface CustomerEbi {
     boolean updateCustomer(CustomerModel customerModel);
     boolean insertVip(String cid, String vcategory);
     List<CustomerModel> getCustomerMessage(String cid);
+    void updatePerson(String cid,String cname,String cnickname,String cesx);
+
+    void addRadd(String cid,String rname,String radd);
+    void updateRadd(String cid,String rname,String radd,String old);
 }
