@@ -10,6 +10,9 @@
 <html>
     <%
         String base = request.getContextPath();
+        String username = (String) request.getSession().getAttribute("username");
+        String eid = username.substring(0,username.length()-5);
+        request.getSession().setAttribute("eid",eid);
     %>
     <head>
         <title>商家正在登录</title>

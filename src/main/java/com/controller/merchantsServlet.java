@@ -156,7 +156,6 @@ public class merchantsServlet extends HttpServlet {
     }
 
     private String getEid(HttpServletRequest request) {
-        String adminName = Utils.utf_8((String) request.getSession().getAttribute("adminName"));
-        return adminName.substring(0, adminName.length() - 5);
+        return Utils.utf_8((String) request.getSession().getAttribute("eid"));
     }
 }

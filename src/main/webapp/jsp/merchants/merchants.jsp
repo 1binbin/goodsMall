@@ -16,8 +16,8 @@
         <%
             String path = request.getContextPath();
             ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) request.getSession().getAttribute("allGoods");
-            String adminName = (String) request.getSession().getAttribute("adminName");
-            String name = adminName.substring(0, adminName.length() - 5);
+            String name = (String) request.getSession().getAttribute("username");
+            System.out.println(name);
             int count = (int) request.getSession().getAttribute("allgoodsCount");
             int pageCount = count / 15 + 1;
             List<GoodsModel> list = EBofactory.getgoodsebiempl().getGcategory();

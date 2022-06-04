@@ -23,12 +23,7 @@
                     }
                 }
             }
-            if (username.endsWith("user")){
-//                String cid = username.substring(0,username.length()-4);
-//                request.getSession().setAttribute("username",username);
-//                request.getSession().setAttribute("cid",cid);
-//                request.getRequestDispatcher("../jsp/user/userwait.jsp").forward(request,response);
-            }else if (username.endsWith("admin")){
+            if (username.endsWith("admin")){
 //                String adminName = (String) request.getSession().getAttribute("adminName");
                 String eid = username.substring(0,username.length()-5);
                 ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid,0,15);
