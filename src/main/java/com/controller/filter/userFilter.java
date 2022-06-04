@@ -22,6 +22,7 @@ public class userFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
+        session.setMaxInactiveInterval(60*60*24);
         String cid = (String) session.getAttribute("cid");
         if (cid == null) {
             servletResponse.setContentType("text/html;charset=utf-8");
