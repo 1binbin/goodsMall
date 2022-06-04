@@ -50,4 +50,10 @@ public class CustomerDaompl extends BaseDao<CustomerModel>implements CustmerDao 
         String sql = "insert into vip(cid,vcategory,vindate,voutdate) values(?,?,?,?)";
         update(connection,sql,cid,vcategory,vindate,voudate);
     }
+
+    @Override
+    public List<CustomerModel> getCustomerMessage(String cid) {
+        String sql = "select customer.cid,csex,cname,cnickname,rname,radd from raddress,customer where customer.cid = raddress.cid and  customer.cid = ?";
+        return getBeanList(connection,sql,cid);
+    }
 }

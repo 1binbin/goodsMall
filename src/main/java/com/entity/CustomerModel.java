@@ -11,6 +11,8 @@ public class CustomerModel {
     private String cname;
     private String cnickname;
     private String cphone;
+    private String rname;
+    private String radd;
 
     public CustomerModel(String cid, String cpassword, String csex, String cname, String cnickname, String cphone) {
         this.cid = cid;
@@ -19,6 +21,33 @@ public class CustomerModel {
         this.cname = cname;
         this.cnickname = cnickname;
         this.cphone = cphone;
+    }
+
+    public CustomerModel(String cid, String cpassword, String csex, String cname, String cnickname, String cphone, String rname, String radd) {
+        this.cid = cid;
+        this.cpassword = cpassword;
+        this.csex = csex;
+        this.cname = cname;
+        this.cnickname = cnickname;
+        this.cphone = cphone;
+        this.rname = rname;
+        this.radd = radd;
+    }
+
+    public String getRname() {
+        return rname;
+    }
+
+    public void setRname(String rname) {
+        this.rname = rname;
+    }
+
+    public String getRadd() {
+        return radd;
+    }
+
+    public void setRadd(String radd) {
+        this.radd = radd;
     }
 
     public CustomerModel() {

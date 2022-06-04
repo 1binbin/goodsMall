@@ -1,0 +1,200 @@
+/*
+  Created by IntelliJ IDEA.
+  Author: hongxiaobin
+  User: hongxiaobin
+  Date: 2022/6/4
+  Time: 9:37
+  Description: 
+*/
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.personalnformation {
+    position: absolute;
+    right: 0;
+    top: 41px;
+    z-index: 999;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+    background-color: #e3e4e5;
+    /*display: none;*/
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 330px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.personalnformation>span{
+    width: 100%;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #000;
+}
+.personalnformation div{
+    margin-top: 10px;
+    width: 100%;
+}
+.personalnformation div span{
+    font-size: 16px;
+    color: #000;
+    margin-left: 10px;
+}
+.personalnformation div span:nth-child(2){
+    margin-left: 190px;
+}
+.personalnformation div span:nth-child(2):hover{
+    color: #c81623;
+    cursor: pointer;
+}
+.personalnformation .line{
+    width: 98%;
+    height: 1px;
+    background-color: #333;
+    margin-top: 4px;
+}
+#line{
+    margin-bottom: 7px;
+}
+.personalnformation .table,
+.personalnformation .per-top .per-box .one table,
+.personalnformation .per-top .per-box .two table{
+    border-spacing: 10px;
+    width: 100%;
+    height: 75px;
+    font-size: 15px;
+    padding: 0 10px 0 10px;
+    margin-top: 10px;
+}
+.personalnformation .table{
+    margin-left: 37px;
+    width: 330px;
+    height: 130px;
+}
+.personalnformation table input[type="radio"]{
+    transform: scale(1.1);
+}
+.personalnformation table input[type="radio"]:last-child{
+    margin-left: 25px;
+}
+.personalnformation table tr td a{
+    text-decoration: none;
+    font-size: 14px;
+    color: #333;
+}
+.personalnformation table tr td a:hover{
+    color: #c81623;
+}
+.personalnformation table tr td,
+.personalnformation .per-top .per-box .one table tr td,
+.personalnformation .per-top .per-box .two table tr td {
+    font-size: 14px;
+}
+.personalnformation input[type="text"]{
+    background-color: #e3e4e5;
+    height: 20px;
+    width: 180px;
+    border: none;
+}
+.personalnformation input[type="text"]:focus{
+    outline: none;
+    border-bottom: 1px solid red;
+}
+.personalnformation .per-top input[type="radio"]{
+    display: none;
+}
+.per-box .one,
+.per-box .two{
+    display: none;
+}
+.personalnformation .per-top input[type="radio"]:nth-child(1):checked+label,
+.personalnformation .per-top input[type="radio"]:nth-child(3):checked+label{
+    background: linear-gradient(to right, rgba(233,39,88,0.5) 0%, rgba(255,149,105,0.5) 100%);
+    border: none;
+}
+.personalnformation .per-top input[type="radio"]:nth-child(1):checked ~ div .one{
+    display: block;
+}
+.personalnformation .per-top input[type="radio"]:nth-child(3):checked ~ div .two{
+    display: block;
+}
+.per-top label{
+    border-radius: 4px;
+    padding: 2px;
+    border: 1px solid #a5a5a5;
+    margin-top: 5px;
+}
+#label1{
+    margin-left: 60px;
+}
+#label2{
+    margin-left: 37px;
+}
+.personalnformation .per-top .per-box .two span{
+    font-size: 14px;
+    width: 100%;
+    margin-left: 5px;
+}
+.two-box select{
+    height: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 90%;
+    margin-left: 10px;
+}
+.per-bottom{
+    width: 100%;
+}
+.per-bottom button{
+    width: 80px;
+    height: 25px;
+    border-radius: 4px;
+    border: none;
+    margin-bottom: 20px;
+}
+.per-bottom button:hover{
+    background-color: #a5a5a5;
+}
+.per-bottom button:nth-child(1){
+    margin-left: 64px;
+}
+.per-bottom button:nth-child(2){
+    margin-left: 35px;
+}
+.perbottom button:hover{
+    background-color: #a5a5a5;
+}
+.perbottom button{
+    margin-left: 68px;
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.perbottom button:nth-child(2){
+    margin-left: 35px;
+}
+#form{
+    display: flex;
+    flex-direction: row;
+}
+#form input[type="file"]{
+    width: 123px;
+    overflow: hidden;
+}
+#form input[type="submit"]{
+    width: 58px;
+    height: 25px;
+    border: none;
+    border-radius: 4px;
+}
+#form input[type="submit"]:hover{
+    background-color: #a5a5a5;
+}
+.w{
+    display: none;
+}

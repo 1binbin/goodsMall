@@ -1,6 +1,9 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.entity.GoodsModel" %>
-<%@ page import="com.business.Daofactory" %><%--
+<%@ page import="com.business.Daofactory" %>
+<%@ page import="com.business.CustomerEbimpl" %>
+<%@ page import="com.business.EBofactory" %>
+<%@ page import="com.entity.CustomerModel" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -15,11 +18,14 @@
             String path = request.getContextPath();
             List<GoodsModel> eidList = Daofactory.getgoodsdaoimpl().getdEid();
             String cid = (String) request.getSession().getAttribute("cid");
+
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=path%>/css/user.css">
+        <link rel="stylesheet" href="<%=path%>/css/personalnformation.css">
         <script src="<%=path%>/js/user.js"></script>
+        <script src="<%=path%>/js/personalnformation.js"></script>
     </head>
     <body>
         <%--顶部--%>
@@ -44,11 +50,12 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="#">个人信息</a>
+                        <a href="javascript:void(0)" id="person" onclick="person(1)">个人信息</a>
                     </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
             </div>
+            <%@ include file="/jsp/user/person.jsp" %>
         </div>
         <%--    LOGO图+搜索框+购物车--%>
         <div class="search" id="search">
@@ -71,19 +78,50 @@
                 <ul>
                     <li><a href="javascript:void(0)" onclick="getGcategory('家用电器')">家用电器</a></li>
                     <li><a href="javascript:void(0)" onclick="getGcategory('医药保健')">医药保健</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('手机')">手机</a> / <a href="javascript:void(0)" onclick="getGcategory('运营商')">运营商</a> / <a href="javascript:void(0)" onclick="getGcategory('数码')">数码</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('电脑')">电脑</a> / <a href="javascript:void(0)" onclick="getGcategory('办公')">办公</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('家居')">家居</a> / <a href="javascript:void(0)" onclick="getGcategory('家具')">家具</a> / <a href="javascript:void(0)" onclick="getGcategory('家装')">家装</a> / <a href="javascript:void(0)" onclick="getGcategory('厨具')">厨具</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('男装')">男装</a> / <a href="javascript:void(0)" onclick="getGcategory('女装')">女装</a> / <a href="javascript:void(0)" onclick="getGcategory('童装')">童装</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('美妆')">美妆</a> / <a href="javascript:void(0)" onclick="getGcategory('个人清洁')">个人清洁</a> / <a href="javascript:void(0)" onclick="getGcategory('宠物')">宠物</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('女鞋')">女鞋</a> / <a href="javascript:void(0)" onclick="getGcategory('箱包')">箱包</a> / <a href="javascript:void(0)"  onclick="getGcategory('钟表')">钟表</a> / <a href="javascript:void(0)"  onclick="getGcategory('珠宝')">珠宝</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('男鞋')">男鞋</a> / <a href="javascript:void(0)" onclick="getGcategory('运动')">运动</a> / <a href="javascript:void(0)"  onclick="getGcategory('户外')">户外</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('房产')">房产</a> / <a href="javascript:void(0)" onclick="getGcategory('汽车')">汽车</a> / <a href="javascript:void(0)"  onclick="getGcategory('汽车用品')">汽车用品</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('母婴')">母婴</a> / <a href="javascript:void(0)" onclick="getGcategory('玩具乐器')">玩具乐器</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('食品')">食品</a> / <a href="javascript:void(0)" onclick="getGcategory('酒类')">酒类</a> / <a href="javascript:void(0)"  onclick="getGcategory('生鲜')">生鲜</a> / <a href="javascript:void(0)"  onclick="getGcategory('特产')">特产</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('艺术')">艺术</a> / <a href="javascript:void(0)" onclick="getGcategory('礼品鲜花')">礼品鲜花</a> / <a href="javascript:void(0)"  onclick="getGcategory('农贸绿植 ')">农贸绿植</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('图书')">图书</a> / <a href="javascript:void(0)" onclick="getGcategory('文娱')">文娱</a> / <a href="javascript:void(0)"  onclick="getGcategory('教育')">教育</a> / <a href="javascript:void(0)"  onclick="getGcategory('电子书')">电子书</a></li>
-                    <li><a href="javascript:void(0)" onclick="getGcategory('安装')">安装</a> / <a href="javascript:void(0)" onclick="getGcategory('维修')">维修</a> / <a href="javascript:void(0)"  onclick="getGcategory('清洗')">清洗</a> / <a href="javascript:void(0)"  onclick="getGcategory('二手')">二手</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('手机')">手机</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('运营商')">运营商</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('数码')">数码</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('电脑')">电脑</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('办公')">办公</a>
+                    </li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('家居')">家居</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('家具')">家具</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('家装')">家装</a> / <a
+                                href="javascript:void(0)" onclick="getGcategory('厨具')">厨具</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('男装')">男装</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('女装')">女装</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('童装')">童装</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('美妆')">美妆</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('个人清洁')">个人清洁</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('宠物')">宠物</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('女鞋')">女鞋</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('箱包')">箱包</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('钟表')">钟表</a> / <a
+                                href="javascript:void(0)" onclick="getGcategory('珠宝')">珠宝</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('男鞋')">男鞋</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('运动')">运动</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('户外')">户外</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('房产')">房产</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('汽车')">汽车</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('汽车用品')">汽车用品</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('母婴')">母婴</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('玩具乐器')">玩具乐器</a>
+                    </li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('食品')">食品</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('酒类')">酒类</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('生鲜')">生鲜</a> / <a
+                                href="javascript:void(0)" onclick="getGcategory('特产')">特产</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('艺术')">艺术</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('礼品鲜花')">礼品鲜花</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('农贸绿植 ')">农贸绿植</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('图书')">图书</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('文娱')">文娱</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('教育')">教育</a> / <a
+                                href="javascript:void(0)" onclick="getGcategory('电子书')">电子书</a></li>
+                    <li><a href="javascript:void(0)" onclick="getGcategory('安装')">安装</a> / <a href="javascript:void(0)"
+                                                                                              onclick="getGcategory('维修')">维修</a>
+                        / <a href="javascript:void(0)" onclick="getGcategory('清洗')">清洗</a> / <a
+                                href="javascript:void(0)" onclick="getGcategory('二手')">二手</a></li>
                 </ul>
             </div>
             <div class="middle-middle" id="max">
@@ -125,7 +163,8 @@
                 %>
                 <li onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=<%=model.getGid()%>&eid=<%=model.getEid()%>&cid=<%=cid%>')">
                     <div class="like_img"><img
-                            src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=model.getGid()%>.jpg" alt="暂无图片">
+                            src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=model.getGid()%>.jpg"
+                            alt="暂无图片">
                     </div>
                     <div class="like_span">
                         <p><%=model.getGdescribe()%>
@@ -134,7 +173,7 @@
                         <span class="mony"><%=model.getGprice()%></span>
                         <span class="vip">
                             <%
-                                if (model.getGvip().equals("yes")){
+                                if (model.getGvip().equals("yes")) {
                             %>
                             会员商品
                             <%
@@ -189,10 +228,11 @@
     </body>
     <script>
         function getSelect() {
-            window.location.href = "<%=path%>/customerServlet?action=search&search="+document.getElementById("search2").value;
+            window.location.href = "<%=path%>/customerServlet?action=search&search=" + document.getElementById("search2").value;
         }
+
         function getGcategory(m) {
-            window.location.href = "<%=path%>/customerServlet?action=searchGcaetgory&search="+m;
+            window.location.href = "<%=path%>/customerServlet?action=searchGcaetgory&search=" + m;
         }
     </script>
 </html>

@@ -19,4 +19,5 @@ public interface CustmerDao {
 
     void updateCustomer(CustomerModel customerModel);
     void insertVip(String cid, String vcategory, String vindate,String voudate);
+    List<CustomerModel> getCustomerMessage(String cid);
 }

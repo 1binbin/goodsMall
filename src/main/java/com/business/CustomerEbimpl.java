@@ -76,4 +76,9 @@ public class CustomerEbimpl implements CustomerEbi {
             return false;
         }
     }
+
+    @Override
+    public List<CustomerModel> getCustomerMessage(String cid) {
+        return Daofactory.getcustomerimpl().getCustomerMessage(cid);
+    }
 }
