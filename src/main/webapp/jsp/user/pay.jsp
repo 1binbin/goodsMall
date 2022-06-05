@@ -110,6 +110,7 @@
             <span>支付成功</span>
             <span id="second">3</span>
             <span>秒后跳转到首页······</span>
+            <span><a href="<%=path%>/jsp/user/user.jsp">立即返回</a></span>
         </div>
     </body>
     <script>
