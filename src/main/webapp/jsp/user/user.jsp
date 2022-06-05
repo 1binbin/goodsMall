@@ -36,6 +36,7 @@
             }
             List<CustomerModel> list;
             String message;
+            System.out.println(cid);
             if (cid != null) {
                 list = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
                 request.getSession().setAttribute("customer", list);

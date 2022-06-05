@@ -10,3 +10,182 @@
     padding: 0;
     margin: 0;
 }
+
+body {
+    background-color: #e9eaeb;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.adtop {
+    z-index: 999;
+    width: 100%;
+    background-color: #dcdcdc;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.adtop p {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 20px;
+    letter-spacing: 8px;
+    margin-left: 20px;
+}
+
+.adbottom {
+    height: calc(100% - 46px);
+    width: 150px;
+    background-color: #7cbcb6;
+    position: fixed;
+    left: 0;
+    top: 46px;
+}
+
+/*侧边栏*/
+.adleft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+input[type='radio'] {
+    display: none;
+}
+
+.adleft .adone label,
+.adleft .adtwo label {
+    text-align: center;
+    line-height: 80px;
+    width: 150px;
+    height: 80px;
+    font-size: 20px;
+    letter-spacing: 4px;
+    display: block;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+#one:checked + label,
+#two:checked + label {
+    background-color: #e9eaeb;
+    font-size: 22px;
+}
+
+.souye, .huiyuan {
+    width: 1246px;
+    height: 625px;
+    top: 0;
+    left: 150px;
+    position: absolute;
+}
+
+.souye {
+    display: block;
+}
+
+.huiyuan {
+    display: none;
+}
+
+/*轮播图*/
+.souye .box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.souye .box span {
+    font-size: 18px;
+    letter-spacing: 4px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.souye .box .line {
+    width: 98%;
+    height: 1px;
+    background-color: #333;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.souyeone {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.souyeoneleft {
+    margin-right: 50px;
+    width: 180px;
+    height: 240px;
+    border: 1px solid #d3d3d3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.souyeoneleft img {
+    width: 100%;
+}
+
+.souyroneright {
+    height: 220px;
+}
+
+.souyroneright form table {
+    border-spacing: 5px;
+    height: 90px;
+}
+
+.souyroneright form table tr td select {
+    width: 80px;
+}
+
+.souyroneright form input[type='reset'] {
+    margin-right: 10px;
+}
+
+.souyroneright form input[type='submit'],
+.souyroneright form input[type='reset'] {
+    margin-top: 20px;
+    width: 100px;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+.souyroneright form input[type='submit']:hover,
+.souyroneright form input[type='reset']:hover{
+    background-color: #63a69f;
+}
+.souyetwo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.souyetwo ul li{
+    list-style: none;
+    float: left;
+}
+.souyetwo ul li .img{
+    width: 286px;
+    height: 130px;
+    border: 1px solid #d3d3d3;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.souyetwo ul li .img img{
+    width: 100%;
+}
+/*会员管理*/

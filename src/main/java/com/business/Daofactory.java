@@ -26,4 +26,7 @@ public class Daofactory {
     public static OtherDaoImpl getotherDaoImpl(){
         return  new OtherDaoImpl();
     }
+    public static AdminDaoImpl getAdminDaoImpl(){
+        return new AdminDaoImpl();
+    }
 }

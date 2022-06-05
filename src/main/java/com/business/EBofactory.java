@@ -24,4 +24,7 @@ public class EBofactory {
     public  static  otherEbimpl getotherEbimpl(){
         return new otherEbimpl();
     }
+    public static AdminEbiImpl getAdminEbiImpl(){
+        return new AdminEbiImpl();
+    }
 }
