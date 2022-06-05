@@ -4,7 +4,8 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="com.entity.ShoppingcartModel" %>
 <%@ page import="com.business.EBofactory" %>
-<%@ page import="com.entity.EmployeeModel" %><%--
+<%@ page import="com.entity.EmployeeModel" %>
+<%@ page import="com.entity.CustomerModel" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -63,10 +64,6 @@
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
             </div>
-            <%@ page import="com.entity.CustomerModel" %>
-            <%@ page import="com.business.EBofactory" %>
-            <%@ page import="java.util.List" %>
-            <%@ page contentType="text/html;charset=UTF-8" language="java" %>
             <%--    修改个人信息--%>
             <%
                 List<CustomerModel> cusstomerlist = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
