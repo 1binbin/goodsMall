@@ -235,7 +235,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="javascript:void(0)">
+                    <a href="<%=path%>/jsp/admin/adminLogin.jsp">
                         <span><i class="fa fa-line-chart" aria-hidden="true"></i></span>
                         <span>后台</span>
                     </a>
