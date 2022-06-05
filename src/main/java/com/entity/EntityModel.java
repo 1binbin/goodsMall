@@ -32,11 +32,12 @@ public class EntityModel {
     private String vcategory;
     private Date vindate;
     private Date voutdate;
+    private String vstatus;
 
     public EntityModel() {
     }
 
-    public EntityModel(String oid, String gid, String eid, String cid, String rname, LocalDateTime tdate, double tpay, String tisdelivey, String tispay, String message, String gcategory, String gname, double gprice, double ginprice, String gdescribe, String gvip, int mnum, String radd, double allprice, String tisover) {
+    public EntityModel(String oid, String gid, String eid, String cid, String rname, LocalDateTime tdate, double tpay, String tisdelivey, String tispay, String message, String gcategory, String gname, double gprice, double ginprice, String gdescribe, String gvip, int mnum, String radd, double allprice, String tisover, String vcategory, Date vindate, Date voutdate, String vstatus) {
         this.oid = oid;
         this.gid = gid;
         this.eid = eid;
@@ -57,6 +58,10 @@ public class EntityModel {
         this.radd = radd;
         this.allprice = allprice;
         this.tisover = tisover;
+        this.vcategory = vcategory;
+        this.vindate = vindate;
+        this.voutdate = voutdate;
+        this.vstatus = vstatus;
     }
 
     public EntityModel(String oid, String cid, String rname, LocalDateTime tdate, double tpay, String tisdelivey, String tispay) {
@@ -69,11 +74,20 @@ public class EntityModel {
         this.tispay = tispay;
     }
 
+
     public EntityModel(String cid, String vcategory, Date vindate, Date voutdate) {
         this.cid = cid;
         this.vcategory = vcategory;
         this.vindate = vindate;
         this.voutdate = voutdate;
+    }
+
+    public String getVstatus() {
+        return vstatus;
+    }
+
+    public void setVstatus(String vstatus) {
+        this.vstatus = vstatus;
     }
 
     public String getVcategory() {

@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.Utils.Utils" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -11,6 +11,7 @@
     <head>
         <%
             String path = request.getContextPath();
+            String aid = request.getParameter("aid");
         %>
         <title>天天淘-后台</title>
         <link rel="stylesheet" href="<%=path%>/css/admin.css">
@@ -33,15 +34,15 @@
                                     <img src="" alt="" id="img">
                                 </div>
                                 <div class="souyroneright">
-                                    <form action="" enctype="multipart/form-data" method="post">
+                                    <form action="<%=path%>/AdminLUnServlet" enctype="multipart/form-data" method="post">
                                         <table>
                                             <tr>
                                                 <td>选择图片</td>
-                                                <td><input type="file" accept="image/jpeg"  onchange="showimg11(this)"></td>
+                                                <td><input type="file" accept="image/jpeg"  onchange="showimg11(this)" name="file"></td>
                                             </tr>
                                             <tr>
                                                 <td>选择顺序</td>
-                                                <td><select name="" id="">
+                                                <td><select name="seleetc" id="select">
                                                     <option value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>

@@ -34,6 +34,7 @@ public class AdminServlet extends HttpServlet {
         String apassword = request.getParameter("apassword");
         AdminModel adminModel = new AdminModel(aid,apassword);
         if (EBofactory.getAdminEbiImpl().isLogin(adminModel)){
+            request.getSession().setAttribute("aid",aid);
             request.getRequestDispatcher("jsp/admin/admin.jsp").forward(request,response);
         }else {
             Utils.alter(response, "<script type='text/javascript'>alert('用户名或密码错误！')</script>", "<script type='text/javascript'>location.href='jsp/admin/adminLogin.jsp'</script>");

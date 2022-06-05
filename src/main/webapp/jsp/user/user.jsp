@@ -224,6 +224,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="<%=path%>/jsp/admin/adminLogin.jsp">
+                        <span><i class="fa fa-line-chart" aria-hidden="true"></i></span>
+                        <span>后台</span>
+                    </a>
+                </li>
+                <li>
                     <a href="javascript:void(0)">
                         <span><i class="fa fa-commenting-o" aria-hidden="true"></i></span>
                         <span>客服</span>
@@ -233,12 +239,6 @@
                     <a href="javascript:void(0)">
                         <span><i class="fa fa-pencil-square-o" aria-hidden="true"></i></span>
                         <span>反馈</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<%=path%>/jsp/admin/adminLogin.jsp">
-                        <span><i class="fa fa-line-chart" aria-hidden="true"></i></span>
-                        <span>后台</span>
                     </a>
                 </li>
                 <li>
