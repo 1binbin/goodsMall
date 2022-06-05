@@ -81,4 +81,10 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
         String sql = "select * from raddress where cid = ? and rname = ?";
         return getBeanList(connection, sql, cid, rname);
     }
+
+    @Override
+    public List<CustomerModel> getCustomer(String cid) {
+        String sql = "select * from customer where cid = ?";
+        return getBeanList(connection,sql,cid);
+    }
 }

@@ -20,4 +20,5 @@ public interface CustomerEbi {
 
     void addRadd(String cid,String rname,String radd);
     void updateRadd(String cid,String rname,String radd,String old);
+    List<CustomerModel> getCustomer(String cid);
 }

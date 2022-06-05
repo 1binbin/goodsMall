@@ -7,10 +7,10 @@
     List<CustomerModel> cusstomerlist = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
     if (!cusstomerlist.isEmpty()) {
 %>
-<div class="personalnformation" id="personalnformation">
+<div class="personalnformation" id="personalnformation111">
     <div>
         <span>个人信息</span>
-        <span onclick="person(2,'<%=cid%>','<%=path%>')">返回</span>
+        <span onclick="person('personalnformation111',2,'<%=cid%>','<%=path%>')">返回</span>
     </div>
     <div class="line"></div>
     <table class="table">

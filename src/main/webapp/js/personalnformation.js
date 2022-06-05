@@ -1,12 +1,12 @@
-function person(n,m,path) {
+function person(id,n,m,path) {
     if (m ===null){
         window.open(path+"/jsp/index.jsp")
     }else {
         if (n ===1){
-            document.getElementById("personalnformation").style.display = "flex";
+            document.getElementById(id).style.display = "flex";
         }
         if (n===2){
-            document.getElementById("personalnformation").style.display = "none";
+            document.getElementById(id).style.display = "none";
         }
     }
 }

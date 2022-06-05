@@ -102,4 +102,9 @@ public class CustomerEbimpl implements CustomerEbi {
             Daofactory.getcustomerimpl().updateRadd(cid,rname,radd,old);
         }
     }
+
+    @Override
+    public List<CustomerModel> getCustomer(String cid) {
+        return Daofactory.getcustomerimpl().getCustomer(cid);
+    }
 }

@@ -2,6 +2,7 @@ package com.business;
 
 import com.business.businessimplement.CountEbi;
 import com.entity.CountModel;
+import com.entity.CustomerModel;
 
 import java.util.List;
 
@@ -27,4 +28,5 @@ public class CountEbiEmpl implements CountEbi {
         }
         return 0;
     }
+
 }

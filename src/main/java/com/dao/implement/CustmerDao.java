@@ -24,4 +24,5 @@ public interface CustmerDao {
     void addRadd(String cid,String rname,String radd);
     void updateRadd(String cid,String rname,String radd,String old);
     List<CustomerModel> raddlist(String cid,String rname);
+    List<CustomerModel> getCustomer(String cid);
 }
