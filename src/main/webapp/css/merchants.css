@@ -179,11 +179,11 @@ body {
 }
 
 .right .second {
-    display: none;
+    display: block;
 }
 
 .right .third {
-    display: block;
+    display: none;
 }
 
 .right .fourth {
