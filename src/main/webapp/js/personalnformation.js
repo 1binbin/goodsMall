@@ -1,4 +1,6 @@
 function person(id,n,m,path) {
+    console.log(m)
+    console.log(111)
     if (m ===null){
         window.open(path+"/jsp/index.jsp")
     }else {
