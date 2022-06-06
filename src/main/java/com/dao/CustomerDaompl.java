@@ -48,8 +48,8 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
 
     @Override
     public void insertVip(String cid, String vcategory, String vindate, String voudate) {
-        String sql = "insert into vip(cid,vcategory,vindate,voutdate) values(?,?,?,?)";
-        update(connection, sql, cid, vcategory, vindate, voudate);
+        String sql = "insert into vip(cid,vcategory,vindate,voutdate,vstatus) values(?,?,?,?,?)";
+        update(connection, sql, cid, vcategory, vindate, voudate,"no");
     }
 
     @Override
@@ -86,5 +86,23 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
     public List<CustomerModel> getCustomer(String cid) {
         String sql = "select * from customer where cid = ?";
         return getBeanList(connection,sql,cid);
+    }
+
+    @Override
+    public List<CustomerModel> getCustomerVip(String search, String select) {
+        String sql = "select customer.cid ,cname,cnickname,csex,(if(vcategory = 'month','年度会员',if(vcategory = 'quarter','季度会员','年度会员')))as vcategory ,vindate,voutdate,if(vstatus='is','解冻','冻结') as vstatus from customer,vip where customer.cid = vip.cid and (vip.cid = ? or cname  like concat('%',?,'%') or vcategory  like concat('%',?,'%')) and vstatus like concat('%',?,'%')";
+        return getBeanList(connection,sql,search,search,search,select);
+    }
+
+    @Override
+    public List<CustomerModel> getCustomerVip1(String search) {
+        String sql = "select customer.cid ,cname,cnickname,csex,(if(vcategory = 'month','年度会员',if(vcategory = 'quarter','季度会员','年度会员')))as vcategory ,vindate,voutdate,if(vstatus='is','解冻','冻结') as vstatus from customer,vip where customer.cid = vip.cid and (vip.cid = ? or cname  like concat('%',?,'%') or vcategory  like concat('%',?,'%'))";
+        return getBeanList(connection,sql,search,search,search);
+    }
+
+    @Override
+    public void setCustomerVIp(String vstatus,String cid) {
+        String sql = "update vip set vstatus = ? where cid = ?";
+        update(connection,sql,vstatus,cid);
     }
 }

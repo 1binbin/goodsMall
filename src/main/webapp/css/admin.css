@@ -81,11 +81,11 @@ input[type='radio'] {
 }
 
 .souye {
-    display: block;
+    display: none;
 }
 
 .huiyuan {
-    display: none;
+    display: block;
 }
 
 /*轮播图*/
@@ -189,3 +189,149 @@ input[type='radio'] {
     width: 100%;
 }
 /*会员管理*/
+.huiyuan .top .select{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.third .top .select {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 14px;
+    right: 30px;
+}
+
+.choose, .chooseinput, .button ,
+.choose, .chooseinput1, .button {
+    outline: none;
+    height: 32px;
+    background-color: #efefef;
+}
+
+.choose {
+    border-left: 1px solid #333;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-right: none;
+    width: 100px;
+    border-radius: 10px 0 0 10px;
+    text-indent: 8px;
+}
+
+.chooseinput {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-left: none;
+    border-right: none;
+    width: 350px;
+    text-indent: 8px;
+}
+.chooseinput1 {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-left:  1px solid #333;
+    border-right: none;
+    width: 350px;
+    text-indent: 8px;
+    border-radius: 10px 0 0 10px;
+}
+
+.button {
+    border-right: 1px solid #333;
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+}
+
+.button #btnaa {
+    font-size: 22px;
+    color: #333;
+}
+
+.button:hover {
+    background-color: #cacaca;
+}
+.seletc{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.huiyuan .top{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+.huiyuan .top .seletc{
+    margin-left: 20px;
+}
+.huiyuan .top .select{
+    margin-right: 20px;
+}
+#selectc{
+    margin-left: 5px;
+    height: 20px;
+    width: 100px;
+    border-radius: 4px;
+}
+/*会员信息表*/
+.table1{
+    border-bottom: 1px solid #333;
+    border-top: 1px solid #333;
+    width: 98%;
+    height: 520px;
+    margin: 0 auto;
+    overflow-y: scroll;
+}
+.table111{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    margin-left: 12px;
+    width: calc(98% - 16px);
+    border: none !important;
+}
+.table111 tr td {
+    border: none !important;
+}
+#table{
+    width: 100%;
+}
+.table111 ,#table{
+    border-top: 1px solid #333;
+    border-left: 1px solid #333;
+    border-spacing: 0;
+    text-align: center;
+    vertical-align: center;
+    word-break: break-word;
+    word-wrap: break-word;
+    table-layout: fixed;
+}
+#table tr td{
+    border-bottom: 1px solid #333;
+    border-right: 1px solid #333;
+    padding: 5px 0 5px 0;
+}
+#table tr td button{
+    width: 60px;
+    height: 30px;
+    border-radius: 4px;
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+#table tr td button:hover{
+    background-color: #63a69f;
+}

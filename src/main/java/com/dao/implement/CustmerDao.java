@@ -25,4 +25,8 @@ public interface CustmerDao {
     void updateRadd(String cid,String rname,String radd,String old);
     List<CustomerModel> raddlist(String cid,String rname);
     List<CustomerModel> getCustomer(String cid);
+    /*会员管理*/
+    List<CustomerModel> getCustomerVip(String search,String select);
+    List<CustomerModel> getCustomerVip1(String search);
+    void setCustomerVIp (String vstatus,String cid);
 }
