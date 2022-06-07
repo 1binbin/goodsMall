@@ -11,6 +11,6 @@ import java.util.List;
  */
 public class test {
     public static void main(String[] args) {
-        System.out.println(EBofactory.getcustomerebiempl().getCustomerVip1(""));
+        System.out.println(EBofactory.getcustomerebiempl().vcategory("19129214652"));
     }
 }

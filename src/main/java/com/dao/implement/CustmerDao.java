@@ -29,4 +29,8 @@ public interface CustmerDao {
     List<CustomerModel> getCustomerVip(String search,String select);
     List<CustomerModel> getCustomerVip1(String search);
     void setCustomerVIp (String vstatus,String cid);
+    /*会员查询*/
+    List<CustomerModel> getVip(String cid);
+    void deleteVip(String cid);
+    List<CustomerModel> selectISDeleteVip(String cid);
 }

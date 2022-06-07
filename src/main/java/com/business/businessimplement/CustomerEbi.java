@@ -24,4 +24,6 @@ public interface CustomerEbi {
     List<CustomerModel> getCustomerVip(String search,String select);
     List<CustomerModel> getCustomerVip1(String search);
     void setCustomerVIp (String vstatus,String cid);
+    /*会员查询*/
+    String vcategory(String cid);
 }

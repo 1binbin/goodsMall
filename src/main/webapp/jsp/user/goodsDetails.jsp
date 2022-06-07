@@ -2,7 +2,8 @@
 <%@ page import="com.dao.GoodsDaoImpl" %>
 <%@ page import="com.entity.GoodsModel" %>
 <%@ page import="com.business.EBofactory" %>
-<%@ page import="com.entity.EmployeeModel" %><%--
+<%@ page import="com.entity.EmployeeModel" %>
+<%@ page import="com.entity.CustomerModel" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -21,6 +22,7 @@
             List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().getGidEid(gid,eid);
             GoodsModel g = goodsModels.get(0);
             EmployeeModel employeeModel = EBofactory.getemployeeebiempl().getEmployee(eid).get(0);
+            String vcategory = EBofactory.getcustomerebiempl().vcategory(cid);
         %>
         <title>天天淘-商品详情</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsDetails.css">
@@ -89,24 +91,29 @@
                     </div>
                 </div>
                 <div class="m-r-submit">
-                    <button class="gouwuche" onclick="insertCart()">加入购物车</button>
+                    <button class="gouwuche" onclick="insertCart(<%=cid%>)">加入购物车</button>
                     <button class="lijigoumai" onclick="noworder()">直接购买</button>
                 </div>
             </div>
         </div>
     </body>
     <script>
-        function insertCart() {
-            var num = document.getElementById("num").value;
-            const url = "<%=path%>/customerServlet?action=insertCart&gid=<%=gid%>&eid=<%=eid%>&cid=<%=cid%>&snum="+num;
-            let xml = new XMLHttpRequest();
-            xml.open("get",url,true);
-            xml.onreadystatechange = function (){
-                if (xml.readyState === 4 && xml.status === 200){
-                    alert("添加成功");
+        function insertCart(cid) {
+            if (cid !==null){
+                var num = document.getElementById("num").value;
+                const url = "<%=path%>/customerServlet?action=insertCart&gid=<%=gid%>&eid=<%=eid%>&cid=<%=cid%>&snum="+num;
+                let xml = new XMLHttpRequest();
+                xml.open("get",url,true);
+                xml.onreadystatechange = function (){
+                    if (xml.readyState === 4 && xml.status === 200){
+                        alert("添加成功");
+                    }
                 }
+                xml.send(null)
+            }else {
+                alert("请先登录");
+                window.open("<%=path%>/jsp/index.jsp","_self")
             }
-            xml.send(null)
         }
         function noworder() {
         //eid gid num
@@ -114,7 +121,7 @@
             var gid = "<%=g.getGid()%>";
             var num = document.getElementById("num").value;
             var arr = [eid,gid, num];
-            window.open("<%=path%>/jsp/user/order.jsp?arr="+arr);
+            window.open("<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&arr="+arr+"&vcategory=<%=vcategory%>");
         }
     </script>
 </html>

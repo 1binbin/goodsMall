@@ -190,8 +190,11 @@ body {
 .order .order-bottom .box .f-bottom label {
     margin-right: 20px;
 }
-
-.order .order-bottom .box .f-bottom input:checked + label {
+.order .order-bottom .box .hidden{
+    display: none;
+}
+.order .order-bottom .box .f-bottom .radio:checked + label,
+.order .order-bottom .box .f-bottom .radio1:checked + label{
     border: 2px solid #c81623;
     box-shadow: 0 0 2px rgba(0,0,0,0.4);
 }

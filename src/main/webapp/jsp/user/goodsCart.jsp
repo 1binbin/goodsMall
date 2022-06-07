@@ -23,11 +23,12 @@
             int count = EBofactory.getCountbiempl().getAllCart(cid);
             List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
             String message;
-            if (list1.isEmpty()){
+            if (list1.isEmpty()) {
                 message = "你好，请登录或注册";
-            }else {
-                message = "您好，"+list1.get(0).getCnickname();
+            } else {
+                message = "您好，" + list1.get(0).getCnickname();
             }
+            String vcategory = EBofactory.getcustomerebiempl().vcategory(cid);
         %>
         <title>购物车</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -43,7 +44,8 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%>
+                        </a>
                     </li>
                     <li class="line"></li>
                     <li>
@@ -59,7 +61,8 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="javascript:void(0)" id="person" onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
+                        <a href="javascript:void(0)" id="person"
+                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
                     </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
@@ -190,10 +193,10 @@
                 j++;
             }
         }
-        if (arr.length === 0){
+        if (arr.length === 0) {
             alert("请先选中商品")
-        }else {
-            window.location.href = "<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&cid=<%=cid%>&arr=" + arr;
+        } else {
+            window.location.href = "<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&arr=" + arr + "&vcategory=<%=vcategory%>";
         }
     }
 

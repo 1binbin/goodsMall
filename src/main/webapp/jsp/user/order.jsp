@@ -38,12 +38,16 @@
             String oid = simpleDateFormat.format(date);
             List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
             String message;
-            if (list1.isEmpty()){
+            if (list1.isEmpty()) {
                 message = "你好，请登录或注册";
-            }else {
-                message = "您好，"+list1.get(0).getCnickname();
+            } else {
+                message = "您好，" + list1.get(0).getCnickname();
             }
             List<CustomerModel> listRadd = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
+            for (List<String> strings : list) {
+                List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().getGidEid(strings.get(1), strings.get(0));
+                numPrice += Integer.parseInt(strings.get(2)) * goodsModels.get(0).getGprice();
+            }
         %>
         <title>天天淘-结算页</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -52,6 +56,26 @@
         <link rel="stylesheet" href="<%=path%>/css/personalnformation.css">
         <script src="<%=path%>/js/personalnformation.js"></script>
     </head>
+    <script>
+        function loadon() {
+            var reg = new RegExp("(^|&)vcategory=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                r = r[2]
+            } else {
+                r = "";
+            }
+            var hidden1 = document.getElementsByClassName("hidden");
+            if (r !== "") {
+                for (let i = 0; i < hidden1.length; i++) {
+                    hidden1[i].style.display = "flex";
+                }
+            }
+            return r;
+        }
+
+        window.onload = loadon;
+    </script>
     <body>
         <div class="top">
             <span><a href="<%=path%>/jsp/user/user.jsp"><i class="fa fa-angle-double-left"
@@ -59,7 +83,8 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%>
+                        </a>
                     </li>
                     <li class="line"></li>
                     <li>
@@ -75,7 +100,8 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="javascript:void(0)" id="person" onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
+                        <a href="javascript:void(0)" id="person"
+                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
                     </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
@@ -114,8 +140,10 @@
                     <div class="f-top">
                         <p>收货人信息</p>
                         <div class="f-top-right">
-                            <a href="javascript:void(0)" onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">修改收货地址</a>
-                            <a href="javascript:void(0)" onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">新增收货地址</a>
+                            <a href="javascript:void(0)"
+                               onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">修改收货地址</a>
+                            <a href="javascript:void(0)"
+                               onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">新增收货地址</a>
                         </div>
                     </div>
                     <div class="f-bottom">
@@ -149,12 +177,21 @@
                         <p>支付方式</p>
                     </div>
                     <div class="f-bottom">
-                        <input type="radio" name="zfu" value="weixin" id="huodao" checked class="radio">
+                        <input type="radio" name="zfu" value="weixin" id="huodao" class="radio">
                         <label for="huodao">货到付款</label>
                         <input type="radio" name="zfu" value="weixin" id="weixin" checked class="radio">
                         <label for="weixin">微信支付</label>
                         <input type="radio" name="zfu" value="zifubao" id="zifubao" class="radio">
                         <label for="zifubao">支付宝</label>
+                    </div>
+                    <div class="f-top hidden">
+                        <p>是否使用会员</p>
+                    </div>
+                    <div class="f-bottom hidden">
+                        <input type="radio" id="fou" checked name="vip" class="radio1">
+                        <label for="fou" onclick="c('fou',<%=numPrice%>)">否</label>
+                        <input type="radio" id="shi" name="vip" class="radio1">
+                        <label for="shi" onclick="c('shi',<%=numPrice%>)">是</label>
                     </div>
                 </div>
                 <div class="line"></div>
@@ -170,7 +207,6 @@
                             <%
                                 for (List<String> strings : list) {
                                     List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().getGidEid(strings.get(1), strings.get(0));
-                                    numPrice += Integer.parseInt(strings.get(2)) * goodsModels.get(0).getGprice();
                             %>
                             <li>
                                 <div class="goods">
@@ -208,7 +244,7 @@
         <div class="order-message">
             <div class="f">
                 <span>应付总额：</span>
-                <span>￥<%=numPrice%></span>
+                <span id="span">￥<%=numPrice%></span>
             </div>
             <div class="s">
                 <span>寄送至：</span>
@@ -236,15 +272,16 @@
                     fangshi = zifu[i].value;
                 }
             }
+            var numPrice = document.getElementById("span").innerText;
             //添加到未支付订单
-            var url = "<%=path%>/customerServlet?action=addOrder&arr=<%=arr%>&rname=" + a.options[ainde].innerText + "&tpay=<%=numPrice%>&cid=<%=cid%>&oid=<%=oid%>";
+            var url = "<%=path%>/customerServlet?action=addOrder&arr=<%=arr%>&rname=" + a.options[ainde].innerText + "&tpay="+numPrice+"&cid=<%=cid%>&oid=<%=oid%>";
             let xml = new XMLHttpRequest();
             xml.open("get", url, true);
             xml.onreadystatechange = function () {
                 console.log(xml.readyState)
                 console.log(xml.status)
                 if (xml.readyState === 4 && xml.status === 200) {
-                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&numPrice=<%=numPrice%>&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi + "&cid=<%=cid%>&oid=<%=oid%>";
+                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&numPrice='+numPrice+'&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi + "&cid=<%=cid%>&oid=<%=oid%>";
                 }
             }
             xml.send(null);
@@ -260,6 +297,25 @@
             var input = document.getElementById("address");
             var index = input.selectedIndex;
             document.getElementById("radd").innerText = input.options[index].innerText;
+        }
+
+        function c(m,n) {
+            var r = loadon();
+            var discount = 0.0;
+            if (m === 'fou') {
+                discount = 1;
+            } else {
+                if (r === 'year') {
+                    discount = 0.9;
+                } else if (r === 'month') {
+                    discount = 0.95;
+                } else {
+                    discount = 0.98;
+                }
+            }
+            n = n * discount;
+            n = n.toFixed(2);
+            document.getElementById("span").innerText = n;
         }
     </script>
 </html>

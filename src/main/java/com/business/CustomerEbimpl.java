@@ -122,4 +122,14 @@ public class CustomerEbimpl implements CustomerEbi {
     public void setCustomerVIp(String vstatus, String cid) {
         Daofactory.getcustomerimpl().setCustomerVIp(vstatus,cid);
     }
+
+    @Override
+    public String vcategory(String cid) {
+        List<CustomerModel> list= Daofactory.getcustomerimpl().getVip(cid);
+        if (list.isEmpty()){
+            return "";
+        }else {
+            return list.get(0).getVcategory();
+        }
+    }
 }
