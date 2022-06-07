@@ -77,7 +77,7 @@ public class RegisterServlet extends HttpServlet {
                 if (Objects.equals(fpassword, spassword)){
                     if ("user".equals(role)){
                         if (EBofactory.getcustomerebiempl().insertCustomer(customerModel)){
-                            request.getSession().setAttribute("userName",phone+role);
+                            request.getSession().setAttribute("username",phone+role);
                             request.getRequestDispatcher("jsp/userwait.jsp").forward(request,response);
                         }else {
                             Utils.alter(response, "<script type='text/javascript'>alert('账号已存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
@@ -86,7 +86,7 @@ public class RegisterServlet extends HttpServlet {
                         if (EBofactory.getemployeeebiempl().insertEmployee(employeeModel)){
                             Utils.getAllGoods(request,phone,0,15);
                             Utils.getCount(request,phone);
-                            request.getSession().setAttribute("adminName",phone+role);
+                            request.getSession().setAttribute("username",phone+role);
                             request.getRequestDispatcher("jsp/merchants/merchantsWait.jsp").forward(request,response);
                         }else {
                             Utils.alter(response, "<script type='text/javascript'>alert('账号已存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
