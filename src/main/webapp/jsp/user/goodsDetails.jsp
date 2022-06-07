@@ -59,7 +59,7 @@
             </div>
             <div class="top-right">
                 <span><%=employeeModel.getEstorename()%></span>
-                <input type="checkbox" id="i" onclick="insertmyfocus()">
+                <input type="checkbox" id="i" onclick="insertmyfocus('<%=cid%>')">
                 <label for="i"><i class="fa fa-star" aria-hidden="true" id="ii"></i>关注店铺</label>
             </div>
         </div>
@@ -138,19 +138,24 @@
             var eid = "<%=g.getEid()%>";
             var gid = "<%=g.getGid()%>";
             var num = document.getElementById("num").value;
-            var arr = [eid,gid, num];
+            var arr = [eid,gid,num];
             window.open("<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&arr="+arr+"&vcategory=<%=vcategory%>");
         }
-        function insertmyfocus() {
-            var url  = "<%=path%>/customerServlet?action=setFocus&cid=<%=cid%>&eid=<%=eid%>";
-            let xml = new XMLHttpRequest();
-            xml.open("GET",url,true);
-            xml.onreadystatechange = function () {
-                if(xml.readyState === 4 && xml.status === 200){
-                    alert("操作成功");
+        function insertmyfocus(cid) {
+            if (cid==='null'){
+                alert("请先登录");
+                window.open("<%=path%>/jsp/index.jsp","_self")
+            }else {
+                var url  = "<%=path%>/customerServlet?action=setFocus&cid="+cid+"&eid=<%=eid%>";
+                let xml = new XMLHttpRequest();
+                xml.open("GET",url,true);
+                xml.onreadystatechange = function () {
+                    if(xml.readyState === 4 && xml.status === 200){
+                        alert("操作成功");
+                    }
                 }
+                xml.send(null);
             }
-            xml.send(null);
         }
     </script>
 </html>
