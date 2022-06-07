@@ -24,14 +24,21 @@ body {
     width: 100%;
     background-color: #dcdcdc;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.adtop p {
+.adtop p:first-child {
     padding-bottom: 10px;
     padding-top: 10px;
     font-size: 20px;
     letter-spacing: 8px;
     margin-left: 20px;
+}
+.adtop p:nth-child(2){
+    margin-right: 25px;
 }
 
 .adbottom {
@@ -81,11 +88,11 @@ input[type='radio'] {
 }
 
 .souye {
-    display: none;
+    display: block;
 }
 
 .huiyuan {
-    display: block;
+    display: none;
 }
 
 /*轮播图*/

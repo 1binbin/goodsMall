@@ -1,7 +1,9 @@
 <%@ page import="com.Utils.Utils" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.entity.CustomerModel" %>
-<%@ page import="com.business.EBofactory" %><%--
+<%@ page import="com.business.EBofactory" %>
+<%@ page import="com.controller.listener.SessionCounter" %>
+<%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -24,6 +26,7 @@
     <body>
         <div class="adtop">
             <p>天天淘后台</p>
+            <p>在线用户人数：<%=SessionCounter.getActiveSession()%></p>
         </div>
         <div class="adbottom">
             <div class="adleft">
