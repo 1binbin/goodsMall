@@ -48,11 +48,6 @@
 
         function outlogin() {
             if (window.confirm("确定是否退出登录？")) {
-                <%
-                /*Cookie cookie = new Cookie("username","");
-                cookie.setMaxAge(0);
-                response.addCookie(cookie);*/
-                %>
                 window.open("<%=path%>/jsp/index.jsp", "_self")
             }
         }
@@ -92,7 +87,7 @@
                                 <div class="personalnformation">
                                     <div>
                                         <span>个人信息</span>
-                                        <span >返回</span>
+                                        <span onclick="reruen()">返回</span>
                                     </div>
                                     <div class="line"></div>
                                     <table class="table">
@@ -128,7 +123,7 @@
                                         </tr>
                                         <tr>
                                             <td>密码</td>
-                                            <td><span id="a" >点击前往重置密码</span></td>
+                                            <td><span id="a" onclick="window.open('<%=path%>/jsp/index.jsp')">点击前往重置密码</span></td>
                                         </tr>
                                         <tr>
                                             <td>性别</td>
@@ -750,7 +745,6 @@
                 document.getElementById("q").style.display = "none";
                 document.getElementById("w").style.display = "block";
                 document.getElementById("okButton").removeAttribute("disabled")
-                document.getElementById("eid").removeAttribute("readonly");
                 document.getElementById("ename").removeAttribute("readonly");
                 document.getElementById("estorename").removeAttribute("readonly");
                 document.getElementById("ephone").removeAttribute("readonly");
@@ -769,7 +763,7 @@
                         sex1 = sex[i].value;
                     }
                 }
-                var url = path +"/merchantsPersonServlet?action=update&eid="+eid+"&ename="+ename+"&estorename="+estorename+"&cesx="+sex1+"&ephone"+ephone+"&eaddress="+eaddress;
+                var url = path +"/merchantsPersonServlet?action=update&eid="+eid+"&ename="+ename+"&estorename="+estorename+"&cesx="+sex1+"&ephone="+ephone+"&eaddress="+eaddress;
                 let xml = new XMLHttpRequest();
                 xml.open("get",url,true);
                 xml.onreadystatechange = function (){
@@ -779,6 +773,9 @@
                     }
                 }
                 xml.send(null)
+            }
+            function reruen() {
+                document.getElementById("personinfonation").style.display = 'none';
             }
         </script>
     </body>

@@ -678,7 +678,7 @@ body {
     left: 70px;
     top: 90px;
     z-index: 999;
-    display: block;
+    display: none;
 }
 
 .navbar input:checked ~ .main .left ul li .personinfonation {
