@@ -48,7 +48,14 @@
 
         function outlogin() {
             if (window.confirm("确定是否退出登录？")) {
-                window.open("<%=path%>/jsp/index.jsp", "_self")
+                let xml = new XMLHttpRequest();
+                xml.open("GET", "<%=path%>/merchantsPersonServlet?action=deleteCookie", true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        window.open("<%=path%>/jsp/index.jsp", "_self")
+                    }
+                }
+                xml.send(null);
             }
         }
     </script>

@@ -14,10 +14,7 @@ import com.entity.ShoppingcartModel;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -84,5 +81,13 @@ public class merchantsPersonServlet extends HttpServlet {
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");
     }
-
+    /*清除cookie*/
+    protected void deleteCookie(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Cookie cookie = new Cookie("username", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+    }
 }
