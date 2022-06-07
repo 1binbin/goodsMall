@@ -15,4 +15,5 @@ public interface EmployeeEbi {
     boolean insertEmployee(EmployeeModel employeeModel);
     boolean updateEmployee(EmployeeModel employeeModel);
     List<EmployeeModel> getEmployee(String eid);
+    void updateEmployeeAll(EmployeeModel employeeModel);
 }

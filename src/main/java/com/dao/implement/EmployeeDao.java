@@ -15,4 +15,5 @@ public interface EmployeeDao {
     List<EmployeeModel> getEid(String eid);
     void insertEmployee(EmployeeModel employeeModel);
     void updateEmployee(EmployeeModel employeeModel);
+    void updateEmployeeAll(EmployeeModel employeeModel);
 }

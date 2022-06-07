@@ -12,20 +12,21 @@ public class EmployeeModel {
     private String esex;
     private String ename;
     private String estorename;
-    private String phone;
+    private String ephone;
 
     public EmployeeModel() {
     }
 
-    public EmployeeModel(String eid, String epassword, String eaddress, String esex, String ename, String estorename, String phone) {
+    public EmployeeModel(String eid, String epassword, String eaddress, String esex, String ename, String estorename, String ephone) {
         this.eid = eid;
         this.epassword = epassword;
         this.eaddress = eaddress;
         this.esex = esex;
         this.ename = ename;
         this.estorename = estorename;
-        this.phone = phone;
+        this.ephone = ephone;
     }
+
 
     public String getEaddress() {
         return eaddress;
@@ -59,12 +60,12 @@ public class EmployeeModel {
         this.estorename = estorename;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getEphone() {
+        return ephone;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setEphone(String ephone) {
+        this.ephone = ephone;
     }
 
     public String getEid() {

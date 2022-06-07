@@ -75,7 +75,7 @@
                 <div class="forget" id="forget">
                     <form action="<%=path%>/ForgetServlet" class="form" id="form3" method="post">
                         <h2 class="from_title" id="h2">重置密码</h2>
-                        <input type="text" placeholder="手机号" class="input" name="phone">
+                        <input type="text" placeholder="手机号" class="input" name="ephone">
                         <input type="password" placeholder="新密码" class="input" name="fpassword" id="fpassword">
                         <div class="inputdiv"><p id="message2"></p></div>
                         <input type="password" placeholder="确认密码" class="input" name="spassword" id="ffpassword">
@@ -103,7 +103,7 @@
             <div class="container_form container--singin">
                 <form action="<%=path%>/RegisterServlet" class="form" id="form2" method="post">
                     <h2 class="from_title">注册账号</h2>
-                    <input type="text" placeholder="手机号" class="input" name="phone">
+                    <input type="text" placeholder="手机号" class="input" name="ephone">
                     <input type="password" placeholder="密码" class="input" name="fpassword" id="rfpassword">
                     <div class="inputdiv"><p id="message1"></p></div>
                     <input type="password" placeholder="确认密码" class="input" name="spassword" id="rspassword">

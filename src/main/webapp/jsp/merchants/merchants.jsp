@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.business.EBofactory" %>
 <%@ page import="com.entity.EntityModel" %>
+<%@ page import="com.entity.EmployeeModel" %>
 <%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
@@ -23,6 +24,7 @@
             int pageCount = count / 15 + 1;
             List<GoodsModel> list = EBofactory.getgoodsebiempl().getGcategory();
             List<List<EntityModel>> listList = EBofactory.getotherEbimpl().getList(eid, "yes", "", "", "", "", "all");
+            List<EmployeeModel> list1 = EBofactory.getemployeeebiempl().getEmployee(eid);
         %>
         <title>管理员</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -66,7 +68,7 @@
                 <div class="left">
                     <ul>
                         <li>
-                            <img src="<%=path%>/img/1.jpg" alt="暂无图片">
+                            <img src="<%=path%>/merchantsImg/<%=eid%>.jpg" alt="暂无图片">
                             <span>欢迎您，<%=name%></span>
                         </li>
                         <li>
@@ -82,10 +84,71 @@
                             </a>
                         </li>
                         <li>
-                            <a href="javascript:void(0);" id="d" onclick="dOnclick()">
+                            <a href="javascript:void(0);" id="d" onclick="showPerson()">
                                 <i class="fa fa-user-circle-o" aria-hidden="true"></i>
                                 <span>个人中心</span>
                             </a>
+                            <div class="personinfonation" id="personinfonation">
+                                <div class="personalnformation">
+                                    <div>
+                                        <span>个人信息</span>
+                                        <span >返回</span>
+                                    </div>
+                                    <div class="line"></div>
+                                    <table class="table">
+                                        <tr>
+                                            <td>头像</td>
+                                            <td>
+                                                <form action="<%=path%>/merchantsPersonServlet" method="post" enctype="multipart/form-data" id="form">
+                                                    <input type="hidden" name="action" value="touxiang">
+                                                    <input type="file" accept="image/jpeg" name="touxiang">
+                                                    <input type="submit" value="点击上传" id="touxiang">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>账号</td>
+                                            <td><input type="text" id="eid" readonly="readonly" value="<%=list1.get(0).getEid()%>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>姓名</td>
+                                            <td><input type="text" id="ename" readonly="readonly" value="<%=list1.get(0).getEname()%>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>店名</td>
+                                            <td><input type="text" id="estorename" readonly="readonly" value="<%=list1.get(0).getEstorename()%>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>电话</td>
+                                            <td><input type="text" id="ephone" readonly="readonly" value="<%=list1.get(0).getEphone()%>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>地址</td>
+                                            <td><input type="text" id="eaddress" readonly="readonly" value="<%=list1.get(0).getEaddress()%>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>密码</td>
+                                            <td><span id="a" >点击前往重置密码</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>性别</td>
+                                            <td>
+                                                <div class="q" id="q">
+                                                    <input type="text" readonly="readonly" value="<%=list1.get(0).getEsex()!=null?(list1.get(0).getEsex().equals("male")?"男":"女"):"null"%>">
+                                                </div>
+                                                <div class="w" id="w">
+                                                    <input class="ssex" type="radio" name="csex" value="male" readonly="readonly" id="nan" checked>男
+                                                    <input class="ssex" type="radio" name="csex" value="fmale" readonly="readonly" id="nv">女
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div class="perbottom">
+                                        <button onclick="okupdate1()">点击修改</button>
+                                        <button onclick="updatePerson1('<%=path%>')" disabled="disabled" id="okButton">确认修改</button>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -379,10 +442,6 @@
                             </div>
                         </div>
                     </div>
-                    <%--个人中心--%>
-                    <div class="fourth" id="fourth">
-
-                    </div>
                 </div>
             </div>
         </div>
@@ -531,7 +590,6 @@
             const first = document.getElementById("first")
             const second = document.getElementById("second")
             const third = document.getElementById("third")
-            const fourth = document.getElementById("fourth")
             const a = document.getElementById("a")
             const b = document.getElementById("b")
             const c = document.getElementById("c")
@@ -543,20 +601,13 @@
             function bOnclick() {
                 second.style.display = "block";
                 third.style.display = "none";
-                fourth.style.display = "none";
             }
 
             function cOnclick() {
                 second.style.display = "none";
                 third.style.display = "block";
-                fourth.style.display = "none";
             }
 
-            function dOnclick() {
-                second.style.display = "none";
-                third.style.display = "none";
-                fourth.style.display = "block";
-            }
 
             function reset() {
                 updatebottom.style.transform = "scaleX(0)"
@@ -688,6 +739,43 @@
                     if (xml.readyState === 4 && xml.status === 200) {
                         alert("一键发货成功");
                         change(eid)
+                    }
+                }
+                xml.send(null)
+            }
+            function showPerson(){
+                document.getElementById("personinfonation").style.display = 'block';
+            }
+            function okupdate1() {
+                document.getElementById("q").style.display = "none";
+                document.getElementById("w").style.display = "block";
+                document.getElementById("okButton").removeAttribute("disabled")
+                document.getElementById("eid").removeAttribute("readonly");
+                document.getElementById("ename").removeAttribute("readonly");
+                document.getElementById("estorename").removeAttribute("readonly");
+                document.getElementById("ephone").removeAttribute("readonly");
+                document.getElementById("eaddress").removeAttribute("readonly");
+            }
+            function updatePerson1(path) {
+                var eid = document.getElementById("eid").value;
+                var ename = document.getElementById("ename").value;
+                var estorename = document.getElementById("estorename").value;
+                var ephone = document.getElementById("ephone").value;
+                var eaddress = document.getElementById("eaddress").value;
+                var sex = document.getElementsByClassName("ssex")
+                var sex1;
+                for (let i = 0; i < sex.length ; i++) {
+                    if (sex[i].checked){
+                        sex1 = sex[i].value;
+                    }
+                }
+                var url = path +"/merchantsPersonServlet?action=update&eid="+eid+"&ename="+ename+"&estorename="+estorename+"&cesx="+sex1+"&ephone"+ephone+"&eaddress="+eaddress;
+                let xml = new XMLHttpRequest();
+                xml.open("get",url,true);
+                xml.onreadystatechange = function (){
+                    if (xml.readyState ===4&& xml.status===200){
+                        alert("修改成功")
+                        window.location.reload()
                     }
                 }
                 xml.send(null)

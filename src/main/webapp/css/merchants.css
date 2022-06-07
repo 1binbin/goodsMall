@@ -112,16 +112,19 @@ body {
     color: #fff;
     background-color: #35495d;
 }
+
 /*退出登录*/
-#outlogin{
+#outlogin {
     position: fixed;
     right: 40px;
     margin-top: 10px;
     font-size: 18px;
 }
-#outlogin:hover{
+
+#outlogin:hover {
     color: #ea3838;
 }
+
 /*兄弟选择器，判断复选框是否被选中*/
 /*+为兄弟选择器，找到input的下一个兄弟label*/
 .navbar input:checked + .label {
@@ -186,9 +189,6 @@ body {
     display: none;
 }
 
-.right .fourth {
-    background-color: #df8159;
-}
 
 /*商品管理*/
 .second .top {
@@ -198,7 +198,7 @@ body {
 }
 
 .second .top .p,
-.third .top .p{
+.third .top .p {
     color: var(--back);
     font-size: 20px;
     padding: 20px 20px 10px 20px;
@@ -277,7 +277,7 @@ body {
 }
 
 /*商品管理搜索框*/
-.second .top .select ,
+.second .top .select,
 .third .top .select {
     width: auto;
     display: flex;
@@ -289,7 +289,7 @@ body {
     right: 30px;
 }
 
-.choose, .chooseinput, .button ,
+.choose, .chooseinput, .button,
 .choose, .chooseinput1, .button {
     outline: none;
     height: 32px;
@@ -314,10 +314,11 @@ body {
     width: 350px;
     text-indent: 8px;
 }
+
 .chooseinput1 {
     border-top: 1px solid #333;
     border-bottom: 1px solid #333;
-    border-left:  1px solid #333;
+    border-left: 1px solid #333;
     border-right: none;
     width: 350px;
     text-indent: 8px;
@@ -347,7 +348,7 @@ body {
 }
 
 /*添加商品、修改商品信息、查看主图*/
-.addbottom, .updatebottom,.goodsImg{
+.addbottom, .updatebottom, .goodsImg {
     transition: all 0.3s ease-in-out;
     background-color: #efefef;
     position: absolute;
@@ -358,6 +359,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 .addbottom, .updatebottom {
     width: 800px;
     margin-left: -400px;
@@ -366,7 +368,8 @@ body {
     transform: scaleX(0);
     flex-direction: row;
 }
-.goodsImg{
+
+.goodsImg {
     width: 500px;
     margin-left: -250px;
     height: 450px;
@@ -374,23 +377,28 @@ body {
     transform: scaleY(0);
     flex-direction: column;
 }
-.goodsImg .left{
+
+.goodsImg .left {
     display: flex;
     flex-direction: row;
 }
-.goodsImg .left .ditaboxtextarea p{
+
+.goodsImg .left .ditaboxtextarea p {
     margin-bottom: 2px;
 }
-.goodsImg .left .ditaboxtextarea textarea{
+
+.goodsImg .left .ditaboxtextarea textarea {
     resize: none;
     width: 190px;
     height: 330px;
     border: 1px solid #b8b8b8;
     border-radius: 8px;
 }
-.goodsImg .left .ditaboxtextarea{
+
+.goodsImg .left .ditaboxtextarea {
     margin-left: 20px;
 }
+
 #add:checked + .addGoods #ia {
     color: #2a3f54;
     transform: scale(1.3);
@@ -399,11 +407,13 @@ body {
 #all:hover + .allGoods #iaa {
     color: #2a3f54;
 }
+
 #ia, #iaa {
     font-size: 40px;
     color: #a5a5a5;
 }
-.addbottom .addleft, .updatebottom .addleft,.goodsImg .left .addleft{
+
+.addbottom .addleft, .updatebottom .addleft, .goodsImg .left .addleft {
     border: 1px solid #b8b8b8;
     border-radius: 8px;
     width: 263px;
@@ -413,13 +423,15 @@ body {
     justify-content: center;
     align-items: center;
 }
-.addbottom .addleft, .updatebottom .addleft{
+
+.addbottom .addleft, .updatebottom .addleft {
     margin-right: 30px;
 }
 
-#img,#img1,#img2{
+#img, #img1, #img2 {
     width: 100%;
 }
+
 .addbottom .addform .im, .updatebottom .addform .im {
     display: inline-block;
     margin-bottom: 18px;
@@ -442,7 +454,7 @@ body {
 
 .addbottom .addform .addright input,
 .updatebottom .addform .addright input,
-.goodsImg .addright input{
+.goodsImg .addright input {
     width: 100px;
     height: 30px;
     border-radius: 10px;
@@ -456,65 +468,76 @@ body {
 .updatebottom .addform .addright .submit {
     margin-left: 120px;
 }
+
 .addbottom .addform .addright .reset,
 #reset {
     margin-left: 50px;
 }
-#resetimg{
+
+#resetimg {
     margin-top: 20px;
 }
+
 .addbottom .addform .addright input:hover,
 .updatebottom .addform .addright input:hover,
 .goodsImg .addright input:hover {
     background-color: #f1b599;
 }
-.textarea{
+
+.textarea {
     resize: none;
     margin-left: 5px;
     height: 80px;
 }
-.boxtextarea{
+
+.boxtextarea {
     display: flex;
     flex-direction: row;
 }
+
 /*.third div{
     width: 200px;
     height: 200px;
     background-color: red;
 }*/
 /*分页*/
-.paging{
+.paging {
     list-style: none;
     position: relative;
     top: 12px;
     left: 0;
     margin-left: 15px;
 }
-.paging .pageCount{
+
+.paging .pageCount {
     float: left;
     margin-left: 10px;
 }
-.paging .pageCount input{
+
+.paging .pageCount input {
     width: 60px;
 }
+
 .paging .pageCount:nth-child(7),
 .paging .pageCount:nth-child(8),
 .paging .pageCount:nth-child(9),
-.paging .pageCount:nth-child(10){
+.paging .pageCount:nth-child(10) {
     border: 1px solid #a5a5a5;
     width: 60px;
     text-align: center;
     letter-spacing: 2px;
 }
+
 .paging .pageCount:nth-child(7):hover,
 .paging .pageCount:nth-child(8):hover,
 .paging .pageCount:nth-child(9):hover,
-.paging .pageCount:nth-child(10):hover{
+.paging .pageCount:nth-child(10):hover {
     background-color: #a5a5a5;
     cursor: pointer;
 }
+
 /*订单中心*/
-.third .bottom{
+.third .bottom {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -523,7 +546,8 @@ body {
     margin: 0 auto 10px auto;
     /*border: 1px solid red;*/
 }
-.bottom .bottom-top{
+
+.bottom .bottom-top {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -532,30 +556,34 @@ body {
     margin-left: 30px;
     font-size: 14px;
 }
+
 .bottom .bottom-top span,
 .bottom .bottom-top select,
-.bottom .bottom-top input{
+.bottom .bottom-top input {
     margin-right: 10px;
 }
-.bottom .bottom-top button{
+
+.bottom .bottom-top button {
     width: 85px;
     height: 25px;
     font-size: 16px;
     border: 1px solid #a5a5a5;
     border-radius: 4px;
 }
-.bottom .bottom-top button:hover{
+
+.bottom .bottom-top button:hover {
     background-color: #f1b599;
 }
 
-.bottom-bottom{
+.bottom-bottom {
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.bottom-bottom .bar{
+
+.bottom-bottom .bar {
     display: flex;
     align-items: center;
     width: 100%;
@@ -564,31 +592,39 @@ body {
     height: 20px;
     background-color: #cecece;
 }
-.bottom-bottom .bar span:nth-child(1){
+
+.bottom-bottom .bar span:nth-child(1) {
     width: 12%;
 }
-.bottom-bottom .bar span:nth-child(2){
+
+.bottom-bottom .bar span:nth-child(2) {
     width: 22%;
 }
-.bottom-bottom .bar span:nth-child(3){
+
+.bottom-bottom .bar span:nth-child(3) {
     width: 22%;
 }
-.bottom-bottom .bar span:nth-child(4){
+
+.bottom-bottom .bar span:nth-child(4) {
     width: 23%;
 }
-.bottom-bottom .bar span:nth-child(5){
+
+.bottom-bottom .bar span:nth-child(5) {
     width: 15%;
 }
-.bottom-bottom .bar span:nth-child(6){
+
+.bottom-bottom .bar span:nth-child(6) {
     width: 6%;
 }
-.bottom-bottom .table{
+
+.bottom-bottom .table {
     border-bottom: 1px solid #a5a5a5;
     overflow-y: scroll;
     height: 460px;
     width: 100%;
 }
-.bottom-bottom table{
+
+.bottom-bottom table {
     word-break: break-word;
     word-wrap: break-word;
     width: 100%;
@@ -596,32 +632,179 @@ body {
     border-left: 1px solid #a5a5a5;
     border-spacing: 0;
 }
-.bottom-bottom table tr td{
+
+.bottom-bottom table tr td {
     border-bottom: 1px solid #a5a5a5;
     border-right: 1px solid #a5a5a5;
     text-align: center;
     vertical-align: center;
 }
-.bottom-bottom table tr td{
+
+.bottom-bottom table tr td {
     font-size: 16px;
 }
-.bottom-bottom table tr td:nth-child(4) p{
+
+.bottom-bottom table tr td:nth-child(4) p {
     font-size: 14px;
 }
-.bottom-bottom table tr td:nth-child(1){
+
+.bottom-bottom table tr td:nth-child(1) {
     width: 2%;
 }
+
 .bottom-bottom table tr td:nth-child(2),
 .bottom-bottom table tr td:nth-child(3),
 .bottom-bottom table tr td:nth-child(4),
-.bottom-bottom table tr td:nth-child(5){
+.bottom-bottom table tr td:nth-child(5) {
     width: calc((100% - 8%) / 4);
 }
-.bottom-bottom table tr td:nth-child(6){
+
+.bottom-bottom table tr td:nth-child(6) {
     width: 6%;
 }
-.bb-bottom{
+
+.bb-bottom {
     width: 100%;
     margin-top: 5px;
     margin-left: 13px;
+}
+
+/*个人中心*/
+.personinfonation {
+    width: 330px;
+    height: 300px;
+    background-color: #fff;
+    position: absolute;
+    left: 70px;
+    top: 90px;
+    z-index: 999;
+    display: block;
+}
+
+.navbar input:checked ~ .main .left ul li .personinfonation {
+    left: 200px;
+}
+
+.personalnformation {
+    background-color: #e3e4e5;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.personalnformation > span {
+    width: 100%;
+    margin-left: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    color: #000;
+}
+
+.personalnformation div {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.personalnformation div span {
+    font-size: 16px;
+    color: #000;
+    margin-left: 10px;
+}
+
+.personalnformation div span:nth-child(2) {
+    margin-left: 190px;
+}
+
+.personalnformation div span:nth-child(2):hover {
+    color: #c81623;
+    cursor: pointer;
+}
+
+.personalnformation .line {
+    width: 98%;
+    height: 1px;
+    background-color: #333;
+    margin-top: 4px;
+}
+
+#line {
+    margin-bottom: 7px;
+}
+
+.personalnformation .table {
+    border-spacing: 10px;
+    width: 100%;
+    height: 75px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+.personalnformation .table {
+    width: 100%;
+}
+
+.personalnformation .table tr td:first-child {
+    width: 30px;
+}
+
+.personalnformation table input[type="radio"] {
+    transform: scale(1.1);
+}
+
+.personalnformation table input[type="radio"]:last-child {
+    margin-left: 25px;
+}
+
+.personalnformation table tr td #a {
+    text-decoration: none;
+    font-size: 14px;
+    color: #333;
+}
+
+.personalnformation table tr td #a:hover {
+    color: #c81623;
+    cursor: pointer;
+}
+
+.personalnformation table tr td {
+    font-size: 14px;
+}
+
+.personalnformation input[type="text"] {
+    background-color: #e3e4e5;
+    height: 20px;
+    width: 180px;
+    border: none;
+}
+
+.personalnformation input[type="text"]:focus {
+    outline: none;
+    border-bottom: 1px solid red;
+}
+#form{
+    display: flex;
+    flex-direction: row;
+}
+#form input[type='file']{
+    width: 175px;
+}
+
+.perbottom button:hover{
+    background-color: #a5a5a5;
+}
+.perbottom button{
+    margin-left: 68px;
+    width: 80px;
+    height: 25px;
+    border: none;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.perbottom button:nth-child(2){
+    margin-left: 35px;
+}
+#w{
+    display: none;
 }

@@ -42,4 +42,9 @@ public class EmployeeEbiempl implements EmployeeEbi {
     public List<EmployeeModel> getEmployee(String eid) {
         return Daofactory.getemloyeedaoimpl().getEid(eid);
     }
+
+    @Override
+    public void updateEmployeeAll(EmployeeModel employeeModel) {
+        Daofactory.getemloyeedaoimpl().updateEmployeeAll(employeeModel);
+    }
 }

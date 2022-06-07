@@ -37,14 +37,15 @@
             List<CustomerModel> list;
             String message;
             String vipMessage;
+            String vip = null;
             if (cid != null) {
                 list = EBofactory.getcustomerebiempl().getCustomer(cid);
                 request.getSession().setAttribute("customer", list);
+                vip = EBofactory.getcustomerebiempl().vcategory1(cid);
                 message = "您好，" + list.get(0).getCnickname();
             } else {
                 message = "你好，请登录或注册";
             }
-            String vip = EBofactory.getcustomerebiempl().vcategory1(cid);
             if (vip == null){
                 vipMessage = "会员中心";
             }else {

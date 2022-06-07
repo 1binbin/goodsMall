@@ -50,4 +50,10 @@ public class EmployeeDaoEmpl extends BaseDao<EmployeeModel> implements EmployeeD
         String sql = "update employee set epassword = ? where eid = ?";
         update(connection,sql,employeeModel.getEpassword(),employeeModel.getEid());
     }
+
+    @Override
+    public void updateEmployeeAll(EmployeeModel employeeModel) {
+        String sql = "upate employee set eaddress=? ,esex=? ,ename =? ,estorename=?,ephone=? where eid=?";
+        update(connection,sql,employeeModel.getEaddress(),employeeModel.getEsex(),employeeModel.getEname(),employeeModel.getEstorename(),employeeModel.getEphone(),employeeModel.getEid());
+    }
 }

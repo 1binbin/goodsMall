@@ -126,7 +126,7 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
 
     @Override
     public List<CustomerModel> vipList(String cid) {
-        String sql = "select if(vcategory='month','月度会员',if(vcategory = 'year','年度会员'))messager from vip where cid = ? ";
+        String sql = "select if(vcategory='month','月度会员',if(vcategory = 'year','年度会员','季度会员'))messager from vip where cid = ? ";
         return getBeanList(connection,sql,cid);
     }
 }

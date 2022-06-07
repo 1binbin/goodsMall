@@ -145,6 +145,10 @@ public class CustomerEbimpl implements CustomerEbi {
 
     @Override
     public String vcategory1(String cid) {
-        return Daofactory.getcustomerimpl().vipList(cid).get(0).getMessager();
+        List<CustomerModel> list = Daofactory.getcustomerimpl().vipList(cid);
+        if (!list.isEmpty()){
+            return list.get(0).getMessager();
+        }
+        return null;
     }
 }
