@@ -26,4 +26,5 @@ public interface CustomerEbi {
     void setCustomerVIp (String vstatus,String cid);
     /*会员查询*/
     String vcategory(String cid);
+    boolean delete(String cid);
 }

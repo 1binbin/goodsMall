@@ -120,7 +120,7 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
 
     @Override
     public List<CustomerModel> selectISDeleteVip(String cid) {
-        String sql = "select vip.cid from vip,customer where vip.cid = customer.cid and vip.cid = ? and date_format(voutdate,'%Y-%m-%d') >= date_format(now(),'%Y-%m-%d')";
+        String sql = "select vip.cid from vip,customer where vip.cid = customer.cid and vip.cid = ? and date_format(voutdate,'%Y-%m-%d') <= date_format(now(),'%Y-%m-%d')";
         return getBeanList(connection, sql,cid);
     }
 }

@@ -132,4 +132,14 @@ public class CustomerEbimpl implements CustomerEbi {
             return list.get(0).getVcategory();
         }
     }
+
+    @Override
+    public boolean delete(String cid) {
+        List<CustomerModel> list = Daofactory.getcustomerimpl().selectISDeleteVip(cid);
+        if (!list.isEmpty()){
+            Daofactory.getcustomerimpl().deleteVip(list.get(0).getCid());
+            return true;
+        }
+        return false;
+    }
 }

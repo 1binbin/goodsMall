@@ -51,8 +51,30 @@
         <script src="<%=path%>/js/personalnformation.js"></script>
         <script src="<%=path%>/js/user.js"></script>
     </head>
+    <script>
+        function hidenMesage(){
+            var url = "<%=path%>/customerServlet?action=deleetvip&cid=<%=cid%>";
+            let xml = new XMLHttpRequest();
+            xml.open("get",url,true);
+            xml.onreadystatechange = function (){
+                if (xml.readyState === 4 && xml.status === 200){
+                    let vals = xml.responseText;
+                    let jsonArr = eval(vals);
+                    if (jsonArr[0] === true){
+                        document.getElementById("messager").style.display = "flex";
+                    }
+                }
+            }
+            xml.send(null)
+        }
+        window.onload = hidenMesage;
+    </script>
     <body>
         <%--顶部--%>
+        <div class="messagre" id="messager">
+            <span>您的会员已到期</span>
+            <span><a href="" onclick="hiddenMessagre()">我已了解</a></span>
+        </div>
         <div class="top">
             <span>天天淘商城欢迎您</span>
             <div class="top-right">
@@ -250,6 +272,9 @@
 
         function getGcategory(m) {
             window.location.href = "<%=path%>/customerServlet?action=searchGcaetgory&search=" + m;
+        }
+        function hiddenMessagre() {
+            document.getElementById("messager").style.display = "none";
         }
     </script>
 </html>

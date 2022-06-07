@@ -113,6 +113,7 @@ public class customerServlet extends HttpServlet {
         request.getSession().setAttribute("goods", goodsModels);
         request.getRequestDispatcher("jsp/user/showSelectGoods.jsp").forward(request, response);
     }
+
     protected void searchGcaetgory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String search = request.getParameter("search");
         List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().gteGcategory(search);
@@ -231,17 +232,19 @@ public class customerServlet extends HttpServlet {
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
     }
+
     /*修改个人信息*/
     protected void updatePerson(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cid = request.getParameter("cid");
         String cname = request.getParameter("cname");
         String cnickname = request.getParameter("cnickname");
         String cesx = request.getParameter("cesx");
-        EBofactory.getcustomerebiempl().updatePerson(cid,cname,cnickname,cesx);
+        EBofactory.getcustomerebiempl().updatePerson(cid, cname, cnickname, cesx);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");
     }
+
     /*修改头像*/
     protected void touxiang(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String path = this.getServletContext().getRealPath("/");
@@ -260,22 +263,35 @@ public class customerServlet extends HttpServlet {
                 p.write(path + "\\" + filename);
             }
         }
-        request.getRequestDispatcher("jsp/user/user.jsp").forward(request,response);
+        request.getRequestDispatcher("jsp/user/user.jsp").forward(request, response);
     }
+
     /*地址*/
     protected void updateRadd(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String rname = request.getParameter("rname");
         String radd = request.getParameter("radd");
         String cid = request.getParameter("cid");
         String type = request.getParameter("type");
-        if ("one".equals(type)){
-            EBofactory.getcustomerebiempl().addRadd(cid,rname,radd);
-        }else{
-            String old =request.getParameter("old");
-            EBofactory.getcustomerebiempl().updateRadd(cid,rname,radd,old);
+        if ("one".equals(type)) {
+            EBofactory.getcustomerebiempl().addRadd(cid, rname, radd);
+        } else {
+            String old = request.getParameter("old");
+            EBofactory.getcustomerebiempl().updateRadd(cid, rname, radd, old);
         }
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");
+    }
+
+    protected void deleetvip(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        boolean[] arr = new boolean[1];
+        arr[0] = EBofactory.getcustomerebiempl().delete(cid);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arr);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
     }
 }
