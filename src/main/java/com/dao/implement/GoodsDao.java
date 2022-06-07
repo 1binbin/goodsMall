@@ -99,4 +99,5 @@ public interface GoodsDao {
     List<GoodsModel> getGoodsTime(String search);
     List<GoodsModel> getGcategory(String search);
     List<GoodsModel> likeGoods(String cid);
+    void setGoods(String gid,String eid,int num);
 }

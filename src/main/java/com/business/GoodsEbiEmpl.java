@@ -132,4 +132,9 @@ public class GoodsEbiEmpl implements GoodsEbi {
     public List<GoodsModel> likeGoods(String cid) {
         return Daofactory.getgoodsdaoimpl().likeGoods(cid);
     }
+
+    @Override
+    public void setGoods(String gid, String eid, int num) {
+        Daofactory.getgoodsdaoimpl().setGoods(gid,eid,num);
+    }
 }

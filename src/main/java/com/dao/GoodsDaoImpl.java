@@ -143,4 +143,10 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
         String sql = "select * from goods where gnum>0 and eid in (select eid from myfocus where cid=?)";
         return getBeanList(connection,sql,cid);
     }
+
+    @Override
+    public void setGoods(String gid, String eid, int num) {
+        String sql = "update goods set gnum = gnum - ? where gid = ? and eid = ?";
+        update(connection,sql,num,gid,eid);
+    }
 }

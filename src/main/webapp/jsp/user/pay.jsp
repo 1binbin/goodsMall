@@ -33,6 +33,8 @@
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String now = simpleDateFormat.format(date);
+            String arr = request.getParameter("arr");
+
         %>
         <title>天天淘-支付</title>
         <link rel="stylesheet" href="<%=path%>/css/pay.css">
@@ -116,7 +118,7 @@
     <script>
         function jump() {
             document.getElementsByClassName("message")[0].style.display = "block";
-            const url = "<%=path%>/customerServlet?action=updateTispay&cid=<%=cid%>&oid=<%=oid%>";
+            const url = "<%=path%>/customerServlet?action=updateTispay&cid=<%=cid%>&oid=<%=oid%>&arr=<%=arr%>";
             let  xml = new XMLHttpRequest();
             xml.open("get",url,true);
             xml.send(null)

@@ -81,4 +81,5 @@ public interface GoodsEbi {
     List<GoodsModel> gteGcategory(String search);
     /*我的关注*/
     List<GoodsModel> likeGoods(String cid);
+    void setGoods(String gid,String eid,int num);
 }

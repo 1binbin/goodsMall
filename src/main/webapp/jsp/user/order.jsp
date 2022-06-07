@@ -282,7 +282,7 @@
                 console.log(xml.readyState)
                 console.log(xml.status)
                 if (xml.readyState === 4 && xml.status === 200) {
-                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&numPrice='+numPrice+'&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi + "&cid=<%=cid%>&oid=<%=oid%>";
+                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&arr=<%=arr%>&numPrice='+numPrice+'&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi + "&cid=<%=cid%>&oid=<%=oid%>";
                 }
             }
             xml.send(null);

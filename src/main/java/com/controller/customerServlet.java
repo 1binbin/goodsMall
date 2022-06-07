@@ -86,6 +86,11 @@ public class customerServlet extends HttpServlet {
     protected void updateTispay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cid = request.getParameter("cid");
         String oid = request.getParameter("oid");
+        String arr = request.getParameter("arr");
+        String[] split = arr.split(",");
+        for (int i = 0; i < split.length; i+=3) {
+            EBofactory.getgoodsebiempl().setGoods(split[i+1], split[i], Integer.parseInt(split[i+2]));
+        }
         EBofactory.getotherEbimpl().uodateTicket("yes", oid, cid);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
