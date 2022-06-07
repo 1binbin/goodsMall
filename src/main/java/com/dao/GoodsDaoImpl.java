@@ -155,4 +155,10 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
         String sql = "select * from goods where gnum - ? >= 0 and eid = ? and gid = ?";
         return getBeanList(connection,sql,gnum,eid,gid);
     }
+
+    @Override
+    public List<GoodsModel> listPriceMin() {
+        String sql = "select * from goods where gnum > 0 order by gprice asc limit 3";
+        return getBeanList(connection,sql);
+    }
 }

@@ -83,4 +83,5 @@ public interface GoodsEbi {
     List<GoodsModel> likeGoods(String cid);
     void setGoods(String gid,String eid,int num);
     boolean isPay(String gid,String eid,int gnum);
+    List<GoodsModel> listPriceMin();
 }

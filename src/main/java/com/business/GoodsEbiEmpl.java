@@ -143,4 +143,9 @@ public class GoodsEbiEmpl implements GoodsEbi {
         List<GoodsModel> goodsModel1 = Daofactory.getgoodsdaoimpl().isPay(eid, gid,num);
         return !goodsModel1.isEmpty();
     }
+
+    @Override
+    public List<GoodsModel> listPriceMin() {
+        return Daofactory.getgoodsdaoimpl().listPriceMin();
+    }
 }

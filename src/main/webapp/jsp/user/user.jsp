@@ -1,3 +1,4 @@
+<%--suppress ForLoopReplaceableByWhile --%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.entity.GoodsModel" %>
 <%@ page import="com.business.Daofactory" %>
@@ -244,6 +245,18 @@
             </div>
             <div class="middle-right">
                 <span>今日特价</span>
+                <%
+                    List<GoodsModel> list1 = EBofactory.getgoodsebiempl().listPriceMin();
+                    if (!list1.isEmpty()){
+                        for (int i = 0; i < list1.size(); i++) {
+                %>
+                <div class="img">
+                    <img src="<%=path%>/Product_main_photo/<%=list1.get(i).getEid()%>/<%=list1.get(i).getGid()%>.jpg" alt="" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=<%=list1.get(i).getGid()%>&eid=<%=list1.get(i).getEid()%>&cid=<%=cid%>')">
+                </div>
+                <%
+                        }
+                    }
+                %>
             </div>
         </div>
         <%--        推荐商品--%>
@@ -332,7 +345,7 @@
 
         function showlikeGoods(cid) {
             q()
-            if (cid ===null) {
+            if (cid === null) {
                 document.getElementById("showFansGoods").innerHTML = "请先登录";
             } else {
                 var url = "<%=path%>/customerServlet?action=showFansGoods&cid=" + cid;
