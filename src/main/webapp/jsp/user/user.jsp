@@ -72,7 +72,6 @@
                     if (jsonArr[0] === true){
                         document.getElementById("messager").style.display = "flex";
                     }
-                    console.log("轮播图");
                     const box = document.getElementById("re");
                     const lik = box.getElementsByTagName("li");
 
@@ -246,7 +245,12 @@
         </div>
         <%--        推荐商品--%>
         <div class="content" id="content">
-            <span class="like">猜你喜欢</span>
+            <div class="like">
+                <input type="radio" name="select" id="one" checked>
+                <label for="one" class="span">猜你喜欢</label>
+                <input type="radio" name="select" id="two">
+                <label for="two" class="span">我的关注</label>
+            </div>
             <ul class="like_ul">
                 <%
                     if (!eidList.isEmpty()) {

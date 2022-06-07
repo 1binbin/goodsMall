@@ -1,6 +1,7 @@
 package com.dao.implement;
 
 import com.entity.CustomerModel;
+import com.entity.EntityModel;
 
 import java.util.List;
 

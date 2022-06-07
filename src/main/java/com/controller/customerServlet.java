@@ -5,6 +5,7 @@ package com.controller; /**
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.business.Daofactory;
 import com.business.EBofactory;
 import com.entity.EntityModel;
 import com.entity.GoodsModel;
@@ -288,6 +289,23 @@ public class customerServlet extends HttpServlet {
         boolean[] arr = new boolean[1];
         arr[0] = EBofactory.getcustomerebiempl().delete(cid);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arr);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
+    }
+
+    protected void setFocus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+    }
+    protected void showFocus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        String eid = request.getParameter("eid");
+        List<EntityModel> list = Daofactory.getotherDaoImpl().getFollow(cid, eid);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");

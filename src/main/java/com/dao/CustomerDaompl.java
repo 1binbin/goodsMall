@@ -3,6 +3,7 @@ package com.dao;
 import com.common.JdbcConnection;
 import com.dao.implement.CustmerDao;
 import com.entity.CustomerModel;
+import com.entity.EntityModel;
 
 import java.sql.Connection;
 import java.util.List;

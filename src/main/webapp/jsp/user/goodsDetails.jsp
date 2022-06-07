@@ -30,6 +30,19 @@
         <script src="<%=path%>/js/goodsCart.js"></script>
     </head>
     <script>
+        function showMyfocus() {
+            var url = "<%=path%>/customerServlet?action=showFocus&cid=<%=cid%>&eid=<%=eid%>";
+            let xml = new XMLHttpRequest();
+            xml.open("GET",url,true);
+            xml.onreadystatechange = function () {
+                if(xml.readyState === 4 && xml.status === 200){
+                    let vals = xml.responseText;
+                    let jsonArr = eval(vals);
+
+                }
+            }
+            xml.send(null);
+        }
     </script>
     <body>
         <div class="top">

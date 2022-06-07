@@ -148,4 +148,20 @@ public class otherEbimpl implements otherEbi {
     public void setTisdelivey(String eid, String oid) {
         Daofactory.getotherDaoImpl().setTisdelivey(eid,oid);
     }
+
+    @Override
+    public boolean getFocus(String cid, String eid) {
+        List<EntityModel> list = Daofactory.getotherDaoImpl().getFollow(cid,eid);
+        if (list.isEmpty()) {
+            Daofactory.getotherDaoImpl().insertFollow(cid,eid);
+        }else {
+            Daofactory.getotherDaoImpl().deleteFollow(cid,eid);
+        }
+        return true;
+    }
+
+    @Override
+    public List<EntityModel> getFollow(String cid, String eid) {
+        return Daofactory.getotherDaoImpl().getFollow(cid,eid);
+    }
 }

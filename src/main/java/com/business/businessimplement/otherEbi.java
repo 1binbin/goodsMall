@@ -28,4 +28,7 @@ public interface otherEbi {
     /*商家订单*/
     List<List<EntityModel>> getList(String eid,String tispay,String tisdelivey,String begin,String end,String search,String type);
     void setTisdelivey(String eid,String oid);
+    /*关注店铺*/
+    boolean getFocus(String cid,String eid);
+    List<EntityModel> getFollow(String cid, String eid);
 }

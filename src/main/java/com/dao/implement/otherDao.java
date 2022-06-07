@@ -32,4 +32,7 @@ public interface otherDao {
     List<EntityModel> getOidEidMeaasge(String eid,String oid);
     /*一键发货*/
     void setTisdelivey(String eid,String oid);
+    void insertFollow(String cid,String eid);
+    void deleteFollow(String cid,String eid);
+    List<EntityModel> getFollow(String cid, String eid);
 }
