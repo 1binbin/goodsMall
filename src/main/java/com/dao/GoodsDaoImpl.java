@@ -86,7 +86,7 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public List<GoodsModel> getdEidGoods(String eid) {
-        String sql = "select * from goods where eid = ?";
+        String sql = "select * from goods where eid = ? limit 150";
         return getBeanList(connection, sql, eid);
     }
 
@@ -110,7 +110,7 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public List<GoodsModel> getGoodsAll() {
-        String sql = "select * from goods";
+        String sql = "select * from goods limit 250";
         return getBeanList(connection,sql);
     }
 

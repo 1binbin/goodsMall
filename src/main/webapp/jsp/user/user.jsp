@@ -197,15 +197,6 @@
                         </p>
                         <i class="fa fa-jpy" aria-hidden="true"></i>
                         <span class="mony"><%=model.getGprice()%></span>
-                        <span class="vip">
-                            <%
-                                if (model.getGvip().equals("yes")) {
-                            %>
-                            会员商品
-                            <%
-                                }
-                            %>
-                        </span>
                     </div>
                 </li>
                 <%
