@@ -14,17 +14,29 @@ public interface CustomerEbi {
     boolean insertCustomer(CustomerModel customerModel);
 
     boolean updateCustomer(CustomerModel customerModel);
-    boolean insertVip(String cid, String vcategory);
-    List<CustomerModel> getCustomerMessage(String cid);
-    void updatePerson(String cid,String cname,String cnickname,String cesx);
 
-    void addRadd(String cid,String rname,String radd);
-    void updateRadd(String cid,String rname,String radd,String old);
+    boolean insertVip(String cid, String vcategory);
+
+    List<CustomerModel> getCustomerMessage(String cid);
+
+    void updatePerson(String cid, String cname, String cnickname, String cesx);
+
+    void addRadd(String cid, String rname, String radd);
+
+    void updateRadd(String cid, String rname, String radd, String old);
+
     List<CustomerModel> getCustomer(String cid);
-    List<CustomerModel> getCustomerVip(String search,String select);
+
+    List<CustomerModel> getCustomerVip(String search, String select);
+
     List<CustomerModel> getCustomerVip1(String search);
-    void setCustomerVIp (String vstatus,String cid);
+
+    void setCustomerVIp(String vstatus, String cid);
+
     /*会员查询*/
     String vcategory(String cid);
+
     boolean delete(String cid);
+
+    String vcategory1(String  cid);
 }

@@ -29,6 +29,7 @@
                 message = "您好，" + list1.get(0).getCnickname();
             }
             String vcategory = EBofactory.getcustomerebiempl().vcategory(cid);
+            String vipMessage = (String) request.getSession().getAttribute("vipMessage");
         %>
         <title>购物车</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -53,7 +54,7 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="<%=path%>/jsp/user/members.jsp">成为会员</a>
+                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%></a>
                     </li>
                     <li class="line"></li>
                     <li>

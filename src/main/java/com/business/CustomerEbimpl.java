@@ -142,4 +142,9 @@ public class CustomerEbimpl implements CustomerEbi {
         }
         return false;
     }
+
+    @Override
+    public String vcategory1(String cid) {
+        return Daofactory.getcustomerimpl().vipList(cid).get(0).getMessager();
+    }
 }

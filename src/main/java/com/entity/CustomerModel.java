@@ -19,6 +19,7 @@ public class CustomerModel {
     private Date vindate;
     private Date voutdate;
     private String vstatus;
+    private String messager;
 
     public CustomerModel(String cid, String cpassword, String csex, String cname, String cnickname, String cphone) {
         this.cid = cid;
@@ -40,7 +41,7 @@ public class CustomerModel {
         this.radd = radd;
     }
 
-    public CustomerModel(String cid, String cpassword, String csex, String cname, String cnickname, String cphone, String rname, String radd, String vcategory, Date vindate, Date voutdate, String vstatus) {
+    public CustomerModel(String cid, String cpassword, String csex, String cname, String cnickname, String cphone, String rname, String radd, String vcategory, Date vindate, Date voutdate, String vstatus, String messager) {
         this.cid = cid;
         this.cpassword = cpassword;
         this.csex = csex;
@@ -53,6 +54,15 @@ public class CustomerModel {
         this.vindate = vindate;
         this.voutdate = voutdate;
         this.vstatus = vstatus;
+        this.messager = messager;
+    }
+
+    public String getMessager() {
+        return messager;
+    }
+
+    public void setMessager(String messager) {
+        this.messager = messager;
     }
 
     public String getVcategory() {

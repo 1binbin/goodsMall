@@ -27,6 +27,7 @@
             }else {
                 message = "你好，请登录或注册";
             }
+            String vipMessage = (String) request.getSession().getAttribute("vipMessage");
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -51,7 +52,7 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="<%=path%>/jsp/user/members.jsp">成为会员</a>
+                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%></a>
                     </li>
                     <li class="line"></li>
                     <li>

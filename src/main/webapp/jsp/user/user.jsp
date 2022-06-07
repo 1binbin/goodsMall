@@ -36,6 +36,7 @@
             }
             List<CustomerModel> list;
             String message;
+            String vipMessage;
             if (cid != null) {
                 list = EBofactory.getcustomerebiempl().getCustomer(cid);
                 request.getSession().setAttribute("customer", list);
@@ -43,6 +44,13 @@
             } else {
                 message = "你好，请登录或注册";
             }
+            String vip = EBofactory.getcustomerebiempl().vcategory1(cid);
+            if (vip == null){
+                vipMessage = "会员中心";
+            }else {
+                vipMessage = "尊贵的 "+vip;
+            }
+            request.getSession().setAttribute("vipMessage",vipMessage);
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -89,7 +97,7 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="<%=path%>/jsp/user/members.jsp">成为会员</a>
+                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%></a>
                     </li>
                     <li class="line"></li>
                     <li>

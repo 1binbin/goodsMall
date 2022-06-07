@@ -123,4 +123,10 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
         String sql = "select vip.cid from vip,customer where vip.cid = customer.cid and vip.cid = ? and date_format(voutdate,'%Y-%m-%d') <= date_format(now(),'%Y-%m-%d')";
         return getBeanList(connection, sql,cid);
     }
+
+    @Override
+    public List<CustomerModel> vipList(String cid) {
+        String sql = "select if(vcategory='month','月度会员',if(vcategory = 'year','年度会员'))messager from vip where cid = ? ";
+        return getBeanList(connection,sql,cid);
+    }
 }

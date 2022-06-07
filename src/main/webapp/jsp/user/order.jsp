@@ -48,6 +48,7 @@
                 List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().getGidEid(strings.get(1), strings.get(0));
                 numPrice += Integer.parseInt(strings.get(2)) * goodsModels.get(0).getGprice();
             }
+            String vipMessage = (String) request.getSession().getAttribute("vipMessage");
         %>
         <title>天天淘-结算页</title>
         <link rel="stylesheet" href="<%=path%>/css/goodsCart.css">
@@ -92,7 +93,7 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="<%=path%>/jsp/user/members.jsp">成为会员</a>
+                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%></a>
                     </li>
                     <li class="line"></li>
                     <li>
