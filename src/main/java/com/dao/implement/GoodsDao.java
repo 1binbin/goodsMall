@@ -100,4 +100,5 @@ public interface GoodsDao {
     List<GoodsModel> getGcategory(String search);
     List<GoodsModel> likeGoods(String cid);
     void setGoods(String gid,String eid,int num);
+    List<GoodsModel> isPay(String eid,String gid,int num);
 }

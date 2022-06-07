@@ -82,4 +82,5 @@ public interface GoodsEbi {
     /*我的关注*/
     List<GoodsModel> likeGoods(String cid);
     void setGoods(String gid,String eid,int num);
+    boolean isPay(String gid,String eid,int gnum);
 }
