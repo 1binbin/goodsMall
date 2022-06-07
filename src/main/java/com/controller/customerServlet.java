@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.business.Daofactory;
 import com.business.EBofactory;
+import com.entity.CustomerModel;
 import com.entity.EntityModel;
 import com.entity.GoodsModel;
 import com.entity.ShoppingcartModel;
@@ -24,6 +25,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -323,6 +325,18 @@ public class customerServlet extends HttpServlet {
     protected void showFansGoods(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String cid = request.getParameter("cid");
         List<GoodsModel> list = Daofactory.getgoodsdaoimpl().likeGoods(cid);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
+    }
+    protected void isPay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String arr = request.getParameter("arr");
+        String[] arr1 = arr.split(",");
+        boolean is = EBofactory.getgoodsebiempl().isPay(arr1[0],arr1[1], Integer.parseInt(arr1[2]));
+        String[] list = new String[]{is+""};
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");

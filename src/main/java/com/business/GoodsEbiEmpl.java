@@ -139,8 +139,8 @@ public class GoodsEbiEmpl implements GoodsEbi {
     }
 
     @Override
-    public boolean isPay(String gid, String eid, int num) {
-        List<GoodsModel> goodsModel1 = Daofactory.getgoodsdaoimpl().isPay(gid, eid,num);
+    public boolean isPay(String eid, String gid, int num) {
+        List<GoodsModel> goodsModel1 = Daofactory.getgoodsdaoimpl().isPay(eid, gid,num);
         return !goodsModel1.isEmpty();
     }
 }

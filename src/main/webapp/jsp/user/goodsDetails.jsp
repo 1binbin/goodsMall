@@ -139,7 +139,21 @@
             var gid = "<%=g.getGid()%>";
             var num = document.getElementById("num").value;
             var arr = [eid,gid,num];
-            window.open("<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&arr="+arr+"&vcategory=<%=vcategory%>");
+            var url = "<%=path%>/customerServlet?action=isPay&arr="+arr;
+            let xml = new XMLHttpRequest();
+            xml.open("get",url,true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200){
+                    var vals = xml.responseText;
+                    let jsonArr = eval(vals);
+                    if (jsonArr[0] === "true"){
+                        window.open("<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&arr="+arr+"&vcategory=<%=vcategory%>");
+                    }else {
+                        alert("库存量不足");
+                    }
+                }
+            }
+            xml.send(null);
         }
         function insertmyfocus(cid) {
             if (cid==='null'){

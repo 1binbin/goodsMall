@@ -152,7 +152,7 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
 
     @Override
     public List<GoodsModel> isPay(String eid, String gid,int gnum) {
-        String sql = "select * from goods where gnum - ? > 0 and eid = ? and gid = ?";
-        return getBeanList(connection,sql,0,eid,gid);
+        String sql = "select * from goods where gnum - ? >= 0 and eid = ? and gid = ?";
+        return getBeanList(connection,sql,gnum,eid,gid);
     }
 }

@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class test {
     public static void main(String[] args) {
-        System.out.println(EBofactory.getcustomerebiempl().delete("19129214652"));
+        boolean list = EBofactory.getgoodsebiempl().isPay("15875195553","131231241123",8);
+        System.out.println(list);
     }
 }

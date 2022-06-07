@@ -13,7 +13,7 @@
         <%
             String path = request.getContextPath();
             int numCount = Integer.parseInt(request.getParameter("num"));
-            double numPrice = Double.parseDouble(request.getParameter("numPrice"));
+            double numPrice = Double.parseDouble(request.getParameter("numPrice").replace("￥", ""));
             String address = request.getParameter("address");
             String fangshi = request.getParameter("zifu");
             String cid = request.getParameter("cid");
