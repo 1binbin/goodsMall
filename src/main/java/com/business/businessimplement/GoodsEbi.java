@@ -79,4 +79,6 @@ public interface GoodsEbi {
     List<GoodsModel> getGoodsPrice(double down,double up,String search);
     List<GoodsModel> getGoodsTime(String search);
     List<GoodsModel> gteGcategory(String search);
+    /*我的关注*/
+    List<GoodsModel> likeGoods(String cid);
 }

@@ -315,4 +315,14 @@ public class customerServlet extends HttpServlet {
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
     }
+    protected void showFansGoods(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        List<GoodsModel> list = Daofactory.getgoodsdaoimpl().likeGoods(cid);
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(list);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
+    }
 }

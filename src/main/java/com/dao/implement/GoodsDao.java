@@ -98,4 +98,5 @@ public interface GoodsDao {
     List<GoodsModel> getGoodsPrice(double down,double up,String search);
     List<GoodsModel> getGoodsTime(String search);
     List<GoodsModel> getGcategory(String search);
+    List<GoodsModel> likeGoods(String cid);
 }

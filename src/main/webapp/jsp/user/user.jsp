@@ -46,12 +46,12 @@
             } else {
                 message = "你好，请登录或注册";
             }
-            if (vip == null){
+            if (vip == null) {
                 vipMessage = "会员中心";
-            }else {
-                vipMessage = "尊贵的 "+vip;
+            } else {
+                vipMessage = "尊贵的 " + vip;
             }
-            request.getSession().setAttribute("vipMessage",vipMessage);
+            request.getSession().setAttribute("vipMessage", vipMessage);
         %>
         <title>天天淘</title>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -61,15 +61,15 @@
         <script src="<%=path%>/js/user.js"></script>
     </head>
     <script>
-        function hidenMesage(){
+        function hidenMesage() {
             const url = "<%=path%>/customerServlet?action=deleetvip&cid=<%=cid%>";
             let xml = new XMLHttpRequest();
-            xml.open("get",url,true);
-            xml.onreadystatechange = function (){
-                if (xml.readyState === 4 && xml.status === 200){
+            xml.open("get", url, true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
                     let vals = xml.responseText;
                     let jsonArr = eval(vals);
-                    if (jsonArr[0] === true){
+                    if (jsonArr[0] === true) {
                         document.getElementById("messager").style.display = "flex";
                     }
                     const box = document.getElementById("re");
@@ -111,6 +111,7 @@
             }
             xml.send(null)
         }
+
         window.onload = hidenMesage;
     </script>
     <body>
@@ -133,7 +134,8 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%></a>
+                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%>
+                        </a>
                     </li>
                     <li class="line"></li>
                     <li>
@@ -141,7 +143,8 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="#" id="person" onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
+                        <a href="#" id="person"
+                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
                     </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
@@ -246,12 +249,12 @@
         <%--        推荐商品--%>
         <div class="content" id="content">
             <div class="like">
-                <input type="radio" name="select" id="one" checked>
-                <label for="one" class="span">猜你喜欢</label>
-                <input type="radio" name="select" id="two">
-                <label for="two" class="span">我的关注</label>
+                <input type="radio" name="select" id="one11" checked>
+                <label for="one11" class="span" onclick="window.location.reload()">猜你喜欢</label>
+                <input type="radio" name="select" id="two11">
+                <label for="two11" class="span" onclick="showlikeGoods(<%=cid%>)">我的关注</label>
             </div>
-            <ul class="like_ul">
+            <ul class="like_ul" id="showFansGoods">
                 <%
                     if (!eidList.isEmpty()) {
                         for (GoodsModel goodsModel : eidList) {
@@ -322,8 +325,44 @@
         function getGcategory(m) {
             window.location.href = "<%=path%>/customerServlet?action=searchGcaetgory&search=" + m;
         }
+
         function hiddenMessagre() {
             document.getElementById("messager").style.display = "none";
         }
+
+        function showlikeGoods(cid) {
+            q()
+            if (cid ===null) {
+                document.getElementById("showFansGoods").innerHTML = "请先登录";
+            } else {
+                var url = "<%=path%>/customerServlet?action=showFansGoods&cid=" + cid;
+                let xml = new XMLHttpRequest();
+                xml.open("GET", url, true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        var json = JSON.parse(xml.responseText);
+                        var str = "";
+                        for (var i = 0; i < json.length; i++) {
+                            str += "<li onclick='window.open(\"<%=path%>/jsp/user/goodsDetails.jsp?gid=" + json[i].gid + "&eid=" + json[i].eid + "&cid=" + cid + "\")'>" +
+                                "<div class='like_img'><img src='<%=path%>/Product_main_photo/" + json[i].eid + "/" + json[i].gid + ".jpg' alt='暂无图片'></div>" +
+                                "<div class='like_span'>" +
+                                "<p>" + json[i].gdescribe + "</p>" +
+                                "<i class='fa fa-jpy' aria-hidden='true'></i>" +
+                                "<span class='mony'>" + json[i].gprice + "</span>" +
+                                "</div>" +
+                                "</li>";
+                        }
+                        document.getElementById("showFansGoods").innerHTML = str;
+                    }
+                }
+                xml.send(null);
+            }
+        }
+
+        function q() {
+            window.document.getElementById("one11").removeAttribute("checked");
+            window.document.getElementById("two11").setAttribute("checked", "checked");
+        }
+
     </script>
 </html>

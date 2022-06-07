@@ -443,7 +443,6 @@ body {
 }
 .content .like input:checked+.span{
     background-color: #ec6158;
-    color: #fff;
 }
     /*侧边导航*/
 #nav {
