@@ -297,6 +297,9 @@ public class customerServlet extends HttpServlet {
     }
 
     protected void setFocus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String cid = request.getParameter("cid");
+        String eid = request.getParameter("eid");
+        EBofactory.getotherEbimpl().getFocus(cid, eid);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
         response.setCharacterEncoding("UTF-8");

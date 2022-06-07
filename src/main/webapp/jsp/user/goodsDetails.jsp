@@ -38,11 +38,16 @@
                 if(xml.readyState === 4 && xml.status === 200){
                     let vals = xml.responseText;
                     let jsonArr = eval(vals);
-
+                    if (jsonArr.length !== 0){
+                        document.getElementById("i").checked = true;
+                    }else {
+                        document.getElementById("i").checked = false;
+                    }
                 }
             }
             xml.send(null);
         }
+        window.onload = showMyfocus;
     </script>
     <body>
         <div class="top">
@@ -54,7 +59,7 @@
             </div>
             <div class="top-right">
                 <span><%=employeeModel.getEstorename()%></span>
-                <input type="checkbox" id="i">
+                <input type="checkbox" id="i" onclick="insertmyfocus()">
                 <label for="i"><i class="fa fa-star" aria-hidden="true" id="ii"></i>关注店铺</label>
             </div>
         </div>
@@ -135,6 +140,17 @@
             var num = document.getElementById("num").value;
             var arr = [eid,gid, num];
             window.open("<%=path%>/jsp/user/order.jsp?cid=<%=cid%>&arr="+arr+"&vcategory=<%=vcategory%>");
+        }
+        function insertmyfocus() {
+            var url  = "<%=path%>/customerServlet?action=setFocus&cid=<%=cid%>&eid=<%=eid%>";
+            let xml = new XMLHttpRequest();
+            xml.open("GET",url,true);
+            xml.onreadystatechange = function () {
+                if(xml.readyState === 4 && xml.status === 200){
+                    alert("操作成功");
+                }
+            }
+            xml.send(null);
         }
     </script>
 </html>
