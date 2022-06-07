@@ -16,7 +16,6 @@
     <head>
         <%
             String path = request.getContextPath();
-            String aid = request.getParameter("aid");
             List<CustomerModel> list = EBofactory.getcustomerebiempl().getCustomerVip1("");
         %>
         <title>天天淘-后台</title>
