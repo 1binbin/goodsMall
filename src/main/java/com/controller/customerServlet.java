@@ -63,7 +63,7 @@ public class customerServlet extends HttpServlet {
     protected void addOrder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String rname = request.getParameter("rname");
         String cid = request.getParameter("cid");
-        double tpay = Double.parseDouble(request.getParameter("tpay"));
+        double tpay = Double.parseDouble(request.getParameter("tpay").substring(1));
         String arr = request.getParameter("arr");
         String[] split = arr.split(",");
         String oid = request.getParameter("oid");
