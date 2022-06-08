@@ -21,7 +21,7 @@
             String name = (String) request.getSession().getAttribute("username");
             String eid = (String) request.getSession().getAttribute("eid");
             int count = (int) request.getSession().getAttribute("allgoodsCount");
-            int pageCount = count / 8 + 1;
+            int pageCount = count / 15 + 1;
             List<GoodsModel> list = EBofactory.getgoodsebiempl().getGcategory();
             List<List<EntityModel>> listList = EBofactory.getotherEbimpl().getList(eid, "yes", "", "", "", "", "all");
             List<EmployeeModel> list1 = EBofactory.getemployeeebiempl().getEmployee(eid);
@@ -507,8 +507,8 @@
                         let jsonArr = eval(vals);
                         tableinner(jsonArr);
                         for (let goods of jsonArr) {
-                            document.getElementById("allcount").innerText = Math.floor(Number(goods.allCount) / 8) + 1;
-                            document.getElementById("jumpNumChoose").max = Math.floor(Number(goods.allCount) / 8) + 1;
+                            document.getElementById("allcount").innerText = Math.floor(Number(goods.allCount) / 15) + 1;
+                            document.getElementById("jumpNumChoose").max = Math.floor(Number(goods.allCount) / 15) + 1;
                             break;
                         }
                     }
