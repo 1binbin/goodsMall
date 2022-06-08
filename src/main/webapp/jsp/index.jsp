@@ -50,7 +50,7 @@
                 <form action="<%=path%>/IndexServlet" class="form" id="form1" method="post">
                     <h2 class="from_title">用户登录中心</h2>
                     <div class="acc">
-                        <input type="text" placeholder="账号" class="input" name="username">
+                        <input type="text" placeholder="手机号" class="input" name="username">
                         <input type="password" placeholder="密码" class="input" name="password" id="password">
                         <div class="code">
                             <input type="text" placeholder="验证码" class="input1" name="code">

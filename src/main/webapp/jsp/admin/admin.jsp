@@ -25,13 +25,14 @@
     <body>
         <div class="adtop">
             <p>天天淘后台</p>
-            <p>在线用户人数：<%=SessionCounter.getActiveSession()%></p>
+            <p>在线用户人数：<%=SessionCounter.getActiveSession()%>
+            </p>
         </div>
         <div class="adbottom">
             <div class="adleft">
                 <div class="adone">
-                    <input type="radio" id="one" name="radio" onclick="change1()" checked>
-                    <label for="one">首页装扮</label>
+                    <input type="radio" id="one" name="radio" onclick="change1()" checked class="radio">
+                    <label for="one" class="label">首页装扮</label>
                     <div class="souye" id="shouye">
                         <div class="box">
                             <span>轮播图上传</span>
@@ -102,8 +103,8 @@
                     </div>
                 </div>
                 <div class="adtwo">
-                    <input type="radio" id="two" name="radio" onclick="change2()">
-                    <label for="two">会员管理</label>
+                    <input type="radio" id="two" name="radio" onclick="change2()" class="radio">
+                    <label for="two" class="label">会员管理</label>
                     <div class="huiyuan" id="huiyuan">
                         <div class="top">
                             <div class="seletc">
@@ -166,6 +167,42 @@
                                         }
                                     %>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="adthree">
+                    <input type="checkbox" id="three" checked>
+                    <label for="three" class="label">商品类别</label>
+                    <div class="gcategory">
+                        <div class="box1">
+                            <div class="box1-top">
+                                <input type="radio" name="select" id="sone" checked class="gradio">
+                                <label for="sone">添加</label>
+                                <input type="radio" name="select" id="stwo" class="gradio">
+                                <label for="stwo">删除</label>
+                                <input type="radio" name="select" id="wthree" class="gradio">
+                                <label for="wthree">修改</label>
+                            </div>
+                            <div class="box1-middle">
+                                <table>
+                                    <tr>
+                                        <td>操作对象</td>
+                                        <td>
+                                            <select name="" id="gselect">
+                                                <option></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>操作内容</td>
+                                        <td><input type="text" placeholder="添加\修改内容"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="box1-bottom">
+                                <button>重置</button>
+                                <button>确定</button>
                             </div>
                         </div>
                     </div>
