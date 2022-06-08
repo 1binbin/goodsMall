@@ -3,6 +3,7 @@
 <%@ page import="com.entity.CustomerModel" %>
 <%@ page import="com.business.EBofactory" %>
 <%@ page import="com.controller.listener.SessionCounter" %>
+<%@ page import="com.entity.GoodsModel" %>
 <%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
@@ -172,7 +173,7 @@
                     </div>
                 </div>
                 <div class="adthree">
-                    <input type="checkbox" id="three" checked>
+                    <input type="checkbox" id="three">
                     <label for="three" class="label">商品类别</label>
                     <div class="gcategory">
                         <div class="box1">
@@ -190,7 +191,17 @@
                                         <td>操作对象</td>
                                         <td>
                                             <select name="" id="gselect" disabled>
-                                                <option></option>
+                                                <%
+                                                    List<GoodsModel> list1 = EBofactory.getgoodsebiempl().getGoodsAll();
+                                                    if (!list1.isEmpty()) {
+                                                        for (int i = 0; i < list1.size(); i++) {
+                                                %>
+                                                <option><%=list1.get(i).getGcategory()%>
+                                                </option>
+                                                <%
+                                                        }
+                                                    }
+                                                %>
                                             </select>
                                         </td>
                                     </tr>
@@ -279,18 +290,22 @@
                 xml.send(null);
             }
         }
+
         function setone() {
             document.getElementById("gselect").disabled = true;
             document.getElementById("gtext").disabled = false;
         }
+
         function settwo() {
             document.getElementById("gselect").disabled = false;
             document.getElementById("gtext").disabled = true;
         }
+
         function setthree() {
             document.getElementById("gselect").disabled = false;
             document.getElementById("gtext").disabled = false;
         }
+
         function submitgcategory(path) {
             var radio = document.getElementsByClassName("gradio");
             var select;
@@ -309,7 +324,7 @@
             } else if (select === "stwo") {
                 url = "<%=path%>/AdminServlet?action=addgcategory&type=delete&g=" + gselect;
             } else if (select === "wthree") {
-                url = "<%=path%>/AdminServlet?action=addgcategory&type=update&g=" + newg+"&gselect="+gselect;
+                url = "<%=path%>/AdminServlet?action=addgcategory&type=update&g=" + newg + "&gselect=" + gselect;
             }
             let xml = new XMLHttpRequest();
             xml.open("get", url, true);
