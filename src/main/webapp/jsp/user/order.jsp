@@ -34,8 +34,9 @@
                 list.add(stringList);
             }
             Date date = new Date();
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-            String oid = simpleDateFormat.format(date);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmss");
+            String s = cid.substring(cid.length()-4);
+            String oid = simpleDateFormat.format(date) + s;
             List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
             String message;
             if (list1.isEmpty()) {

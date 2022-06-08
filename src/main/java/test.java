@@ -11,7 +11,8 @@ import java.util.List;
  */
 public class test {
     public static void main(String[] args) {
-        boolean list = EBofactory.getgoodsebiempl().isPay("15875195553","131231241123",8);
-        System.out.println(list);
+        String cid = "15875195553";
+        cid = cid.substring(cid.length()-4);
+        System.out.println(cid);
     }
 }
