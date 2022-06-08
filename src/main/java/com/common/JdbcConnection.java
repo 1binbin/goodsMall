@@ -1,5 +1,8 @@
 package com.common;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import java.io.FileInputStream;
 import java.net.URLDecoder;
 import java.sql.Connection;
@@ -21,17 +24,9 @@ public class JdbcConnection {
      * @Return: Connection
      */
     public static Connection getConnection() throws Exception {
-        Properties properties = new Properties();
-        String path = JdbcConnection.class.getClassLoader().getResource("jdbc.properties").getPath();
-        path = URLDecoder.decode(path, "utf-8");
-        FileInputStream fileInputStream = new FileInputStream(path);
-        properties.load(fileInputStream);
-        String driver = properties.get("driver").toString();
-        String user = properties.get("user").toString();
-        String password = properties.get("password").toString();
-        String url = properties.get("url").toString();
-        Class.forName(driver);
-        Connection connection = DriverManager.getConnection(url, user, password);
+        Context context = new InitialContext();
+        DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc/goodsMall");
+        Connection connection = dataSource.getConnection();
         return connection;
     }
 }
