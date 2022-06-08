@@ -155,7 +155,6 @@
                         <ul>
                             <li>综合排序</li>
                             <li onclick="selectCategory('最新上架',2)">最新上架</li>
-                            <li>我的关注</li>
                             <li>
                                 <span>价格区间</span>
                                 <input type="text" placeholder="￥" id="down">

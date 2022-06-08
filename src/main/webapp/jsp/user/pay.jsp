@@ -1,5 +1,6 @@
 <%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Calendar" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -33,6 +34,10 @@
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String now = simpleDateFormat.format(date);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.DATE, +1);
+            String next = simpleDateFormat.format(calendar.getTime());
             String arr = request.getParameter("arr");
 
         %>
@@ -72,7 +77,7 @@
             </div>
             <div class="p-left">
                 <span>请在</span>
-                <span><%=now%> 23:00:00</span>
+                <span><%=next%> 00:00:00</span>
                 <span>之内完成支付，否则自动取消订单</span>
             </div>
         </div>

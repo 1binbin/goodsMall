@@ -27,7 +27,6 @@
 //                String adminName = (String) request.getSession().getAttribute("adminName");
                 String eid = username.substring(0,username.length()-5);
                 ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid,0,15);
-                System.out.println(arrayList.size());
                 int count = EBofactory.getCountbiempl().getallCount(eid);
                 request.getSession().setAttribute("allGoods",arrayList);
                 request.getSession().setAttribute("username",username);

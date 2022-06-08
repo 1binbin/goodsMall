@@ -78,7 +78,7 @@ public class RegisterServlet extends HttpServlet {
                     if ("user".equals(role)){
                         if (EBofactory.getcustomerebiempl().insertCustomer(customerModel)){
                             request.getSession().setAttribute("username",phone+role);
-                            request.getRequestDispatcher("jsp/userwait.jsp").forward(request,response);
+                            request.getRequestDispatcher("jsp/user/userwait.jsp").forward(request,response);
                         }else {
                             Utils.alter(response, "<script type='text/javascript'>alert('账号已存在！')</script>", "<script type='text/javascript'>location.href='jsp/index.jsp'</script>");
                         }

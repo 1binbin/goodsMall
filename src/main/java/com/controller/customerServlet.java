@@ -91,6 +91,7 @@ public class customerServlet extends HttpServlet {
         String arr = request.getParameter("arr");
         String[] split = arr.split(",");
         for (int i = 0; i < split.length; i+=3) {
+            System.out.println(split.length);
             EBofactory.getgoodsebiempl().setGoods(split[i+1], split[i], Integer.parseInt(split[i+2]));
         }
         EBofactory.getotherEbimpl().uodateTicket("yes", oid, cid);
@@ -141,7 +142,7 @@ public class customerServlet extends HttpServlet {
             list = EBofactory.getgoodsebiempl().getGoodsGcategory(gcategory, search);
         } else if ("three".equals(type)) {
             double down = request.getParameter("down").length()==0?0:Double.parseDouble(request.getParameter("down"));
-            double up = request.getParameter("up").length()==0?0:Double.parseDouble(request.getParameter("up"));
+            double up = request.getParameter("up").length()==0?999999.99:Double.parseDouble(request.getParameter("up"));
             list = EBofactory.getgoodsebiempl().getGoodsPrice(down, up, search);
         } else if ("two".equals(type)) {
             list = EBofactory.getgoodsebiempl().getGoodsTime(search);
