@@ -52,16 +52,16 @@ public class merchantsServlet extends HttpServlet {
         String eid = getEid(request);
         GoodsModel goodsModel = getGoodsModel(request);
         EBofactory.getgoodsebiempl().insertGoods(goodsModel);
-        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getAllGoods(request, eid, 0, 8);
         Utils.getCount(request, eid);
-        request.getRequestDispatcher("jsp/mechants/merchants.jsp").forward(request, response);
+        request.getRequestDispatcher("jsp/merchants/merchants.jsp").forward(request, response);
     }
 
     protected void update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
         GoodsModel goodsModel = getGoodsModel(request);
         EBofactory.getgoodsebiempl().updateGoods(goodsModel);
-        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getAllGoods(request, eid, 0, 8);
         Utils.getCount(request, eid);
         request.getRequestDispatcher("jsp/merchants/merchants.jsp").forward(request, response);
     }
@@ -70,7 +70,7 @@ public class merchantsServlet extends HttpServlet {
         String eid = getEid(request);
         String gid = Utils.utf_8(request.getParameter("gid"));
         EBofactory.getgoodsebiempl().deleteGoods(gid, eid);
-        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getAllGoods(request, eid, 0, 8);
         Utils.getCount(request, eid);
         request.getRequestDispatcher("jsp/merchants/merchants.jsp").forward(request, response);
     }
@@ -83,13 +83,13 @@ public class merchantsServlet extends HttpServlet {
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
         ArrayList<GoodsModel> arrayList = new ArrayList<>();
         if ("all".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsAll(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsAll(selectText, eid, 8 * (pageNum - 1), 8 * pageNum);
         } else if ("selectGid".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGid(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGid(selectText, eid, 8 * (pageNum - 1), 8 * pageNum);
         } else if ("selectGname".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGname(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGname(selectText, eid, 8 * (pageNum - 1), 8 * pageNum);
         } else if ("selectGcategory".equals(selectOption)) {
-            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGcategory(selectText, eid, 15 * (pageNum - 1), 15 * pageNum);
+            arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsGcategory(selectText, eid, 8 * (pageNum - 1), 8 * pageNum);
         }
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arrayList);
         response.setContentType("text/xml;charset=UTF-8");
@@ -102,7 +102,7 @@ public class merchantsServlet extends HttpServlet {
     protected void paging(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
         int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-        List<GoodsModel> arrayList = EBofactory.getgoodsebiempl().selectGoodsList(eid, 15 * (pageNum - 1), 15 * pageNum);
+        List<GoodsModel> arrayList = EBofactory.getgoodsebiempl().selectGoodsList(eid, 8 * (pageNum - 1), 8 * pageNum);
         JSONArray jsonArray = (JSONArray) JSONObject.toJSON(arrayList);
         response.setContentType("text/xml;charset=UTF-8");
         response.setHeader("Cache-Control", "no-cache");
@@ -113,7 +113,7 @@ public class merchantsServlet extends HttpServlet {
 
     protected void all(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String eid = getEid(request);
-        Utils.getAllGoods(request, eid, 0, 15);
+        Utils.getAllGoods(request, eid, 0, 8);
         Utils.getCount(request, eid);
         request.getRequestDispatcher("jsp/merchants/merchants.jsp").forward(request, response);
     }

@@ -87,7 +87,7 @@ public class IndexServlet extends HttpServlet {
                     if (choose) {
                         response.addCookie(cookie);
                     }
-                    Utils.getAllGoods(request, username,0,15);
+                    Utils.getAllGoods(request, username,0,8);
                     Utils.getCount(request,username);
                     request.getSession().setAttribute("username", username + role);
                     request.getRequestDispatcher("jsp/merchants/merchantsWait.jsp").forward(request, response);

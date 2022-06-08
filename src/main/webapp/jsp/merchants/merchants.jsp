@@ -21,7 +21,7 @@
             String name = (String) request.getSession().getAttribute("username");
             String eid = (String) request.getSession().getAttribute("eid");
             int count = (int) request.getSession().getAttribute("allgoodsCount");
-            int pageCount = count / 15 + 1;
+            int pageCount = count / 8 + 1;
             List<GoodsModel> list = EBofactory.getgoodsebiempl().getGcategory();
             List<List<EntityModel>> listList = EBofactory.getotherEbimpl().getList(eid, "yes", "", "", "", "", "all");
             List<EmployeeModel> list1 = EBofactory.getemployeeebiempl().getEmployee(eid);
@@ -101,7 +101,8 @@
                                         <tr>
                                             <td>头像</td>
                                             <td>
-                                                <form action="<%=path%>/merchantsPersonServlet" method="post" enctype="multipart/form-data" id="form">
+                                                <form action="<%=path%>/merchantsPersonServlet" method="post"
+                                                      enctype="multipart/form-data" id="form">
                                                     <input type="hidden" name="action" value="touxiang">
                                                     <input type="file" accept="image/jpeg" name="touxiang">
                                                     <input type="submit" value="点击上传" id="touxiang">
@@ -110,44 +111,56 @@
                                         </tr>
                                         <tr>
                                             <td>账号</td>
-                                            <td><input type="text" id="eid" readonly="readonly" value="<%=list1.get(0).getEid()%>"></td>
+                                            <td><input type="text" id="eid" readonly="readonly"
+                                                       value="<%=list1.get(0).getEid()%>"></td>
                                         </tr>
                                         <tr>
                                             <td>姓名</td>
-                                            <td><input type="text" id="ename" readonly="readonly" value="<%=list1.get(0).getEname()%>"></td>
+                                            <td><input type="text" id="ename" readonly="readonly"
+                                                       value="<%=list1.get(0).getEname()%>"></td>
                                         </tr>
                                         <tr>
                                             <td>店名</td>
-                                            <td><input type="text" id="estorename" readonly="readonly" value="<%=list1.get(0).getEstorename()%>"></td>
+                                            <td><input type="text" id="estorename" readonly="readonly"
+                                                       value="<%=list1.get(0).getEstorename()%>"></td>
                                         </tr>
                                         <tr>
                                             <td>电话</td>
-                                            <td><input type="text" id="ephone" readonly="readonly" value="<%=list1.get(0).getEphone()%>"></td>
+                                            <td><input type="text" id="ephone" readonly="readonly"
+                                                       value="<%=list1.get(0).getEphone()%>"></td>
                                         </tr>
                                         <tr>
                                             <td>地址</td>
-                                            <td><input type="text" id="eaddress" readonly="readonly" value="<%=list1.get(0).getEaddress()%>"></td>
+                                            <td><input type="text" id="eaddress" readonly="readonly"
+                                                       value="<%=list1.get(0).getEaddress()%>"></td>
                                         </tr>
                                         <tr>
                                             <td>密码</td>
-                                            <td><span id="a" onclick="window.open('<%=path%>/jsp/index.jsp')">点击前往重置密码</span></td>
+                                            <td><span id="a"
+                                                      onclick="window.open('<%=path%>/jsp/index.jsp')">点击前往重置密码</span>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>性别</td>
                                             <td>
                                                 <div class="q" id="q">
-                                                    <input type="text" readonly="readonly" value="<%=list1.get(0).getEsex()!=null?(list1.get(0).getEsex().equals("male")?"男":"女"):"null"%>">
+                                                    <input type="text" readonly="readonly"
+                                                           value="<%=list1.get(0).getEsex()!=null?(list1.get(0).getEsex().equals("male")?"男":"女"):"null"%>">
                                                 </div>
                                                 <div class="w" id="w">
-                                                    <input class="ssex" type="radio" name="csex" value="male" readonly="readonly" id="nan" checked>男
-                                                    <input class="ssex" type="radio" name="csex" value="fmale" readonly="readonly" id="nv">女
+                                                    <input class="ssex" type="radio" name="csex" value="male"
+                                                           readonly="readonly" id="nan" checked>男
+                                                    <input class="ssex" type="radio" name="csex" value="fmale"
+                                                           readonly="readonly" id="nv">女
                                                 </div>
                                             </td>
                                         </tr>
                                     </table>
                                     <div class="perbottom">
                                         <button onclick="okupdate1()">点击修改</button>
-                                        <button onclick="updatePerson1('<%=path%>')" disabled="disabled" id="okButton">确认修改</button>
+                                        <button onclick="updatePerson1('<%=path%>')" disabled="disabled" id="okButton">
+                                            确认修改
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -186,38 +199,41 @@
                                     <th>修改</th>
                                 </tr>
                             </table>
-                            <table class="goods" id="goodstable">
-                                <%--录入商品表格信息--%>
-                                <%
-                                    if (arrayList != null) {
-                                        for (GoodsModel goods : arrayList) {
-                                %>
-                                <tr>
-                                    <td><%=goods.getGid()%>
-                                    </td>
-                                    <td><%=goods.getGname()%>
-                                    </td>
-                                    <td><%=goods.getGcategory()%>
-                                    </td>
-                                    <td><%=goods.getGnum()%>
-                                    </td>
-                                    <td><%=goods.getGinprice()%>
-                                    </td>
-                                    <td><%=goods.getGprice()%>
-                                    </td>
-                                    <td onclick="showgoodsimg('<%=goods.getGid()%>','<%=goods.getGdescribe()%>')"><i
-                                            class="fa fa-info-circle"
-                                            aria-hidden="true"></i></td>
-                                    <td onclick="deleteCheck('<%=goods.getGid()%>')"><i class="fa fa-trash-o"
-                                                                                        aria-hidden="true"></i></td>
-                                    <td onclick='update("<%=goods.getGid()%>","<%=goods.getGname()%>","<%=goods.getGcategory()%>","<%=goods.getGnum()%>","<%=goods.getGinprice()%>","<%=goods.getGprice()%>","<%=goods.getGdescribe()%>")'>
-                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
-                                </tr>
-                                <%
+                            <div class="box">
+                                <table class="goods" id="goodstable">
+                                    <%--录入商品表格信息--%>
+                                    <%
+                                        if (arrayList != null) {
+                                            System.out.println(arrayList.size());
+                                            for (GoodsModel goods : arrayList) {
+                                    %>
+                                    <tr>
+                                        <td><%=goods.getGid()%>
+                                        </td>
+                                        <td><%=goods.getGname()%>
+                                        </td>
+                                        <td><%=goods.getGcategory()%>
+                                        </td>
+                                        <td><%=goods.getGnum()%>
+                                        </td>
+                                        <td><%=goods.getGinprice()%>
+                                        </td>
+                                        <td><%=goods.getGprice()%>
+                                        </td>
+                                        <td onclick="showgoodsimg('<%=goods.getGid()%>','<%=goods.getGdescribe()%>')"><i
+                                                class="fa fa-info-circle"
+                                                aria-hidden="true"></i></td>
+                                        <td onclick="deleteCheck('<%=goods.getGid()%>')"><i class="fa fa-trash-o"
+                                                                                            aria-hidden="true"></i></td>
+                                        <td onclick='update("<%=goods.getGid()%>","<%=goods.getGname()%>","<%=goods.getGcategory()%>","<%=goods.getGnum()%>","<%=goods.getGinprice()%>","<%=goods.getGprice()%>","<%=goods.getGdescribe()%>")'>
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+                                    </tr>
+                                    <%
+                                            }
                                         }
-                                    }
-                                %>
-                            </table>
+                                    %>
+                                </table>
+                            </div>
                             <ul class="paging">
                                 <li class="pageCount">第&nbsp;<span id="pagenum">1</span>&nbsp;页</li>
                                 <li class="pageCount"> /</li>
@@ -239,7 +255,7 @@
                                 <div class="addleft" id="localImg">
                                     <img src="" alt="暂无图片" class="img_goods" id="img">
                                 </div>
-                                <form action="<%=path%>/adminServlet" class="addform" enctype="multipart/form-data"
+                                <form action="<%=path%>/merchantsServlet" class="addform" enctype="multipart/form-data"
                                       method="post">
                                     <input type="hidden" name="action" value="insert">
                                     <div class="addmiddle">
@@ -298,7 +314,7 @@
                                 <div class="addleft">
                                     <img src="" alt="暂无图片" class="img_goods" id="img1">
                                 </div>
-                                <form action="<%=path%>/adminServlet" class="addform" enctype="multipart/form-data"
+                                <form action="<%=path%>/merchantsServlet" class="addform" enctype="multipart/form-data"
                                       method="post">
                                     <input type="hidden" name="action" value="update">
                                     <div class="addmiddle">
@@ -450,7 +466,7 @@
         <script>
             function update(gid, gname, gcategory, gnum, ginprice, gpeice, gdescribe) {
                 updatebottom.style.transform = "scaleX(1)"
-                document.getElementById("img1").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
+                document.getElementById("img1").src = "<%=path%>/Product_main_photo/<%=eid%>/" + gid + ".jpg";
                 document.getElementById("ugid").value = gid;
                 document.getElementById("ugname").value = gname;
                 document.getElementById("ugnum").value = gnum;
@@ -461,7 +477,7 @@
             }
 
             function showgoodsimg(gid, gdescribe) {
-                document.getElementById("img2").src = "<%=path%>/Product_main_photo/<%=name%>/" + gid + ".jpg";
+                document.getElementById("img2").src = "<%=path%>/Product_main_photo/<%=eid%>/" + gid + ".jpg";
                 if (gdescribe != null) {
                     document.getElementById("goodsImgtextarea").value = gdescribe;
                 }
@@ -491,8 +507,8 @@
                         let jsonArr = eval(vals);
                         tableinner(jsonArr);
                         for (let goods of jsonArr) {
-                            document.getElementById("allcount").innerText = Math.floor(Number(goods.allCount) / 15) + 1;
-                            document.getElementById("jumpNumChoose").max = Math.floor(Number(goods.allCount) / 15) + 1;
+                            document.getElementById("allcount").innerText = Math.floor(Number(goods.allCount) / 8) + 1;
+                            document.getElementById("jumpNumChoose").max = Math.floor(Number(goods.allCount) / 8) + 1;
                             break;
                         }
                     }
@@ -745,9 +761,11 @@
                 }
                 xml.send(null)
             }
-            function showPerson(){
+
+            function showPerson() {
                 document.getElementById("personinfonation").style.display = 'block';
             }
+
             function okupdate1() {
                 document.getElementById("q").style.display = "none";
                 document.getElementById("w").style.display = "block";
@@ -757,6 +775,7 @@
                 document.getElementById("ephone").removeAttribute("readonly");
                 document.getElementById("eaddress").removeAttribute("readonly");
             }
+
             function updatePerson1(path) {
                 var eid = document.getElementById("eid").value;
                 var ename = document.getElementById("ename").value;
@@ -765,22 +784,23 @@
                 var eaddress = document.getElementById("eaddress").value;
                 var sex = document.getElementsByClassName("ssex")
                 var sex1;
-                for (let i = 0; i < sex.length ; i++) {
-                    if (sex[i].checked){
+                for (let i = 0; i < sex.length; i++) {
+                    if (sex[i].checked) {
                         sex1 = sex[i].value;
                     }
                 }
-                var url = path +"/merchantsPersonServlet?action=update&eid="+eid+"&ename="+ename+"&estorename="+estorename+"&cesx="+sex1+"&ephone="+ephone+"&eaddress="+eaddress;
+                var url = path + "/merchantsPersonServlet?action=update&eid=" + eid + "&ename=" + ename + "&estorename=" + estorename + "&cesx=" + sex1 + "&ephone=" + ephone + "&eaddress=" + eaddress;
                 let xml = new XMLHttpRequest();
-                xml.open("get",url,true);
-                xml.onreadystatechange = function (){
-                    if (xml.readyState ===4&& xml.status===200){
+                xml.open("get", url, true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
                         alert("修改成功")
                         window.location.reload()
                     }
                 }
                 xml.send(null)
             }
+
             function reruen() {
                 document.getElementById("personinfonation").style.display = 'none';
             }

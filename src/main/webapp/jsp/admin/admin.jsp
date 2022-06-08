@@ -192,11 +192,11 @@
                                         <td>
                                             <select name="" id="gselect" disabled>
                                                 <%
-                                                    List<GoodsModel> list1 = EBofactory.getgoodsebiempl().getGoodsAll();
+                                                    List<GoodsModel> list1 = EBofactory.getgoodsebiempl().getGcategory();
                                                     if (!list1.isEmpty()) {
                                                         for (int i = 0; i < list1.size(); i++) {
                                                 %>
-                                                <option><%=list1.get(i).getGcategory()%>
+                                                <option value="<%=list1.get(i).getGcategory()%>"><%=list1.get(i).getGcategory()%>
                                                 </option>
                                                 <%
                                                         }
@@ -306,7 +306,7 @@
             document.getElementById("gtext").disabled = false;
         }
 
-        function submitgcategory(path) {
+        function submitgcategory() {
             var radio = document.getElementsByClassName("gradio");
             var select;
             for (let i = 0; i < radio.length; i++) {
@@ -315,16 +315,14 @@
                 }
             }
             var url;
-            var gselect1 = document.getElementById("gselect");
-            var index = gselect1.selectedIndex;
+            var gselect1 = document.getElementById("gselect").value;
             var newg = document.getElementById("gtext").value;
-            var gselect = gselect1.options[index].value;
             if (select === "sone") {
-                url = "<%=path%>/AdminServlet?action=addgcategory&type=add&g=" + newg;
+                url = "<%=path%>/AdminServlet?action=setGcategory&type=add&g=" + newg;
             } else if (select === "stwo") {
-                url = "<%=path%>/AdminServlet?action=addgcategory&type=delete&g=" + gselect;
+                url = "<%=path%>/AdminServlet?action=setGcategory&type=delete&g=" + gselect1;
             } else if (select === "wthree") {
-                url = "<%=path%>/AdminServlet?action=addgcategory&type=update&g=" + newg + "&gselect=" + gselect;
+                url = "<%=path%>/AdminServlet?action=setGcategory&type=update&g=" + newg + "&gselect=" + gselect1;
             }
             let xml = new XMLHttpRequest();
             xml.open("get", url, true);
@@ -333,6 +331,7 @@
                     let vals = xml.responseText;
                     let jsonArr = eval(vals);
                     alert(jsonArr[0]);
+                    window.location.reload();
                 }
             }
             xml.send(null);

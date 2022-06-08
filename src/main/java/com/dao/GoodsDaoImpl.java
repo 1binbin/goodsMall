@@ -189,6 +189,6 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
     @Override
     public void setGcategory(String g,String newg) {
         String sql = "update goodsc set gcategory = ? where gcategory = ?";
-        update(connection,sql,g,newg);
+        update(connection,sql,newg,g);
     }
 }
