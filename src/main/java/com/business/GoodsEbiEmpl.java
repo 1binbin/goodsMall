@@ -148,4 +148,42 @@ public class GoodsEbiEmpl implements GoodsEbi {
     public List<GoodsModel> listPriceMin() {
         return Daofactory.getgoodsdaoimpl().listPriceMin();
     }
+
+    @Override
+    public List<GoodsModel> getGcategoryAll() {
+        return Daofactory.getgoodsdaoimpl().getGcategoryAll();
+    }
+
+    @Override
+    public boolean insertGcategory(String g) {
+        List<GoodsModel> goodsModel1 = Daofactory.getgoodsdaoimpl().getGcategory1(g);
+        if (goodsModel1.isEmpty()) {
+            Daofactory.getgoodsdaoimpl().insertGcategory(g);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteGcategory(String g) {
+        List<GoodsModel> goodsModel1 = Daofactory.getgoodsdaoimpl().getGcategory1(g);
+        if (!goodsModel1.isEmpty()) {
+            Daofactory.getgoodsdaoimpl().deleteGcategory(g);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean setGcategory(String g, String newg) {
+        List<GoodsModel> goodsModel1 = Daofactory.getgoodsdaoimpl().getGcategory1(g);
+        if (!goodsModel1.isEmpty()) {
+            Daofactory.getgoodsdaoimpl().setGcategory(g, newg);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

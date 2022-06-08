@@ -81,4 +81,35 @@ public class AdminServlet extends HttpServlet {
         PrintWriter printWriter = response.getWriter();
         printWriter.print(jsonArray);
     }
+    protected void setGcategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String type = request.getParameter("type");
+        String g = request.getParameter("g");
+        String[] mesag = new String[1];
+        if ("add".equals(type)){
+            if (EBofactory.getgoodsebiempl().insertGcategory(g)){
+                mesag[0] = "添加成功！";
+            }else {
+                mesag[0] = "添加失败！";
+            }
+        }else if ("delete".equals(type)){
+            if (EBofactory.getgoodsebiempl().deleteGcategory(g)) {
+                mesag[0] = "删除成功！";
+            }else {
+                mesag[0] = "删除失败！";
+            }
+        }else if ("update".equals(type)){
+            String gselect = request.getParameter("gselect");
+            if (EBofactory.getgoodsebiempl().setGcategory(gselect,g)) {
+                mesag[0] = "修改成功！";
+            }else {
+                mesag[0] = "修改失败！";
+            }
+        }
+        JSONArray jsonArray = (JSONArray) JSONObject.toJSON(mesag);
+        response.setContentType("text/xml;charset=UTF-8");
+        response.setHeader("Cache-Control", "no-cache");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter printWriter = response.getWriter();
+        printWriter.print(jsonArray);
+    }
 }

@@ -84,4 +84,8 @@ public interface GoodsEbi {
     void setGoods(String gid,String eid,int num);
     boolean isPay(String gid,String eid,int gnum);
     List<GoodsModel> listPriceMin();
+    List<GoodsModel> getGcategoryAll();
+    boolean insertGcategory(String g);
+    boolean deleteGcategory(String g);
+    boolean setGcategory(String g,String newg);
 }

@@ -102,4 +102,10 @@ public interface GoodsDao {
     void setGoods(String gid,String eid,int num);
     List<GoodsModel> isPay(String eid,String gid,int num);
     List<GoodsModel> listPriceMin();
+    /*商品类别管理*/
+    List<GoodsModel> getGcategoryAll();
+    List<GoodsModel> getGcategory1(String g );
+    void insertGcategory(String g);
+    void deleteGcategory(String g);
+    void setGcategory(String g,String newg);
 }

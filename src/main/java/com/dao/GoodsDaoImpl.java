@@ -161,4 +161,34 @@ public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
         String sql = "select * from goods where gnum > 0 order by gprice asc limit 3";
         return getBeanList(connection,sql);
     }
+
+    @Override
+    public List<GoodsModel> getGcategoryAll() {
+        String sql = "select * from goodsc";
+        return getBeanList(connection,sql);
+    }
+
+    @Override
+    public List<GoodsModel> getGcategory1(String g) {
+        String sql = "select * from goodsc where gcategory = ?";
+        return getBeanList(connection,sql,g);
+    }
+
+    @Override
+    public void insertGcategory(String g) {
+        String sql = "insert into goodsc values(?)";
+        update(connection,sql,g);
+    }
+
+    @Override
+    public void deleteGcategory(String g) {
+        String sql = "delete from goodsc where gcategory = ?";
+        update(connection,sql,g);
+    }
+
+    @Override
+    public void setGcategory(String g,String newg) {
+        String sql = "update goodsc set gcategory = ? where gcategory = ?";
+        update(connection,sql,g,newg);
+    }
 }

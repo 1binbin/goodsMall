@@ -177,11 +177,11 @@
                     <div class="gcategory">
                         <div class="box1">
                             <div class="box1-top">
-                                <input type="radio" name="select" id="sone" checked class="gradio">
+                                <input type="radio" name="select" id="sone" checked class="gradio" onclick="setone()">
                                 <label for="sone">添加</label>
-                                <input type="radio" name="select" id="stwo" class="gradio">
+                                <input type="radio" name="select" id="stwo" class="gradio" onclick="settwo()">
                                 <label for="stwo">删除</label>
-                                <input type="radio" name="select" id="wthree" class="gradio">
+                                <input type="radio" name="select" id="wthree" class="gradio" onclick="setthree()">
                                 <label for="wthree">修改</label>
                             </div>
                             <div class="box1-middle">
@@ -189,20 +189,20 @@
                                     <tr>
                                         <td>操作对象</td>
                                         <td>
-                                            <select name="" id="gselect">
+                                            <select name="" id="gselect" disabled>
                                                 <option></option>
                                             </select>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>操作内容</td>
-                                        <td><input type="text" placeholder="添加\修改内容"></td>
+                                        <td><input type="text" placeholder="添加\修改内容" id="gtext" required></td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="box1-bottom">
                                 <button>重置</button>
-                                <button>确定</button>
+                                <button onclick="submitgcategory()">确定</button>
                             </div>
                         </div>
                     </div>
@@ -278,6 +278,49 @@
                 }
                 xml.send(null);
             }
+        }
+        function setone() {
+            document.getElementById("gselect").disabled = true;
+            document.getElementById("gtext").disabled = false;
+        }
+        function settwo() {
+            document.getElementById("gselect").disabled = false;
+            document.getElementById("gtext").disabled = true;
+        }
+        function setthree() {
+            document.getElementById("gselect").disabled = false;
+            document.getElementById("gtext").disabled = false;
+        }
+        function submitgcategory(path) {
+            var radio = document.getElementsByClassName("gradio");
+            var select;
+            for (let i = 0; i < radio.length; i++) {
+                if (radio[i].checked) {
+                    select = radio[i].id;
+                }
+            }
+            var url;
+            var gselect1 = document.getElementById("gselect");
+            var index = gselect1.selectedIndex;
+            var newg = document.getElementById("gtext").value;
+            var gselect = gselect1.options[index].value;
+            if (select === "sone") {
+                url = "<%=path%>/AdminServlet?action=addgcategory&type=add&g=" + newg;
+            } else if (select === "stwo") {
+                url = "<%=path%>/AdminServlet?action=addgcategory&type=delete&g=" + gselect;
+            } else if (select === "wthree") {
+                url = "<%=path%>/AdminServlet?action=addgcategory&type=update&g=" + newg+"&gselect="+gselect;
+            }
+            let xml = new XMLHttpRequest();
+            xml.open("get", url, true);
+            xml.onreadystatechange = function () {
+                if (xml.readyState === 4 && xml.status === 200) {
+                    let vals = xml.responseText;
+                    let jsonArr = eval(vals);
+                    alert(jsonArr[0]);
+                }
+            }
+            xml.send(null);
         }
     </script>
 </html>
