@@ -208,11 +208,11 @@ body {
     display: inline-block;
 }
 .second .top .box{
+    height: calc(100% - 150px);
     overflow-y: scroll;
 }
 .second .top .goods {
     display: block;
-    height: calc(100% - 150px);
     margin-left: 20px;
     text-align: center;
     /*    表格框线*/
