@@ -263,9 +263,9 @@
                                         <input type="file" name="file" class="minput"
                                                onchange="showImg(this)" accept="image/jpeg" multiple="multiple"><br>
                                         <p class="im">商品编号</p>
-                                        <input type="text" name="gid" class="minput"><br>
+                                        <input type="text" name="gid" class="minput" pattern="^\d{1,16}$" required><br>
                                         <p class="im">商品名称</p>
-                                        <input type="text" name="gname" class="minput"><br>
+                                        <input type="text" name="gname" class="minput" pattern="^.{0,32}$" required><br>
                                         <p class="im">商品类别</p>
                                         <select class="minput" name="gcategory">
                                             <%
@@ -280,11 +280,11 @@
                                             %>
                                         </select><br>
                                         <p class="im">库存量</p>
-                                        <input type="text" name="gnum" class="minput"><br>
+                                        <input type="text" name="gnum" class="minput" required><br>
                                         <p class="im">商品进价</p>
-                                        <input type="text" name="ginprice" class="minput"><br>
+                                        <input type="text" name="ginprice" class="minput" required><br>
                                         <p class="im">商品售价</p>
-                                        <input type="text" name="gprice" class="minput"><br>
+                                        <input type="text" name="gprice" class="minput" required><br>
                                         <p class="im">会员商品</p>
                                         <select class="minput" name="isvip">
                                             <option value="yes">是</option>
@@ -293,7 +293,7 @@
                                         <div class="boxtextarea">
                                             <p class="im imm">商品描述</p>
                                             <textarea name="gdescribe" class="minput textarea"
-                                                      maxlength="120"></textarea>
+                                                      maxlength="120" required></textarea>
                                         </div>
                                     </div>
                                     <div class="addright">
@@ -324,9 +324,9 @@
                                         <p class="im">商品编号</p>
                                         <input type="text" name="gid" class="minput" id="ugid" readonly="readonly"><br>
                                         <p class="im">商品名称</p>
-                                        <input type="text" name="gname" class="minput" id="ugname"><br>
+                                        <input type="text" name="gname" class="minput" id="ugname" pattern="^.{0,32}$" required><br>
                                         <p class="im">商品类别</p>
-                                        <select class="minput" name="gcategory" id="ugcategory">
+                                        <select class="minput" name="gcategory" id="ugcategory" >
                                             <%
                                                 if (!list.isEmpty()) {
                                                     for (GoodsModel goodsModel : list) {
@@ -339,20 +339,20 @@
                                             %>
                                         </select><br>
                                         <p class="im">库存量</p>
-                                        <input type="text" name="gnum" class="minput" id="ugnum"><br>
+                                        <input type="text" name="gnum" class="minput" id="ugnum" required><br>
                                         <p class="im">商品进价</p>
-                                        <input type="text" name="ginprice" class="minput" id="uginprice"><br>
+                                        <input type="text" name="ginprice" class="minput" id="uginprice" required><br>
                                         <p class="im">商品售价</p>
-                                        <input type="text" name="gprice" class="minput" id="ugprice"><br>
+                                        <input type="text" name="gprice" class="minput" id="ugprice" required><br>
                                         <p class="im">会员商品</p>
-                                        <select class="minput" name="isvip">
+                                        <select class="minput" name="isvip" >
                                             <option value="yes">是</option>
                                             <option value="no">否</option>
                                         </select>
                                         <div class="boxtextarea">
                                             <p class="im imm">商品描述</p>
                                             <textarea name="gdescribe" class="minput textarea"
-                                                      maxlength="120" id="ugdescribe"></textarea>
+                                                      maxlength="120" id="ugdescribe" required></textarea>
                                         </div>
                                     </div>
                                     <div class="addright">

@@ -76,7 +76,7 @@
                 <div class="forget" id="forget">
                     <form action="<%=path%>/ForgetServlet" class="form" id="form3" method="post">
                         <h2 class="from_title" id="h2">重置密码</h2>
-                        <input type="text" placeholder="手机号" class="input" name="ephone" >
+                        <input type="text" placeholder="手机号" class="input" name="ephone"  pattern="^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$">
                         <input type="password" placeholder="新密码" class="input" name="fpassword" id="fpassword">
                         <div class="inputdiv"><p id="message2"></p></div>
                         <input type="password" placeholder="确认密码" class="input" name="spassword" id="ffpassword">
