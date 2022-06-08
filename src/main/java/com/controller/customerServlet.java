@@ -140,8 +140,8 @@ public class customerServlet extends HttpServlet {
         if ("one".equals(type)) {
             list = EBofactory.getgoodsebiempl().getGoodsGcategory(gcategory, search);
         } else if ("three".equals(type)) {
-            double down = Double.parseDouble(request.getParameter("down"));
-            double up = Double.parseDouble(request.getParameter("up"));
+            double down = request.getParameter("down").length()==0?0:Double.parseDouble(request.getParameter("down"));
+            double up = request.getParameter("up").length()==0?0:Double.parseDouble(request.getParameter("up"));
             list = EBofactory.getgoodsebiempl().getGoodsPrice(down, up, search);
         } else if ("two".equals(type)) {
             list = EBofactory.getgoodsebiempl().getGoodsTime(search);

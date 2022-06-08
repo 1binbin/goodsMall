@@ -584,7 +584,7 @@
                     return false;
                 }
                 //    验证价格最多两位小数
-                const regu = /^(([0-9]+)|([0-9]+\.[0-9]{0,2}))$/;
+                const regu = /^(([1-9]{1}\d{0,5})|(0{1}))(\.\d{1,2})?$/;
                 if (form.gprice.value !== "" && !regu.test(form.gprice.value)) {
                     alert("价格请输入最多两位小数的非负数");
                     form.gprice.focus();
