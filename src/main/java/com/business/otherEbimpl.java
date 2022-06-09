@@ -76,7 +76,7 @@ public class otherEbimpl implements otherEbi {
         if (is){
             oidList = Daofactory.getotherDaoImpl().getTicketCidChecked(cid, pay, delivey, over,begin,end,search);
         }else {
-            oidList = Daofactory.getotherDaoImpl().getTicketCidCheckedyear(cid, pay, delivey, over);
+            oidList = Daofactory.getotherDaoImpl().getTicketCidCheckedyear(cid, pay, delivey, over,search);
         }
         for (EntityModel entityModel : oidList) {
             List<EntityModel> list1 = Daofactory.getotherDaoImpl().getTicketCidOid(cid, entityModel.getOid());

@@ -81,7 +81,7 @@
                 <div class="search" id="search">
                     <div class="form1">
                         <input type="text" placeholder="搜索内容" id="searchText">
-                        <div class="button" onclick="searchText()"><i class="fa fa-search" aria-hidden="true"
+                        <div class="button" onclick="searchText('<%=cid%>')"><i class="fa fa-search" aria-hidden="true"
                                                                       id="btnaa"></i></div>
                     </div>
                     <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp?cid=<%=cid%>')">
@@ -97,7 +97,7 @@
         <div class="m-bottom-second">
             <div class="time">
                 <span>时间筛选</span>
-                <select name="" id="time" onchange="searchText()">
+                <select name="" id="time" onchange="searchText('<%=cid%>')">
                     <option value="all">全部</option>
                     <option value="onemonth">一个月内</option>
                     <option value="threemonth">三个月内</option>
@@ -155,7 +155,7 @@
                         <div class="ob-left">
                             <%
                                 for (int i = 0; i < list.get(j).size(); i++) {
-                                    temp1.append(list.get(j).get(i).getEid()).append(",").append(list.get(j).get(i).getGid()).append(",").append(list.get(j).get(i).getMnum());
+                                    temp1.append(list.get(j).get(i).getEid()).append(",").append(list.get(j).get(i).getGid()).append(",").append(list.get(j).get(i).getMnum()).append(",");
                             %>
                             <div class="show">
                                 <div class="show-left">
@@ -268,7 +268,9 @@
                             "<div class=\"o-bottom\">" +
                             "<div class=\"ob-left\">";
                         let itemin = "";
+                        let arr1 = "";
                         for (let j = 0; j < json[i].length; j++) {
+                            arr1 += json[i][j].eid+','+json[i][j].gid+','+json[i][j].mnum+','
                             itemin += "<div class=\"show\">" +
                                 "<div class=\"show-left\">" +
                                 "<div class=\"img\"><img src=\"<%=path%>/Product_main_photo/" + json[i][j].eid + "/" + json[i][j].gid + ".jpg\" alt=\"\"></div>" +
@@ -316,7 +318,7 @@
                         let itmeinin = "";
                         const strings = json[i][0].message.split(",");
                         for (let k = 0; k < strings.length; k++) {
-                            itmeinin += "<a href=\"javascript:void(0)\" onclick=\"jumpother('" + strings[k] + "','" + json[i][0].oid + "','" + cid + "')\">" + strings[k] + "</a>";
+                            itmeinin += "<a href=\"javascript:void(0)\" onclick=\"jumpother('" + strings[k] + "','" + json[i][0].oid + "','" + cid +"','"+arr1+"')\">" + strings[k] + "</a>";
                         }
                         item += itmeinin;
                         item += "</div>" +
@@ -329,18 +331,19 @@
             xml.send(null)
         }
 
-        function searchText() {
-            const cid = '<%=cid%>';
+        function searchText(cid) {
             let id = "";
+            console.log(2)
             const shouhuradio = document.getElementsByClassName("shouhuradio");
             for (let i = 0; i < shouhuradio.length; i++) {
                 if (shouhuradio[i].checked) {
                     id = shouhuradio[i].id;
                 }
             }
-            if (id === "one") {
+            console.log(id)
+            if (id === "one1") {
                 selectOrder(cid, "", "", "")
-            } else if (id === "two") {
+            } else if (id === "two1") {
                 selectOrder(cid, "yes", "no", "no")
             } else if (id === "three") {
                 selectOrder(cid, "yes", "yes", "no")

@@ -65,9 +65,9 @@ public class OtherDaoImpl extends BaseDao<EntityModel> implements otherDao {
     }
 
     @Override
-    public List<EntityModel> getTicketCidCheckedyear(String cid, String pay, String delivey, String over) {
-        String sql = "select distinct myorder.oid from myorder,ticket where ticket.oid = myorder.oid and cid = ? and tispay = ? and tisdelivey = ? and tisover = ? and tisdelete = 'no'";
-        return getBeanList(connection, sql, cid, pay, delivey, over);
+    public List<EntityModel> getTicketCidCheckedyear(String cid, String pay, String delivey, String over,String search) {
+        String sql = "select distinct myorder.oid from myorder,ticket,goods where ticket.oid = myorder.oid and goods.gid = myorder.gid and cid = ? and tispay like concat('%', ?, '%') and tisdelivey like concat('%', ?, '%') and tisover like concat('%', ?, '%') and tisdelete = 'no' and (gname like concat('%',?,'%') or gdescribe like concat('%',?,'%'))";
+        return getBeanList(connection, sql, cid, pay, delivey, over,search,search);
     }
 
     @Override
