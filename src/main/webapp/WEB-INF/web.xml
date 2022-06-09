@@ -10,4 +10,7 @@
     <listener>
         <listener-class>com.controller.listener.SessionCounter</listener-class>
     </listener>
+    <listener>
+        <listener-class>com.controller.listener.GetConnection</listener-class>
+    </listener>
 </web-app>  
