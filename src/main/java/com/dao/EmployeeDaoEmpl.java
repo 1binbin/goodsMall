@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.controller.listener.GetConnection;
 import com.dao.implement.EmployeeDao;
 import com.entity.EmployeeModel;
 
@@ -13,15 +14,7 @@ import java.util.List;
  * @Description
  */
 public class EmployeeDaoEmpl extends BaseDao<EmployeeModel> implements EmployeeDao {
-    Connection connection;
-    {
-        try {
-            connection = JdbcConnection.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    Connection connection = GetConnection.connection;
     @Override
     public List<EmployeeModel> getEmployeeList(EmployeeModel employeeModel) {
         String sql = "select * from employee where eid = ? and epassword = ?";

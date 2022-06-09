@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.controller.listener.GetConnection;
 import com.dao.implement.otherDao;
 import com.entity.EntityModel;
 
@@ -12,15 +13,7 @@ import java.util.List;
  * @Time 2022/6/2-16:19
  */
 public class OtherDaoImpl extends BaseDao<EntityModel> implements otherDao {
-    Connection connection;
-
-    {
-        try {
-            connection = JdbcConnection.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    Connection connection = GetConnection.connection;
 
     @Override
     public void insertOrder(String oid, String gid, String eid, int mnum) {

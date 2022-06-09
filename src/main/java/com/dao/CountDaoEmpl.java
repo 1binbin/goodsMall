@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.controller.listener.GetConnection;
 import com.dao.implement.CountDao;
 import com.entity.CountModel;
 
@@ -12,15 +13,7 @@ import java.util.List;
  * @Time 2022/5/27-9:39
  */
 public class CountDaoEmpl extends BaseDao<CountModel> implements CountDao {
-    Connection connection;
-
-    {
-        try {
-            connection = JdbcConnection.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    Connection connection = GetConnection.connection;
     @Override
     public List<CountModel> allgoodsCount(String eid) {
         String sql = "select count(gid)allCount from goods where eid =?";

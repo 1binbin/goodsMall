@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.controller.listener.GetConnection;
 import com.dao.implement.shoppingcartDao;
 import com.entity.ShoppingcartModel;
 
@@ -12,16 +13,7 @@ import java.util.List;
  * @Time 2022/6/2-10:34
  */
 public class ShoppingcartDaoImpl extends BaseDao<ShoppingcartModel> implements shoppingcartDao {
-    Connection connection;
-
-    {
-        try {
-            connection = JdbcConnection.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    Connection connection = GetConnection.connection;
     @Override
     public void insertCart(ShoppingcartModel shoppingcartModel) {
         String sql = "insert into shoppingcart(cid,eid,gid) values(?,?,?)";

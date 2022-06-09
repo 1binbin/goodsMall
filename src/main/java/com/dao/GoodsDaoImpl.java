@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.controller.listener.GetConnection;
 import com.dao.implement.GoodsDao;
 import com.entity.GoodsModel;
 
@@ -13,16 +14,7 @@ import java.util.List;
  * @Description 图书dao层接口实现类
  */
 public class GoodsDaoImpl extends BaseDao<GoodsModel> implements GoodsDao {
-    Connection connection;
-
-    {
-        try {
-            connection = JdbcConnection.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
+    Connection connection = GetConnection.connection;
     @Override
     public void insertGoods(GoodsModel goodsModel) {
         String sql = "insert into goods(eid,gid,gname,gcategory,gprice,ginprice,gnum,gdescribe,gvip) values(?,?,?,?,?,?,?,?,?)";

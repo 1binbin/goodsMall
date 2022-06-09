@@ -1,6 +1,7 @@
 package com.dao;
 
 import com.common.JdbcConnection;
+import com.controller.listener.GetConnection;
 import com.dao.implement.CustmerDao;
 import com.entity.CustomerModel;
 import com.entity.EntityModel;
@@ -13,15 +14,7 @@ import java.util.List;
  * @Time 2022/5/14-11:06
  */
 public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao {
-    Connection connection;
-
-    {
-        try {
-            connection = JdbcConnection.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    Connection connection = GetConnection.connection;
 
     @Override
     public List<CustomerModel> getCustomerList(CustomerModel customerModel) {
