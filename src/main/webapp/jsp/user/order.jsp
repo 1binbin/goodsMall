@@ -111,7 +111,7 @@
                     <li class="line"></li>
                     <li>
                         <a href="javascript:void(0)" id="person"
-                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
+                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>')">个人信息</a>
                     </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
@@ -151,9 +151,9 @@
                         <p>收货人信息</p>
                         <div class="f-top-right">
                             <a href="javascript:void(0)"
-                               onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">修改收货地址</a>
+                               onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>')">修改收货地址</a>
                             <a href="javascript:void(0)"
-                               onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">新增收货地址</a>
+                               onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>')">新增收货地址</a>
                         </div>
                     </div>
                     <div class="f-bottom">

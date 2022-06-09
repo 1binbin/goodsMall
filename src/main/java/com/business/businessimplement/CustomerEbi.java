@@ -40,4 +40,5 @@ public interface CustomerEbi {
 
     String vcategory1(String  cid);
     List<CustomerModel> selectVip(String cid);
+    List<CustomerModel> selectCustomer(String cie);
 }

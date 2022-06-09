@@ -150,7 +150,7 @@
                     <li class="line"></li>
                     <li>
                         <a href="#" id="person"
-                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>>')">个人信息</a>
+                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>')">个人信息</a>
                     </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>

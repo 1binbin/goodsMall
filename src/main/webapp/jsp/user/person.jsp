@@ -4,7 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--    修改个人信息--%>
 <%
-    List<CustomerModel> cusstomerlist = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
+    List<CustomerModel> cusstomerlist = EBofactory.getcustomerebiempl().selectCustomer(cid);
     if (!cusstomerlist.isEmpty()) {
 %>
 <div class="personalnformation" id="personalnformation111">

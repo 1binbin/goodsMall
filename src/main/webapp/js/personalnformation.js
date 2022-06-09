@@ -1,6 +1,6 @@
-function person(id,n,m,path) {
-    if (m ===null){
-        window.open(path+"/jsp/index.jsp")
+function person(id,n,cid,path) {
+    if (cid === 'null'){
+        window.location.href = path+"/jsp/index.jsp"
     }else {
         if (n ===1){
             document.getElementById(id).style.display = "flex";

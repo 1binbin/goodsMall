@@ -48,4 +48,5 @@ public interface CustmerDao {
 
     List<CustomerModel> vipList(String cid);
     List<CustomerModel> selectVip(String cid);
+    List<CustomerModel> selectCustomer(String cie);
 }
