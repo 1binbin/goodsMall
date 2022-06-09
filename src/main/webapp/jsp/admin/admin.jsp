@@ -159,7 +159,7 @@
                                         <td><%=list.get(i).getVoutdate()%>
                                         </td>
                                         <td>
-                                            <button onclick="setStatus('<%=list.get(i).getVstatus()%>','<%=list.get(i).getCid()%>')"><%=list.get(i).getVstatus()%>
+                                            <button onclick="setStatus('<%=list.get(i).getCid()%>')" id="vipbutton"><%=list.get(i).getVstatus()%>
                                             </button>
                                         </td>
                                     </tr>
@@ -262,7 +262,7 @@
                         str += "<td>" + jsonArr[i].vcategory + "</td>";
                         str += "<td>" + jsonArr[i].vindate + "</td>";
                         str += "<td>" + jsonArr[i].voutdate + "</td>";
-                        str += "<td><button onclick=\"setStatus('" + jsonArr[i].vstatus + "','" + jsonArr[i].cid + "')\">" + jsonArr[i].vstatus + "</button></td>";
+                        str += "<td><button onclick=\"setStatus('" + jsonArr[i].cid + "')\"  id=\"vipbutton\">" + jsonArr[i].vstatus + "</button></td>";
                         str += "</tr>";
                     }
                     document.getElementById("table").innerHTML = str;
@@ -271,20 +271,25 @@
             xml.send(null)
         }
 
-        function setStatus(m, cid) {
+        function setStatus( cid) {
+            var m =  document.getElementById("vipbutton").innerText;
             var status;
+            var change;
             if (m === '冻结') {
                 status = 'no'
+                change = '解冻'
             } else {
                 status = 'yes'
+                change = '冻结';
             }
             if (window.confirm("是否" + m)) {
-                var url = "<%=path%>/AdminServlet?action=updatevip&vstatus=" + status + "%cid=" + cid;
+                var url = "<%=path%>/AdminServlet?action=updatevip&vstatus=" + status + "&cid=" + cid;
                 let xml = new XMLHttpRequest();
                 xml.open("get", url, true);
                 xml.onreadystatechange = function () {
                     if (xml.readyState === 4 && xml.status === 200) {
                         alert("操作成功");
+                        document.getElementById("vipbutton").innerText = change;
                     }
                 }
                 xml.send(null);
