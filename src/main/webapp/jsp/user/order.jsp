@@ -35,7 +35,7 @@
             }
             Date date = new Date();
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmss");
-            String s = cid.substring(cid.length()-4);
+            String s = cid.substring(cid.length() - 4);
             String oid = simpleDateFormat.format(date) + s;
             List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
             String message;
@@ -45,6 +45,12 @@
                 message = "您好，" + list1.get(0).getCnickname();
             }
             List<CustomerModel> listRadd = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
+            String rname = "";
+            String radd ="";
+            if (!listRadd.isEmpty()){
+                rname = listRadd.get(0).getRname();
+                radd = listRadd.get(0).getRadd();
+            }
             for (List<String> strings : list) {
                 List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().getGidEid(strings.get(1), strings.get(0));
                 numPrice += Integer.parseInt(strings.get(2)) * goodsModels.get(0).getGprice();
@@ -73,9 +79,10 @@
                     hidden1[i].style.display = "flex";
                 }
             }
+            document.getElementsByClassName("raddclass")[0].innerText= '<%=radd%>';
+            document.getElementById("rname").innerText = '<%=rname%>';
             return r;
         }
-
         window.onload = loadon;
     </script>
     <body>
@@ -94,7 +101,8 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%></a>
+                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%>
+                        </a>
                     </li>
                     <li class="line"></li>
                     <li>
@@ -152,22 +160,26 @@
                         <span>收货人</span>
                         <select name="name" id="name" onchange="rname()">
                             <%
-                                for (CustomerModel customerModel : listRadd) {
+                                if (!listRadd.isEmpty()) {
+                                    for (CustomerModel customerModel : listRadd) {
                             %>
                             <option value="<%=customerModel.getRname()%>"><%=customerModel.getRname()%>
                             </option>
                             <%
+                                    }
                                 }
                             %>
                         </select>
                         <span>收货地址</span>
                         <select name="address" id="address" onchange="radd()">
                             <%
-                                for (CustomerModel customerModel : listRadd) {
+                                if (!listRadd.isEmpty()) {
+                                    for (CustomerModel customerModel : listRadd) {
                             %>
                             <option value="<%=customerModel.getRadd()%>"><%=customerModel.getRadd()%>
                             </option>
                             <%
+                                    }
                                 }
                             %>
                         </select>
@@ -250,7 +262,7 @@
             </div>
             <div class="s">
                 <span>寄送至：</span>
-                <span id="radd"></span>
+                <span id="radd" class="raddclass"></span>
                 <span>收货人：</span>
                 <span id="rname"></span>
             </div>
@@ -276,14 +288,12 @@
             }
             var numPrice = document.getElementById("span").innerText;
             //添加到未支付订单
-            var url = "<%=path%>/customerServlet?action=addOrder&arr=<%=arr%>&rname=" + a.options[ainde].innerText + "&tpay="+numPrice+"&cid=<%=cid%>&oid=<%=oid%>";
+            var url = "<%=path%>/customerServlet?action=addOrder&arr=<%=arr%>&rname=" + a.options[ainde].innerText + "&tpay=" + numPrice + "&cid=<%=cid%>&oid=<%=oid%>";
             let xml = new XMLHttpRequest();
             xml.open("get", url, true);
             xml.onreadystatechange = function () {
-                console.log(xml.readyState)
-                console.log(xml.status)
                 if (xml.readyState === 4 && xml.status === 200) {
-                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&arr=<%=arr%>&numPrice='+numPrice+'&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi + "&cid=<%=cid%>&oid=<%=oid%>";
+                    window.location.href = '<%=path%>/jsp/user/pay.jsp?num=<%=numCount%>&arr=<%=arr%>&numPrice=' + numPrice + '&address=' + a.options[ainde].innerText + b.options[binde].innerText + "&zifu=" + fangshi + "&cid=<%=cid%>&oid=<%=oid%>";
                 }
             }
             xml.send(null);
@@ -298,10 +308,10 @@
         function radd() {
             var input = document.getElementById("address");
             var index = input.selectedIndex;
-            document.getElementById("radd").innerText = input.options[index].innerText;
+            document.getElementsByClassName("raddclass")[0].innerText = input.options[index].innerText;
         }
 
-        function c(m,n) {
+        function c(m, n) {
             var r = loadon();
             var discount = 0.0;
             if (m === 'fou') {

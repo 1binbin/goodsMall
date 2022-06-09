@@ -61,9 +61,9 @@
     <span>收货地址</span>
     <div class="line" id="line"></div>
     <div class="per-top">
-        <input type="radio" id="one" name="radd" checked class="radio" value="t">
+        <input type="radio" id="one" name="radd" checked class="radioRadd" value="t">
         <label for="one" id="label1">添加地址</label>
-        <input type="radio" id="two" name="radd" class="radio" value="o">
+        <input type="radio" id="two" name="radd" class="radioRadd" value="o">
         <label for="two" id="label2">修改地址</label>
         <div class="per-box">
             <div class="one">
