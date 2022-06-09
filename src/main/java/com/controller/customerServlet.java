@@ -281,10 +281,6 @@ public class customerServlet extends HttpServlet {
         String radd = request.getParameter("radd");
         String cid = request.getParameter("cid");
         String type = request.getParameter("type");
-        System.out.println(rname);
-        System.out.println(radd);
-        System.out.println(cid);
-        System.out.println(type);
         if ("one".equals(type)) {
             EBofactory.getcustomerebiempl().addRadd(cid, rname, radd);
         } else {

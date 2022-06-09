@@ -204,7 +204,6 @@
                                     <%--录入商品表格信息--%>
                                     <%
                                         if (arrayList != null) {
-                                            System.out.println(arrayList.size());
                                             for (GoodsModel goods : arrayList) {
                                     %>
                                     <tr>
