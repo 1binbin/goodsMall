@@ -26,6 +26,7 @@ import java.lang.reflect.Method;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -91,7 +92,6 @@ public class customerServlet extends HttpServlet {
         String arr = request.getParameter("arr");
         String[] split = arr.split(",");
         for (int i = 0; i < split.length; i+=3) {
-            System.out.println(split.length);
             EBofactory.getgoodsebiempl().setGoods(split[i+1], split[i], Integer.parseInt(split[i+2]));
         }
         EBofactory.getotherEbimpl().uodateTicket("yes", oid, cid);
@@ -214,11 +214,9 @@ public class customerServlet extends HttpServlet {
         String type = request.getParameter("type");
         switch (type) {
             case "one":
-                System.out.println(1);
                 EBofactory.getotherEbimpl().updateTisover(cid, oid);
                 break;
             case "two":
-                System.out.println(2);
                 EBofactory.getotherEbimpl().deleteOrder(cid, oid);
                 break;
             case "three":

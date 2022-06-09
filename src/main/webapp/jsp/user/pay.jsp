@@ -38,7 +38,6 @@
             calendar.add(Calendar.DATE, +1);
             String next = simpleDateFormat.format(calendar.getTime());
             String arr = request.getParameter("arr");
-
         %>
         <title>天天淘-支付</title>
         <link rel="stylesheet" href="<%=path%>/css/pay.css">

@@ -143,6 +143,7 @@
             <div class="orderShow" id="orderShow">
                 <%
                     for (int j = 0; j < list.size(); j++) {
+                        StringBuilder temp1 = new StringBuilder();
                 %>
                 <div class="orderBox">
                     <div class="o-top">
@@ -154,6 +155,7 @@
                         <div class="ob-left">
                             <%
                                 for (int i = 0; i < list.get(j).size(); i++) {
+                                    temp1.append(list.get(j).get(i).getEid()).append(",").append(list.get(j).get(i).getGid()).append(",").append(list.get(j).get(i).getMnum());
                             %>
                             <div class="show">
                                 <div class="show-left">
@@ -217,7 +219,7 @@
                                 for (int i = 0; i < strings.length; i++) {
                             %>
                             <a href="javascript:void(0)"
-                               onclick="jumpother('<%=strings[i]%>','<%=list.get(j).get(0).getOid()%>','<%=cid%>')"><%=strings[i]%>
+                               onclick="jumpother('<%=strings[i]%>','<%=list.get(j).get(0).getOid()%>','<%=cid%>','<%=temp1%>')"><%=strings[i]%>
                             </a>
                             <%
                                 }
@@ -346,7 +348,7 @@
                 selectOrder(cid, "no", "no", "no")
             }
         }
-        function jumpother(n, oid, cid) {
+        function jumpother(n, oid, cid,list) {
             if (n === "确认收货") {
                 confirmGoods(oid, cid)
             }
@@ -357,7 +359,7 @@
                 cancelOrder(oid, cid)
             }
             if (n === "去付款") {
-                gotoPay(oid, cid);
+                gotoPay(oid, cid,list);
             }
         }
 
@@ -408,7 +410,7 @@
         }
 
         //    去付款
-        function gotoPay(oid, cid) {
+        function gotoPay(oid, cid,list) {
             const url = "<%=path%>/customerServlet?action=gotoPay&oid=" + oid + "&cid=" + cid;
             let xml = new XMLHttpRequest();
             xml.open("get", url, true);
@@ -416,7 +418,7 @@
                 if (xml.readyState === 4 && xml.status === 200) {
                     const data = xml.responseText;
                     const json = JSON.parse(data);
-                    window.location.href = "<%=path%>/jsp/user/pay.jsp?num=" + json[0]+"&numPrice="+json[1]+"&address="+json[2]+"&zifu=weixin";
+                    window.location.href = "<%=path%>/jsp/user/pay.jsp?&arr="+list+"&num=" + json[0]+"&numPrice="+json[1]+"&address="+json[2]+"&zifu=weixin&oid=" + oid + "&cid=" + cid;
                 }
             }
             xml.send(null)
