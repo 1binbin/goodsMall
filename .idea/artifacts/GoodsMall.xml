@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GoodsMall">
+    <output-path>D:/桌面</output-path>
+    <root id="archive" name="GoodsMall.war">
+      <element id="artifact" artifact-name="GoodsMall:war exploded" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="commons-dbutils-1.6" module-name="GoodsMall" />
+          <element id="library" level="module" name="taglibs-standard-impl-1.2.5" module-name="GoodsMall" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
