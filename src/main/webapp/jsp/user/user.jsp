@@ -31,7 +31,10 @@
                 }
             }
             if (username.endsWith("user")) {
-                cid = username.substring(0, username.length() - 4);
+                String cidnew = username.substring(0, username.length() - 4);
+                if (cid ==null || cid.equals(cidnew)) {
+                    cid = cidnew;
+                }
                 request.getSession().setAttribute("username", username);
                 request.getSession().setAttribute("cid", cid);
             }
