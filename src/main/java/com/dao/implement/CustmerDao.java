@@ -47,4 +47,5 @@ public interface CustmerDao {
     List<CustomerModel> selectISDeleteVip(String cid);
 
     List<CustomerModel> vipList(String cid);
+    List<CustomerModel> selectVip(String cid);
 }

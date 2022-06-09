@@ -50,7 +50,7 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
     @Override
     public void insertVip(String cid, String vcategory, String vindate, String voudate) {
         String sql = "insert into vip(cid,vcategory,vindate,voutdate,vstatus) values(?,?,?,?,?)";
-        update(connection, sql, cid, vcategory, vindate, voudate,"no");
+        update(connection, sql, cid, vcategory, vindate, voudate,"yes");
     }
 
     @Override
@@ -127,7 +127,13 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
 
     @Override
     public List<CustomerModel> vipList(String cid) {
-        String sql = "select if(vcategory='month','月度会员',if(vcategory = 'year','年度会员','季度会员'))messager from vip where cid = ? ";
+        String sql = "select if(vcategory='month','月度会员',if(vcategory = 'year','年度会员','季度会员'))messager from vip where cid = ? and vstatus = ?";
+        return getBeanList(connection,sql,cid,"yes");
+    }
+
+    @Override
+    public List<CustomerModel> selectVip(String cid) {
+        String sql = "select * from vip where cid = ?";
         return getBeanList(connection,sql,cid);
     }
 }

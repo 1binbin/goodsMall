@@ -151,4 +151,9 @@ public class CustomerEbimpl implements CustomerEbi {
         }
         return null;
     }
+
+    @Override
+    public List<CustomerModel> selectVip(String cid) {
+        return Daofactory.getcustomerimpl().selectVip(cid);
+    }
 }

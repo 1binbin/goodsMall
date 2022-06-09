@@ -39,4 +39,5 @@ public interface CustomerEbi {
     boolean delete(String cid);
 
     String vcategory1(String  cid);
+    List<CustomerModel> selectVip(String cid);
 }

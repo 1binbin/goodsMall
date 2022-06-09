@@ -48,7 +48,12 @@
                 message = "你好，请登录或注册";
             }
             if (vip == null) {
-                vipMessage = "会员中心";
+                List<CustomerModel> list1 = EBofactory.getcustomerebiempl().selectVip(cid);
+                if (!list1.isEmpty()){
+                    vipMessage = "会员已冻结";
+                }else {
+                    vipMessage = "会员中心";
+                }
             } else {
                 vipMessage = "尊贵的 " + vip;
             }
