@@ -11,7 +11,7 @@ import java.io.PrintWriter;
  * @Author hongxiaobin
  * @Time 2022/6/4-16:15
  */
-@WebFilter(filterName = "userFilter", urlPatterns = {"/jsp/user/goodsCart.jsp", "/jsp/user/members.jsp", "/jsp/user/myOrder.jsp", "/jsp/user/order.jsp", "/jsp/user/pay.jsp","/jsp/merchants/merchants.jsp","/jsp/merchants/merchantsWait.jsp"})
+@WebFilter(filterName = "userFilter", urlPatterns = {"/jsp/user/goodsCart.jsp", "/jsp/user/members.jsp", "/jsp/user/myOrder.jsp", "/jsp/user/order.jsp", "/jsp/user/pay.jsp"})
 public class userFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,8 +24,7 @@ public class userFilter implements Filter {
         HttpSession session = request.getSession();
         session.setMaxInactiveInterval(60*60*24);
         String cid = (String) session.getAttribute("cid");
-        String eid = (String) session.getAttribute("eid");
-        if (cid == null || eid == null) {
+        if (cid == null) {
             servletResponse.setContentType("text/html;charset=utf-8");
             PrintWriter out = servletResponse.getWriter();
             out.print("<script type='text/javascript'>alert('请先登录！')</script>");
