@@ -109,7 +109,7 @@ public class CustomerDaompl extends BaseDao<CustomerModel> implements CustmerDao
 
     @Override
     public List<CustomerModel> getVip(String cid) {
-        String sql = "select vcategory from vip where cid = ? and vstatus = 'no'";
+        String sql = "select vcategory from vip where cid = ? and vstatus = 'yes'";
         return getBeanList(connection,sql,cid);
     }
 
