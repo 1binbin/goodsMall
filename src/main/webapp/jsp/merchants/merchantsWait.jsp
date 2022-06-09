@@ -16,7 +16,7 @@
     %>
     <head>
         <title>商家正在登录</title>
-        <link rel="stylesheet" href="<%=base%>/css/wait.css">
+        <link rel="stylesheet" href="<%=base%>/css/merchantswait.css">
     </head>
     <script>
         function jump() {
@@ -26,7 +26,15 @@
     </script>
     <body>
         <div class="loading">
-            <span>正在登录中······</span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
     </body>
 </html>
