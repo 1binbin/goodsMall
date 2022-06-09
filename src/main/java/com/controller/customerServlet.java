@@ -160,7 +160,9 @@ public class customerServlet extends HttpServlet {
         String arr = request.getParameter("arr");
         String cid = request.getParameter("cid");
         String[] split = arr.split(",");
-        EBofactory.getShoppingcartempl().deleteCart(cid, split[0], split[1]);
+        for (int i = 0; i < split.length; i+=2) {
+            EBofactory.getShoppingcartempl().deleteCart(cid, split[i], split[i+1]);
+        }
     }
 
     protected void deleteCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

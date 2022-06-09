@@ -216,24 +216,32 @@
     }
 
     function deleteCheckedGoods() {
-        if (window.confirm("确定是否删除选中的商品？")) {
-            const eidInput = document.getElementsByClassName("allGoods");
-            const arr = [];
-            for (let i = 0; i < eidInput.length; i++) {
-                if (eidInput[i].checked) {
-                    const eid = eidInput[i].className.split(" ")[2];
-                    const gid = eidInput[i].className.split(" ")[3];
-                    arr[i] = [eid, gid];
-                }
+        const eidInput = document.getElementsByClassName("allGoods");
+        const arr = [];
+        let j = 0;
+        for (let i = 0; i < eidInput.length; i++) {
+            if (eidInput[i].checked) {
+                const eid = eidInput[i].className.split(" ")[2];
+                const gid = eidInput[i].className.split(" ")[3];
+                console.log(eid)
+                console.log(gid)
+                arr[j] = [eid,gid];
+                j++;
             }
-            let xml = new XMLHttpRequest();
-            xml.open("get", "<%=path%>/customerServlet?action=deleteChekedCart&cid=<%=cid%>&arr=" + arr, true);
-            xml.onreadystatechange = function () {
-                if (xml.readyState === 4 && xml.status === 200) {
-                    window.location.reload();
+        }
+        if (arr.length ===0){
+            alert("请先选择商品")
+        }else {
+            if (window.confirm("确定是否删除选中的商品？")) {
+                let xml = new XMLHttpRequest();
+                xml.open("get", "<%=path%>/customerServlet?action=deleteChekedCart&cid=<%=cid%>&arr=" + arr, true);
+                xml.onreadystatechange = function () {
+                    if (xml.readyState === 4 && xml.status === 200) {
+                        window.location.reload();
+                    }
                 }
+                xml.send(null);
             }
-            xml.send(null);
         }
     }
 
