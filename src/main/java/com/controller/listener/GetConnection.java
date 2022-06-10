@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 /**
  * @Author hongxiaobin
@@ -24,6 +25,10 @@ public class GetConnection implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        connection = null;
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
