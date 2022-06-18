@@ -5,10 +5,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--    修改个人信息--%>
 <%
-    List<CustomerModel> cusstomerlist = EBofactory.getcustomerebiempl().selectCustomer(cid);
-    request.setAttribute("cusstomerlist",cusstomerlist);
+    List<CustomerModel> cusstomerlist = EBofactory.getcustomerebiempl().selectCustomer(cid);%>
+<%
+    if (!cusstomerlist.isEmpty()) {
 %>
-<c:if test="${empty cusstomerlist}">
+
 <div class="personalnformation" id="personalnformation111">
     <div>
         <span>个人信息</span>
@@ -36,7 +37,8 @@
         </tr>
         <tr>
             <td>昵称</td>
-            <td><input type="text" id="cnickname" readonly="readonly" value="<%=cusstomerlist.get(0).getCnickname()%>"></td>
+            <td><input type="text" id="cnickname" readonly="readonly"
+                       value="<%=cusstomerlist.get(0).getCnickname()%>"></td>
         </tr>
         <tr>
             <td>密码</td>
@@ -88,10 +90,14 @@
                 <span>修改对象</span>
                 <div class="two-box">
                     <select name="" id="seelctRadd">
-                        <c:forEach var="cusstomerlist" items="${cusstomerlist}" varStatus="i">
-                            <option value="${cusstomerlist.rname}">${cusstomerlist.rname}
-                            </option>
-                        </c:forEach>
+                        <%
+                            for (int i = 0; i < cusstomerlist.size(); i++) {
+                        %>
+                        <option value="<%=cusstomerlist.get(i).getRname()%>"><%=cusstomerlist.get(i).getRname()%>
+                        </option>
+                        <%
+                            }
+                        %>
                     </select>
                 </div>
                 <span>修改内容</span>
@@ -117,4 +123,6 @@
         </div>
     </div>
 </div>
-</c:if>
+<%
+    }
+%>

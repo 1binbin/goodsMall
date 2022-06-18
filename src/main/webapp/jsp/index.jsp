@@ -36,7 +36,7 @@
         %>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
         <link rel="stylesheet" href="<%=path%>/css/index.css">
-        <title>51商城</title>
+        <title>天天淘</title>
         <script type="text/javascript">
             function refrush_code(obj) {
                 obj.setAttribute("src", obj.getAttribute("src").toString().split("?")[0] + "?id=" + Math.random());
