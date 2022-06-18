@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.entity.CustomerModel" %>
 <%@ page import="com.business.EBofactory" %>
 <%@ page import="java.util.List" %>
@@ -5,8 +6,9 @@
 <%--    修改个人信息--%>
 <%
     List<CustomerModel> cusstomerlist = EBofactory.getcustomerebiempl().selectCustomer(cid);
-    if (!cusstomerlist.isEmpty()) {
+    request.setAttribute("cusstomerlist",cusstomerlist);
 %>
+<c:if test="${empty cusstomerlist}">
 <div class="personalnformation" id="personalnformation111">
     <div>
         <span>个人信息</span>
@@ -86,14 +88,10 @@
                 <span>修改对象</span>
                 <div class="two-box">
                     <select name="" id="seelctRadd">
-                        <%
-                            for (CustomerModel customerModel : cusstomerlist) {
-                        %>
-                        <option value="<%=customerModel.getRname()%>"><%=customerModel.getRname()%>
-                        </option>
-                        <%
-                            }
-                        %>
+                        <c:forEach var="cusstomerlist" items="${cusstomerlist}" varStatus="i">
+                            <option value="${cusstomerlist.rname}">${cusstomerlist.rname}
+                            </option>
+                        </c:forEach>
                     </select>
                 </div>
                 <span>修改内容</span>
@@ -119,6 +117,4 @@
         </div>
     </div>
 </div>
-<%
-    }
-%>
+</c:if>

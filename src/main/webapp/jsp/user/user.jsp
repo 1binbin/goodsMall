@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--suppress ForLoopReplaceableByWhile --%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.entity.GoodsModel" %>
@@ -231,13 +232,9 @@
             <div class="middle-middle" id="max">
                 <div class="re" id="re">
                     <ul>
-                        <%
-                            for (int i = 1; i <= 8; i++) {
-                        %>
-                        <li><img src="<%=path%>/shuffling_img/<%=i%>.jpg" alt=""></li>
-                        <%
-                            }
-                        %>
+                        <c:forEach begin="1" end="8" step="1" varStatus="i">
+                            <li><img src="<%=path%>/shuffling_img/${i.count}.jpg" alt=""></li>
+                        </c:forEach>
                     </ul>
                     <ol>
                         <li></li>
@@ -255,16 +252,15 @@
                 <span>今日特价</span>
                 <%
                     List<GoodsModel> list1 = EBofactory.getgoodsebiempl().listPriceMin();
-                    if (!list1.isEmpty()){
-                        for (int i = 0; i < list1.size(); i++) {
+                    request.setAttribute("list1",list1);
                 %>
-                <div class="img">
-                    <img src="<%=path%>/Product_main_photo/<%=list1.get(i).getEid()%>/<%=list1.get(i).getGid()%>.jpg" alt="" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=<%=list1.get(i).getGid()%>&eid=<%=list1.get(i).getEid()%>&cid=<%=cid%>')">
-                </div>
-                <%
-                        }
-                    }
-                %>
+                <c:if test="${empty list1}">
+                    <c:forEach var="list1" items="${requestScope.list1}" varStatus="i">
+                        <div class="img">
+                            <img src="<%=path%>/Product_main_photo/${list1[i.count].eid}/${list1[i.count].gid}.jpg" alt="" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=${list1[i.count].gid}&eid=${list1[i.count].eid}&cid=<%=cid%>')">
+                        </div>
+                    </c:forEach>
+                </c:if>
             </div>
         </div>
         <%--        推荐商品--%>

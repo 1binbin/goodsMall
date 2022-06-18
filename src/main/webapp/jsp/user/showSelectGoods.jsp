@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.entity.GoodsModel" %>
 <%@ page import="com.business.Daofactory" %>
 <%@ page import="java.util.List" %>
@@ -16,6 +17,7 @@
         <%
             String path = request.getContextPath();
             List<GoodsModel> goodsModels = (List<GoodsModel>) request.getSession().getAttribute("goods");
+            request.setAttribute("goodsModels",goodsModels);
             String search = (String) request.getSession().getAttribute("search");
             String search1 = (String) request.getSession().getAttribute("search1");
             String cid = (String) request.getSession().getAttribute("cid");
@@ -173,24 +175,20 @@
         <%--商品展示--%>
         <div class="content">
             <ul class="like_ul" id="ul">
-                <%
-                    if (!goodsModels.isEmpty()) {
-                        for (GoodsModel goodsModel : goodsModels) {
-                %>
-                <li onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=<%=goodsModel.getGid()%>&eid=<%=goodsModel.getEid()%>')">
-                    <div class="like_img"><img
-                            src="<%=path%>/Product_main_photo/<%=goodsModel.getEid()%>/<%=goodsModel.getGid()%>.jpg" alt="">
-                    </div>
-                    <div class="like_span">
-                        <p><%=goodsModel.getGdescribe()%>
-                        </p>
-                        <i class="fa fa-jpy" aria-hidden="true"></i>
-                        <span class="mony"><%=goodsModel.getGprice()%></span></div>
-                </li>
-                <%
-                        }
-                    }
-                %>
+                <c:if test="${empty goodsModels}">
+                    <c:forEach var="goodsModels" items="${goodsModels}" varStatus="i">
+                        <li onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=${goodsModels.gid}&eid=${goodsModels.eid}')">
+                            <div class="like_img"><img
+                                    src="<%=path%>/Product_main_photo/${goodsModels.eid}/${goodsModels.gid}.jpg" alt="">
+                            </div>
+                            <div class="like_span">
+                                <p>${goodsModels.gdescribe}
+                                </p>
+                                <i class="fa fa-jpy" aria-hidden="true"></i>
+                                <span class="mony">${goodsModels.gprice}</span></div>
+                        </li>
+                    </c:forEach>
+                </c:if>
             </ul>
         </div>
         <div class="rightnav1" id="nav1">

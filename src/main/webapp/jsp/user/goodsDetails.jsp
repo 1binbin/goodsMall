@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.dao.GoodsDaoImpl" %>
 <%@ page import="com.entity.GoodsModel" %>
@@ -21,7 +22,9 @@
             String cid = request.getParameter("cid");
             List<GoodsModel> goodsModels = EBofactory.getgoodsebiempl().getGidEid(gid,eid);
             GoodsModel g = goodsModels.get(0);
+            request.setAttribute("g",g);
             EmployeeModel employeeModel = EBofactory.getemployeeebiempl().getEmployee(eid).get(0);
+            request.setAttribute("employeeModel",employeeModel);
             String vcategory = EBofactory.getcustomerebiempl().vcategory(cid);
         %>
         <title>天天淘-商品详情</title>
@@ -53,12 +56,12 @@
         <div class="top">
             <div class="top-left">
                 <span>所有商品 > </span>
-                <span><%=g.getGcategory()%></span>
+                <span>${g.gcategory}</span>
                 <span> > </span>
-                <span><%=g.getGname()%>></span>
+                <span>${g.gname}</span>
             </div>
             <div class="top-right">
-                <span><%=employeeModel.getEstorename()%></span>
+                <span>${employeeModel.estorename}</span>
                 <input type="checkbox" id="i" onclick="insertmyfocus('<%=cid%>')">
                 <label for="i"><i class="fa fa-star" aria-hidden="true" id="ii"></i>关注店铺</label>
             </div>
@@ -66,33 +69,29 @@
         <div class="middle">
             <div class="m-left">
                 <div class="img">
-                    <img src="<%=path%>/Product_main_photo/<%=g.getEid()%>/<%=g.getGid()%>.jpg" alt="暂无图片">
+                    <img src="<%=path%>/Product_main_photo/${g.eid}/${g.gid}.jpg" alt="暂无图片">
                 </div>
             </div>
             <div class="m-right">
                 <div class="m-r-top">
-                    <p><%=g.getGdescribe()%></p>
+                    <p>${g.gdescribe}</p>
                 </div>
                 <div class="m-r-middle">
                     <div class="m-r-r-m-left">
                         <div class="one">
                             <span>普通售价</span>
-                            <span>￥<%=g.getGprice()%></span>
+                            <span>￥${g.gprice}</span>
                         </div>
                         <div class="second">
-                            <%
-                                if (g.getGvip().equals("yes")){
-                            %>
-                            <span>会员商品</span>
-                            <%
-                                }
-                            %>
+                            <c:if test="${g.gvip.equals('yes')}">
+                                <span>会员商品</span>
+                            </c:if>
                         </div>
                     </div>
                     <div class="m-r-r-m-right">
                         <div class="one">
                             <span>库存量</span>
-                            <span><%=g.getGnum()%></span>
+                            <span>${g.gnum}</span>
                         </div>
                         <div class="second">
                             <span>月销量</span>

@@ -45,6 +45,7 @@
                 message = "您好，" + list1.get(0).getCnickname();
             }
             List<CustomerModel> listRadd = EBofactory.getcustomerebiempl().getCustomerMessage(cid);
+            request.setAttribute("listRadd",listRadd);
             String rname = "";
             String radd ="";
             if (!listRadd.isEmpty()){
@@ -159,29 +160,21 @@
                     <div class="f-bottom">
                         <span>收货人</span>
                         <select name="name" id="name" onchange="rname()">
-                            <%
-                                if (!listRadd.isEmpty()) {
-                                    for (CustomerModel customerModel : listRadd) {
-                            %>
-                            <option value="<%=customerModel.getRname()%>"><%=customerModel.getRname()%>
-                            </option>
-                            <%
-                                    }
-                                }
-                            %>
+                            <c:if test="${empty listRadd}">
+                                <c:forEach var="listRadd" items="${listRadd}" varStatus="i">
+                                    <option value="${listRadd.rname}">${listRadd.rname}
+                                    </option>
+                                </c:forEach>
+                            </c:if>
                         </select>
                         <span>收货地址</span>
                         <select name="address" id="address" onchange="radd()">
-                            <%
-                                if (!listRadd.isEmpty()) {
-                                    for (CustomerModel customerModel : listRadd) {
-                            %>
-                            <option value="<%=customerModel.getRadd()%>"><%=customerModel.getRadd()%>
-                            </option>
-                            <%
-                                    }
-                                }
-                            %>
+                            <c:if test="$${empty listRadd}">
+                                <c:forEach var="listRadd" items="${listRadd}" varStatus="i">
+                                    <option value="${listRadd.radd}">${listRadd.radd}
+                                    </option>
+                                </c:forEach>
+                            </c:if>
                         </select>
                     </div>
                 </div>
