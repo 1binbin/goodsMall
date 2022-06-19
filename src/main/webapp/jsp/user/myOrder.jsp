@@ -147,7 +147,7 @@
             </div>
             <div class="orderShow" id="orderShow">
                 <c:forEach items="${requestScope.list}" varStatus="i" var="list">
-                    <c:if test="${!list[0].oid.equals('')}">
+                    <c:if test="${!empty list}">
                         <div class="orderBox">
                             <div class="o-top">
                                 <span>${list[0].tdate}</span>
@@ -175,7 +175,6 @@
                                             </div>
                                         </div>
                                     </c:forEach>
-                                        <%--                                    </c:if>--%>
                                 </div>
                                 <div class="ob-one">
                                     <span>${list[0].rname}</span>
