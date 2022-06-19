@@ -3,7 +3,8 @@
 <%@ page import="com.entity.EntityModel" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.business.EBofactory" %>
-<%@ page import="com.entity.CustomerModel" %><%--
+<%@ page import="com.entity.CustomerModel" %>
+<%@ page import="com.entity.EmployeeModel" %><%--
   Created by IntelliJ IDEA.
   Author: hongxiaobin
   User: hongxiaobin
@@ -23,12 +24,13 @@
                 List<EntityModel> entityModels = EBofactory.getotherEbimpl().getTicketCidEid(cid, entityModel.getOid());
                 list.add(entityModels);
             }
+            request.setAttribute("list", list);
             List<CustomerModel> list1 = (List<CustomerModel>) request.getSession().getAttribute("customer");
             String message;
-            if (list1.isEmpty()){
+            if (list1.isEmpty()) {
                 message = "你好，请登录或注册";
-            }else {
-                message = "您好，"+list1.get(0).getCnickname();
+            } else {
+                message = "您好，" + list1.get(0).getCnickname();
             }
             String vipMessage = (String) request.getSession().getAttribute("vipMessage");
         %>
@@ -48,7 +50,8 @@
             <div class="top-right">
                 <ul>
                     <li>
-                        <a href="<%=path%>/jsp/index.jsp"><%=message%></a>
+                        <a href="<%=path%>/jsp/index.jsp"><%=message%>
+                        </a>
                     </li>
                     <li class="line"></li>
                     <li>
@@ -56,7 +59,8 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%></a>
+                        <a href="<%=path%>/jsp/user/members.jsp"><%=vipMessage%>
+                        </a>
                     </li>
                     <li class="line"></li>
                     <li>
@@ -64,7 +68,8 @@
                     </li>
                     <li class="line"></li>
                     <li>
-                        <a href="javascript:void(0)" id="person" onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>')">个人信息</a>
+                        <a href="javascript:void(0)" id="person"
+                           onclick="person('personalnformation111',1,'<%=cid%>','<%=path%>')">个人信息</a>
                     </li>
                 </ul>
                 <div class="img"><img src="<%=path%>/personImg/<%=cid%>.jpg" alt=""></div>
@@ -82,7 +87,7 @@
                     <div class="form1">
                         <input type="text" placeholder="搜索内容" id="searchText">
                         <div class="button" onclick="searchText('<%=cid%>')"><i class="fa fa-search" aria-hidden="true"
-                                                                      id="btnaa"></i></div>
+                                                                                id="btnaa"></i></div>
                     </div>
                     <div class="cart" onclick="window.open('<%=path%>/jsp/user/goodsCart.jsp?cid=<%=cid%>')">
                         <i class="fa fa-shopping-cart" aria-hidden="true"></i>
@@ -141,95 +146,77 @@
                 <span>操作</span>
             </div>
             <div class="orderShow" id="orderShow">
-                <%
-                    for (int j = 0; j < list.size(); j++) {
-                        StringBuilder temp1 = new StringBuilder();
-                %>
-                <div class="orderBox">
-                    <div class="o-top">
-                        <span><%=list.get(j).get(0).getTdate()%></span>
-                        <span>订单编号</span>
-                        <span><%=list.get(j).get(0).getOid()%></span>
-                    </div>
-                    <div class="o-bottom">
-                        <div class="ob-left">
-                            <%
-                                for (int i = 0; i < list.get(j).size(); i++) {
-                                    temp1.append(list.get(j).get(i).getEid()).append(",").append(list.get(j).get(i).getGid()).append(",").append(list.get(j).get(i).getMnum()).append(",");
-                            %>
-                            <div class="show">
-                                <div class="show-left">
-                                    <div class="img"><img
-                                            src="<%=path%>/Product_main_photo/<%=list.get(j).get(i).getEid()%>/<%=list.get(j).get(i).getGid()%>.jpg"
-                                            alt=""></div>
+                <c:forEach items="${requestScope.list}" varStatus="i" var="list">
+                    <c:if test="${!list[0].oid.equals('')}">
+                        <div class="orderBox">
+                            <div class="o-top">
+                                <span>${list[0].tdate}</span>
+                                <span>订单编号</span>
+                                <span>${list[0].oid}</span>
+                            </div>
+                            <div class="o-bottom">
+                                <div class="ob-left">
+                                    <c:forEach var="list1" items="${list}" varStatus="j">
+                                        <div class="show">
+                                            <div class="show-left">
+                                                <div class="img"><img
+                                                        src="<%=path%>/Product_main_photo/${list1.eid}/${list1.gid}.jpg"
+                                                        alt=""></div>
+                                            </div>
+                                            <div class="show-middle">
+                                                <p>${list1.gcategory}
+                                                    | ${list1.gname}
+                                                    | <${list1.gdescribe}
+                                                </p>
+                                            </div>
+                                            <div class="show-right">
+                                                <span>X</span>
+                                                <span>${list1.mnum}</span>
+                                            </div>
+                                        </div>
+                                    </c:forEach>
+                                        <%--                                    </c:if>--%>
                                 </div>
-                                <div class="show-middle">
-                                    <p><%=list.get(j).get(i).getGcategory()%> | <%=list.get(j).get(i).getGname()%>
-                                        | <%=list.get(j).get(i).getGdescribe()%>
-                                    </p>
+                                <div class="ob-one">
+                                    <span>${list[0].rname}</span>
+                                    <i class="fa fa-question-circle-o" aria-hidden="true">
+                                        <div class="address">
+                                            <div class="text">
+                                                <p>收货地址</p>
+                                                <p>${list[0].radd}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </i>
                                 </div>
-                                <div class="show-right">
-                                    <span>X</span>
-                                    <span><%=list.get(j).get(i).getMnum()%></span>
+                                <div class="ob-two">
+                                    <span>￥${list[0].tpay}</span>
+                                </div>
+                                <div class="ob-three">
+                                    <c:if test="${list[0].tispay.equals('no') && list[0].tisdelivey.equals('no') && list[0].tisover.equals('no')}">
+                                        <span class="span">未付款</span>
+                                    </c:if>
+                                    <c:if test="${list[0].tispay.equals('yes') && list[0].tisdelivey.equals('no') && list[0].tisover.equals('no')}">
+                                        <span class="span">未发货</span>
+                                    </c:if>
+                                    <c:if test="${list[0].tispay.equals('yes') && list[0].tisdelivey.equals('yes') && list[0].tisover.equals('no')}">
+                                        <span class="span">待收货</span>
+                                    </c:if>
+                                    <c:if test="${list[0].tispay.equals('yes') && list[0].tisdelivey.equals('yes') && list[0].tisover.equals('yes')}">
+                                        <span class="span">已完成</span>
+                                    </c:if>
+                                </div>
+                                <div class="ob-four">
+                                    <c:forTokens items="${list[0].message}" delims="," var="strigs">
+                                        <a href="javascript:void(0)"
+                                           onclick="jumpother('${strigs}','${list[0].oid}','<%=cid%>','${list[0]}')">${strigs}
+                                        </a>
+                                    </c:forTokens>
                                 </div>
                             </div>
-                            <%
-                                }
-                            %>
                         </div>
-                        <div class="ob-one">
-                            <span><%=list.get(j).get(0).getRname()%></span>
-                            <i class="fa fa-question-circle-o" aria-hidden="true">
-                                <div class="address">
-                                    <div class="text">
-                                        <p>收货地址</p>
-                                        <p><%=list.get(j).get(0).getRadd()%>
-                                        </p>
-                                    </div>
-                                </div>
-                            </i>
-                        </div>
-                        <div class="ob-two">
-                            <span>￥<%=list.get(j).get(0).getTpay()%></span>
-                        </div>
-                        <div class="ob-three">
-                            <%
-                                if (list.get(j).get(0).getTispay().equals("no")) {
-                            %>
-                            <span class="span">未付款</span>
-                            <%
-                            } else if (list.get(j).get(0).getTisdelivey().equals("no")) {
-                            %>
-                            <span class="span">未发货</span>
-                            <%
-                            } else if (list.get(j).get(0).getTisover().equals("no")) {
-                            %>
-                            <span class="span">待收货</span>
-                            <%
-                            } else {
-                            %>
-                            <span class="span">已完成</span>
-                            <%
-                                }
-                            %>
-                        </div>
-                        <div class="ob-four">
-                            <%
-                                String[] strings = list.get(j).get(0).getMessage().split(",");
-                                for (int i = 0; i < strings.length; i++) {
-                            %>
-                            <a href="javascript:void(0)"
-                               onclick="jumpother('<%=strings[i]%>','<%=list.get(j).get(0).getOid()%>','<%=cid%>','<%=temp1%>')"><%=strings[i]%>
-                            </a>
-                            <%
-                                }
-                            %>
-                        </div>
-                    </div>
-                </div>
-                <%
-                    }
-                %>
+                    </c:if>
+                </c:forEach>
             </div>
         </div>
         <%--        返回顶部--%>
@@ -270,7 +257,7 @@
                         let itemin = "";
                         let arr1 = "";
                         for (let j = 0; j < json[i].length; j++) {
-                            arr1 += json[i][j].eid+','+json[i][j].gid+','+json[i][j].mnum+','
+                            arr1 += json[i][j].eid + ',' + json[i][j].gid + ',' + json[i][j].mnum + ','
                             itemin += "<div class=\"show\">" +
                                 "<div class=\"show-left\">" +
                                 "<div class=\"img\"><img src=\"<%=path%>/Product_main_photo/" + json[i][j].eid + "/" + json[i][j].gid + ".jpg\" alt=\"\"></div>" +
@@ -318,7 +305,7 @@
                         let itmeinin = "";
                         const strings = json[i][0].message.split(",");
                         for (let k = 0; k < strings.length; k++) {
-                            itmeinin += "<a href=\"javascript:void(0)\" onclick=\"jumpother('" + strings[k] + "','" + json[i][0].oid + "','" + cid +"','"+arr1+"')\">" + strings[k] + "</a>";
+                            itmeinin += "<a href=\"javascript:void(0)\" onclick=\"jumpother('" + strings[k] + "','" + json[i][0].oid + "','" + cid + "','" + arr1 + "')\">" + strings[k] + "</a>";
                         }
                         item += itmeinin;
                         item += "</div>" +
@@ -351,7 +338,8 @@
                 selectOrder(cid, "no", "no", "no")
             }
         }
-        function jumpother(n, oid, cid,list) {
+
+        function jumpother(n, oid, cid, list) {
             if (n === "确认收货") {
                 confirmGoods(oid, cid)
             }
@@ -362,7 +350,7 @@
                 cancelOrder(oid, cid)
             }
             if (n === "去付款") {
-                gotoPay(oid, cid,list);
+                gotoPay(oid, cid, list);
             }
         }
 
@@ -413,7 +401,8 @@
         }
 
         //    去付款
-        function gotoPay(oid, cid,list) {
+        function gotoPay(oid, cid, list) {
+            console.log(list)
             const url = "<%=path%>/customerServlet?action=gotoPay&oid=" + oid + "&cid=" + cid;
             let xml = new XMLHttpRequest();
             xml.open("get", url, true);
@@ -421,7 +410,7 @@
                 if (xml.readyState === 4 && xml.status === 200) {
                     const data = xml.responseText;
                     const json = JSON.parse(data);
-                    window.location.href = "<%=path%>/jsp/user/pay.jsp?&arr="+list+"&num=" + json[0]+"&numPrice="+json[1]+"&address="+json[2]+"&zifu=weixin&oid=" + oid + "&cid=" + cid;
+                    window.location.href = "<%=path%>/jsp/user/pay.jsp?&arr=" + list + "&num=" + json[0] + "&numPrice=" + json[1] + "&address=" + json[2] + "&zifu=weixin&oid=" + oid + "&cid=" + cid;
                 }
             }
             xml.send(null)

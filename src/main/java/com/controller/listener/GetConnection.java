@@ -18,6 +18,7 @@ public class GetConnection implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         try {
             connection = JdbcConnection.getConnection();
+            System.out.println(connection);
         } catch (Exception e) {
             e.printStackTrace();
         }

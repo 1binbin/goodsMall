@@ -276,23 +276,6 @@ public class EntityModel {
 
     @Override
     public String toString() {
-        return "EntityModel{" +
-                "oid='" + oid + '\'' +
-                ", gid='" + gid + '\'' +
-                ", eid='" + eid + '\'' +
-                ", cid='" + cid + '\'' +
-                ", rname='" + rname + '\'' +
-                ", tdate=" + tdate +
-                ", tpay=" + tpay +
-                ", tisdelivey='" + tisdelivey + '\'' +
-                ", tispay='" + tispay + '\'' +
-                ", message='" + message + '\'' +
-                ", gcategory='" + gcategory + '\'' +
-                ", gname='" + gname + '\'' +
-                ", gprice=" + gprice +
-                ", ginprice=" + ginprice +
-                ", gdescribe='" + gdescribe + '\'' +
-                ", gvip='" + gvip + '\'' +
-                '}';
+        return eid + ',' + gid + ',' + mnum + ',';
     }
 }
