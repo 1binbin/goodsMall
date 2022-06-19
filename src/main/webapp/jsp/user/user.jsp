@@ -254,10 +254,10 @@
                     List<GoodsModel> list1 = EBofactory.getgoodsebiempl().listPriceMin();
                     request.setAttribute("list1",list1);
                 %>
-                <c:if test="${empty list1}">
+                <c:if test="${!empty list1}">
                     <c:forEach var="list1" items="${requestScope.list1}" varStatus="i">
                         <div class="img">
-                            <img src="<%=path%>/Product_main_photo/${list1[i.count].eid}/${list1[i.count].gid}.jpg" alt="" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=${list1[i.count].gid}&eid=${list1[i.count].eid}&cid=<%=cid%>')">
+                            <img src="<%=path%>/Product_main_photo/${list1.eid}/${list1.gid}.jpg" alt="" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=${list1.gid}&eid=${list.eid}&cid=<%=cid%>')">
                         </div>
                     </c:forEach>
                 </c:if>
