@@ -160,7 +160,7 @@
                     <div class="f-bottom">
                         <span>收货人</span>
                         <select name="name" id="name" onchange="rname()">
-                            <c:if test="${empty listRadd}">
+                            <c:if test="${!empty listRadd}">
                                 <c:forEach var="listRadd" items="${listRadd}" varStatus="i">
                                     <option value="${listRadd.rname}">${listRadd.rname}
                                     </option>
@@ -169,7 +169,7 @@
                         </select>
                         <span>收货地址</span>
                         <select name="address" id="address" onchange="radd()">
-                            <c:if test="$${empty listRadd}">
+                            <c:if test="${!empty listRadd}">
                                 <c:forEach var="listRadd" items="${listRadd}" varStatus="i">
                                     <option value="${listRadd.radd}">${listRadd.radd}
                                     </option>
