@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="com.entity.EmployeeModel" %>
 <%@ page import="com.business.EBofactory" %>
 <%@ page import="com.entity.GoodsModel" %>
@@ -16,22 +17,22 @@
             String path = request.getContextPath();
             Cookie[] cookies = request.getCookies();
             String username = "";
-            if (cookies!=null){
-                for (Cookie cookie:cookies){
-                    if ("username".equals(cookie.getName())){
+            if (cookies != null) {
+                for (Cookie cookie : cookies) {
+                    if ("username".equals(cookie.getName())) {
                         username = cookie.getValue();
                     }
                 }
             }
-            if (username.endsWith("admin")){
+            if (username.endsWith("admin")) {
 //                String adminName = (String) request.getSession().getAttribute("adminName");
-                String eid = username.substring(0,username.length()-5);
-                ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid,0,15);
+                String eid = username.substring(0, username.length() - 5);
+                ArrayList<GoodsModel> arrayList = (ArrayList<GoodsModel>) EBofactory.getgoodsebiempl().selectGoodsList(eid, 0, 15);
                 int count = EBofactory.getCountbiempl().getallCount(eid);
-                request.getSession().setAttribute("allGoods",arrayList);
-                request.getSession().setAttribute("username",username);
-                request.getSession().setAttribute("allgoodsCount",count);
-                request.getRequestDispatcher("../jsp/merchants/merchantsWait.jsp").forward(request,response);
+                request.getSession().setAttribute("allGoods", arrayList);
+                request.getSession().setAttribute("username", username);
+                request.getSession().setAttribute("allgoodsCount", count);
+                request.getRequestDispatcher("../jsp/merchants/merchantsWait.jsp").forward(request, response);
             }
         %>
         <link href="<%=path%>/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -50,7 +51,7 @@
                 <form action="<%=path%>/IndexServlet" class="form" id="form1" method="post">
                     <h2 class="from_title">用户登录中心</h2>
                     <div class="acc">
-                        <input type="text" placeholder="手机号" class="input" name="username" >
+                        <input type="text" placeholder="手机号" class="input" name="username">
                         <input type="password" placeholder="密码" class="input" name="password" id="password">
                         <div class="code">
                             <input type="text" placeholder="验证码" class="input1" name="code">
@@ -62,12 +63,13 @@
                                                                 checked><span><span></span></span>用户</label>
                         <label for="radio1" class="lable"><input type="radio" name="role" value="admin"
                                                                  id="radio1"><span><span></span></span>商家</label>
-                        <label for="check"><input type="checkbox" id="check" name="keep" value="choose"><span><span></span></span>记住我</label>
+                        <label for="check"><input type="checkbox" id="check" name="keep"
+                                                  value="choose"><span><span></span></span>记住我</label>
                         <label for="check1" class="forgetlable"><input type="checkbox" id="check1"
                                                                        onclick="c()">忘记密码</label>
                     </div>
                     <div class="box">
-                        <input type="submit" value="登录" class="btn" >
+                        <input type="submit" value="登录" class="btn">
                         <input type="reset" value="重置" class="btn">
                     </div>
                 </form>
@@ -75,7 +77,8 @@
                 <div class="forget" id="forget">
                     <form action="<%=path%>/ForgetServlet" class="form" id="form3" method="post">
                         <h2 class="from_title" id="h2">重置密码</h2>
-                        <input type="text" placeholder="手机号" class="input" name="ephone"  pattern="^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$">
+                        <input type="text" placeholder="手机号" class="input" name="ephone"
+                               pattern="^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$">
                         <input type="password" placeholder="新密码" class="input" name="fpassword" id="fpassword">
                         <div class="inputdiv"><p id="message2"></p></div>
                         <input type="password" placeholder="确认密码" class="input" name="spassword" id="ffpassword">
@@ -85,10 +88,11 @@
                             <img src="<%=path%>/ForgetServlet" alt="暂无图片" onclick="refrush_code(this)" title="点击刷新">
                         </div>
                         <div class="fn">
-                            <label for="radio1112" class="lable"><input type="radio" name="role" value="user" id="radio1112"
-                                                                       checked><span><span></span></span>用户</label>
+                            <label for="radio1112" class="lable"><input type="radio" name="role" value="user"
+                                                                        id="radio1112"
+                                                                        checked><span><span></span></span>用户</label>
                             <label for="radio112" class="lable"><input type="radio" name="role" value="admin"
-                                                                      id="radio112"><span><span></span></span>商家</label>
+                                                                       id="radio112"><span><span></span></span>商家</label>
                         </div>
                         <div class="box">
                             <input type="submit" value="确定" class="btn" id="submit2">
@@ -103,7 +107,8 @@
             <div class="container_form container--singin">
                 <form action="<%=path%>/RegisterServlet" class="form" id="form2" method="post">
                     <h2 class="from_title">注册账号</h2>
-                    <input type="text" placeholder="手机号" class="input" name="ephone" pattern="^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$">
+                    <input type="text" placeholder="手机号" class="input" name="ephone"
+                           pattern="^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$">
                     <input type="password" placeholder="密码" class="input" name="fpassword" id="rfpassword">
                     <div class="inputdiv"><p id="message1"></p></div>
                     <input type="password" placeholder="确认密码" class="input" name="spassword" id="rspassword">
@@ -159,6 +164,7 @@
         function back_return() {
             forget.style.transform = "scaleY(0)";
         }
+
         var regu = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/
         var rfpassword = document.getElementById("rfpassword");
         var fpassword = document.getElementById("fpassword");
@@ -169,48 +175,48 @@
         var ffpassword = document.getElementById("ffpassword");
         var message4 = document.getElementById("message4");
         var message5 = document.getElementById("message5");
-        rfpassword.oninput = function (){
-            if (!regu.test(rfpassword.value)){
+        rfpassword.oninput = function () {
+            if (!regu.test(rfpassword.value)) {
                 message1.innerHTML = "密码应为6-16位数字和字母组成";
                 message1.style.color = "#ef4444"
                 rspassword.disabled = true;
-            }else {
+            } else {
                 message1.innerHTML = "密码格式正确";
                 message1.style.color = "green";
                 rspassword.disabled = false;
             }
         }
-        fpassword.oninput = function (){
-            if (!regu.test(fpassword.value)){
+        fpassword.oninput = function () {
+            if (!regu.test(fpassword.value)) {
                 message2.innerHTML = "密码应为6-16位数字和字母组成";
                 message2.style.color = "#ef4444"
                 ffpassword.disabled = true;
-            }else {
+            } else {
                 message2.innerHTML = "密码格式正确";
                 message2.style.color = "green";
                 ffpassword.disabled = false;
             }
         }
-    //    确认密码
+        //    确认密码
         var submit1 = document.getElementById("submit1");
         var submit2 = document.getElementById("submit2");
-        rspassword.oninput = function (){
-            if (rfpassword.value!==rspassword.value){
-                message4.innerHTML="与新密码不相同";
+        rspassword.oninput = function () {
+            if (rfpassword.value !== rspassword.value) {
+                message4.innerHTML = "与新密码不相同";
                 message4.style.color = "#ef4444"
                 submit1.disabled = true;
-            }else {
+            } else {
                 message4.innerHTML = "密码正确";
                 message4.style.color = "green";
                 submit1.disabled = false;
             }
         }
-        ffpassword.oninput = function (){
-            if (fpassword.value!==ffpassword.value){
-                message5.innerHTML="与新密码不相同";
+        ffpassword.oninput = function () {
+            if (fpassword.value !== ffpassword.value) {
+                message5.innerHTML = "与新密码不相同";
                 message5.style.color = "#ef4444"
                 submit2.disabled = true;
-            }else {
+            } else {
                 message5.innerHTML = "密码正确";
                 message5.style.color = "green";
                 submit2.disabled = false;
