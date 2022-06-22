@@ -32,10 +32,9 @@ p{
     background-color: #e8c2c2;
 }
 .middle .img{
-    margin-left: 110px;
-    width: 640px;
+    margin-left: 155px;
+    width: 520px;
     height: 360px;
-    border:1px solid red;
     display:flex;
     justify-content: center;
     align-items: center;

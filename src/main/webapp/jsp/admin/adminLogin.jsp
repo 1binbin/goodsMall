@@ -20,7 +20,7 @@
         <p>天天淘商城后台登录</p>
         <div class="middle">
             <div class="img">
-                <img src="" alt="">
+                <img src="<%=path%>/img/logo.png" alt="">
             </div>
             <div class="container">
                 <h1>后台登录</h1>
