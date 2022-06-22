@@ -45,7 +45,7 @@
     <body>
         <div class="top">
             <div class="t-left">
-                <img src="<%=path%>/img/1.jpg" alt="" class="logo">
+                <img src="<%=path%>/img/logo.png" alt="" class="logo">
                 <span>收银台</span>
             </div>
             <div class="t-right">

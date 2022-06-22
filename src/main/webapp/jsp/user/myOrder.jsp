@@ -79,7 +79,7 @@
         </div>
         <div class="m-middle">
             <div class="left">
-                <div class="img"><img src="<%=path%>/img/1.jpg" alt=""></div>
+                <div class="img"><img src="<%=path%>/img/logo.png" alt=""></div>
                 <span>天天淘-我的订单</span>
             </div>
             <div class="right">

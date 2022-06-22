@@ -164,7 +164,7 @@
         </div>
         <%--    LOGO图+搜索框+购物车--%>
         <div class="search" id="search">
-            <div class="logo"><img src="<%=path%>/img/1.jpg" alt=""></div>
+            <div class="logo"><img src="<%=path%>/img/logo.png" alt=""></div>
             <form action="<%=path%>/customerServlet" method="get">
                 <input type="hidden" name="action" value="search">
                 <input type="text" placeholder="搜索内容" name="search" id="search2">
