@@ -257,7 +257,7 @@
                 <c:if test="${!empty list1}">
                     <c:forEach var="list1" items="${requestScope.list1}" varStatus="i">
                         <div class="img">
-                            <img src="<%=path%>/Product_main_photo/${list1.eid}/${list1.gid}.jpg" alt="" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=${list1.gid}&eid=${list.eid}&cid=<%=cid%>')">
+                            <img src="<%=path%>/Product_main_photo/${list1.eid}/${list1.gid}.jpg" alt="" onclick="window.open('<%=path%>/jsp/user/goodsDetails.jsp?gid=${list1.gid}&eid=${list1.eid}&cid=<%=cid%>')">
                         </div>
                     </c:forEach>
                 </c:if>
