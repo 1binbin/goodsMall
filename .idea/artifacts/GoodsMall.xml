@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="war" name="GoodsMall">
-    <output-path>D:/桌面</output-path>
+    <output-path>$PROJECT_DIR$/../../</output-path>
     <root id="archive" name="GoodsMall.war">
       <element id="artifact" artifact-name="GoodsMall:war exploded" />
       <element id="directory" name="WEB-INF">
