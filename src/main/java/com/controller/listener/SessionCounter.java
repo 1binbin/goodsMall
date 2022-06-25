@@ -18,7 +18,6 @@ public class SessionCounter implements HttpSessionListener {
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
-        System.out.println(1);
         if (activeSession>0){
             activeSession--;
         }
