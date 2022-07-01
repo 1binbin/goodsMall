@@ -9,6 +9,7 @@
           <element id="library" level="module" name="taglibs-standard-impl-1.2.5" module-name="GoodsMall" />
         </element>
       </element>
+      <element id="artifact" artifact-name="GoodsMall:war" />
     </root>
   </artifact>
 </component>
